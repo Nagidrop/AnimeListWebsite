@@ -1,0 +1,57 @@
+package animelist.model;
+
+import java.io.Serializable;
+
+/**
+ *
+ * @author Quan Duc Loc CE140037 (SE1401)
+ */
+public class ListDTO implements Serializable {
+    private int animeID;
+    private int accountID;
+    private int status;
+    private int progress;
+
+    public ListDTO() {
+    }
+
+    public ListDTO(int animeID, int accountID, int status, int progress) {
+        this.animeID = animeID;
+        this.accountID = accountID;
+        this.status = status;
+        this.progress = progress;
+    }
+
+    public int getAnimeID() {
+        return animeID;
+    }
+
+    public void setAnimeID(int animeID) {
+        this.animeID = animeID;
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+ 
+}

@@ -266,8 +266,8 @@ h6 {
 td.active {
   background-color: #2c6ed5;
 }
-
-input[type="date" i] {
+/* remove "i" after date */
+input[type="date"] {
   padding: 14px;
 }
 
