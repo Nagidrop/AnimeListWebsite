@@ -1,0 +1,59 @@
+package animelist.model;
+
+import java.io.Serializable;
+import java.sql.Date;
+
+/**
+ *
+ * @author Quan Duc Loc CE140037 (SE1401)
+ */
+public class ListHistoryDTO implements Serializable {
+    private long listHistoryID;
+    private int listAnimeID;
+    private int listAccountID;
+    private Date created_at;
+
+    public ListHistoryDTO() {
+    }
+
+    public ListHistoryDTO(long listHistoryID, int listAnimeID, int listAccountID, Date created_at) {
+        this.listHistoryID = listHistoryID;
+        this.listAnimeID = listAnimeID;
+        this.listAccountID = listAccountID;
+        this.created_at = created_at;
+    }
+
+    public long getListHistoryID() {
+        return listHistoryID;
+    }
+
+    public void setListHistoryID(long listHistoryID) {
+        this.listHistoryID = listHistoryID;
+    }
+
+    public int getListAnimeID() {
+        return listAnimeID;
+    }
+
+    public void setListAnimeID(int listAnimeID) {
+        this.listAnimeID = listAnimeID;
+    }
+
+    public int getListAccountID() {
+        return listAccountID;
+    }
+
+    public void setListAccountID(int listAccountID) {
+        this.listAccountID = listAccountID;
+    }
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+    
+    
+}
