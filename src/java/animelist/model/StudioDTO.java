@@ -7,19 +7,19 @@ import java.sql.Date;
  *
  * @author Quan Duc Loc CE140037 (SE1401)
  */
-public class SeasonDTO implements Serializable {
+public class StudioDTO  implements Serializable {
     private int id;
     private String name;
-    private Date updated_at;
+    private Date created_at;
     private Date deleted_at;
 
-    public SeasonDTO() {
+    public StudioDTO() {
     }
 
-    public SeasonDTO(int id, String name, Date updated_at, Date deleted_at) {
+    public StudioDTO(int id, String name, Date created_at, Date deleted_at) {
         this.id = id;
         this.name = name;
-        this.updated_at = updated_at;
+        this.created_at = created_at;
         this.deleted_at = deleted_at;
     }
 
@@ -39,12 +39,12 @@ public class SeasonDTO implements Serializable {
         this.name = name;
     }
 
-    public Date getUpdated_at() {
-        return updated_at;
+    public Date getCreated_at() {
+        return created_at;
     }
 
-    public void setUpdated_at(Date updated_at) {
-        this.updated_at = updated_at;
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
     }
 
     public Date getDeleted_at() {

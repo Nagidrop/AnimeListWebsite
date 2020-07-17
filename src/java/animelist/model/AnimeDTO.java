@@ -7,17 +7,18 @@ import java.sql.Date;
  *
  * @author Quan Duc Loc CE140037 (SE1401)
  */
-public class AnimeDTO implements Serializable{
+public class AnimeDTO implements Serializable {
+
     private int id;
-    private int seasonId;
-    private int accountId;
-    private String name;
+    private int accountID;
+    private int seasonID;
     private String type;
+    private String name;
     private Date releaseDate;
     private String rating;
     private int episodes;
     private String status;
-    private int duration;
+    private String duration;
     private String description;
     private String poster;
     private String trailer;
@@ -27,12 +28,12 @@ public class AnimeDTO implements Serializable{
     public AnimeDTO() {
     }
 
-    public AnimeDTO(int id, int seasonId, int accountId, String name, String type, Date releaseDate, String rating, int episodes, String status, int duration, String description, String poster, String trailer, Date created_at, Date deleted_at) {
+    public AnimeDTO(int id, int accountId, int seasonId, String type, String name, Date releaseDate, String rating, int episodes, String status, String duration, String description, String poster, String trailer, Date created_at, Date deleted_at) {
         this.id = id;
-        this.seasonId = seasonId;
-        this.accountId = accountId;
-        this.name = name;
+        this.accountID = accountId;
+        this.seasonID = seasonId;
         this.type = type;
+        this.name = name;
         this.releaseDate = releaseDate;
         this.rating = rating;
         this.episodes = episodes;
@@ -53,28 +54,20 @@ public class AnimeDTO implements Serializable{
         this.id = id;
     }
 
-    public int getSeasonId() {
-        return seasonId;
+    public int getAccountID() {
+        return accountID;
     }
 
-    public void setSeasonId(int seasonId) {
-        this.seasonId = seasonId;
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 
-    public int getAccountId() {
-        return accountId;
+    public int getSeasonID() {
+        return seasonID;
     }
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setSeasonID(int seasonID) {
+        this.seasonID = seasonID;
     }
 
     public String getType() {
@@ -83,6 +76,14 @@ public class AnimeDTO implements Serializable{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getReleaseDate() {
@@ -117,11 +118,11 @@ public class AnimeDTO implements Serializable{
         this.status = status;
     }
 
-    public int getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -164,5 +165,6 @@ public class AnimeDTO implements Serializable{
     public void setDeleted_at(Date deleted_at) {
         this.deleted_at = deleted_at;
     }
+
     
 }

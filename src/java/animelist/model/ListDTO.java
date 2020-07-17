@@ -7,37 +7,35 @@ import java.io.Serializable;
  * @author Quan Duc Loc CE140037 (SE1401)
  */
 public class ListDTO implements Serializable {
-    private int animeId;
-    private int accountId;
+    private int animeID;
+    private int accountID;
     private int status;
     private int progress;
-    private int favourite;
 
     public ListDTO() {
     }
 
-    public ListDTO(int animeId, int accountId, int status, int progress, int favourite) {
-        this.animeId = animeId;
-        this.accountId = accountId;
+    public ListDTO(int animeID, int accountID, int status, int progress) {
+        this.animeID = animeID;
+        this.accountID = accountID;
         this.status = status;
         this.progress = progress;
-        this.favourite = favourite;
     }
 
-    public int getAnimeId() {
-        return animeId;
+    public int getAnimeID() {
+        return animeID;
     }
 
-    public void setAnimeId(int animeId) {
-        this.animeId = animeId;
+    public void setAnimeID(int animeID) {
+        this.animeID = animeID;
     }
 
-    public int getAccountId() {
-        return accountId;
+    public int getAccountID() {
+        return accountID;
     }
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
     }
 
     public int getStatus() {
@@ -55,13 +53,5 @@ public class ListDTO implements Serializable {
     public void setProgress(int progress) {
         this.progress = progress;
     }
-
-    public int getFavourite() {
-        return favourite;
-    }
-
-    public void setFavourite(int favourite) {
-        this.favourite = favourite;
-    }
-    
+ 
 }

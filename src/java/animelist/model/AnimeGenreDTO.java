@@ -7,36 +7,36 @@ import java.sql.Date;
  *
  * @author Quan Duc Loc CE140037 (SE1401)
  */
-public class GenreDTO implements Serializable {
-    private int id;
-    private String name;
+public class AnimeGenreDTO implements Serializable {
+    private int genreID;
+    private int animeID;
     private Date created_at;
     private Date deleted_at;
 
-    public GenreDTO() {
+    public AnimeGenreDTO() {
     }
 
-    public GenreDTO(int id, String name, Date created_at, Date deleted_at) {
-        this.id = id;
-        this.name = name;
+    public AnimeGenreDTO(int genreID, int animeID, Date created_at, Date deleted_at) {
+        this.genreID = genreID;
+        this.animeID = animeID;
         this.created_at = created_at;
         this.deleted_at = deleted_at;
     }
 
-    public int getId() {
-        return id;
+    public int getGenreID() {
+        return genreID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setGenreID(int genreID) {
+        this.genreID = genreID;
     }
 
-    public String getName() {
-        return name;
+    public int getAnimeID() {
+        return animeID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAnimeID(int animeID) {
+        this.animeID = animeID;
     }
 
     public Date getCreated_at() {
