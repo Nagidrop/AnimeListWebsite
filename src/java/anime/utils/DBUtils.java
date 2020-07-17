@@ -22,7 +22,7 @@ public class DBUtils implements Serializable {
             Context context = new InitialContext();
             Context tomcatCtx = (Context) context.lookup("java:comp/env");
 
-            DataSource ds = (DataSource) tomcatCtx.lookup("DBDataSource");
+            DataSource ds = (DataSource) tomcatCtx.lookup("AnimeListDataSource");
 
             Connection conn = ds.getConnection();
 
@@ -33,6 +33,7 @@ public class DBUtils implements Serializable {
         } catch (SQLException ex) { 
             Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return null;
     }
 }
