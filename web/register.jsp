@@ -1,85 +1,111 @@
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
+        <title>Login Form</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      
-        <title> Register Forms</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
-        <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-        <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-        <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-        <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
-
-        <link href="css/reg.css" rel="stylesheet" media="all">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+        <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="css/util.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <!--===============================================================================================-->
+        <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/animsition/js/animsition.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/bootstrap/js/popper.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/daterangepicker/moment.min.js"></script>
+        <script src="vendor/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/countdowntime/countdowntime.js"></script>
+        <!--===============================================================================================-->
+        <script src="js/main.js"></script>
+        <!--===============================================================================================-->
     </head>
     <body>
         <jsp:include page='header.jsp'/>
 
-        <div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins" style="background-image: url('images/bg-03.jpg');">
-            <div class="wrapper wrapper--w780">
-                <div class="card card-3">
-                    <div class="card-heading"></div>
-                    <div class="card-body">
-                        <h2 class="title">Registration Form</h2>
-                        <form method="POST">
-                            <div class="input-group">
-                                <input class="input--style-3" type="text" placeholder="Name" name="name">
-                            </div>
-                            <div class="input-group">
-                                <input class="input--style-3 js-datepicker" type="text" placeholder="Birthdate" name="birthday">
-                                <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                            </div>
-                            <div class="input-group">
-                                <div class="rs-select2 js-select-simple select--no-search">
-                                    <select name="gender">
-                                        <option disabled="disabled" selected="selected">Gender</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                        <option>Other</option>
-                                    </select>
-                                    <div class="select-dropdown"></div>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <input class="input--style-3" type="email" placeholder="Email" name="email">
-                            </div>
-                            <div class="input-group">
-                                <input class="input--style-3" type="text" placeholder="Phone" name="phone">
-                            </div>
-                            <div class="p-t-10">
-                                <button class="btn btn--pill btn--green" type="submit">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+        <div class="limiter">
+            <div class="container-login100" style="background-image: url('images/bg-02.jpg');">
+                <div class="wrap-register100">
+                    <form class="login100-form validate-form">
+                        <span class="login100-form-logo">
+                            <img src="images/lilo.png" width="100" height="100" >
+                        </span>
+
+                        <span class="login100-form-title p-b-34 p-t-27">
+                            Sign Up
+                        </span>
+
+                        <div class="wrap-input100 validate-input" data-validate = "Enter username">
+                            <input class="input100" type="text" name="username" placeholder="Username">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate = "Enter Full name">
+                            <input class="input100" type="text" name="full name" placeholder="Full name">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate = "Enter Email">
+                            <input class="input100" type="text" name="email" placeholder="Email">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                            <input class="input100" type="password" name="pass" placeholder="Password">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter confirm password">
+                            <input class="input100" type="password" name="pass" placeholder="Confirm Password">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn">
+                                Login
+                            </button>
+                        </div>
+
+                        <div class="text-center p-t-90">
+                            <a class="txt1" href="#">
+                                Forgot Password?
+                            </a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <script src="vendor/jquery/jquery.min.js" type="a585a6981bcca082ce463201-text/javascript"></script>
 
-        <script src="vendor/select2/select2.min.js" type="a585a6981bcca082ce463201-text/javascript"></script>
-        <script src="vendor/datepicker/moment.min.js" type="a585a6981bcca082ce463201-text/javascript"></script>
-        <script src="vendor/datepicker/daterangepicker.js" type="a585a6981bcca082ce463201-text/javascript"></script>
+        <div id="dropDownSelect1"></div>
 
-        <script src="js/global.js" type="a585a6981bcca082ce463201-text/javascript"></script>
 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13" type="a585a6981bcca082ce463201-text/javascript"></script>
-        <script type="a585a6981bcca082ce463201-text/javascript">
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
 
-            gtag('config', 'UA-23581568-13');
-        </script>
-        <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="a585a6981bcca082ce463201-|49" defer=""></script></body>
+    </body>
 </html>
