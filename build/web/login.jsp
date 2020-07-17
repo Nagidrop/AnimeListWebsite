@@ -57,7 +57,7 @@
                 <div class="wrap-login100">
                     <form class="login100-form validate-form">
                         <span class="login100-form-logo">
-                            <i class="zmdi zmdi-landscape"></i>
+                            <img src="images/lilo.png" width="100" height="100" >
                         </span>
 
                         <span class="login100-form-title p-b-34 p-t-27">
