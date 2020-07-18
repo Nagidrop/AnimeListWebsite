@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -179,7 +180,7 @@ public class AnimeListDAO {
 
                 animeList.add(new AnimeDTO(animeID, 0, seasonID, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
-            
+
             return animeList;
         } catch (SQLException ex) {
             Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,7 +201,7 @@ public class AnimeListDAO {
                 Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return null;
     }
 
@@ -238,7 +239,7 @@ public class AnimeListDAO {
 
                 animeList.add(new AnimeDTO(animeID, 0, seasonID, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
-            
+
             return animeList;
         } catch (SQLException ex) {
             Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -259,7 +260,189 @@ public class AnimeListDAO {
                 Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         return null;
     }
+
+    public ArrayList<AnimeDTO> getSearchAnime(String searchValue, String type, int StudioID, int genreID, int seasonID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<AnimeDTO> animeList;
+
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT [anime].AccountID, [anime].AnimeID, [anime].SeasonID, [anime].`name` , [anime].type , [anime].releaseDate , [anime].rating , [anime].episodes , [anime].`status` , [anime].duration, [anime].description, [anime].poster, [anime].trailer, [anime].created_at, [anime].deleted_at, StudioID, GenreID \n"
+                    + "FROM \n"
+                    + "anime INNER JOIN anime_studio on [anime].AnimeID = [anime_studio].AnimeID  \n"
+                    + "INNER JOIN genre_anime on [genre_anime].AnimeID = [anime].AnimeID \n"
+                    + "WHERE [anime].`name` like ? and \n"
+                    + "type like ? and \n"
+                    + "GenreID like ? and \n"
+                    + "SeasonID like ? \n"
+                    + "GROUP BY [anime].name");
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<String> getTypes() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<String> types = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT type FROM anime GROUP BY type");
+
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                if (types == null) {
+                    types = new ArrayList<>();
+                }
+                types.add(rs.getString("type"));
+            }
+            return types;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+
+    public ArrayList<GenreDTO> getGenres() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<GenreDTO> genres = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT * FROM genre");
+
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int GenreID = rs.getInt("GenreID");
+                String name = rs.getString("name");
+                Date created_at = rs.getDate("created_at");
+                Date deleted_at = rs.getDate("deleted_at");
+                GenreDTO genre = new GenreDTO(GenreID, name, created_at, deleted_at);
+                if (genres == null) {
+                    genres = new ArrayList<>();
+                }
+                genres.add(genre);
+            }
+
+            return genres;
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+
+    public ArrayList<StudioDTO> getStudios() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<StudioDTO> studios = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT * FROM studio");
+
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int StudioID = rs.getInt("StudioID");
+                String name = rs.getString("name");
+                Date created_at = rs.getDate("created_at");
+                Date deleted_at = rs.getDate("deleted_at");
+                StudioDTO studio = new StudioDTO(StudioID, name, created_at, deleted_at);
+                if (studios == null) {
+                    studios = new ArrayList<>();
+                }
+                studios.add(studio);
+            }
+
+            return studios;
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+
+    public List<SeasonDTO> getSeasons() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        List<SeasonDTO> seasons = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT * FROM season ORDER BY SeasonID desc");
+
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int SeasonID = rs.getInt("SeasonID");
+                String name = rs.getString("name");
+                Date created_at = rs.getDate("created_at");
+                Date deleted_at = rs.getDate("deleted_at");
+                SeasonDTO season = new SeasonDTO(SeasonID, name, created_at, deleted_at);
+                if (seasons == null) {
+                    seasons = new ArrayList<>();
+                }
+                seasons.add(season);
+            }
+
+            return seasons;
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+
 }

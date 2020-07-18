@@ -4,7 +4,11 @@
     Author     : Quan Duc Loc CE140037 (SE1401)
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="animelist.model.AnimeDTO"%>
+<%@page import="animelist.model.AnimeDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri = "/struts-tags" prefix = "s" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +20,29 @@
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
         <title>AnimeListWebsite</title>
     </head>
-    <body>
+    <body class="container">
         <jsp:include page='header.jsp'/>
+        <div class=""><p></div>
+
+        <div class="row mb-3 ">
+            <s:iterator value="listAnimeDTOs" status="dto">
+                <div class="col-md-3">
+                    <div class="card ">
+
+                        <div class="card-body">
+                            <img  src="<s:property  value="poster"/>">
+                        </div>
+                        <div class="card-footer">
+                            <s:property value="name"/>
+                        </div>
+                    </div>
+
+                </div>
+            </s:iterator>
+
+
+
+        </div>
+
     </body>
 </html>
