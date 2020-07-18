@@ -35,7 +35,6 @@ public class ShowIndexAction extends ActionSupport implements ServletRequestAwar
     public String execute() throws Exception {
         AnimeListDAO dao = new AnimeListDAO();
         listAnimeDTOs = dao.getAnimes(12);
-        request.setAttribute("list", listAnimeDTOs);
    
         return SUCCESS;
     }

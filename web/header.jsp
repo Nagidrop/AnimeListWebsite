@@ -3,6 +3,7 @@
     Created on : Jul 15, 2020, 7:25:43 PM
     Author     : HAPPY
 --%>
+<%@taglib uri = "/struts-tags" prefix = "s" %>
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <a class="navbar-brand" href="#">WibuAnimeList</a>
@@ -15,7 +16,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Anime</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
-                    <a class="dropdown-item" href="AnimeSearch.jsp">Anime Search</a>
+                    <a class="dropdown-item" href="<s:url action="initSearchPage"/>">Anime Search</a>
                     <a class="dropdown-item" href="#">Top Anime</a>
                     <a class="dropdown-item" href="#">Seasonal Anime</a>
                 </div>

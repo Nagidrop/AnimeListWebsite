@@ -6,7 +6,7 @@
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
         <action name="index" class="animelist.controller.ShowIndexAction" >
-         <result name = "success" type = "dispatcher"> index.jsp</result>
+         <result name = "success"> index.jsp</result>
         </action>
         <action name="login" >
             <result name="success">login.jsp</result>
@@ -18,6 +18,10 @@
                 <param name="actionName">login</param>
                 <param name="status" >123</param>
             </result>
+        </action>
+        
+        <action name="initSearchPage" class = "animelist.controller.InitSearchPageAction">
+            <result name="success">AnimeSearch.jsp</result>
         </action>
     </package>
 </struts>

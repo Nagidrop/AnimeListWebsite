@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -405,15 +406,15 @@ public class AnimeListDAO {
         }
     }
 
-    public ArrayList<SeasonDTO> getSeasons() throws SQLException {
+    public List<SeasonDTO> getSeasons() throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<SeasonDTO> seasons = null;
+        List<SeasonDTO> seasons = null;
         try {
             conn = DBUtils.makeConnection();
 
-            st = conn.prepareStatement("SELECT * FROM studio");
+            st = conn.prepareStatement("SELECT * FROM season ORDER BY SeasonID desc");
 
             rs = st.executeQuery();
 

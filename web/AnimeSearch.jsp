@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -79,8 +80,9 @@
                                 <div class="input-select">
                                     <select data-trigger="" name="choices-single-defaul">
                                         <option placeholder="" value="">Type</option>
-                                        <option>Subject b</option>
-                                        <option>Subject c</option>
+                                        <s:iterator value="types" status="dto">
+                                            <option value="<s:property/>"><s:property/></option>
+                                        </s:iterator>
                                     </select>
                                 </div>
                             </div>
@@ -88,8 +90,9 @@
                                 <div class="input-select">
                                     <select data-trigger="" name="choices-single-defaul">
                                         <option placeholder="" value="">Genre</option>
-                                        <option>Subject b</option>
-                                        <option>Subject c</option>
+                                        <s:iterator value="genres" status="dto">
+                                            <option value="<s:property value="id"/>"><s:property value="name"/></option>
+                                        </s:iterator>
                                     </select>
                                 </div>
                             </div>
@@ -99,8 +102,9 @@
                                 <div class="input-select">
                                     <select data-trigger="" name="choices-single-defaul">
                                         <option placeholder="" value="">Studio</option>
-                                        <option>Subject b</option>
-                                        <option>Subject c</option>
+                                         <s:iterator value="studios" status="dto">
+                                            <option value="<s:property value="id"/>"><s:property value="name"/></option>
+                                        </s:iterator>
                                     </select>
                                 </div>
                             </div>
@@ -108,11 +112,9 @@
                                 <div class="input-select">
                                     <select data-trigger="" name="choices-single-defaul">
                                         <option placeholder="" value="">Season</option>
-                                        <option>Last time</option>
-                                        <option>Today</option>
-                                        <option>This week</option>
-                                        <option>This month</option>
-                                        <option>This year</option>
+                                         <s:iterator value="seasons" status="dto">
+                                            <option value="<s:property value="id"/>"><s:property value="name"/></option>
+                                        </s:iterator>
                                     </select>
                                 </div>
                             </div>

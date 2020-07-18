@@ -8,6 +8,7 @@
 <%@page import="animelist.model.AnimeDTO"%>
 <%@page import="animelist.model.AnimeDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri = "/struts-tags" prefix = "s" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,23 +23,22 @@
     <body class="container">
         <jsp:include page='header.jsp'/>
         <div class=""><p></div>
-            <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("list");%>
 
         <div class="row mb-3 ">
-            <%for (AnimeDTO item : list) {%>
-            <div class="col-md-3">
-                <div class="card ">
+            <s:iterator value="listAnimeDTOs" status="dto">
+                <div class="col-md-3">
+                    <div class="card ">
 
-                    <div class="card-body">
-                        <img  src="<%=item.getPoster()%>">
+                        <div class="card-body">
+                            <img  src="<s:property  value="poster"/>">
+                        </div>
+                        <div class="card-footer">
+                            <s:property value="name"/>
+                        </div>
                     </div>
-                    <div class="card-footer">
-                        <%=item.getName()%>
-                    </div>
+
                 </div>
-
-            </div>
-            <%}%>
+            </s:iterator>
 
 
 
