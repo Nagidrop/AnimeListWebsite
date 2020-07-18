@@ -179,7 +179,7 @@ public class AnimeListDAO {
 
                 animeList.add(new AnimeDTO(animeID, 0, seasonID, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
-            
+            System.out.println(animeList);
             return animeList;
         } catch (SQLException ex) {
             Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,7 +200,7 @@ public class AnimeListDAO {
                 Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+        System.out.println("1");
         return null;
     }
 
