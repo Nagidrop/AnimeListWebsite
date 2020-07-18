@@ -26,5 +26,9 @@
         <action name="initSearchPage" class = "animelist.controller.InitSearchPageAction">
             <result name="success">AnimeSearch.jsp</result>
         </action>
+        
+        <action name="search" class = "animelist.controller.SearchAction">
+            <result name="success" type="dispatcher">searchResult.jsp</result>
+        </action>
     </package>
 </struts>
