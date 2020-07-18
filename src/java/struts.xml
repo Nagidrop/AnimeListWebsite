@@ -5,16 +5,19 @@
 <struts>
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
-        <action name="">
-            <result>index.jsp</result>
+        <action name="index" class="animelist.controller.ShowIndexAction" >
+         <result name = "success" type = "dispatcher"> index.jsp</result>
         </action>
-        <action name="login">
+        <action name="login" >
             <result name="success">login.jsp</result>
         </action>
         
         <action name="loginclicked"  class="animelist.controller.LoginAction">
             <result name="success">index.jsp</result>
-            <result name="fail">invalid.jsp</result>
+            <result name="fail" type="redirectAction">
+                <param name="actionName">login</param>
+                <param name="status" >123</param>
+            </result>
         </action>
     </package>
 </struts>
