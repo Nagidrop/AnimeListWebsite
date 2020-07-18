@@ -22,7 +22,7 @@ public class AnimeListDAO {
 
     public AnimeListDAO() {
     }
-    
+
     public AccountDTO login(String username, String password) {
         String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
 
@@ -262,18 +262,25 @@ public class AnimeListDAO {
 
         return null;
     }
-    
-    
-     public ArrayList<AnimeDTO> getSearchAnime(String searchValue, String type, int StudioID, int genreID, int seasonID) throws SQLException {
+
+    public ArrayList<AnimeDTO> getSearchAnime(String searchValue, String type, int StudioID, int genreID, int seasonID) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         ArrayList<AnimeDTO> animeList;
-        
+
         try {
             conn = DBUtils.makeConnection();
-            
-            st = conn.prepareStatement("select * from anime where anime.name like ? and type = ? and ");
+
+            st = conn.prepareStatement("SELECT [anime].AccountID, [anime].AnimeID, [anime].SeasonID, [anime].`name` , [anime].type , [anime].releaseDate , [anime].rating , [anime].episodes , [anime].`status` , [anime].duration, [anime].description, [anime].poster, [anime].trailer, [anime].created_at, [anime].deleted_at, StudioID, GenreID \n"
+                    + "FROM \n"
+                    + "anime INNER JOIN anime_studio on [anime].AnimeID = [anime_studio].AnimeID  \n"
+                    + "INNER JOIN genre_anime on [genre_anime].AnimeID = [anime].AnimeID \n"
+                    + "WHERE [anime].`name` like ? and \n"
+                    + "type like ? and \n"
+                    + "GenreID like ? and \n"
+                    + "SeasonID like ? \n"
+                    + "GROUP BY [anime].name");
         } finally {
             if (conn != null) {
                 conn.close();
@@ -319,7 +326,7 @@ public class AnimeListDAO {
             }
         }
     }
-    
+
     public ArrayList<GenreDTO> getGenres() throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -343,9 +350,9 @@ public class AnimeListDAO {
                 }
                 genres.add(genre);
             }
-           
+
             return genres;
-            
+
         } finally {
             if (conn != null) {
                 conn.close();
@@ -358,7 +365,7 @@ public class AnimeListDAO {
             }
         }
     }
-    
+
     public ArrayList<StudioDTO> getStudios() throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -382,9 +389,9 @@ public class AnimeListDAO {
                 }
                 studios.add(studio);
             }
-           
+
             return studios;
-            
+
         } finally {
             if (conn != null) {
                 conn.close();
@@ -397,7 +404,7 @@ public class AnimeListDAO {
             }
         }
     }
-    
+
     public ArrayList<SeasonDTO> getSeasons() throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -421,9 +428,9 @@ public class AnimeListDAO {
                 }
                 seasons.add(season);
             }
-           
+
             return seasons;
-            
+
         } finally {
             if (conn != null) {
                 conn.close();
@@ -436,6 +443,5 @@ public class AnimeListDAO {
             }
         }
     }
-    
-    
+
 }
