@@ -1,12 +1,14 @@
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
+ */
+
 package animelist.model;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-/**
- *
- * @author Quan Duc Loc CE140037 (SE1401)
- */
+/* DTO for Account table */
 public class AccountDTO implements Serializable {
     private int id;
     private int roleID;

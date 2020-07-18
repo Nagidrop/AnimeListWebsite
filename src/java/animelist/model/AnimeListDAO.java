@@ -1,9 +1,11 @@
-package animelist.model;
-
 /**
  *
- * @author Quan Duc Loc CE140037 (SE1401)
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
+
+package animelist.model;
+
+/* DAO for Anime List Project */
 public class AnimeListDAO {
 
 }
