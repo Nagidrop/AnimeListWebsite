@@ -264,13 +264,16 @@ public class AnimeListDAO {
     }
     
     
-     public ArrayList<AnimeDTO> loadSearchAnime(String name, String type, int StudioID, int genreID, int seasonID) throws SQLException {
+     public ArrayList<AnimeDTO> getSearchAnime(String searchValue, String type, int StudioID, int genreID, int seasonID) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
+        ArrayList<AnimeDTO> animeList;
+        
         try {
             conn = DBUtils.makeConnection();
-
+            
+            st = conn.prepareStatement("select * from anime where anime.name like ? and type = ? and ");
         } finally {
             if (conn != null) {
                 conn.close();

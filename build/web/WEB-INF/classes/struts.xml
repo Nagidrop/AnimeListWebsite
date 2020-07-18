@@ -11,6 +11,7 @@
         <action name="login">
             <result name="success">login.jsp</result>
         </action>
+        
         <action name="loginclicked"  class="animelist.controller.LoginAction">
             <result name="success">index.jsp</result>
             <result name="fail">invalid.jsp</result>
