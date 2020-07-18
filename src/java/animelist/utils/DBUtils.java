@@ -3,7 +3,7 @@
  * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 
-package anime.utils;
+package animelist.utils;
 
 import java.io.Serializable;
 import java.sql.Connection;

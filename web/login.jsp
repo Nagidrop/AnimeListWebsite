@@ -55,7 +55,7 @@
         <div class="limiter">
             <div class="container-login100" style="background-image: url('images/bg-02.jpg');">
                 <div class="wrap-login100">
-                    <form class="login100-form validate-form">
+                    <form class="login100-form validate-form" action="loginclicked" method="POST">
                         <span class="login100-form-logo">
                             <img src="images/lilo.png" width="100" height="100" >
                         </span>
