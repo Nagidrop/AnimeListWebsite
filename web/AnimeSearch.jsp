@@ -122,8 +122,8 @@
                                 <div class="result-count">
                                     <span> </span></div>
                                 <div class="group-btn">
-                                    <button class="btn-delete" id="delete">RESET</button>
-                                    <button class="btn-search">SEARCH</button>
+                                    <button type="reset" class="btn-delete" id="delete">RESET</button>
+                                    <button tyep="submit" class="btn-search">SEARCH</button>
                                 </div>
                             </div>
                         </div>
