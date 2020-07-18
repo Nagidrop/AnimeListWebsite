@@ -4,6 +4,9 @@
     Author     : Quan Duc Loc CE140037 (SE1401)
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="animelist.model.AnimeDTO"%>
+<%@page import="animelist.model.AnimeDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +19,30 @@
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
         <title>AnimeListWebsite</title>
     </head>
-    <body>
+    <body class="container">
         <jsp:include page='header.jsp'/>
+        <div class=""><p></div>
+            <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("list");%>
+
+        <div class="row mb-3 ">
+            <%for (AnimeDTO item : list) {%>
+            <div class="col-md-3">
+                <div class="card ">
+
+                    <div class="card-body">
+                        <img  src="<%=item.getPoster()%>">
+                    </div>
+                    <div class="card-footer">
+                        <%=item.getName()%>
+                    </div>
+                </div>
+
+            </div>
+            <%}%>
+
+
+
+        </div>
+
     </body>
 </html>

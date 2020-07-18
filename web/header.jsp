@@ -31,8 +31,10 @@
         <input class="form-control" type="text" placeholder="Search Anime...">
         <input class="btn btn-search form-control" type="submit" value="Search">
     </form>
-    <div class="col-md-2">
+    <div class="col-sm-1">
         <a type="button" href="login.action" class="btn btn-primary ">Login</a>
+    </div>
+     <div class="col-sm-1">
         <a type="button" href="" class="btn btn-success ">Sign Up</a>
     </div>
 
