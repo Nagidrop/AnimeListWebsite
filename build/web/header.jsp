@@ -33,7 +33,7 @@
         <input class="btn btn-search form-control" type="submit" value="Search">
     </form>
     <div class="col-sm-1">
-        <a type="button" href="login.action" class="btn btn-primary ">Login</a>
+        <a type="button" href="prelogin.action" class="btn btn-primary ">Login</a>
     </div>
      <div class="col-sm-1">
         <a type="button" href="" class="btn btn-success ">Sign Up</a>
