@@ -24,7 +24,6 @@ public class LoginAction {
         AccountDTO account = dao.login(username, pass);
         String url = FAIL;
         if (account != null) {
-            System.out.println("ALALALALALA");
             Map session = ActionContext.getContext().getSession();
             session.put("USERNAME", getUsername());
 
