@@ -1,17 +1,18 @@
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
+ */
+
 package animelist.model;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-/**
- *
- * @author Quan Duc Loc CE140037 (SE1401)
- */
+/* DTO for Account table */
 public class AccountDTO implements Serializable {
     private int id;
     private int roleID;
     private String username;
-    private String password;
     private String fullName;
     private String avatar;
     private String email;
@@ -22,11 +23,10 @@ public class AccountDTO implements Serializable {
     public AccountDTO() {
     }
 
-    public AccountDTO(int id, int roleId, String username, String password, String fullName, String avatar, String email, int gender, Date created_at, Date deleted_at) {
+    public AccountDTO(int id, int roleID, String username, String fullName, String avatar, String email, int gender, Date created_at, Date deleted_at) {
         this.id = id;
-        this.roleID = roleId;
+        this.roleID = roleID;
         this.username = username;
-        this.password = password;
         this.fullName = fullName;
         this.avatar = avatar;
         this.email = email;
@@ -57,14 +57,6 @@ public class AccountDTO implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFullName() {
@@ -114,6 +106,6 @@ public class AccountDTO implements Serializable {
     public void setDeleted_at(Date deleted_at) {
         this.deleted_at = deleted_at;
     }
-    
+
     
 }
