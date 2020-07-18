@@ -20,34 +20,9 @@ import java.util.logging.Logger;
 /* DAO for Anime List Project */
 public class AnimeListDAO {
 
-    private List<AnimeDTO> SearchAnimeList;
-
     public AnimeListDAO() {
     }
-
-    public List<AnimeDTO> getSearchAnimeList() {
-        return SearchAnimeList;
-    }
-
-    public void loadSearchAnime(String name, String type, int StudioID, int genreID, int seasonID) throws SQLException {
-        Connection conn = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        try {
-            conn = DBUtils.makeConnection();
-
-
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
-            if (st != null) {
-                st.close();
-            }
-            if (rs != null) {
-                rs.close();
-            }
-        }
+    
     public AccountDTO login(String username, String password) {
         String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
 
@@ -287,4 +262,177 @@ public class AnimeListDAO {
 
         return null;
     }
+    
+    
+     public ArrayList<AnimeDTO> loadSearchAnime(String name, String type, int StudioID, int genreID, int seasonID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<String> getTypes() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<String> types = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT type FROM anime GROUP BY type");
+
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                if (types == null) {
+                    types = new ArrayList<>();
+                }
+                types.add(rs.getString("type"));
+            }
+            return types;
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+    
+    public ArrayList<GenreDTO> getGenres() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<GenreDTO> genres = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT * FROM genre");
+
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int GenreID = rs.getInt("GenreID");
+                String name = rs.getString("name");
+                Date created_at = rs.getDate("created_at");
+                Date deleted_at = rs.getDate("deleted_at");
+                GenreDTO genre = new GenreDTO(GenreID, name, created_at, deleted_at);
+                if (genres == null) {
+                    genres = new ArrayList<>();
+                }
+                genres.add(genre);
+            }
+           
+            return genres;
+            
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+    
+    public ArrayList<StudioDTO> getStudios() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<StudioDTO> studios = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT * FROM studio");
+
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int StudioID = rs.getInt("StudioID");
+                String name = rs.getString("name");
+                Date created_at = rs.getDate("created_at");
+                Date deleted_at = rs.getDate("deleted_at");
+                StudioDTO studio = new StudioDTO(StudioID, name, created_at, deleted_at);
+                if (studios == null) {
+                    studios = new ArrayList<>();
+                }
+                studios.add(studio);
+            }
+           
+            return studios;
+            
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+    
+    public ArrayList<SeasonDTO> getSeasons() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<SeasonDTO> seasons = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT * FROM studio");
+
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int SeasonID = rs.getInt("SeasonID");
+                String name = rs.getString("name");
+                Date created_at = rs.getDate("created_at");
+                Date deleted_at = rs.getDate("deleted_at");
+                SeasonDTO season = new SeasonDTO(SeasonID, name, created_at, deleted_at);
+                if (seasons == null) {
+                    seasons = new ArrayList<>();
+                }
+                seasons.add(season);
+            }
+           
+            return seasons;
+            
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+    
+    
 }
