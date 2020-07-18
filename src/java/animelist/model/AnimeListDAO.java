@@ -179,6 +179,8 @@ public class AnimeListDAO {
 
                 animeList.add(new AnimeDTO(animeID, 0, seasonID, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
+            
+            return animeList;
         } catch (SQLException ex) {
             Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -202,7 +204,7 @@ public class AnimeListDAO {
         return null;
     }
 
-    public void getTopAnimesByType(int top) {
+    public ArrayList<AnimeDTO> getTopAnimesByType(int top) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -236,6 +238,8 @@ public class AnimeListDAO {
 
                 animeList.add(new AnimeDTO(animeID, 0, seasonID, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
+            
+            return animeList;
         } catch (SQLException ex) {
             Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -255,5 +259,7 @@ public class AnimeListDAO {
                 Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        return null;
     }
 }
