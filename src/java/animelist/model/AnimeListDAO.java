@@ -14,19 +14,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /* DAO for Anime List Project */
 public class AnimeListDAO {
-    List<AnimeDTO> animeList;
 
     public AnimeListDAO() {
-    }
-
-    public List<AnimeDTO> getAnimeList() {
-        return animeList;
     }
 
     public AccountDTO login(String username, String password) {
@@ -151,10 +145,11 @@ public class AnimeListDAO {
         return false;
     }
 
-    public void getListAnime(int amount) {
+    public ArrayList<AnimeDTO> getAnimes(int amount) {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
+        ArrayList<AnimeDTO> animeList = null;
 
         try {
             conn = DBUtils.makeConnection();
@@ -162,7 +157,7 @@ public class AnimeListDAO {
             st.setInt(1, amount);
             rs = st.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 int animeID = rs.getInt("animeID");
                 int seasonID = rs.getInt("seasonID");
                 String type = rs.getString("type");
@@ -178,11 +173,68 @@ public class AnimeListDAO {
                 Date created_at = rs.getDate("created_at");
                 Date deleted_at = rs.getDate("deleted_at");
 
-                if (this.animeList == null) {
-                    this.animeList = new ArrayList<>();
+                if (animeList == null) {
+                    animeList = new ArrayList<>();
                 }
 
-                this.animeList.add(new AnimeDTO(animeID, 0, seasonID, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
+                animeList.add(new AnimeDTO(animeID, 0, seasonID, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (st != null) {
+                    st.close();
+                }
+
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return null;
+    }
+
+    public void getTopAnimesByType(int top) {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<AnimeDTO> animeList = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT TOP(?) FROM Anime ORDER BY Type");
+            st.setInt(1, top);
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int animeID = rs.getInt("animeID");
+                int seasonID = rs.getInt("seasonID");
+                String type = rs.getString("type");
+                String name = rs.getString("name");
+                Date releaseDate = rs.getDate("releaseDate");
+                String rating = rs.getString("rating");
+                int episodes = rs.getInt("episodes");
+                String status = rs.getString("status");
+                String duration = rs.getString("duration");
+                String description = rs.getString("description");
+                String poster = rs.getString("poster");
+                String trailer = rs.getString("trailer");
+                Date created_at = rs.getDate("created_at");
+                Date deleted_at = rs.getDate("deleted_at");
+
+                if (animeList == null) {
+                    animeList = new ArrayList<>();
+                }
+
+                animeList.add(new AnimeDTO(animeID, 0, seasonID, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
