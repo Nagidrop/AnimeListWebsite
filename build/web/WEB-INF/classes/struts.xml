@@ -5,8 +5,15 @@
 <struts>
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
+        <action name="">
+            <result>index.jsp</result>
+        </action>
         <action name="login">
             <result name="success">login.jsp</result>
+        </action>
+        <action name="loginclicked"  class="animelist.controller.LoginAction">
+            <result name="success">index.jsp</result>
+            <result name="fail">invalid.jsp</result>
         </action>
     </package>
 </struts>

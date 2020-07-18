@@ -1,4 +1,9 @@
-package anime.utils;
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
+ */
+
+package animelist.utils;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -10,11 +15,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-
-/**
- *
- * @author Quan Duc Loc CE140037 (SE1401)
- */
+/* Establish a connection to database */
 public class DBUtils implements Serializable {
 
     public static Connection makeConnection() {
