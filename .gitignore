@@ -71,6 +71,12 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+nbproject/build-impl.xml
+nbproject/genfiles.properties
+nbproject/project.properties
+nbproject/project.xml
+nbproject/private/private.properties
+nbproject/private/private.xml
 
 ##############################
 ## Visual Studio Code
@@ -82,15 +88,3 @@ nb-configuration.xml
 ## OS X
 ##############################
 .DS_Store
-nbproject/private/private.properties
-nbproject/private/private.xml
-nbproject/private/private.properties
-nbproject/private/private.xml
-nbproject/project.properties
-nbproject/build-impl.xml
-nbproject/genfiles.properties
-nbproject/private/private.properties
-nbproject/project.properties
-nbproject/project.xml
-nbproject/private/private.properties
-nbproject/private/private.xml
