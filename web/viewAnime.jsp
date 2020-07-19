@@ -251,7 +251,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show active" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
+                            <div class="tab-pane fade" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
                                 <iframe width="500" height="300" src="<s:property value="anime.trailer"/>  " frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
                             </div>  
                         </div>
