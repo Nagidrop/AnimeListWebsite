@@ -7,6 +7,8 @@ package animelist.model;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Comparator;
+import java.util.ArrayList;
+
 
 /* DTO for Anime table */
 public class AnimeDTO implements Serializable {
@@ -14,7 +16,9 @@ public class AnimeDTO implements Serializable {
     /* An Anime properties */
     private int id;
     private int accountID;
-    private int seasonID;
+    private String season;
+    private ArrayList<StudioDTO> studios;
+    private ArrayList<GenreDTO> genres;
     private String type;
     private String name;
     private Date releaseDate;
@@ -32,10 +36,12 @@ public class AnimeDTO implements Serializable {
     public AnimeDTO() {
     }
 
-    public AnimeDTO(int id, int accountId, int seasonId, String type, String name, Date releaseDate, String rating, int episodes, String status, String duration, String description, String poster, String trailer, Date created_at, Date deleted_at) {
+    public AnimeDTO(int id, int accountID, String season, ArrayList<StudioDTO> studios, ArrayList<GenreDTO> genres, String type, String name, Date releaseDate, String rating, int episodes, String status, String duration, String description, String poster, String trailer, Date created_at, Date deleted_at) {
         this.id = id;
-        this.accountID = accountId;
-        this.seasonID = seasonId;
+        this.accountID = accountID;
+        this.season = season;
+        this.studios = studios;
+        this.genres = genres;
         this.type = type;
         this.name = name;
         this.releaseDate = releaseDate;
@@ -51,6 +57,7 @@ public class AnimeDTO implements Serializable {
     }
 
     /* Getters and Setters */
+
     public int getId() {
         return id;
     }
@@ -67,12 +74,28 @@ public class AnimeDTO implements Serializable {
         this.accountID = accountID;
     }
 
-    public int getSeasonID() {
-        return seasonID;
+    public String getSeason() {
+        return season;
     }
 
-    public void setSeasonID(int seasonID) {
-        this.seasonID = seasonID;
+    public void setSeason(String season) {
+        this.season = season;
+    }
+
+    public ArrayList<StudioDTO> getStudios() {
+        return studios;
+    }
+
+    public void setStudios(ArrayList<StudioDTO> studios) {
+        this.studios = studios;
+    }
+
+    public ArrayList<GenreDTO> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(ArrayList<GenreDTO> genres) {
+        this.genres = genres;
     }
 
     public String getType() {
