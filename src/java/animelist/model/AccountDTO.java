@@ -34,7 +34,6 @@ public class AccountDTO implements Serializable {
         this.created_at = created_at;
         this.deleted_at = deleted_at;
     }
-
     public int getId() {
         return id;
     }

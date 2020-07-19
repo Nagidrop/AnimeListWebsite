@@ -23,8 +23,7 @@
     <body class="container">
         <jsp:include page='header.jsp'/>
         <div class=""><p></div>
-        <h1>Search Result :</h1>
-        
+
         <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("DCM");%>
 
         <%if(list!=null){%>

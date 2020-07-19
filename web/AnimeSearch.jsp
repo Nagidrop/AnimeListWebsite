@@ -59,8 +59,7 @@
     </head>
     <body>
         <jsp:include page='header.jsp'/>
-        
-    
+    <body>
         <div class="s010" style="background-image: url('images/bg-10.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
             <s:form action="search">
                 <div class="inner-form">
@@ -183,5 +182,6 @@
             gtag('config', 'UA-23581568-13');
         </script>
         <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="62c9915bca822e18f27fd30b-|49" defer=""></script></body>
+</html>
 </body>
 </html>
