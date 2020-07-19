@@ -23,21 +23,21 @@
             body{
                 background: -webkit-linear-gradient(left, #3931af, #00c6ff);
             }
-            .emp-profile{
+            .emp-details{
                 padding: 3%;
                 margin-top: 3%;
                 margin-bottom: 3%;
                 border-radius: 0.5rem;
                 background: #fff;
             }
-            .profile-img{
+            .details-img{
                 text-align: center;
             }
-            .profile-img img{
+            .details-img img{
                 width: 70%;
                 height: 100%;
             }
-            .profile-img .file {
+            .details-img .file {
                 position: relative;
                 overflow: hidden;
                 margin-top: -20%;
@@ -47,19 +47,19 @@
                 font-size: 15px;
                 background: #212529b8;
             }
-            .profile-img .file input {
+            .details-img .file input {
                 position: absolute;
                 opacity: 0;
                 right: 0;
                 top: 0;
             }
-            .profile-head h5{
+            .details-head h5{
                 color: #333;
             }
-            .profile-head h6{
+            .details-head h6{
                 color: #0062cc;
             }
-            .profile-edit-btn{
+            .details-edit-btn{
                 border: none;
                 border-radius: 1.5rem;
                 width: 70%;
@@ -78,40 +78,40 @@
                 font-size: 15px;
                 font-weight: 600;
             }
-            .profile-head .nav-tabs{
+            .details-head .nav-tabs{
                 margin-bottom:5%;
             }
-            .profile-head .nav-tabs .nav-link{
+            .details-head .nav-tabs .nav-link{
                 font-weight:600;
                 border: none;
             }
-            .profile-head .nav-tabs .nav-link.active{
+            .details-head .nav-tabs .nav-link.active{
                 border: none;
                 border-bottom:2px solid #0062cc;
             }
-            .profile-work{
+            .details-work{
                 padding: 14%;
                 margin-top: -15%;
             }
-            .profile-work p{
+            .details-work p{
                 font-size: 12px;
                 color: #818182;
                 font-weight: 600;
                 margin-top: 10%;
             }
-            .profile-work a{
+            .details-work a{
                 text-decoration: none;
                 color: #495057;
                 font-weight: 600;
                 font-size: 14px;
             }
-            .profile-work ul{
+            .details-work ul{
                 list-style: none;
             }
-            .profile-tab label{
+            .details-tab label{
                 font-weight: 600;
             }
-            .profile-tab p{
+            .details-tab p{
                 font-weight: 600;
                 color: #0062cc;
             }
@@ -125,21 +125,21 @@
     </head>
     <body>
         <jsp:include page='header.jsp'/>
-        <div class="container emp-profile">
+        <div class="container emp-details">
             <form method="post">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="profile-img">
+                        <div class="details-img">
                             <img src="images/poster/<s:property value="anime.poster"/>" alt=""/>
                         </div>
-                        <div class="profile-work">
+                        <div class="details-work">
                             <%if (session.getAttribute("user") != null) {%>
                             <h1>HELLO</h1>
                             <% } %>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="profile-head">
+                    <div class="col-md-8">
+                        <div class="details-head">
                             <h1>
                                 <s:property value="anime.name" />
                             </h1>
@@ -149,10 +149,10 @@
                             <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Synopsis</a>
+                                    <a class="nav-link active" id="synopsis-tab" data-toggle="tab" href="#synopsis" role="tab" aria-controls="synopsis" aria-selected="true">Synopsis</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Details</a>
+                                    <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">Details</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="trailer-tab" data-toggle="tab" href="#trailer" role="tab" aria-controls="trailer" aria-selected="false">Trailer</a>
@@ -160,11 +160,11 @@
 
                             </ul>
                         </div>
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-content details-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="synopsis" role="tabpanel" aria-labelledby="synopsis-tab">
                                 <p class="synopsis"> <s:property value="anime.description" /></p>
                             </div>    
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Type</label>
@@ -254,17 +254,17 @@
                             </div>
                             <div class="tab-pane fade" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
                                 <s:if test="%{anime.trailer != null}">
-                                    <iframe width="500" height="300" src="<s:property value="anime.trailer"/>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe> 
-                                    </s:if>
-                                    <s:else>
-                                    <p style="text-align: center; color: #000000">There is no trailer available for this anime title</p>
+                                    <div style="text-align: center;"><iframe width="500" height="300" src="<s:property value="anime.trailer"/>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe></div>
+                                        </s:if>
+                                        <s:else>
+                                    <p style="text-align: center; color: #000000;">There is no trailer available for this anime title</p>
                                 </s:else>
                             </div>  
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                    </div>
+                    <!--                    <div class="col-md-2">
+                                            <input type="submit" class="details-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                                        </div>-->
                     <div class="row">
                         <div class="col-md-4">
 
