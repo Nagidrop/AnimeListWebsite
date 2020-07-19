@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : viewAnime
     Created on : Jul 19, 2020, 5:04:19 PM
     Author     : Quan Duc Loc CE140037 (SE1401)
@@ -121,7 +121,7 @@
                 font-weight:normal!important;
             }
         </style>
-        <title><s:property value="anime.name"/> - AnimeListWebsite</title>
+        <title><s:property value="anime.name"/> - WibuAnimeList</title>
     </head>
     <body>
         <jsp:include page='header.jsp'/>
@@ -163,7 +163,7 @@
                         <div class="tab-content details-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="synopsis" role="tabpanel" aria-labelledby="synopsis-tab">
                                 <p class="synopsis"> <s:property value="anime.description" /></p>
-                            </div>    
+                            </div>
                             <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -206,10 +206,10 @@
                                             int studioIndex = 0;
                                             for (StudioDTO studio : studioList) {
                                                 if (studioIndex == 0) {
-                                        %>    
+                                        %>
                                         <p><%= studio.getName()%>
                                             <% } else {%>
-                                            <%= ", " + studio.getName()%> 
+                                            <%= ", " + studio.getName()%>
                                             <% }
                                                     studioIndex++;
                                                 }%>
@@ -225,10 +225,10 @@
                                             int genreIndex = 0;
                                             for (GenreDTO genre : genreList) {
                                                 if (genreIndex == 0) {
-                                        %>    
+                                        %>
                                         <p> <%= genre.getName()%>
                                             <% } else {%>
-                                            <%= ", " + genre.getName()%> 
+                                            <%= ", " + genre.getName()%>
                                             <% }
                                                     genreIndex++;
                                                 }%>
@@ -259,7 +259,7 @@
                                         <s:else>
                                     <p style="text-align: center; color: #000000;">There is no trailer available for this anime title</p>
                                 </s:else>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                     <!--                    <div class="col-md-2">
@@ -274,7 +274,7 @@
                         </div>
                     </div>
                 </div>
-            </form>           
+            </form>
         </div>
     </body>
 </html>

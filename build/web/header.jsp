@@ -3,7 +3,7 @@
     Created on : Jul 15, 2020, 7:25:43 PM
     Author     : HAPPY
 --%>
-<%@taglib uri = "/struts-tags" prefix = "s" %>
+<%@taglib uri="/struts-tags" prefix="s"%>
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <a class="navbar-brand" href="<s:url action="index"/>">WibuAnimeList</a>
