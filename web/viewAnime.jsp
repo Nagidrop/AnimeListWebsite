@@ -133,8 +133,9 @@
                             <img src="images/poster/<s:property value="anime.poster"/>" alt=""/>
                         </div>
                         <div class="profile-work">
-
-                            
+                            <%if (session.getAttribute("user") != null) {%>
+                            <h1>HELLO</h1>
+                            <% } %>
                         </div>
                     </div>
                     <div class="col-md-6">
