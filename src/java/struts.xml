@@ -27,7 +27,7 @@
         </action>
         <action name="viewAnime" class="animelist.controller.ViewAnimeAction" >
             <result name="success" type="dispatcher">viewAnime.jsp</result>
-            <result name="fail">404notfound.jsp</result>
+            <result name="fail">404.jsp</result>
         </action>
 
         <action name="initSearchPage" class = "animelist.controller.InitSearchPageAction">
