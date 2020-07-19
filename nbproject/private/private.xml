@@ -3,20 +3,36 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/AnimeListWebsite/web/header.jsp</file>
-            <file>file:/E:/AnimeListWebsite/nbproject/private/private.xml</file>
-            <file>file:/E:/AnimeListWebsite/web/login.jsp</file>
-            <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/RegisterAction.java</file>
-            <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/SearchAction.java</file>
-            <file>file:/E:/AnimeListWebsite/web/META-INF/context.xml</file>
-            <file>file:/E:/AnimeListWebsite/web/AnimeSearch.jsp</file>
-            <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/LoginAction.java</file>
-            <file>file:/E:/AnimeListWebsite/web/searchResult.jsp</file>
-            <file>file:/E:/AnimeListWebsite/web/index.jsp</file>
-            <file>file:/E:/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
-            <file>file:/E:/AnimeListWebsite/nbproject/private/private.properties</file>
-            <file>file:/E:/AnimeListWebsite/web/register.jsp</file>
-            <file>file:/E:/AnimeListWebsite/src/java/struts.xml</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/login.jsp</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/ShowIndexAction.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeStudioDTO.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/images/bg-10.jpg</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/ListHistoryDTO.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/vendor/bootstrap/css/bootstrap.min.css</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/js/extention/choices.js</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/css/util.css</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/SearchAction.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeGenreDTO.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/js/global.js</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/InitSearchPageAction.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/SeasonDTO.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/css/AdvanceSearch.css</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/searchResult.jsp</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/header.jsp</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/AdminIndexAction.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/register.jsp</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeDTO.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/LoginAction.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/AnimeSearch.jsp</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/GenreDTO.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/struts.xml</file>
+            <file>file:/D:/Project/AnimeListWebsite/nbproject/build-impl.xml</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/css/reg.css</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/js/main.js</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/css/main.css</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/index.jsp</file>
         </group>
     </open-files>
 </project-private>
