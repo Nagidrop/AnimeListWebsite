@@ -36,7 +36,6 @@
                             <s:property value="name"/>
                         </div>
                     </div>
-
                 </div>
             </s:iterator>
     </body>
