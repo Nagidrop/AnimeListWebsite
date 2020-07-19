@@ -33,6 +33,8 @@ public class LoginAction {
             /* Create new session for user with username */
             Map session = ActionContext.getContext().getSession();
             session.put("user", account);
+            session.put("fullname", account.getFullName());
+            session.put("id", account.getId());
             url = SUCCESS;
         }
 
