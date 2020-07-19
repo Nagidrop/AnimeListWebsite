@@ -23,17 +23,21 @@
     <body class="container">
         <jsp:include page='header.jsp'/>
         <div class=""><p></div>
+        <div class="row">
+            <div class="col-md-7" ><h1>Search Result :</h1></div>
+            <div class="col-md-5" >Sort</div>
+           
+        </div>
 
-        <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("DCM");%>
-
-        <%if(list!=null){%>
+         <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("DCM");%>
+        <%if (list != null) {%>
         <div class="row mb-3 ">
             <%for (AnimeDTO item : list) {%>
             <div class="col-md-3">
                 <div class="card ">
 
                     <div class="card-body">
-                        <img  src="<%=item.getPoster()%>">
+                        <img  src="images/poster/<%=item.getPoster()%>">
                     </div>
                     <div class="card-footer">
                         <%=item.getName()%>
@@ -41,9 +45,10 @@
                 </div>
 
             </div>
-            <%}}else{%>
+            <%}
+            } else {%>
             <h2>null</h2><%}%>
-            
+
     </body>
 </html>
 

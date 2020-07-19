@@ -14,9 +14,11 @@
                 <param name="actionName">index</param>
             </result>
         </action>
-        
+           <action name="logout" class="animelist.controller.LogoutAction" >
+            <result name="success" type="redirectAction">index</result>      
+        </action>
         <action name="login"  class="animelist.controller.LoginAction">
-            <result name="success">index.jsp</result>
+            <result name="success"  type="redirectAction">index</result>
             <result name="fail" type="redirectAction">
                 <param name="actionName">prelogin</param>
                 <param name="status" >123</param>
@@ -31,8 +33,23 @@
             <result name="success" type="dispatcher">searchResult.jsp</result>
         </action>
         
-        <<action name="info" class = "animelist.controller.SearchAction">
-            <result name="success" type="dispatcher">userinfo.jsp</result>
+        <action name="register" class = "animelist.controller.RegisterAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">.index</param>
+            </result>
+            <result name="fail">invalid.jsp</result>
+        </action>
+        <action name="changepassword" class = "animelist.controller.ChangePasswordAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">.index</param>
+            </result>
+            <result name="fail">invalid.jsp</result>
+        </action>
+          <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">.index</param>
+            </result>
+            <result name="fail">invalid.jsp</result>
         </action>
     </package>
 </struts>

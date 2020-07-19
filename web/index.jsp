@@ -4,6 +4,7 @@
     Author     : Quan Duc Loc CE140037 (SE1401)
 --%>
 
+<%@page import="animelist.model.AccountDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="animelist.model.AnimeDTO"%>
 <%@page import="animelist.model.AnimeDTO"%>
@@ -30,14 +31,16 @@
                     <div class="card ">
 
                         <div class="card-body">
-                            <img  src="<s:property  value="poster"/>">
+                            <img  src="images/poster/<s:property  value="poster"/>">
                         </div>
                         <div class="card-footer">
                             <s:property value="name"/>
                         </div>
                     </div>
-
                 </div>
             </s:iterator>
+
+        </div>
+
     </body>
 </html>

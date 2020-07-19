@@ -433,23 +433,22 @@
                             <div class="card">
                                 <div class="card-body text-center bg-primary rounded-top">
                                     <div class="user-box"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
-                                    <h5 class="mb-1 text-white">HitLife</h5>
+                                    <h5 class="mb-1 text-white"><%= session.getAttribute("username")%></h5>
                                     <h6 class="text-light">True Wibu</h6>
                                 </div>
                                 <div class="card-body">
                                     <ul class="list-group shadow-none">
                                         <li class="list-group-item">
-                                            <% AccountDTO currentUser = (AccountDTO)(session.getAttribute(""));%>
                                             <div class="list-icon"> <i class="fa fa-user-circle"></i> </div>
-                                            <div class="list-details"> <span><%= currentUser.getUsername()%></span> <small>Username</small> </div>
+                                            <div class="list-details"> <span><%= session.getAttribute("username")%></span> <small>Username</small> </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="list-icon"> <i class="fa fa-envelope"></i> </div>
-                                            <div class="list-details"> <span><%= currentUser.getEmail()%></span> <small>Email Address</small> </div>
+                                            <div class="list-details"> <span><%= session.getAttribute("email")%></span> <small>Email Address</small> </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="list-icon"> <i class="fa fa-genderless"></i> </div>
-                                            <div class="list-details"> <span><%= currentUser.getGender()%></span> <small>Gender</small> </div>
+                                            <div class="list-details"> <span><%= session.getAttribute("gender")%></span> <small>Gender</small> </div>
                                         </li>
                                     </ul>
                                     <div class="row text-center mt-4">
@@ -473,13 +472,11 @@
                             <div class="card-body">
                                 <ul class="nav nav-pills nav-pills-primary nav-justified">
                                     <li class="nav-item"> <a href="javascript:void();" data-target="#profile" data-toggle="pill" class="nav-link active show"><i class="icon-user"></i> <span class="hidden-xs">Profile</span></a> </li>
-                                    <li class="nav-item"> <a href="javascript:void();" data-target="#edit" data-toggle="pill" class="nav-link"><i class="icon-note"></i> <span class="hidden-xs">Edit</span></a> </li>
-                                    <li class="nav-item"> <a href="javascript:void();" data-target="#editpassword" data-toggle="pill" class="nav-link"><i class="icon-pass"></i> <span class="hidden-xs">Password Changed</span></a> </li>
                                 </ul>
                                 <div class="tab-content p-3">
                                     <div class="tab-pane active show" id="profile">
                                         <h5 class="mb-3">User Profile</h5>
-                                        <h6 class="mb-2">Full Name: γαλαξίας<%= currentUser.getFullName()%></h6> 
+                                        <h6 class="mb-2">Full Name: <%= session.getAttribute("fullname")%></h6> 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <h6>About</h6>
@@ -488,83 +485,6 @@
                                                 <p> Indie music, watch anime, happy when having a notification on mobile phone. </p>
                                             </div>
                                         </div>
-                                        <!--/row--> 
-                                    </div>
-                                    <div class="tab-pane" id="edit">
-                                        <form>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">Full name</label>
-                                                <div class="col-lg-9">
-                                                    <input class="form-control" type="text" value="γαλαξίας">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-lg-9"> </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">Email</label>
-                                                <div class="col-lg-9">
-                                                    <input class="form-control" type="email" value="info@example.com">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
-                                                <div class="col-lg-9">
-                                                    <input class="form-control" type="file" name="upload" value="Upload Image">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-lg-9"> </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-lg-6"> </div>
-                                                <div class="col-lg-3"> </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">Gender</label>
-                                                <div class="col-lg-9">
-                                                    &ensp;
-                                                    <input type="checkbox" id="gender0" name="gender0" value="Male">
-                                                    <label for="gender0">Male</label>                    &ensp;
-                                                    <input type="checkbox" id="gender1" name="gender1" value="Female">
-                                                    <label for="gender1">Female</label>                  &ensp;
-                                                    <input type="checkbox" id="gender2" name="gender2" value="Other" checked>
-                                                    <label for="gender2">Other</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label"></label>
-                                                <div class="col-lg-9">
-                                                    <input type="reset" class="btn btn-secondary" value="Cancel">
-                                                    <input type="button" class="btn btn-primary" value="Save Changes">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="tab-pane" id="editpassword">
-                                        <form>
-                                            <input type="checkbox" onclick="Toggle()"> 
-                                            <b>Show Password</b> 
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">New Password</label>
-                                                <div class="col-lg-9">
-                                                    <input class="form-control" type="password" value="" id="typepass">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
-                                                <div class="col-lg-9">
-                                                    <input class="form-control" type="password" value="" id="typepass1">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label"></label>
-                                                <div class="col-lg-9">
-                                                    <input type="reset" class="btn btn-secondary1" value="Cancel">
-                                                    <input type="button" class="btn btn-primary1" value="Save Changes">
-                                                </div>
-                                            </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -574,21 +494,6 @@
             </div>
             <script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
             <script type="text/javascript">
-                                                $('input[type="checkbox"]').on('change', function () {
-                                                    $('input[type="checkbox"]').not(this).prop('checked', false);
-                                                });
-                                                // Change the type of input to password or text 
-                                                function Toggle() {
-                                                    var temp = document.getElementById("typepass");
-                                                    var temp1 = document.getElementById("typepass1");
-                                                    if (temp.type === "password" && temp1.type === "password") {
-                                                        temp.type = "text";
-                                                        temp1.type = "text";
-                                                    } else {
-                                                        temp.type = "password";
-                                                        temp1.type = "password";
-                                                    }
-                                                }
             </script>
     </body>
 </html>

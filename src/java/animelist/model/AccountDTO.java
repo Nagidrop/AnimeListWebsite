@@ -2,7 +2,6 @@
  *
  * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
-
 package animelist.model;
 
 import java.io.Serializable;
@@ -10,6 +9,8 @@ import java.sql.Date;
 
 /* DTO for Account table */
 public class AccountDTO implements Serializable {
+
+    /* Account properties */
     private int id;
     private int roleID;
     private String username;
@@ -20,9 +21,7 @@ public class AccountDTO implements Serializable {
     private Date created_at;
     private Date deleted_at;
 
-    public AccountDTO() {
-    }
-
+    /* Constructors */
     public AccountDTO(int id, int roleID, String username, String fullName, String avatar, String email, int gender, Date created_at, Date deleted_at) {
         this.id = id;
         this.roleID = roleID;
@@ -34,6 +33,8 @@ public class AccountDTO implements Serializable {
         this.created_at = created_at;
         this.deleted_at = deleted_at;
     }
+
+    /* Getters and Setters */
     public int getId() {
         return id;
     }
@@ -86,10 +87,6 @@ public class AccountDTO implements Serializable {
         return gender;
     }
 
-    public void setGender(int gender) {
-        this.gender = gender;
-    }
-
     public Date getCreated_at() {
         return created_at;
     }
@@ -105,6 +102,4 @@ public class AccountDTO implements Serializable {
     public void setDeleted_at(Date deleted_at) {
         this.deleted_at = deleted_at;
     }
-
-    
 }

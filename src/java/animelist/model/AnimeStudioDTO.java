@@ -2,16 +2,18 @@
  *
  * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
-
 package animelist.model;
 
 import java.io.Serializable;
 
 /* DTO for Anime_Studio table */
-public class AnimeStudioDTO implements Serializable{
+public class AnimeStudioDTO implements Serializable {
+
+    /* Anime_Studio properties */
     private int animeID;
     private int studioID;
 
+    /* Constructors with and without arguments */
     public AnimeStudioDTO() {
     }
 
@@ -20,6 +22,7 @@ public class AnimeStudioDTO implements Serializable{
         this.studioID = studioID;
     }
 
+    /* Getters and Setters */
     public int getAnimeID() {
         return animeID;
     }
@@ -35,6 +38,5 @@ public class AnimeStudioDTO implements Serializable{
     public void setStudioID(int studioID) {
         this.studioID = studioID;
     }
-    
-    
+
 }
