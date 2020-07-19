@@ -6,6 +6,7 @@ package animelist.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Comparator;
 
 /* DTO for Anime table */
 public class AnimeDTO implements Serializable {
@@ -169,5 +170,16 @@ public class AnimeDTO implements Serializable {
     public void setDeleted_at(Date deleted_at) {
         this.deleted_at = deleted_at;
     }
+    
+    public static Comparator<AnimeDTO> animeNameComp = new Comparator<AnimeDTO>(){
+        @Override
+        public int compare(AnimeDTO t, AnimeDTO t1) {
+            String name1 = t.getName().toLowerCase();
+            String name2 = t1.getName().toLowerCase();
+            
+            return name1.compareTo(name2);
+        }
+        
+    };
 
 }
