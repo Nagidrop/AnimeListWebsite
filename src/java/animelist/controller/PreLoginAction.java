@@ -24,7 +24,7 @@ public class PreLoginAction {
         String url = SUCCESS;
         
         /* If session already exists (user already logged in), do not allow to login anymore */
-        if (session != null) {
+        if (session.get("user") != null) {
             url = FAIL;
         }
 
