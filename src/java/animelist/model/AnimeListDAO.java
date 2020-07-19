@@ -14,7 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +32,8 @@ public class AnimeListDAO {
      *
      * @param username
      * @param password
-     * @return Account object (except password) if login successful, null if login credentials don't match
+     * @return Account object (except password) if login successful, null if
+     * login credentials don't match
      * @throws java.sql.SQLException
      */
     public AccountDTO login(String username, String password) throws SQLException {
@@ -487,6 +490,128 @@ public class AnimeListDAO {
                 rs.close();
             }
         }
+    }
+
+    public String countAnimes() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT count(*) as count FROM anime");
+
+            rs = st.executeQuery();
+            if (rs.first()) {
+                String countString = rs.getString(1);
+                return countString;
+            }
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return "";
+    }
+
+    public String countUsers() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT count(*) as count FROM account where RoleID=2");
+
+            rs = st.executeQuery();
+
+            if (rs.first()) {
+                String countString = rs.getString(1);
+                return countString;
+            }
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return "";
+    }
+
+    public String countAdmin() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT count(*) as count FROM account where RoleID = 1");
+
+            rs = st.executeQuery();
+            if (rs.first()) {
+                String countString = rs.getString(1);
+                return countString;
+            }
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return "";
+    }
+
+    public HashMap<String, String> countAnimeofType() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.makeConnection();
+            HashMap<String, String> list = new HashMap<>();
+
+            st = conn.prepareStatement("SELECT count(*),type as count FROM anime GROUP BY type");
+            rs = st.executeQuery();
+            if (rs.first()) {
+                do {
+                    String countString = rs.getString(1);
+                    String name = rs.getString(2);
+                    list.put(name, countString);
+                } while (rs.next());
+
+                return list;
+            }
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return null;
     }
 
 }
