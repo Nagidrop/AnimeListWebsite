@@ -20,11 +20,10 @@
             <file>file:/D:/Project/AnimeListWebsite/web/css/AdvanceSearch.css</file>
             <file>file:/D:/Project/AnimeListWebsite/web/searchResult.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/web/header.jsp</file>
-            <file>file:/D:/Project/AnimeListWebsite/web/AnimeInfo.jsp</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/AdminIndexAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/register.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeDTO.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/LoginAction.java</file>
-            <file>file:/D:/Project/AnimeListWebsite/web/invalid.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/web/AnimeSearch.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/GenreDTO.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/struts.xml</file>
