@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author PC
  */
 public class UserInfoAction {
+
     private final String SUCCESS = "success";
     private final String FAIL = "fail";
     private String username;
@@ -25,10 +26,14 @@ public class UserInfoAction {
     private String avatar;
     private String gender;
     private HttpServletRequest request;
-    public UserInfoAction(){}
-        public String execute() throws Exception {
-           // Map session = ActionContext.getContext().getSession();
+
+    public UserInfoAction() {
+    }
+
+    public String execute() throws Exception {
+        // Map session = ActionContext.getContext().getSession();
         AnimeListDAO dao = new AnimeListDAO();
         AccountDTO account = dao.login(username, password);
-        }
+        return SUCCESS;
+    }
 }

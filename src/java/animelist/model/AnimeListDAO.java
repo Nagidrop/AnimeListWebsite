@@ -152,11 +152,12 @@ public class AnimeListDAO {
             if (st != null) {
                 st.close();
 
-            if (conn != null) {
-                conn.close();
+                if (conn != null) {
+                    conn.close();
+                }
             }
+            return false;
         }
-        return false;
     }
 
     /**
@@ -671,6 +672,8 @@ public class AnimeListDAO {
         } catch (SQLException e) {
         }
         return false;
+    }
+
     public AnimeDTO getAnimeDetails(int animeID) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;

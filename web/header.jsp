@@ -48,8 +48,8 @@
                 Welcome, <s:property value="%{#session.user.fullName}"/> <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#">Change Password</a>
-                <a class="dropdown-item" href="#">Change Info</a>
+                <a class="dropdown-item" href="changepassword">Change Password</a>
+                <a class="dropdown-item" href="editinfo">Change Info</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="logout">Log Out</a>
             </div>
