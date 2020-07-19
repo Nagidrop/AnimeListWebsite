@@ -1,6 +1,6 @@
 <%-- 
-    Document   : invalid
-    Created on : Jul 18, 2020, 12:17:44 PM
+    Document   : test
+    Created on : Jul 19, 2020, 9:11:01 PM
     Author     : Quan Duc Loc CE140037 (SE1401)
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>OH NYANN~~~ </title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1>Nyan~~ Onii-channn~~~ yameteeee desuuu~~ </h1>
+        <h1>Hello World!</h1>
     </body>
 </html>

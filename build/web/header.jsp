@@ -37,14 +37,14 @@
         <a type="button" href="prelogin.action" class="btn btn-primary ">Login</a>
     </div>
     <div class="col-sm-1">
-        <a type="button" href="" class="btn btn-success ">Sign Up</a>
+        <a type="button" href="register.jsp" class="btn btn-success ">Sign Up</a>
     </div>
     <%}else{%>
 
     <ul class="nav navbar-nav">
         <li class="dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
-                Welcome, <%=session.getAttribute("fullname")%> <b class="caret"></b>
+                Welcome, <s:property value="%{#session.user.fullName}"/> <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">Change Password</a>

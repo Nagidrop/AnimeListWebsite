@@ -59,7 +59,7 @@ public class SearchAction extends ActionSupport implements ServletRequestAware {
             listAnimeDTOs = dao.getSearchAnime(searchValue, type, studioID, genreID, seasonID);
           
             
-            request.setAttribute("DCM", listAnimeDTOs);
+            request.setAttribute("searchlist", listAnimeDTOs);
         } catch (SQLException ex) {
             Logger.getLogger(SearchAction.class.getName()).log(Level.SEVERE, null, ex);
         }
