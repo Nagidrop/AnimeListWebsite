@@ -253,7 +253,12 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
-                                <iframe width="500" height="300" src="<s:property value="anime.trailer"/>  " frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+                                <s:if test="%{anime.trailer != null}">
+                                    <iframe width="500" height="300" src="<s:property value="anime.trailer"/>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe> 
+                                    </s:if>
+                                    <s:else>
+                                    <p style="text-align: center; color: #000000">There is no trailer available for this anime title</p>
+                                </s:else>
                             </div>  
                         </div>
                     </div>
