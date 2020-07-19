@@ -6,7 +6,7 @@
 <%@taglib uri = "/struts-tags" prefix = "s" %>
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">WibuAnimeList</a>
+    <a class="navbar-brand" href="<s:url action="index"/>">WibuAnimeList</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,14 +28,14 @@
 
     </div>
 
-    <form class="form-inline my-2 my-md-0" id="search-form">
-        <input class="form-control" type="text" placeholder="Search Anime...">
-        <input class="btn btn-search form-control" type="submit" value="Search">
-    </form>
+    <s:form cssClass="form-inline my-2 my-md-0" id="search-form" action="search">
+        <input class="form-control" type="text" name="searchvalue" placeholder="Search Anime...">
+        <input class="btn btn-search form-control" type="submit" value="Search" >
+    </s:form>
     <div class="col-sm-1">
         <a type="button" href="prelogin.action" class="btn btn-primary ">Login</a>
     </div>
-     <div class="col-sm-1">
+    <div class="col-sm-1">
         <a type="button" href="" class="btn btn-success ">Sign Up</a>
     </div>
 
