@@ -44,6 +44,7 @@
     <ul class="nav navbar-nav">
         <li class="dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
+
                 Welcome, <s:property value="%{#session.user.fullName}"/> <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right">

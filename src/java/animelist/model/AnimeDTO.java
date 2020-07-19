@@ -193,7 +193,7 @@ public class AnimeDTO implements Serializable {
     public void setDeleted_at(Date deleted_at) {
         this.deleted_at = deleted_at;
     }
-    
+
     public static Comparator<AnimeDTO> animeNameComp = new Comparator<AnimeDTO>(){
         @Override
         public int compare(AnimeDTO t, AnimeDTO t1) {
@@ -204,5 +204,6 @@ public class AnimeDTO implements Serializable {
         }
         
     };
+
 
 }

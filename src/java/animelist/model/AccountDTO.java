@@ -21,10 +21,6 @@ public class AccountDTO implements Serializable {
     private Date created_at;
     private Date deleted_at;
 
-    /* Constructors */
-    public AccountDTO() {
-    }
-
     public AccountDTO(int id, int roleID, String username, String fullName, String avatar, String email, int gender, Date created_at, Date deleted_at) {
         this.id = id;
         this.roleID = roleID;
@@ -88,10 +84,6 @@ public class AccountDTO implements Serializable {
 
     public int getGender() {
         return gender;
-    }
-
-    public void setGender(int gender) {
-        this.gender = gender;
     }
 
     public Date getCreated_at() {
