@@ -1,10 +1,15 @@
+<%-- 
+    Document   : AnimeInfo
+    Created on : Jul 19, 2020, 11:23:29 AM
+    Author     : PC
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <title>Login Form</title>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Anime name + AnimeListWebsite</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -50,63 +55,19 @@
         <script src="js/main.js"></script>
         <!--===============================================================================================-->
     </head>
-    <body>
+    <body class="container">
         <jsp:include page='header.jsp'/>
-
-        <div class="limiter">
-            <div class="container-login100" style="background-image: url('images/bg-02.jpg');">
-                <div class="wrap-register100">
-                    <s:form class="login100-form validate-form" action="register">
-                        <span class="login100-form-logo">
-                            <img src="images/lilo.png" width="100" height="100" >
-                        </span>
-
-                        <span class="login100-form-title p-b-34 p-t-27">
-                            Sign Up
-                        </span>
-
-                        <div class="wrap-input100 validate-input" data-validate = "Enter username">
-                            <input class="input100" type="text" name="registerUsername" placeholder="Username">
-                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
-                        </div>
-                        <div class="wrap-input100 validate-input" data-validate = "Enter Full name">
-                            <input class="input100" type="text" name="registerFullname" placeholder="Full name">
-                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
-                        </div>
-                        <div class="wrap-input100 validate-input" data-validate = "Enter Email">
-                            <input class="input100" type="text" name="registerEmail" placeholder="Email">
-                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input" data-validate="Enter password">
-                            <input class="input100" type="password" name="registerPassword" placeholder="Password">
-                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
-                        </div>
-                        <div class="wrap-input100 validate-input" data-validate="Enter confirm password">
-                            <input class="input100" type="password" name="repass" placeholder="Confirm Password">
-                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
-                        </div>
-
-                        <div class="container-login100-form-btn">
-                            <button class="login100-form-btn">
-                                Login
-                            </button>
-                        </div>
-
-                        <div class="text-center p-t-90">
-                            <a class="txt1" href="#">
-                                Forgot Password?
-                            </a>
-                        </div>
-                    </s:form>
-                </div>
-            </div>
+        
+        <div class=""> <p/> </div>
+        
+        <div class="row-md-3">
+            <div class="">Clannad</div>
         </div>
-
-
-        <div id="dropDownSelect1"></div>
-
-
-
+        
+        <div class="row">
+            <div class="col-md-5"><image src="https://cdn.myanimelist.net/images/anime/1804/95033.jpg"/></div>
+            <div class="col-md-7">Synopsis</div>
+        </div>
+        
     </body>
 </html>
