@@ -121,7 +121,7 @@
                 font-weight:normal!important;
             }
         </style>
-        <title>JSP Page</title>
+        <title><s:property value="anime.name"/> - AnimeListWebsite</title>
     </head>
     <body>
         <jsp:include page='header.jsp'/>
