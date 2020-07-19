@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -55,7 +56,7 @@
         <div class="limiter">
             <div class="container-login100" style="background-image: url('images/bg-02.jpg');">
                 <div class="wrap-register100">
-                    <form class="login100-form validate-form">
+                    <s:form class="login100-form validate-form" action="register">
                         <span class="login100-form-logo">
                             <img src="images/lilo.png" width="100" height="100" >
                         </span>
@@ -65,24 +66,24 @@
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Enter username">
-                            <input class="input100" type="text" name="username" placeholder="Username">
+                            <input class="input100" type="text" name="registerUsername" placeholder="Username">
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
                         <div class="wrap-input100 validate-input" data-validate = "Enter Full name">
-                            <input class="input100" type="text" name="full name" placeholder="Full name">
+                            <input class="input100" type="text" name="registerFullname" placeholder="Full name">
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
                         <div class="wrap-input100 validate-input" data-validate = "Enter Email">
-                            <input class="input100" type="text" name="email" placeholder="Email">
+                            <input class="input100" type="text" name="registerEmail" placeholder="Email">
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="Enter password">
-                            <input class="input100" type="password" name="pass" placeholder="Password">
+                            <input class="input100" type="password" name="registerPassword" placeholder="Password">
                             <span class="focus-input100" data-placeholder="&#xf191;"></span>
                         </div>
                         <div class="wrap-input100 validate-input" data-validate="Enter confirm password">
-                            <input class="input100" type="password" name="pass" placeholder="Confirm Password">
+                            <input class="input100" type="password" name="repass" placeholder="Confirm Password">
                             <span class="focus-input100" data-placeholder="&#xf191;"></span>
                         </div>
 
@@ -97,7 +98,7 @@
                                 Forgot Password?
                             </a>
                         </div>
-                    </form>
+                    </s:form>
                 </div>
             </div>
         </div>

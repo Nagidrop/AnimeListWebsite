@@ -3,11 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-
+            <file>file:/E:/AnimeListWebsite/web/header.jsp</file>
+            <file>file:/E:/AnimeListWebsite/nbproject/private/private.xml</file>
+            <file>file:/E:/AnimeListWebsite/web/login.jsp</file>
+            <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/RegisterAction.java</file>
+            <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/SearchAction.java</file>
             <file>file:/E:/AnimeListWebsite/web/META-INF/context.xml</file>
+            <file>file:/E:/AnimeListWebsite/web/AnimeSearch.jsp</file>
+            <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/LoginAction.java</file>
+            <file>file:/E:/AnimeListWebsite/web/searchResult.jsp</file>
+            <file>file:/E:/AnimeListWebsite/web/index.jsp</file>
+            <file>file:/E:/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
             <file>file:/E:/AnimeListWebsite/nbproject/private/private.properties</file>
+            <file>file:/E:/AnimeListWebsite/web/register.jsp</file>
             <file>file:/E:/AnimeListWebsite/src/java/struts.xml</file>
-
         </group>
     </open-files>
 </project-private>

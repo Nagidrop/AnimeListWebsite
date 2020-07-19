@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package animelist.controller;
 
 import animelist.model.AnimeListDAO;
@@ -15,7 +14,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
  *
  * @author Tran Minh Thang CE140085
  */
-public class RegisterAction extends ActionSupport implements ServletRequestAware{
+public class RegisterAction extends ActionSupport implements ServletRequestAware {
+
     private String username;
     private String password;
     private String fullname;
@@ -29,21 +29,24 @@ public class RegisterAction extends ActionSupport implements ServletRequestAware
 
     @Override
     public String execute() throws Exception {
-        
+
         AnimeListDAO dao = new AnimeListDAO();
-        
+
         username = request.getParameter("registerUsername");
-        password = request.getParameter("registerPass");
+        password = request.getParameter("registerPassword");
         fullname = request.getParameter("registerFullname");
         email = request.getParameter("registerEmail");
         
-        dao.register(username, password, fullname, email);
+        System.out.println(username +password+ fullname+ email);
         
-        return SUCCESS;
+        if (dao.register(username, password, fullname, email)) {
+
+            return SUCCESS;
+        } else {
+            return "fail";
+        }
     }
- 
-    
-    
+
     public String getUsername() {
         return username;
     }
@@ -80,7 +83,5 @@ public class RegisterAction extends ActionSupport implements ServletRequestAware
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;
     }
-    
-    
-    
+
 }

@@ -131,7 +131,7 @@ public class AnimeListDAO {
 
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("INSERT INTO Account(RoleID, username, password, fullname, email, created_at) VALUES (?, ?, ?, ?, ?) ");
+            st = conn.prepareStatement("INSERT INTO Account(RoleID, username, password, fullname, email, created_at) VALUES (?, ?, ?, ?, ?, ?) ");
             st.setInt(1, 2);
             st.setString(2, username);
             st.setString(3, hashPassword);
