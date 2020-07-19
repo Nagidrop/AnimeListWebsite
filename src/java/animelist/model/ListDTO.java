@@ -2,18 +2,20 @@
  *
  * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
-
 package animelist.model;
 
 import java.io.Serializable;
 
 /* DTO for List table */
 public class ListDTO implements Serializable {
+
+    /* Anime List (for users) properties */
     private int animeID;
     private int accountID;
     private int status;
     private int progress;
 
+    /* Constructors with and without arguments */
     public ListDTO() {
     }
 
@@ -24,6 +26,7 @@ public class ListDTO implements Serializable {
         this.progress = progress;
     }
 
+    /* Getters and Setters */
     public int getAnimeID() {
         return animeID;
     }
@@ -55,5 +58,5 @@ public class ListDTO implements Serializable {
     public void setProgress(int progress) {
         this.progress = progress;
     }
- 
+
 }

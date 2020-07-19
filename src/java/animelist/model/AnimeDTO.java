@@ -2,7 +2,6 @@
  *
  * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
-
 package animelist.model;
 
 import java.io.Serializable;
@@ -11,6 +10,7 @@ import java.sql.Date;
 /* DTO for Anime table */
 public class AnimeDTO implements Serializable {
 
+    /* An Anime properties */
     private int id;
     private int accountID;
     private int seasonID;
@@ -27,6 +27,7 @@ public class AnimeDTO implements Serializable {
     private Date created_at;
     private Date deleted_at;
 
+    /* Constructors with and without arguments */
     public AnimeDTO() {
     }
 
@@ -48,6 +49,7 @@ public class AnimeDTO implements Serializable {
         this.deleted_at = deleted_at;
     }
 
+    /* Getters and Setters */
     public int getId() {
         return id;
     }
@@ -168,5 +170,4 @@ public class AnimeDTO implements Serializable {
         this.deleted_at = deleted_at;
     }
 
-    
 }

@@ -18,6 +18,10 @@ import javax.sql.DataSource;
 /* Establish a connection to database */
 public class DBUtils implements Serializable {
 
+    /**
+     * Try to get connection to database
+     * @return database connection if successful, null if failed
+     */
     public static Connection makeConnection() {
         try {
             Context context = new InitialContext();
