@@ -45,11 +45,12 @@
         <li class="dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
 
-                Welcome, <s:property value="%{#session.user.fullName}"/> <b class="caret"></b>
+                Welcome, <s:property value="%{#session.fullname}"/> <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="changepassword">Change Password</a>
-                <a class="dropdown-item" href="editinfo">Change Info</a>
+                <a class="dropdown-item" href="userinfo.jsp">Personal Info</a>
+                <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
+                <a class="dropdown-item" href="editinfo.jsp"/>Change Info</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="logout">Log Out</a>
             </div>

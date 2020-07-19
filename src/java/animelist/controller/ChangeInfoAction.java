@@ -42,17 +42,17 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
         email = request.getParameter("email");
         fullname = request.getParameter("name");
         avatar = request.getParameter("upload");
-        session.put("fullname", fullname);
-        session.put("email", email);
+        session.replace("fullname", fullname);
+        session.replace("email", email);
         switch (gender) {
             case 0:
-                session.put("gender", "Male");
+                session.replace("gender", "Male");
                 break;
             case 1:
-                session.put("gender", "Female");
+                session.replace("gender", "Female");
                 break;
             case 2:
-                session.put("gender", "Other");
+                session.replace("gender", "Other");
                 break;
         }
         dao.changeInfo(username, fullname, avatar, email, gender);

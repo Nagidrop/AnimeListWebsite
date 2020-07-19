@@ -424,10 +424,10 @@
         <script src="js/main.js"></script>
         <!--===============================================================================================-->
     </head>
-    <body>
+    <body style=" background-image: url('images/bg-06.png'); background-size: cover; background-repeat: no-repeat;">
         <jsp:include page='header.jsp'/>
-        <div class="container-userinfo" style="background-image: url('images/bg-11.jpg');">
-            <div class="container">
+        <div class="container-userinfo">
+            <div class="container" style="margin-top: 2%">
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="profile-card-4 z-depth-3">

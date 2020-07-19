@@ -423,9 +423,10 @@
         <script src="js/main.js"></script>
         <!--===============================================================================================-->
     </head>
-    <body>
+    <body style=" background-image: url('images/bg-06.png'); background-size: cover; background-repeat: no-repeat;">
         <jsp:include page='header.jsp'/>
-        <div class="container-userinfo" style="background-image: url('images/bg-11.jpg');">
+        
+        <div class="container-userinfo" style="margin-top:2%">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-4">
@@ -433,7 +434,7 @@
                             <div class="card">
                                 <div class="card-body text-center bg-primary rounded-top">
                                     <div class="user-box"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
-                                    <h5 class="mb-1 text-white"><%= session.getAttribute("username")%></h5>
+                                    <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
                                     <h6 class="text-light">True Wibu</h6>
                                 </div>
                                 <div class="card-body">
