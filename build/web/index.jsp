@@ -4,6 +4,7 @@
     Author     : Quan Duc Loc CE140037 (SE1401)
 --%>
 
+<%@page import="animelist.model.AccountDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="animelist.model.AnimeDTO"%>
 <%@page import="animelist.model.AnimeDTO"%>
@@ -18,7 +19,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
-        <title>AnimeListWebsite</title>
+        <title>Wibu Anime List</title>
     </head>
     <body class="container">
         <jsp:include page='header.jsp'/>
@@ -28,15 +29,19 @@
             <s:iterator value="listAnimeDTOs" status="dto">
                 <div class="col-md-3">
                     <div class="card ">
-
-                        <div class="card-body">
-                            <img  src="<s:property  value="poster"/>">
-                        </div>
-                        <div class="card-footer">
-                            <s:property value="name"/>
-                        </div>
+                        <a href="viewAnime?animeID=<s:property  value="id"/>">
+                            <div class="card-body">
+                                <img  src="images/poster/<s:property  value="poster"/>">
+                            </div>
+                            <div class="card-footer">
+                                <s:property value="name"/>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </s:iterator>
+
+        </div>
+
     </body>
 </html>

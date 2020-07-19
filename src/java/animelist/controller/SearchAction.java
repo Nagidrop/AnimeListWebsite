@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
+
 package animelist.controller;
 
 import animelist.model.AnimeDTO;
@@ -15,10 +15,6 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author PC
- */
 public class SearchAction extends ActionSupport implements ServletRequestAware {
 
     private String searchValue;
@@ -63,7 +59,7 @@ public class SearchAction extends ActionSupport implements ServletRequestAware {
             listAnimeDTOs = dao.getSearchAnime(searchValue, type, studioID, genreID, seasonID);
           
             
-            request.setAttribute("DCM", listAnimeDTOs);
+            request.setAttribute("searchlist", listAnimeDTOs);
         } catch (SQLException ex) {
             Logger.getLogger(SearchAction.class.getName()).log(Level.SEVERE, null, ex);
         }

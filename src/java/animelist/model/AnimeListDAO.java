@@ -21,13 +21,23 @@ import java.util.logging.Logger;
 /* DAO for Anime List Project */
 public class AnimeListDAO {
 
+    /* Constructor */
     public AnimeListDAO() {
     }
 
-    public AccountDTO login(String username, String password) {
+    /**
+     * Check if user login credentials match ones in database
+     *
+     * @param username
+     * @param password
+     * @return Account object (except password) if login successful, null if
+     * login credentials don't match
+     * @throws java.sql.SQLException
+     */
+    public AccountDTO login(String username, String password) throws SQLException {
         String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
 
-        /* code to hash password using MD5 algorithm */
+        /* Code to hash password using MD5 algorithm */
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
 
@@ -44,6 +54,7 @@ public class AnimeListDAO {
             Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        /* Declare Connection, PreparedStatement and ResultSet variables */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -67,33 +78,38 @@ public class AnimeListDAO {
 
                 return new AccountDTO(id, roleID, username, fullname, avatar, email, gender, created_at, deleted_at);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
+            /* Close the JDBC resources after use */
+            if (rs != null) {
+                rs.close();
+            }
 
-                if (st != null) {
-                    st.close();
-                }
+            if (st != null) {
+                st.close();
+            }
 
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+            if (conn != null) {
+                conn.close();
             }
         }
 
         return null;
     }
 
-    public boolean register(String username, String password, String fullname, String email) {
+    /**
+     * Register a new user to database
+     *
+     * @param username
+     * @param password
+     * @param fullname
+     * @param email
+     * @return true if successful, false otherwise
+     * @throws java.sql.SQLException
+     */
+    public boolean register(String username, String password, String fullname, String email) throws SQLException {
         String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
 
-        /* code to hash password using MD5 algorithm */
+        /* Code to hash password using MD5 algorithm */
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
 
@@ -110,12 +126,13 @@ public class AnimeListDAO {
             Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        /* Declare Connection, PreparedStatement variables */
         Connection conn = null;
         PreparedStatement st = null;
 
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("INSERT INTO Account(RoleID, username, password, fullname, email, created_at) VALUES (?, ?, ?, ?, ?) ");
+            st = conn.prepareStatement("INSERT INTO Account(RoleID, username, password, fullname, email, created_at) VALUES (?, ?, ?, ?, ?, ?) ");
             st.setInt(1, 2);
             st.setString(2, username);
             st.setString(3, hashPassword);
@@ -127,26 +144,29 @@ public class AnimeListDAO {
             if (result > 0) {
                 return true;
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (st != null) {
-                    st.close();
-                }
+            /* Close the JDBC resources after use */
 
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
             }
         }
 
         return false;
     }
 
-    public ArrayList<AnimeDTO> getAnimes(int amount) {
+    /**
+     * Get an arbitrary anime list of an amount
+     *
+     * @param amount (amount of animes to get)
+     * @return list of animes of such amount
+     * @throws java.sql.SQLException
+     */
+    public ArrayList<AnimeDTO> getAnimes(int amount) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -160,7 +180,9 @@ public class AnimeListDAO {
 
             while (rs.next()) {
                 int animeID = rs.getInt("animeID");
-                int seasonID = rs.getInt("seasonID");
+                String season = getSeasonName(rs.getInt("seasonID"));
+                ArrayList<StudioDTO> studios = getStudioList(animeID);
+                ArrayList<GenreDTO> genres = getGenreList(animeID);
                 String type = rs.getString("type");
                 String name = rs.getString("name");
                 Date releaseDate = rs.getDate("releaseDate");
@@ -178,31 +200,23 @@ public class AnimeListDAO {
                     animeList = new ArrayList<>();
                 }
 
-                animeList.add(new AnimeDTO(animeID, 0, seasonID, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
+                animeList.add(new AnimeDTO(animeID, 0, season, studios, genres, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
 
             return animeList;
-        } catch (SQLException ex) {
-            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
+            if (rs != null) {
+                rs.close();
+            }
 
-                if (st != null) {
-                    st.close();
-                }
+            if (st != null) {
+                st.close();
+            }
 
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+            if (conn != null) {
+                conn.close();
             }
         }
-
-        return null;
     }
 
     public ArrayList<AnimeDTO> getTopAnimesByType(int top) {
@@ -219,7 +233,9 @@ public class AnimeListDAO {
 
             while (rs.next()) {
                 int animeID = rs.getInt("animeID");
-                int seasonID = rs.getInt("seasonID");
+                String season = getSeasonName(rs.getInt("seasonID"));
+                ArrayList<StudioDTO> studios = getStudioList(animeID);
+                ArrayList<GenreDTO> genres = getGenreList(animeID);
                 String type = rs.getString("type");
                 String name = rs.getString("name");
                 Date releaseDate = rs.getDate("releaseDate");
@@ -237,7 +253,7 @@ public class AnimeListDAO {
                     animeList = new ArrayList<>();
                 }
 
-                animeList.add(new AnimeDTO(animeID, 0, seasonID, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
+                animeList.add(new AnimeDTO(animeID, 0, season, studios, genres, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
 
             return animeList;
@@ -275,13 +291,13 @@ public class AnimeListDAO {
 
             st = conn.prepareStatement("SELECT anime.AccountID, anime.AnimeID, anime.SeasonID, anime.name , anime.type , anime.releaseDate , anime.rating , anime.episodes , anime.status , anime.duration, anime.description, anime.poster, anime.trailer, anime.created_at, anime.deleted_at, StudioID, GenreID \n"
                     + "FROM \n"
-                    + "anime INNER JOIN anime_studio on anime.AnimeID = anime_studio.AnimeID  \n"
-                    + "INNER JOIN genre_anime on genre_anime.AnimeID = anime.AnimeID \n"
+                    + "anime JOIN anime_studio on anime.AnimeID = anime_studio.AnimeID  \n"
+                    + "JOIN genre_anime on genre_anime.AnimeID = anime.AnimeID \n"
                     + "WHERE anime.name like ? and \n"
                     + "type like ? and \n"
                     + "GenreID like ? and \n"
                     + "StudioID like ? and \n"
-                    + "SeasonID like ? \n"
+                    + "(SeasonID like ? or SeasonID is NULL)\n"
                     + "GROUP BY anime.name");
 
             st.setString(1, "%" + searchValue + "%");
@@ -293,7 +309,9 @@ public class AnimeListDAO {
             rs = st.executeQuery();
             while (rs.next()) {
                 int animeID = rs.getInt("animeID");
-                int seasonid = rs.getInt("seasonID");
+                String season = getSeasonName(rs.getInt("seasonID"));
+                ArrayList<StudioDTO> studios = getStudioList(animeID);
+                ArrayList<GenreDTO> genres = getGenreList(animeID);
                 String animetype = rs.getString("type");
                 String name = rs.getString("name");
                 Date releaseDate = rs.getDate("releaseDate");
@@ -311,7 +329,7 @@ public class AnimeListDAO {
                     animeList = new ArrayList<>();
                 }
 
-                animeList.add(new AnimeDTO(animeID, 0, seasonid, animetype, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
+                animeList.add(new AnimeDTO(animeID, 0, season, studios, genres, animetype, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
 
             return animeList;
@@ -478,4 +496,166 @@ public class AnimeListDAO {
         }
     }
 
+    public AnimeDTO getAnimeDetails(int animeID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        AnimeDTO anime = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT * FROM Anime WHERE AnimeID = ?");
+            st.setInt(1, animeID);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                String season = getSeasonName(rs.getInt("seasonID"));
+                ArrayList<StudioDTO> studios = getStudioList(animeID);
+                ArrayList<GenreDTO> genres = getGenreList(animeID);
+                String type = rs.getString("type");
+                String name = rs.getString("name");
+                Date releaseDate = rs.getDate("releaseDate");
+                String rating = rs.getString("rating");
+                int episodes = rs.getInt("episodes");
+                String status = rs.getString("status");
+                String duration = rs.getString("duration");
+                String description = rs.getString("description");
+                String poster = rs.getString("poster");
+                String trailer = rs.getString("trailer");
+                Date created_at = rs.getDate("created_at");
+
+                anime = new AnimeDTO(animeID, 0, season, studios, genres, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, null);
+            }
+
+            return anime;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public String getSeasonName(int seasonID) throws SQLException {
+        String seasonName = null;
+
+        if (seasonID == 0) {
+            seasonName = " ";
+            return seasonName;
+        }
+
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT name FROM Season WHERE SeasonID = ?");
+            st.setInt(1, seasonID);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                seasonName = rs.getString("name");
+            }
+
+            return seasonName;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public ArrayList<StudioDTO> getStudioList(int animeID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<StudioDTO> studioList = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT * FROM anime_studio JOIN studio ON studio.StudioID = anime_studio.StudioID WHERE anime_studio.AnimeID = ?");
+            st.setInt(1, animeID);
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int studioID = rs.getInt("StudioID");
+                String studioName = rs.getString("name");
+
+                if (studioList == null) {
+                    studioList = new ArrayList<>();
+                }
+
+                studioList.add(new StudioDTO(studioID, studioName, null, null));
+            }
+
+            return studioList;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public ArrayList<GenreDTO> getGenreList(int animeID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<GenreDTO> genreList = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT * FROM genre_anime JOIN genre on genre.GenreID = genre_anime.GenreID WHERE genre_anime.AnimeID = ?");
+            st.setInt(1, animeID);
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int genreID = rs.getInt("GenreID");
+                String genreName = rs.getString("name");
+
+                if (genreList == null) {
+                    genreList = new ArrayList<>();
+                }
+
+                genreList.add(new GenreDTO(genreID, genreName, null, null));
+            }
+
+            return genreList;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 }
