@@ -21,13 +21,22 @@ import java.util.logging.Logger;
 /* DAO for Anime List Project */
 public class AnimeListDAO {
 
+    /* Constructor */
     public AnimeListDAO() {
     }
 
-    public AccountDTO login(String username, String password) {
+    /**
+     * Check if user login credentials match ones in database
+     *
+     * @param username
+     * @param password
+     * @return Account object (except password) if login successful, null if login credentials don't match
+     * @throws java.sql.SQLException
+     */
+    public AccountDTO login(String username, String password) throws SQLException {
         String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
 
-        /* code to hash password using MD5 algorithm */
+        /* Code to hash password using MD5 algorithm */
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
 
@@ -44,6 +53,7 @@ public class AnimeListDAO {
             Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        /* Declare Connection, PreparedStatement and ResultSet variables */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -67,33 +77,38 @@ public class AnimeListDAO {
 
                 return new AccountDTO(id, roleID, username, fullname, avatar, email, gender, created_at, deleted_at);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
+            /* Close the JDBC resources after use */
+            if (rs != null) {
+                rs.close();
+            }
 
-                if (st != null) {
-                    st.close();
-                }
+            if (st != null) {
+                st.close();
+            }
 
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+            if (conn != null) {
+                conn.close();
             }
         }
 
         return null;
     }
 
-    public boolean register(String username, String password, String fullname, String email) {
+    /**
+     * Register a new user to database
+     *
+     * @param username
+     * @param password
+     * @param fullname
+     * @param email
+     * @return true if successful, false otherwise
+     * @throws java.sql.SQLException
+     */
+    public boolean register(String username, String password, String fullname, String email) throws SQLException {
         String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
 
-        /* code to hash password using MD5 algorithm */
+        /* Code to hash password using MD5 algorithm */
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
 
@@ -110,6 +125,7 @@ public class AnimeListDAO {
             Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        /* Declare Connection, PreparedStatement variables */
         Connection conn = null;
         PreparedStatement st = null;
 
@@ -127,26 +143,29 @@ public class AnimeListDAO {
             if (result > 0) {
                 return true;
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (st != null) {
-                    st.close();
-                }
+            /* Close the JDBC resources after use */
 
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
             }
         }
 
         return false;
     }
 
-    public ArrayList<AnimeDTO> getAnimes(int amount) {
+    /**
+     * Get an arbitrary anime list of an amount
+     *
+     * @param amount (amount of animes to get)
+     * @return list of animes of such amount
+     * @throws java.sql.SQLException
+     */
+    public ArrayList<AnimeDTO> getAnimes(int amount) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -182,27 +201,19 @@ public class AnimeListDAO {
             }
 
             return animeList;
-        } catch (SQLException ex) {
-            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
+            if (rs != null) {
+                rs.close();
+            }
 
-                if (st != null) {
-                    st.close();
-                }
+            if (st != null) {
+                st.close();
+            }
 
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+            if (conn != null) {
+                conn.close();
             }
         }
-
-        return null;
     }
 
     public ArrayList<AnimeDTO> getTopAnimesByType(int top) {

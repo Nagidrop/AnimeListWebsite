@@ -2,17 +2,19 @@
  *
  * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
-
 package animelist.model;
 
 import java.io.Serializable;
 
 /* DTO for Role table */
 public class RoleDTO implements Serializable {
+
+    /* Account Role properties */
     private int id;
     private String slug;
     private String name;
 
+    /* Constructors with and without arguments */
     public RoleDTO() {
     }
 
@@ -22,6 +24,7 @@ public class RoleDTO implements Serializable {
         this.name = name;
     }
 
+    /* Getters and Setters */
     public int getId() {
         return id;
     }
@@ -45,5 +48,5 @@ public class RoleDTO implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

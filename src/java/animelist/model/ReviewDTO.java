@@ -2,14 +2,15 @@
  *
  * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
-
 package animelist.model;
 
 import java.io.Serializable;
 import java.sql.Date;
 
 /* DTO for Review table */
-public class ReviewDTO implements Serializable{
+public class ReviewDTO implements Serializable {
+
+    /* Review properties */
     private long id;
     private int animeID;
     private int accountID;
@@ -18,6 +19,7 @@ public class ReviewDTO implements Serializable{
     private Date created_at;
     private Date deleted_at;
 
+    /* Constructors with and without arguments */
     public ReviewDTO() {
     }
 
@@ -31,6 +33,7 @@ public class ReviewDTO implements Serializable{
         this.deleted_at = deleted_at;
     }
 
+    /* Getters and Setters */
     public long getId() {
         return id;
     }
@@ -86,6 +89,5 @@ public class ReviewDTO implements Serializable{
     public void setDeleted_at(Date deleted_at) {
         this.deleted_at = deleted_at;
     }
-    
-    
+
 }
