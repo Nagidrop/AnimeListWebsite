@@ -9,10 +9,14 @@
             <file>file:/D:/Project/AnimeListWebsite/web/images/bg-10.jpg</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/ListHistoryDTO.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/editinfo.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/web/vendor/bootstrap/css/bootstrap.min.css</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/RegisterAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/js/extention/choices.js</file>
             <file>file:/D:/Project/AnimeListWebsite/web/css/util.css</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/viewAnime.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/SearchAction.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/changepassword.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeGenreDTO.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/js/global.js</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/InitSearchPageAction.java</file>
@@ -21,14 +25,19 @@
             <file>file:/D:/Project/AnimeListWebsite/web/searchResult.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/web/header.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/AdminIndexAction.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AccountDTO.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/register.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeDTO.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/ChangeInfoAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/LoginAction.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/userinfo.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/web/AnimeSearch.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/GenreDTO.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/struts.xml</file>
             <file>file:/D:/Project/AnimeListWebsite/nbproject/build-impl.xml</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/test.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/web/css/reg.css</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/UserInfoAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/js/main.js</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/css/main.css</file>
