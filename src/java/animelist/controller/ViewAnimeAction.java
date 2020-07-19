@@ -34,7 +34,9 @@ public class ViewAnimeAction extends ActionSupport implements ServletRequestAwar
             url = SUCCESS;
             request.setAttribute("StudioList", anime.getStudios());
             request.setAttribute("GenreList", anime.getGenres());
-            anime.setTrailer(anime.getTrailer().replace("&autoplay=1", ""));
+            if (anime.getTrailer() != null) {
+                anime.setTrailer(anime.getTrailer().replace("&autoplay=1", ""));
+            }
         }
 
         return url;
