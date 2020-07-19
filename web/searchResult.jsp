@@ -18,7 +18,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
-        <title>AnimeListWebsite</title>
+        <title>Search Results</title>
     </head>
     <body class="container">
         <jsp:include page='header.jsp'/>
@@ -26,22 +26,23 @@
         <div class="row">
             <div class="col-md-7" ><h1>Search Result :</h1></div>
             <div class="col-md-5" >Sort</div>
-           
+
         </div>
 
-         <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("searchlist");%>
+        <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("searchlist");%>
         <%if (list != null) {%>
         <div class="row mb-3 ">
             <%for (AnimeDTO item : list) {%>
             <div class="col-md-3">
                 <div class="card ">
-
-                    <div class="card-body">
-                        <img  src="images/poster/<%=item.getPoster()%>">
-                    </div>
-                    <div class="card-footer">
-                        <%=item.getName()%>
-                    </div>
+                    <a href="viewAnime?animeID=<%= item.getId() %>">
+                        <div class="card-body">
+                            <img  src="images/poster/<%=item.getPoster()%>">
+                        </div>
+                        <div class="card-footer">
+                            <%=item.getName()%>
+                        </div>
+                    </a>
                 </div>
 
             </div>
