@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/PC/Documents/GitHub/AnimeListWebsite/web/index.jsp</file>
             <file>file:/C:/Users/PC/Documents/GitHub/AnimeListWebsite/src/java/animelist/controller/LoginAction.java</file>
-            <file>file:/C:/Users/PC/Documents/GitHub/AnimeListWebsite/src/java/animelist/controller/PreLoginAction.java</file>
-            <file>file:/C:/Users/PC/Documents/GitHub/AnimeListWebsite/src/java/animelist/controller/UserInfoAction.java</file>
-            <file>file:/C:/Users/PC/Documents/GitHub/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
-            <file>file:/C:/Users/PC/Documents/GitHub/AnimeListWebsite/web/AnimeSearch.jsp</file>
+            <file>file:/C:/Users/PC/Documents/GitHub/AnimeListWebsite/web/userinfo.jsp</file>
         </group>
     </open-files>
 </project-private>
