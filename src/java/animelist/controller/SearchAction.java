@@ -7,24 +7,28 @@ package animelist.controller;
 
 import animelist.model.AnimeDTO;
 import animelist.model.AnimeListDAO;
+import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.interceptor.ServletRequestAware;
 
 /**
  *
  * @author PC
  */
-public class SearchAction {
+public class SearchAction extends ActionSupport implements ServletRequestAware {
 
     private String searchValue;
     private String type;
-    private int genreID;
-    private int studioID;
-    private int seasonID;
-    private ArrayList<AnimeDTO> searchAnimeList;
-    private final String SUCCESS = "succes";
+    private String genreID;
+    private String studioID;
+    private String seasonID;
+    private ArrayList<AnimeDTO> listAnimeDTOs = new ArrayList<>();
+    private final String SUCCESS = "success";
+    private HttpServletRequest request;
 
     public SearchAction() {
     }
@@ -32,17 +36,48 @@ public class SearchAction {
     public String execute() {
         try {
             AnimeListDAO dao = new AnimeListDAO();
+
+            searchValue = request.getParameter("searchvalue");
+            if (searchValue == null || searchValue.equalsIgnoreCase("")) {
+                searchValue = "%";
+            }
+
+            type = request.getParameter("type");
+            if (type == null || type.equalsIgnoreCase("")) {
+                type = "%";
+            }
+            genreID = request.getParameter("genre");
+            if (genreID == null || genreID.equalsIgnoreCase("")) {
+                genreID = "%";
+            }
+            studioID = request.getParameter("studio");
+            if (studioID == null || studioID.equalsIgnoreCase("")) {
+                studioID = "%";
+            }
+            seasonID = request.getParameter("season");
+            if (seasonID == null || seasonID.equalsIgnoreCase("")) {
+                seasonID = "%";
+            }
             
-            searchAnimeList = dao.getSearchAnime(searchValue, type, studioID, genreID, seasonID);
+            System.out.println(searchValue + type+ studioID+ genreID+ seasonID);
+            listAnimeDTOs = dao.getSearchAnime(searchValue, type, studioID, genreID, seasonID);
+          
             
-            return SUCCESS;
-            
+            request.setAttribute("DCM", listAnimeDTOs);
         } catch (SQLException ex) {
             Logger.getLogger(SearchAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return SUCCESS;
     }
-    
+
+    public String getSearchValue() {
+        return searchValue;
+    }
+
+    public void setSearchValue(String searchValue) {
+        this.searchValue = searchValue;
+    }
+
     public String getType() {
         return type;
     }
@@ -51,38 +86,45 @@ public class SearchAction {
         this.type = type;
     }
 
-    public int getGenreID() {
+    public String getGenreID() {
         return genreID;
     }
 
-    public void setGenreID(int genreID) {
+    public void setGenreID(String genreID) {
         this.genreID = genreID;
     }
 
-    public int getStudioID() {
+    public String getStudioID() {
         return studioID;
     }
 
-    public void setStudioID(int studioID) {
+    public void setStudioID(String studioID) {
         this.studioID = studioID;
     }
 
-    public int getSeasonID() {
+    public String getSeasonID() {
         return seasonID;
     }
 
-    public void setSeasonID(int seasonID) {
+    public void setSeasonID(String seasonID) {
         this.seasonID = seasonID;
     }
 
     public ArrayList<AnimeDTO> getSearchAnimeList() {
-        return searchAnimeList;
+        return listAnimeDTOs;
     }
 
     public void setSearchAnimeList(ArrayList<AnimeDTO> searchAnimeList) {
-        this.searchAnimeList = searchAnimeList;
+        this.listAnimeDTOs = searchAnimeList;
     }
-    
-    
+
+    @Override
+    public void setServletRequest(HttpServletRequest hsr) {
+        this.request = hsr;
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
 
 }

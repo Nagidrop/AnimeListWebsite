@@ -61,11 +61,11 @@
         <jsp:include page='header.jsp'/>
     <body>
         <div class="s010" style="background-image: url('images/bg-10.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
-            <form>
+            <s:form action="search">
                 <div class="inner-form">
                     <div class="basic-search">
                         <div class="input-field">
-                            <input id="search" type="text" placeholder="Search Anime..." />
+                            <input name="searchvalue" id="search" type="text" placeholder="Search Anime..." />
                             <div class="icon-wrap">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
@@ -78,7 +78,7 @@
                         <div class="row">
                             <div class="input-field">
                                 <div class="input-select">
-                                    <select data-trigger="" name="choices-single-defaul">
+                                    <select data-trigger="" name="type">
                                         <option placeholder="" value="">Type</option>
                                         <s:iterator value="types" status="dto">
                                             <option value="<s:property/>"><s:property/></option>
@@ -88,7 +88,7 @@
                             </div>
                             <div class="input-field">
                                 <div class="input-select">
-                                    <select data-trigger="" name="choices-single-defaul">
+                                    <select data-trigger="" name="genre">
                                         <option placeholder="" value="">Genre</option>
                                         <s:iterator value="genres" status="dto">
                                             <option value="<s:property value="id"/>"><s:property value="name"/></option>
@@ -100,7 +100,7 @@
                         <div class="row second">
                             <div class="input-field">
                                 <div class="input-select">
-                                    <select data-trigger="" name="choices-single-defaul">
+                                    <select data-trigger="" name="studio">
                                         <option placeholder="" value="">Studio</option>
                                          <s:iterator value="studios" status="dto">
                                             <option value="<s:property value="id"/>"><s:property value="name"/></option>
@@ -110,7 +110,7 @@
                             </div>
                             <div class="input-field">
                                 <div class="input-select">
-                                    <select data-trigger="" name="choices-single-defaul">
+                                    <select data-trigger="" name="season">
                                         <option placeholder="" value="">Season</option>
                                          <s:iterator value="seasons" status="dto">
                                             <option value="<s:property value="id"/>"><s:property value="name"/></option>
@@ -125,13 +125,13 @@
                                     <span> </span></div>
                                 <div class="group-btn">
                                     <button type="reset" class="btn-delete" id="delete">RESET</button>
-                                    <button tyep="submit" class="btn-search">SEARCH</button>
+                                    <button type="submit" class="btn-search" value="SEARCH">SEARCH</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+            </s:form>
         </div>
         <script src="js/extention/choices.js" type="62c9915bca822e18f27fd30b-text/javascript"></script>
         <script type="62c9915bca822e18f27fd30b-text/javascript">

@@ -264,24 +264,58 @@ public class AnimeListDAO {
         return null;
     }
 
-    public ArrayList<AnimeDTO> getSearchAnime(String searchValue, String type, int StudioID, int genreID, int seasonID) throws SQLException {
+    public ArrayList<AnimeDTO> getSearchAnime(String searchValue, String type, String StudioID, String genreID, String seasonID) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<AnimeDTO> animeList;
+        ArrayList<AnimeDTO> animeList = null;
 
         try {
             conn = DBUtils.makeConnection();
 
-            st = conn.prepareStatement("SELECT [anime].AccountID, [anime].AnimeID, [anime].SeasonID, [anime].`name` , [anime].type , [anime].releaseDate , [anime].rating , [anime].episodes , [anime].`status` , [anime].duration, [anime].description, [anime].poster, [anime].trailer, [anime].created_at, [anime].deleted_at, StudioID, GenreID \n"
+            st = conn.prepareStatement("SELECT anime.AccountID, anime.AnimeID, anime.SeasonID, anime.name , anime.type , anime.releaseDate , anime.rating , anime.episodes , anime.status , anime.duration, anime.description, anime.poster, anime.trailer, anime.created_at, anime.deleted_at, StudioID, GenreID \n"
                     + "FROM \n"
-                    + "anime INNER JOIN anime_studio on [anime].AnimeID = [anime_studio].AnimeID  \n"
-                    + "INNER JOIN genre_anime on [genre_anime].AnimeID = [anime].AnimeID \n"
-                    + "WHERE [anime].`name` like ? and \n"
+                    + "anime INNER JOIN anime_studio on anime.AnimeID = anime_studio.AnimeID  \n"
+                    + "INNER JOIN genre_anime on genre_anime.AnimeID = anime.AnimeID \n"
+                    + "WHERE anime.name like ? and \n"
                     + "type like ? and \n"
                     + "GenreID like ? and \n"
+                    + "StudioID like ? and \n"
                     + "SeasonID like ? \n"
-                    + "GROUP BY [anime].name");
+                    + "GROUP BY anime.name");
+
+            st.setString(1, "%" + searchValue + "%");
+            st.setString(2, type);
+            st.setString(3, genreID);
+            st.setString(4, StudioID);
+            st.setString(5, seasonID);
+
+            rs = st.executeQuery();
+            while (rs.next()) {
+                int animeID = rs.getInt("animeID");
+                int seasonid = rs.getInt("seasonID");
+                String animetype = rs.getString("type");
+                String name = rs.getString("name");
+                Date releaseDate = rs.getDate("releaseDate");
+                String rating = rs.getString("rating");
+                int episodes = rs.getInt("episodes");
+                String status = rs.getString("status");
+                String duration = rs.getString("duration");
+                String description = rs.getString("description");
+                String poster = rs.getString("poster");
+                String trailer = rs.getString("trailer");
+                Date created_at = rs.getDate("created_at");
+                Date deleted_at = rs.getDate("deleted_at");
+
+                if (animeList == null) {
+                    animeList = new ArrayList<>();
+                }
+
+                animeList.add(new AnimeDTO(animeID, 0, seasonid, animetype, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
+            }
+
+            return animeList;
+
         } finally {
             if (conn != null) {
                 conn.close();
@@ -293,7 +327,6 @@ public class AnimeListDAO {
                 rs.close();
             }
         }
-        return null;
     }
 
     public ArrayList<String> getTypes() throws SQLException {
