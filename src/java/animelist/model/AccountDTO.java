@@ -21,7 +21,6 @@ public class AccountDTO implements Serializable {
     private Date created_at;
     private Date deleted_at;
 
-    /* Constructors */
     public AccountDTO(int id, int roleID, String username, String fullName, String avatar, String email, int gender, Date created_at, Date deleted_at) {
         this.id = id;
         this.roleID = roleID;
@@ -102,4 +101,5 @@ public class AccountDTO implements Serializable {
     public void setDeleted_at(Date deleted_at) {
         this.deleted_at = deleted_at;
     }
+
 }

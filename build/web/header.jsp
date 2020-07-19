@@ -44,12 +44,13 @@
     <ul class="nav navbar-nav">
         <li class="dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
-                Welcome, <%=session.getAttribute("fullname")%> <b class="caret"></b>
+
+                Welcome, <s:property value="%{#session.user.fullName}"/> <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="userinfo.jsp">Info User</a>
-                <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
-                <a class="dropdown-item" href="editinfo.jsp">Change Info</a>
+                <a class="dropdown-item" href="#">Change Password</a>
+                <a class="dropdown-item" href="#">Change Info</a>
+
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="logout">Log Out</a>
             </div>
