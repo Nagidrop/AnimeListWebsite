@@ -424,7 +424,7 @@
         <script src="js/main.js"></script>
         <!--===============================================================================================-->
     </head>
-    <body style=" background-image: url('images/bg-06.png'); background-size: cover; background-repeat: no-repeat; ">
+    <body style=" background-image: url('images/bg-13.png'); background-size: cover; background-repeat: no-repeat; ">
         <jsp:include page='header.jsp'/>
         <div class="container-userinfo" style="margin-top:2%">
             <div class="container">
