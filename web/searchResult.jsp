@@ -29,7 +29,7 @@
            
         </div>
 
-         <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("DCM");%>
+         <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("searchlist");%>
         <%if (list != null) {%>
         <div class="row mb-3 ">
             <%for (AnimeDTO item : list) {%>

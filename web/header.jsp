@@ -44,7 +44,7 @@
     <ul class="nav navbar-nav">
         <li class="dropdown">
             <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
-                Welcome, <%=session.getAttribute("fullname")%> <b class="caret"></b>
+                Welcome, <s:property value="%{#session.user.username}"/> <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#">Change Password</a>

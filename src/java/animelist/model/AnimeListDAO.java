@@ -30,7 +30,8 @@ public class AnimeListDAO {
      *
      * @param username
      * @param password
-     * @return Account object (except password) if login successful, null if login credentials don't match
+     * @return Account object (except password) if login successful, null if
+     * login credentials don't match
      * @throws java.sql.SQLException
      */
     public AccountDTO login(String username, String password) throws SQLException {
@@ -286,13 +287,13 @@ public class AnimeListDAO {
 
             st = conn.prepareStatement("SELECT anime.AccountID, anime.AnimeID, anime.SeasonID, anime.name , anime.type , anime.releaseDate , anime.rating , anime.episodes , anime.status , anime.duration, anime.description, anime.poster, anime.trailer, anime.created_at, anime.deleted_at, StudioID, GenreID \n"
                     + "FROM \n"
-                    + "anime INNER JOIN anime_studio on anime.AnimeID = anime_studio.AnimeID  \n"
-                    + "INNER JOIN genre_anime on genre_anime.AnimeID = anime.AnimeID \n"
+                    + "anime JOIN anime_studio on anime.AnimeID = anime_studio.AnimeID  \n"
+                    + "JOIN genre_anime on genre_anime.AnimeID = anime.AnimeID \n"
                     + "WHERE anime.name like ? and \n"
                     + "type like ? and \n"
                     + "GenreID like ? and \n"
                     + "StudioID like ? and \n"
-                    + "SeasonID like ? \n"
+                    + "(SeasonID like ? or SeasonID is NULL)\n"
                     + "GROUP BY anime.name");
 
             st.setString(1, "%" + searchValue + "%");
