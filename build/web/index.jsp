@@ -40,8 +40,8 @@
 
                 </div>
             </s:iterator>
-      
 
+        </div>
 
-                 </body>
-            </html>
+    </body>
+</html>
