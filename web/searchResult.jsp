@@ -37,7 +37,7 @@
                 <div class="card ">
 
                     <div class="card-body">
-                        <img  src="<%=item.getPoster()%>">
+                        <img  src="images/poster/<%=item.getPoster()%>">
                     </div>
                     <div class="card-footer">
                         <%=item.getName()%>

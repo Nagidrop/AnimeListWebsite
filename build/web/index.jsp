@@ -30,7 +30,7 @@
                     <div class="card ">
 
                         <div class="card-body">
-                            <img  src="<s:property  value="poster"/>">
+                            <img  src="images/poster/<s:property  value="poster"/>">
                         </div>
                         <div class="card-footer">
                             <s:property value="name"/>

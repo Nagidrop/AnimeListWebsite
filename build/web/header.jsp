@@ -36,7 +36,7 @@
         <a type="button" href="prelogin.action" class="btn btn-primary ">Login</a>
     </div>
     <div class="col-sm-1">
-        <a type="button" href="" class="btn btn-success ">Sign Up</a>
+        <a type="button" href="register.jsp" class="btn btn-success ">Sign Up</a>
     </div>
 
 </nav>

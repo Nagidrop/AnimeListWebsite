@@ -30,5 +30,11 @@
         <action name="search" class = "animelist.controller.SearchAction">
             <result name="success" type="dispatcher">searchResult.jsp</result>
         </action>
+        
+        <action name="register" class = "animelist.controller.RegisterAction">
+            <result name="success" type="redirect">
+                <param name="location">.index</param>
+            </result>
+        </action>
     </package>
 </struts>
