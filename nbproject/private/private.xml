@@ -3,12 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/LoginAction.java</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/utils/DBUtils.java</file>
             <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/struts.xml</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/register.jsp</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/SearchAction.java</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/ShowIndexAction.java</file>
             <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/model/AnimeDTO.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/login.jsp</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/InitSearchPageAction.java</file>
             <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/model/AccountDTO.java</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/header.jsp</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/index.jsp</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/register.jsp</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/login.jsp</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/invalid.jsp</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/PreLoginAction.java</file>
+            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/AnimeSearch.jsp</file>
         </group>
     </open-files>
 </project-private>
