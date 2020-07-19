@@ -5,8 +5,30 @@
 <struts>
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
-        <action name="login">
+        <action name="index" class="animelist.controller.ShowIndexAction" >
+         <result name = "success"> index.jsp</result>
+        </action>
+        <action name="prelogin" class="animelist.controller.PreLoginAction" >
             <result name="success">login.jsp</result>
+            <result name="fail" type="redirectAction">
+                <param name="actionName">index</param>
+            </result>
+        </action>
+        
+        <action name="login"  class="animelist.controller.LoginAction">
+            <result name="success">index.jsp</result>
+            <result name="fail" type="redirectAction">
+                <param name="actionName">prelogin</param>
+                <param name="status" >123</param>
+            </result>
+        </action>
+        
+        <action name="initSearchPage" class = "animelist.controller.InitSearchPageAction">
+            <result name="success">AnimeSearch.jsp</result>
+        </action>
+        
+        <action name="search" class = "animelist.controller.SearchAction">
+            <result name="success" type="dispatcher">searchResult.jsp</result>
         </action>
     </package>
 </struts>

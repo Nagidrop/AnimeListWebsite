@@ -846,7 +846,7 @@ legend {
     font-size: 18px;
     height: 70px;
     color: #fff;
-    background: linear-gradient(20deg, #e0acd3, #6cb8ca);
+    background: linear-gradient(-20deg, #d683e6, #28a6d6);
     font-family: 'Lato', sans-serif;
 }
 
@@ -877,7 +877,7 @@ legend {
     min-width: 100px;
     height: 40px;
     padding: 0 15px;
-    background: linear-gradient(-160deg, #e0acd3, #6cb8ca);
+    background: linear-gradient(-160deg, #d683e6, #28a6d6);
     white-space: nowrap;
     border-radius: 20px;
     font-size: 14px;
@@ -893,7 +893,7 @@ legend {
 
 .s010 form .inner-form .input-field .btn-search:before {
     border-radius: inherit;
-    background: linear-gradient(20deg, #e0acd3, #6cb8ca);
+    background: linear-gradient(-20deg, #d683e6, #28a6d6);
     content: '';
     display: block;
     height: 100%;
@@ -987,7 +987,7 @@ legend {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    justify-content: space-evenly;
     -ms-flex-align: center;
     align-items: center;
     margin-bottom: 20px;
@@ -1133,7 +1133,7 @@ legend {
 }
 
 .s010 form .inner-form .advance-search .choices.valid .choices__inner {
-    background: linear-gradient(to right, #2c6dd5 0%, #2c6dd5 28%, #ff4b5a 91%, #ff4b5a 100%);
+    background: linear-gradient(-20deg, #d683e6, #28a6d6);
 }
 
 .s010 form .inner-form .advance-search .choices.valid:after {
