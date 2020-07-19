@@ -84,6 +84,7 @@ public class RegisterAction extends ActionSupport implements ServletRequestAware
         this.request = hsr;
     }
 
+
     public HttpServletRequest getRequest() {
         return request;
     }

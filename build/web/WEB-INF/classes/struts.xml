@@ -14,8 +14,9 @@
                 <param name="actionName">index</param>
             </result>
         </action>
+
         <action name="logout" class="animelist.controller.LogoutAction" >
-            <result name="success" type="redirectAction">index</result>      
+            <result name="success" type="redirectAction">index</result>
         </action>
         <action name="login"  class="animelist.controller.LoginAction">
             <result name="success"  type="redirectAction">index</result>
@@ -25,22 +26,40 @@
             </result>
         </action>
         <action name="viewAnime" class="animelist.controller.ViewAnimeAction" >
-            <result name="success" type="dispatcher">viewAnime.jsp</result>      
+            <result name="success" type="dispatcher">viewAnime.jsp</result>
         </action>
-        
+
         <action name="initSearchPage" class = "animelist.controller.InitSearchPageAction">
             <result name="success">AnimeSearch.jsp</result>
         </action>
-        
+
         <action name="search" class = "animelist.controller.SearchAction">
             <result name="success" type="dispatcher">searchResult.jsp</result>
         </action>
-        
+          <action name="admin" class = "animelist.controller.AdminIndexAction">
+            <result name="success" type="dispatcher">admin/index.jsp</result>
+          </action>
+
         <action name="register" class = "animelist.controller.RegisterAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">.index</param>
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
+
+        <action name="changepassword" class = "animelist.controller.ChangePasswordAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">.index</param>
+            </result>
+            <result name="fail">invalid.jsp</result>
+        </action>
+
+          <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">.index</param>
+            </result>
+            <result name="fail">invalid.jsp</result>
+        </action>
+
     </package>
 </struts>

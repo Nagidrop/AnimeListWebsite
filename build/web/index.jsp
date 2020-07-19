@@ -29,6 +29,7 @@
             <s:iterator value="listAnimeDTOs" status="dto">
                 <div class="col-md-3">
                     <div class="card ">
+
                         <a href="viewAnime?animeID=<s:property  value="id"/>">
                             <div class="card-body">
                                 <img  src="images/poster/<s:property  value="poster"/>">
@@ -37,6 +38,7 @@
                                 <s:property value="name"/>
                             </div>
                         </a>
+
                     </div>
                 </div>
             </s:iterator>

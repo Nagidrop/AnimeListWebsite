@@ -14,7 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -149,14 +151,13 @@ public class AnimeListDAO {
 
             if (st != null) {
                 st.close();
-            }
 
-            if (conn != null) {
-                conn.close();
+                if (conn != null) {
+                    conn.close();
+                }
             }
+            return false;
         }
-
-        return false;
     }
 
     /**
@@ -494,6 +495,183 @@ public class AnimeListDAO {
                 rs.close();
             }
         }
+    }
+
+    public String countAnimes() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT count(*) as count FROM anime");
+
+            rs = st.executeQuery();
+            if (rs.first()) {
+                String countString = rs.getString(1);
+                return countString;
+            }
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return "";
+    }
+
+    public String countUsers() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT count(*) as count FROM account where RoleID=2");
+
+            rs = st.executeQuery();
+
+            if (rs.first()) {
+                String countString = rs.getString(1);
+                return countString;
+            }
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return "";
+    }
+
+    public String countAdmin() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("SELECT count(*) as count FROM account where RoleID = 1");
+
+            rs = st.executeQuery();
+            if (rs.first()) {
+                String countString = rs.getString(1);
+                return countString;
+            }
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return "";
+    }
+
+    public HashMap<String, String> countAnimeofType() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.makeConnection();
+            HashMap<String, String> list = new HashMap<>();
+
+            st = conn.prepareStatement("SELECT count(*),type as count FROM anime GROUP BY type");
+            rs = st.executeQuery();
+            if (rs.first()) {
+                do {
+                    String countString = rs.getString(1);
+                    String name = rs.getString(2);
+                    list.put(name, countString);
+                } while (rs.next());
+
+                return list;
+            }
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return null;
+    }
+
+    public boolean changeInfo(String username, String fullname, String avatar, String email, int gender) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("Update account set fullname = ?, email=? , avatar=?, gender=? where username=?");
+            st.setString(1, fullname);
+            st.setString(2, email);
+            st.setString(3, avatar);
+            st.setInt(4, gender);
+            st.setString(5, username);
+            int count = st.executeUpdate();
+            if (count > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+
+    public boolean changePassword(String username, String password) throws SQLException {
+        String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
+
+        /* code to hash password using MD5 algorithm */
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            byte[] messageDigest = md.digest(password.getBytes());
+
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            // Convert message digest into hex value
+            hashPassword = no.toString(16);
+            while (hashPassword.length() < 32) {
+                hashPassword = "0" + hashPassword;
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("Update account set password = ? where username=?");
+            st.setString(1, hashPassword);
+            st.setString(2, username);
+            int count = st.executeUpdate();
+            if (count > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+        }
+        return false;
     }
 
     public AnimeDTO getAnimeDetails(int animeID) throws SQLException {
