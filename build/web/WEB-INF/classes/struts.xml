@@ -14,9 +14,11 @@
                 <param name="actionName">index</param>
             </result>
         </action>
-        
+           <action name="logout" class="animelist.controller.LogoutAction" >
+            <result name="success" type="redirectAction">index</result>      
+        </action>
         <action name="login"  class="animelist.controller.LoginAction">
-            <result name="success">index.jsp</result>
+            <result name="success"  type="redirectAction">index</result>
             <result name="fail" type="redirectAction">
                 <param name="actionName">prelogin</param>
                 <param name="status" >123</param>

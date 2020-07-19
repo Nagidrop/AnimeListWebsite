@@ -32,11 +32,31 @@
         <input class="form-control" type="text" name="searchvalue" placeholder="Search Anime...">
         <input class="btn btn-search form-control" type="submit" value="Search" >
     </s:form>
+    <%if(session.getAttribute("user")==null){%>
     <div class="col-sm-1">
         <a type="button" href="prelogin.action" class="btn btn-primary ">Login</a>
     </div>
     <div class="col-sm-1">
         <a type="button" href="register.jsp" class="btn btn-success ">Sign Up</a>
     </div>
+    <%}else{%>
+
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
+                Welcome, User <b class="caret"></b>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#">Change Password</a>
+                <a class="dropdown-item" href="#">Change Info</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="logout">Log Out</a>
+            </div>
+        </li>
+    </ul>
+
+
+    <%}%>
+
 
 </nav>

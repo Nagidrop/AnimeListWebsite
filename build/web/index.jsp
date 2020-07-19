@@ -4,6 +4,7 @@
     Author     : Quan Duc Loc CE140037 (SE1401)
 --%>
 
+<%@page import="animelist.model.AccountDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="animelist.model.AnimeDTO"%>
 <%@page import="animelist.model.AnimeDTO"%>
@@ -38,5 +39,8 @@
                     </div>
                 </div>
             </s:iterator>
-    </body>
-</html>
+      
+
+
+                 </body>
+            </html>
