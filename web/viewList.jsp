@@ -738,7 +738,7 @@
                 position: absolute;
                 bottom: 0px;
                 left: 0px;
-                background-color: #4065BA;
+                background-color: #343a40;
                 display: block;
                 width: 100%;
                 height: 4px;
@@ -1150,6 +1150,10 @@
             .progresseps{
                 border: 1px solid #000000!important;
             }
+
+            .status-button{
+                text-decoration: none!important;
+            }
         </style>
         <title><s:property value="%{#session.username}"/>'s Anime List - Wibu Anime List</title>
     </head>
@@ -1165,13 +1169,18 @@
 
         <div id="list-container" class="list-container">
             <div id="status-menu" class="status-menu-container">
-                <div class="status-menu"><a href="https://myanimelist.net/animelist/Nagidrop?status=7"
-                                            class="status-button all_anime on">All Anime</a><a href="https://myanimelist.net/animelist/Nagidrop?status=1"
-                                            class="status-button watching ">Currently Watching</a><a href="https://myanimelist.net/animelist/Nagidrop?status=2"
-                                            class="status-button completed ">Completed</a><a href="https://myanimelist.net/animelist/Nagidrop?status=3"
-                                            class="status-button onhold ">On Hold</a><a href="https://myanimelist.net/animelist/Nagidrop?status=4"
-                                            class="status-button dropped ">Dropped</a><a href="https://myanimelist.net/animelist/Nagidrop?status=6"
-                                            class="status-button plantowatch ">Plan to Watch</a><div class="search-container">
+                <div class="status-menu">
+                    <a id="all_anime" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=0" class="status-button all_anime">All Anime</a>
+                    <a id="watching" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=1"
+                       class="status-button watching ">Currently Watching</a>
+                    <a id="completed" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=2"
+                       class="status-button completed ">Completed</a>
+                    <a id="onhold" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=3"
+                       class="status-button onhold ">On Hold</a>
+                    <a id="dropped" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=4"
+                       class="status-button dropped ">Dropped</a>
+                    <a id="plantowatch" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=5"
+                       class="status-button plantowatch ">Plan to Watch</a><div class="search-container">
                     </div>
                 </div>
             </div>
@@ -1183,7 +1192,7 @@
                         <span class="text">ALL ANIME</span>
                     </div>
                     <table class="list-table" style="font-size: 12px;">
-                        <tbody><tr class="list-table-header">
+                        <thead><tr class="list-table-header">
                                 <th class="header-title number">No.</th>
                                 <th class="header-title image"><a class="link hover_info">Poster</a></th>
                                 <th class="header-title title"><a href="" class="link sort">Anime Title</a></th>
@@ -1192,18 +1201,19 @@
                                 <th class="header-title progress"><a href="" class="link sort">Status</a></th>
                                 <th class="header-title edit"><a href="" class="link sort">Edit</a></th>
                             </tr>
-                        </tbody>
+                        </thead>
                         <% ArrayList<ListDTO> animeList = (ArrayList<ListDTO>) request.getAttribute("AnimeList");
                             ArrayList<AnimeDTO> animeDetailsList = (ArrayList<AnimeDTO>) request.getAttribute("AnimeDetailsList");
                             int animeIndex = 0;
                             int statusIndex = 1;
-                            if (animeDetailsList.size() != 0) {
+                            if (!animeDetailsList.isEmpty()) {
                                 ArrayList<String> statusList = (ArrayList<String>) request.getAttribute("StatusList");
                                 for (AnimeDTO anime : animeDetailsList) {
                                     ListDTO listAnime = animeList.get(animeIndex);
                                     animeIndex++;
                         %> 
                         <tbody class="list-item" >
+                        <form action="editAnimeList" method="POST">
                             <tr class="list-table-data">
                                 <td class="data number" style="width: 5%;"><%= animeIndex%></td>
 
@@ -1223,7 +1233,7 @@
 
                                 <td class="data progress" style="background-color: transparent!important; width: 9%; text-align: left">
                                     <input type="text" style="font-size: 12px;" name="ProgressEdit" size="1" class="inputtext form-control-sm progresseps" value="<%= listAnime.getProgress()%>" style="border: 1px solid #ced4da!important;">
-                                     / <%= anime.getEpisodes()%><input type="hidden" name="EpisodesEdit" value="<%= anime.getEpisodes()%>" />
+                                    / <%= anime.getEpisodes()%><input type="hidden" name="EpisodesEdit" value="<%= anime.getEpisodes()%>" />
                                 </td>
 
                                 <td class="data status" style="width: 15%;">
@@ -1243,14 +1253,62 @@
                                     <input type="submit" style="font-size: 12px;" value="Edit" />
                                 </td>
                             </tr>
+                        </form>
                         </tbody>
                         <% }
-                        } else {%>
-                        <p style="text-align: center!important;">There are no animes in your list!</p>
-                        <% }%>
+                            }%>
                     </table>
+                    <% if (animeDetailsList.isEmpty()) {%>
+                    <div style="text-align: center!important; font-size: 20px; margin-top: 3%;">There are no animes to display!</div>
+                    <% }%>
                 </div>
             </div>
         </div>
+        <script>
+            var status =<s:property value="listStatus" />;
+            if (status == 0) {
+                $("#all_anime").addClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 1) {
+                $("#all_anime").removeClass("on");
+                $("#watching").addClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 2) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").addClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 3) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").addClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 4) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").addClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 5) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").addClass("on");
+            }
+        </script>
     </body>
 </html>

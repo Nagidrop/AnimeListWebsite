@@ -21,6 +21,7 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
     private ArrayList<AnimeDTO> animeDetailsList;
     private ArrayList<String> statusList;
     private int accountID;
+    private int listStatus;
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
 
@@ -31,13 +32,14 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
     public String execute() throws Exception {
         /* Instantiate DAO object and calls login method to check from DB */
         AnimeListDAO dao = new AnimeListDAO();
-        animeList = dao.getAnimeList(accountID);
+        System.out.println(listStatus);
+        animeList = dao.getAnimeList(accountID, listStatus);
         animeDetailsList = dao.getAnimeDetailsList(animeList);
 
-        String url = FAIL; // by default, login is not successful
+        String url = SUCCESS; // by default, login is not successful
 
         if (animeList != null) {
-            url = SUCCESS;
+//            url = SUCCESS;
             request.setAttribute("AnimeList", animeList);
             request.setAttribute("AnimeDetailsList", animeDetailsList);
             statusList = new ArrayList<>();
@@ -78,6 +80,22 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
 
     public void setAccountID(int accountID) {
         this.accountID = accountID;
+    }
+
+    public ArrayList<String> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(ArrayList<String> statusList) {
+        this.statusList = statusList;
+    }
+
+    public int getListStatus() {
+        return listStatus;
+    }
+
+    public void setListStatus(int listStatus) {
+        this.listStatus = listStatus;
     }
 
     public static Logger getLOG() {

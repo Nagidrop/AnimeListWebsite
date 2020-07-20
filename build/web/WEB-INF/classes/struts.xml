@@ -68,5 +68,8 @@
             <result name="success" type="dispatcher">viewList.jsp</result>
         </action>
 
+        <action name="editAnimeList" class="animelist.controller.EditListAction" >
+            <result name="success" type="dispatcher">viewList.jsp</result>
+        </action>
     </package>
 </struts>

@@ -836,7 +836,7 @@ public class AnimeListDAO {
         }
     }
 
-    public ArrayList<ListDTO> getAnimeList(int accountID) throws SQLException {
+    public ArrayList<ListDTO> getAnimeList(int accountID, int listStatus) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -844,7 +844,12 @@ public class AnimeListDAO {
 
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("SELECT * FROM list WHERE AccountID = ?");
+            if (listStatus == 0) {
+                st = conn.prepareStatement("SELECT * FROM list WHERE AccountID = ?");
+            } else {
+                st = conn.prepareStatement("SELECT * FROM list WHERE AccountID = ? AND status = ?");
+                st.setInt(2, listStatus);
+            }
             st.setInt(1, accountID);
             rs = st.executeQuery();
 
@@ -852,7 +857,7 @@ public class AnimeListDAO {
                 int animeID = rs.getInt("AnimeID");
                 int status = rs.getInt("status");
                 String statusString = "";
-                
+
                 switch (status) {
                     case 1:
                         statusString = "Currently Watching";
@@ -879,7 +884,7 @@ public class AnimeListDAO {
 
                         break;
                 }
-                
+
                 int progress = rs.getInt("progress");
 
                 if (animeList == null) {
