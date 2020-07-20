@@ -32,7 +32,7 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
     public String execute() throws Exception {
         /* Instantiate DAO object and calls login method to check from DB */
         AnimeListDAO dao = new AnimeListDAO();
-        System.out.println(listStatus);
+
         animeList = dao.getAnimeList(accountID, listStatus);
         animeDetailsList = dao.getAnimeDetailsList(animeList);
 

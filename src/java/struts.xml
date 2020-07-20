@@ -69,7 +69,12 @@
         </action>
 
         <action name="editAnimeList" class="animelist.controller.EditListAction" >
-            <result name="success" type="dispatcher">viewList.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">viewAnimeList</param>
+                <param name="accountID" >${accountIDEdit}</param>
+                <param name="listStatus" >0</param>
+            </result>
+            <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
     </package>
 </struts>

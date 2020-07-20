@@ -923,4 +923,46 @@ public class AnimeListDAO {
 
         return animeDetailsList;
     }
+
+    public boolean editAnimeInList(int accountID, int animeID, int progress, int episodes, int status) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        if (status == 2) {
+            progress = episodes;
+        } else if (status == 5) {
+            progress = 0;
+        }
+
+        if (progress > episodes) {
+            progress = episodes;
+        } else if (progress < 0) {
+            progress = 0;
+        }
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("UPDATE List SET progress = ?, status = ? WHERE AccountID = ? AND AnimeID = ? ");
+            st.setInt(1, progress);
+            st.setInt(2, status);
+            st.setInt(3, accountID);
+            st.setInt(4, animeID);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+
+                return true;
+            }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return false;
+    }
 }

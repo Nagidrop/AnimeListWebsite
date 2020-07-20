@@ -1232,12 +1232,14 @@
                                 </td>
 
                                 <td class="data progress" style="background-color: transparent!important; width: 9%; text-align: left">
-                                    <input type="text" style="font-size: 12px;" name="ProgressEdit" size="1" class="inputtext form-control-sm progresseps" value="<%= listAnime.getProgress()%>" style="border: 1px solid #ced4da!important;">
-                                    / <%= anime.getEpisodes()%><input type="hidden" name="EpisodesEdit" value="<%= anime.getEpisodes()%>" />
+                                    <input type="text" style="font-size: 12px;" name="progressEdit" size="1" class="inputtext form-control-sm progresseps" value="<%= listAnime.getProgress()%>" style="border: 1px solid #ced4da!important;">
+                                    / <%= anime.getEpisodes()%><input type="hidden" name="episodesEdit" value="<%= anime.getEpisodes()%>" />
+                                    <input type="hidden" name="animeIDEdit" value="<%= anime.getId()%>" />
+                                    <input type="hidden" name="accountIDEdit" value="<s:property value="%{#session.id}"/>" />
                                 </td>
 
                                 <td class="data status" style="width: 15%;">
-                                    <select name="StatusEdit"> 
+                                    <select name="statusEdit"> 
                                         <% for (String status : statusList) {
                                                 if (status != listAnime.getStatus()) {
                                         %>
