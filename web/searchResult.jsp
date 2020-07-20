@@ -24,38 +24,46 @@
         <jsp:include page='header.jsp'/>
         <div class=""><p></div>
         <div class="row">
-            <div class="col-md-7" ><h1>Search Result :</h1></div>
-            <div class="col-md-5" >Sort<select name="myinfo_status" id="myinfo_status" class="inputtext js-anime-status-dropdown"><option value="1">Watching</option><option value="2">Completed</option><option value="3">On-Hold</option><option value="4">Dropped</option><option value="6">Plan to Watch</option></select></div>
-
-
-        </div>
-
-        <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("searchlist");%>
-        <%if (list != null) {%>
-        <div class="row mb-3 ">
-            <%for (AnimeDTO item : list) {%>
-            <div class="col-md-3">
-                <div class="card " title=" <%=item.getName()%>">
-
-                    <a href="viewAnime?animeID=<%= item.getId()%>">
-                        <div class="card-body">
-                            <img class="img-thumbnail" style="width: 200px;height: 280px"   src="images/poster/<%=item.getPoster()%>">
-                        </div>
-                        <div class="card-footer" style="text-align: center" title=" <%=item.getName()%>">
-                            <%if (item.getName().length() > 20) {
-                                    out.print(item.getName().substring(0, 20)+"...");
-                                } else {
-                                    out.print(item.getName());
-                                }%>
-                        </div>
-                    </a>
+            <div class="col-md-7" ><h3>Search Result :</h3></div>
+            <div class="col-md-5" >
+                <div class="d-flex flex-row-reverse">
+                    <div class="p-2">
+                        <select name="" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control">
+                            <option value="1">Name</option>
+                            <option value="2">Season</option>
+                            <option value="3">On-Hold</option>
+                        </select>
+                    </div>
+                    <div class="p-2"><p style="font-size: 18px">Sort:</p></div> 
                 </div>
-
             </div>
-            <%}
-            } else {%>
-            <h2>null</h2><%}%>
 
-    </body>
-</html>
+            <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("searchlist");%>
+            <%if (list != null) {%>
+            <div class="row mb-3 ">
+                <%for (AnimeDTO item : list) {%>
+                <div class="col-md-3">
+                    <div class="card " style="margin: 2%;" title=" <%=item.getName()%>">
+
+                        <a href="viewAnime?animeID=<%= item.getId()%>">
+                            <div class="card-body">
+                                <img class="img-thumbnail" style="width: 200px;height: 280px"   src="images/poster/<%=item.getPoster()%>">
+                            </div>
+                            <div class="card-footer" style="text-align: center" title=" <%=item.getName()%>">
+                                <%if (item.getName().length() > 20) {
+                                        out.print(item.getName().substring(0, 20) + "...");
+                                    } else {
+                                        out.print(item.getName());
+                                    }%>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <%}
+            } else {%>
+                <h5>There is no anime meet the criteria</h5><%}%>
+
+                </body>
+                </html>
 

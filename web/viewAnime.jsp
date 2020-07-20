@@ -207,7 +207,7 @@
                                 <s:property value="anime.name" />
                             </h1>
                             <h6>
-                                <s:property value="anime.season" />
+                                <s:property value="anime.season.name" />
                             </h6>
                             <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">

@@ -534,13 +534,33 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Gender</label>
                                                 <div class="col-lg-9">
+                                                    <s:if test="%{#session.gender== 'Male'}">
                                                     &ensp;
-                                                    <input type="checkbox" id="gender0" name="gender" value="0" >
+                                                    <input type="checkbox" id="gender0" name="gender" value="0" checked>
                                                     <label for="gender0">Male</label>                    &ensp;
                                                     <input type="checkbox" id="gender1" name="gender" value="1">
                                                     <label for="gender1">Female</label>                  &ensp;
                                                     <input type="checkbox" id="gender2" name="gender" value="2">
                                                     <label for="gender2">Other</label>
+                                                    </s:if>
+                                                    <s:elseif test="%{#session.gender== 'Female'}">
+                                                    &ensp;
+                                                    <input type="checkbox" id="gender0" name="gender" value="0" >
+                                                    <label for="gender0">Male</label>                    &ensp;
+                                                    <input type="checkbox" id="gender1" name="gender" value="1" checked>
+                                                    <label for="gender1">Female</label>                  &ensp;
+                                                    <input type="checkbox" id="gender2" name="gender" value="2">
+                                                    <label for="gender2">Other</label>
+                                                    </s:elseif>
+                                                    <s:elseif test="%{#session.gender== 'Other'}">
+                                                    &ensp;
+                                                    <input type="checkbox" id="gender0" name="gender" value="0" >
+                                                    <label for="gender0">Male</label>                    &ensp;
+                                                    <input type="checkbox" id="gender1" name="gender" value="1">
+                                                    <label for="gender1">Female</label>                  &ensp;
+                                                    <input type="checkbox" id="gender2" name="gender" value="2"checked>
+                                                    <label for="gender2">Other</label>
+                                                    </s:elseif>
                                                 </div>
                                             </div>
                                             <div class="form-group row">

@@ -181,7 +181,7 @@ public class AnimeListDAO {
 
             while (rs.next()) {
                 int animeID = rs.getInt("animeID");
-                String season = getSeasonName(rs.getInt("seasonID"));
+                SeasonDTO season = getSeason(rs.getInt("seasonID"));
                 ArrayList<StudioDTO> studios = getStudioList(animeID);
                 ArrayList<GenreDTO> genres = getGenreList(animeID);
                 String type = rs.getString("type");
@@ -234,7 +234,7 @@ public class AnimeListDAO {
 
             while (rs.next()) {
                 int animeID = rs.getInt("animeID");
-                String season = getSeasonName(rs.getInt("seasonID"));
+                SeasonDTO season = getSeason(rs.getInt("seasonID"));
                 ArrayList<StudioDTO> studios = getStudioList(animeID);
                 ArrayList<GenreDTO> genres = getGenreList(animeID);
                 String type = rs.getString("type");
@@ -314,7 +314,7 @@ public class AnimeListDAO {
             rs = st.executeQuery();
             while (rs.next()) {
                 int animeID = rs.getInt("animeID");
-                String season = getSeasonName(rs.getInt("seasonID"));
+                SeasonDTO season = getSeason(rs.getInt("seasonID"));
                 ArrayList<StudioDTO> studios = getStudioList(animeID);
                 ArrayList<GenreDTO> genres = getGenreList(animeID);
                 String animetype = rs.getString("type");
@@ -642,6 +642,23 @@ public class AnimeListDAO {
         }
         return false;
     }
+    
+    public boolean deleteUser(int id, Date deleted_at) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("Update account set deleted_at = ? where AccountID=?");
+            st.setDate(1, deleted_at);
+            st.setInt(2, id);
+            int count = st.executeUpdate();
+            if (count > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
 
     public boolean changePassword(String username, String password) throws SQLException {
         String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
@@ -693,7 +710,7 @@ public class AnimeListDAO {
             rs = st.executeQuery();
 
             if (rs.next()) {
-                String season = getSeasonName(rs.getInt("seasonID"));
+                SeasonDTO season = getSeason(rs.getInt("seasonID"));
                 ArrayList<StudioDTO> studios = getStudioList(animeID);
                 ArrayList<GenreDTO> genres = getGenreList(animeID);
                 String type = rs.getString("type");
@@ -727,12 +744,12 @@ public class AnimeListDAO {
         }
     }
 
-    public String getSeasonName(int seasonID) throws SQLException {
+    public SeasonDTO getSeason(int seasonID) throws SQLException {
         String seasonName = null;
 
         if (seasonID == 0) {
             seasonName = " ";
-            return seasonName;
+            return new SeasonDTO(0, "", null, null);
         }
 
         Connection conn = null;
@@ -749,7 +766,7 @@ public class AnimeListDAO {
                 seasonName = rs.getString("name");
             }
 
-            return seasonName;
+            return new SeasonDTO(seasonID, seasonName,null,null);
         } finally {
             if (rs != null) {
                 rs.close();
