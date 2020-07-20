@@ -179,7 +179,7 @@
                                                     <td class="spaceit">Eps Seen:</td>
                                                     <td class="spaceit">
                                                         <input type="text" id="myinfo_watchedeps" name="myinfo_watchedeps" size="3" class="inputtext form-control-sm" value="" style="border: 1px solid #ced4da!important;"> / <span id="curEps">                                
-                                                            <s:if test="%{anime.episodes != null}">
+                                                            <s:if test="%{anime.episodes != 0}">
                                                                 <s:property value="anime.episodes" />
                                                             </s:if>
                                                             <s:else>
