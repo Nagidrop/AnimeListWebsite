@@ -7,17 +7,20 @@ package animelist.controller;
 import animelist.model.AccountDTO;
 import animelist.model.AnimeListDAO;
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.struts2.interceptor.ServletRequestAware;
 
 /* Logic code when user press button in login view */
-public class LoginAction {
+public class LoginAction extends ActionSupport implements ServletRequestAware {
 
     private String username; // username passed from form input
     private String pass; // password passed from form input
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
     private final String ADMIN = "admimpage"; // indicates successful action
-
+    private HttpServletRequest request;
 
     /* Constructor */
     public LoginAction() {
@@ -77,5 +80,14 @@ public class LoginAction {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    @Override
+    public void setServletRequest(HttpServletRequest hsr) {
+        this.request = hsr;
     }
 }
