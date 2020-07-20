@@ -7,9 +7,11 @@ package animelist.controller;
 import animelist.model.AnimeDTO;
 import animelist.model.AnimeListDAO;
 import animelist.model.ListDTO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -36,16 +38,12 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
         animeList = dao.getAnimeList(accountID, listStatus);
         animeDetailsList = dao.getAnimeDetailsList(animeList);
 
+        Map session = ActionContext.getContext().getSession();
+        statusList = (ArrayList<String>) session.get("StatusList");
+
         if (animeList != null) {
             request.setAttribute("AnimeList", animeList);
             request.setAttribute("AnimeDetailsList", animeDetailsList);
-            statusList = new ArrayList<>();
-            statusList.add("Currently Watching");
-            statusList.add("Completed");
-            statusList.add("On Hold");
-            statusList.add("Dropped");
-            statusList.add("Plan to Watch");
-            request.setAttribute("StatusList", statusList);
         } else {
             request.setAttribute("AnimeList", new ArrayList<>());
             request.setAttribute("AnimeDetailsList", new ArrayList<>());

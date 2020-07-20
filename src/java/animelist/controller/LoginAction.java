@@ -26,6 +26,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     private HttpServletRequest request;
     private ArrayList<ListDTO> animeList;
     private ArrayList<AnimeDTO> animeDetailsList;
+    private ArrayList<String> statusList;
 
     /* Constructor */
     public LoginAction() {
@@ -68,7 +69,21 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
 
             animeList = dao.getAnimeList(account.getId(), 0);
             animeDetailsList = dao.getAnimeDetailsList(animeList);
-            
+
+            statusList = new ArrayList<>();
+            statusList.add("Currently Watching");
+            statusList.add("Completed");
+            statusList.add("On Hold");
+            statusList.add("Dropped");
+            statusList.add("Plan to Watch");
+            session.put("StatusList", statusList);
+            if (animeList != null) {
+                session.put("AnimeList", animeList);
+                session.put("AnimeDetailsList", animeDetailsList);
+            } else {
+                session.put("AnimeList", new ArrayList<>());
+                session.put("AnimeDetailsList", new ArrayList<>());
+            }
         }
 
         return url;
@@ -89,6 +104,30 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public ArrayList<ListDTO> getAnimeList() {
+        return animeList;
+    }
+
+    public void setAnimeList(ArrayList<ListDTO> animeList) {
+        this.animeList = animeList;
+    }
+
+    public ArrayList<AnimeDTO> getAnimeDetailsList() {
+        return animeDetailsList;
+    }
+
+    public void setAnimeDetailsList(ArrayList<AnimeDTO> animeDetailsList) {
+        this.animeDetailsList = animeDetailsList;
+    }
+
+    public ArrayList<String> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(ArrayList<String> statusList) {
+        this.statusList = statusList;
     }
 
     public HttpServletRequest getRequest() {
