@@ -32,7 +32,8 @@ public class AnimeListDAO {
      *
      * @param username
      * @param password
-     * @return Account object (except password) if login successful, null if login credentials don't match
+     * @return Account object (except password) if login successful, null if
+     * login credentials don't match
      * @throws java.sql.SQLException
      */
     public AccountDTO login(String username, String password) throws SQLException {
@@ -915,20 +916,21 @@ public class AnimeListDAO {
             }
 
             return animeList;
-          } finally {
-              if (rs != null) {
-                  rs.close();
-              }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
 
-              if (st != null) {
-                  st.close();
-              }
+            if (st != null) {
+                st.close();
+            }
 
-              if (conn != null) {
-                  conn.close();
-              }
-          }
-      }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
     public ArrayList<AccountDTO> getAccountList(int RoleID) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -970,7 +972,8 @@ public class AnimeListDAO {
             }
         }
     }
-    public boolean changeGenre(int GenreID , String name) throws SQLException {
+
+    public boolean changeGenre(int GenreID, String name) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -986,7 +989,8 @@ public class AnimeListDAO {
         }
         return false;
     }
-        public boolean changeSeason(int SeasonID , String name) throws SQLException {
+
+    public boolean changeSeason(int SeasonID, String name) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -1002,7 +1006,8 @@ public class AnimeListDAO {
         }
         return false;
     }
-        public boolean changeStudio(int StudioID , String name) throws SQLException {
+
+    public boolean changeStudio(int StudioID, String name) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -1016,6 +1021,8 @@ public class AnimeListDAO {
             }
         } catch (SQLException e) {
         }
+        return false;
+    }
 
     public ArrayList<AnimeDTO> getAnimeDetailsList(ArrayList<ListDTO> animeList) throws SQLException {
         ArrayList<AnimeDTO> animeDetailsList = null;
@@ -1070,6 +1077,22 @@ public class AnimeListDAO {
             }
         }
 
+        return false;
+    }
+        public boolean changeType(int AnimeID, String type) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("Update anime set type = ? where AnimeID =?");
+            st.setString(1, type);
+            st.setInt(2, AnimeID);
+            int count = st.executeUpdate();
+            if (count > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+        }
         return false;
     }
 }

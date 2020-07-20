@@ -74,6 +74,9 @@
         <action name="studioView" class = "animelist.controller.StudioView">
             <result name="success">admin/editstudio.jsp</result>
         </action>
+        <action name="typeView" class = "animelist.controller.TypeView">
+            <result name="success">admin/edittype.jsp</result>
+        </action>
         <action name="updateSeason" class = "animelist.controller.AdminUpdateSeason">
             <result name="success" type="redirectAction">
                 <param name="actionName">seasonView</param>
@@ -91,6 +94,13 @@
         <action name="updateStudio" class = "animelist.controller.AdminUpdateStudio">
             <result name="success" type="redirectAction">
                 <param name="actionName">studioView</param>
+            </result>            
+            <result name="fail">invalid.jsp</result>
+
+        </action>
+        <action name="updateType" class = "animelist.controller.AdminUpdateType">
+            <result name="success" type="redirectAction">
+                <param name="actionName">typeView</param>
             </result>            
             <result name="fail">invalid.jsp</result>
 

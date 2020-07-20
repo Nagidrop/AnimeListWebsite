@@ -62,29 +62,31 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                                               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <th><b>SeasonID</b></th>
+                                                    <th><b>GenreID</b></th>
                                                     <th><b>name</b></th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
-                                                    <th><b>SeasonID</b></th>
-                                                    <th><b>name</b></th>
+                                                    <th>GenreID</th>
+                                                    <th>name</th>
+                                                    <th></th>
+                                                    <th></th>
                                                 </tr>
                                             </tfoot>
                                             <tbody>
-                                                <s:iterator value="seasons" status="dto">
+                                                <s:iterator value="genres">
                                                     <tr>
-                                                        <td><s:property value="id"/></td>
-                                                        <td><s:property value="name"/></td>
+                                                        <td><s:property value="id"/> </td>
+                                                        <td><s:property value="name"/> </td>
                                                         <td style="text-align: center">
                                                             <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="name"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
                                                         </td>
                                                         <td style="text-align: center">
-                                                            <a class="btn-sm btn-danger btn-circle "><i class="fa fa-trash" style="color: white"></i></a>
+                                                            <a class="btn-sm btn-danger btn-circle "><i class="fa fa-trash" style="color: white"></i></a>                                  
                                                         </td>
                                                     </tr>
                                                 </s:iterator>
@@ -109,18 +111,18 @@
                             </div>
                             <div class="modal-body">
                                 <form action="updateType" method="post" id="info-form" accept-charset="utf-8">
-<div >
-                               <%--         <input  hidden id="id" name="id" value=> --%>
+                                    <div >
+                                        <input  hidden id="id" name="id" value=>
 
                                         <div class="form-group">
-                                            <label for="aaa">ID:</label>
-                                            <input class="form-control" id="id" name="id" readonly>
-                                                 <label for="fullname">name:</label>
+                                            <label for="aaa">Type:</label>
+                                            <input class="form-control" id="aaa" name="aaa" required>
+                                            <%--     <label for="fullname">name:</label>
 
                                                     <div class="form-group">
                                                         <input class="form-control" id="name" name="name" required>
 
-                                                    </div>
+                                                    </div>--%>
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -153,7 +155,7 @@
     </form>
 
 
- <script>
+   <script>
                 function fillInfo(id, name) {
                     $("#id").val(id);
                     $("#name").val(name);

@@ -1,22 +1,18 @@
-<%-- 
-    Document   : editseason
-    Created on : Jul 20, 2020, 10:04:16 AM
-    Author     : PC
---%>
+<%@taglib uri = "/struts-tags" prefix = "s" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@page import="java.util.ArrayList"%>
-<%@page import="animelist.model.GenreDTO"%>
-<%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Display Genre</title>
+
+        <title>User Manager</title>
+
         <!-- Custom fonts for this template -->
         <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -27,10 +23,12 @@
 
         <!-- Custom styles for this page -->
         <link href="admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
     </head>
+
     <body id="page-top">
-        <s:form action="genreView">
-            <h1>Display Genre List</h1>
+
+        <form action="typeView">
             <!-- Page Wrapper -->
             <div id="wrapper">
 
@@ -49,89 +47,79 @@
                         <!-- End of Topbar -->
 
                         <!-- Begin Page Content -->
-                        <div class="container-fluid">
-
+                        <div class=" q-fluid">
                             <!-- Page Heading -->
-                            <h1 class="h3 mb-2 text-gray-800">Genres Manager</h1>
+                            <h1 class="h3 mb-2 text-gray-800">Display Type List</h1>
                             <!--          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
 
                             <!-- DataTales Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">List Genres</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th><b>GenreID</b></th>
-                                                    <th><b>name</b></th>
-                                                </tr>
-                                                <%--        <%
-                                                       int i = 0;
-                                                       ArrayList<GenreDTO> std = (ArrayList<GenreDTO>) request.getAttribute("listGenre");
-                                                       for(GenreDTO g : std){
-                                                           System.out.println("e.toString()");
-                                                       } 
-                                                       for(GenreDTO g: std) {%>
-                                                       <tr>
-                                                           <form action="CRUD" method="get" >
-                                                           <td><input type="text" name="id" value="<%=g.getId()%>"></td>
-                                                           <td><input type="text" name="name" value="<%=g.getName()%>"></td>
-                                                           <td><a href="CRUD?action=delete&genreid=<%=g.getId()%>" onlick="return confirm('Are you sure to delete?)')">Delete</a></td>
-                                                           <input type="hidden" name="action" value="update">
-                                                           <td><button value="submit" onclick="return confirm('Are you sure to update')">Update</button></td>
-                                                       </form>
-                                                       </tr>
-                                                       <%}%>--%>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>GenreID</th>
-                                                    <th>name</th>
-                                                    <th></th>
-                                                    <th></th>
-                                                </tr>
-                                            </tfoot>
-                                            <tbody>
-                                                <s:iterator value="genres">
-                                                    <tr>
-                                                        <td><s:property value="id"/> </td>
-                                                        <td><s:property value="name"/> </td>
-                                                        <td style="text-align: center">
-                                                            <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="name"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
-                                                        </td>
-                                                        <td style="text-align: center">
-                                                            <a class="btn-sm btn-danger btn-circle "><i class="fa fa-trash" style="color: white"></i></a>                                  
-                                                        </td>
-                                                    </tr>
-                                                </s:iterator>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                    <h6 class="m-0 font-weight-bold text-primary">List Type</h6>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <!-- /.container-fluid -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th><b>GenreID</b></th>
+                                            <th><b>name</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>GenreID</th>
+                                            <th>name</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <s:iterator value="genres">
+                                            <tr>
+                                                <td><s:property value="id"/> </td>
+                                                <td><s:property value="name"/> </td>
+                                                <td style="text-align: center">
+                                                    <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="name"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <a class="btn-sm btn-danger btn-circle "><i class="fa fa-trash" style="color: white"></i></a>                                  
+                                                </td>
+                                            </tr>
+                                        </s:iterator>
+                                    </tbody>
+                                </table>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Edit Genre Info</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="updateGenre" method="post" id="info-form" accept-charset="utf-8">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Type Info</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="updateType" method="post" id="info-form" accept-charset="utf-8">
+                                    <div >
+                                        <input  hidden id="id" name="id" value=>
+
+                                        <div class="form-group">
                                             <div >
-                                               <%-- <input  hidden id="id" name="id" value=> --%>
+                                                <input  hidden id="id" name="id" value=> 
 
                                                 <div class="form-group">
-                                                    <label for="name">id:</label>
+                                                    <label for="aaa">ID:</label>
                                                     <input class="form-control" id="id" name="id" readonly>
                                                     <label for="fullname">name:</label>
 
@@ -143,10 +131,10 @@
                                             </div>
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <input type="submit" id="btn-submit" class="btn btn-primary" value="Save">
-                                        </form>
+                                            </form>
 
+                                        </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
                         <!-- End of Main Content -->
@@ -168,33 +156,37 @@
                 <!-- End of Page Wrapper -->
 
                 <!-- Scroll to Top Button-->
-            </s:form>
-            <script>
-                function fillInfo(id, name) {
-                    $("#id").val(id);
-                    $("#name").val(name);
-                    $("#exampleModal").modal();
+        </form>
 
-                }
-                $("#btn-submit").click(function () {
-                    $("#info-form").submit();
-                });
-            </script>
-            <!-- Bootstrap core JavaScript-->
-            <script src="admin/vendor/jquery/jquery.min.js"></script>
-            <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Core plugin JavaScript-->
-            <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script>
+            function fillInfo(id, name) {
+                $("#id").val(id);
+                $("#name").val(name);
+                $("#exampleModal").modal();
 
-            <!-- Custom scripts for all pages-->
-            <script src="admin/js/sb-admin-2.min.js"></script>
+            }
+            $("#btn-submit").click(function () {
+                $("#info-form").submit();
+            });
+        </script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="admin/vendor/jquery/jquery.min.js"></script>
+        <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Page level plugins -->
-            <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
-            <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            <!-- Page level custom scripts -->
-            <script src="admin/js/demo/datatables-demo.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="admin/js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="admin/js/demo/datatables-demo.js"></script>
+
     </body>
+
 </html>
