@@ -39,8 +39,8 @@ public class DeleteUserAction extends ActionSupport implements ServletRequestAwa
             AnimeListDAO dao = new AnimeListDAO();
             id = request.getParameter("id");
             Map session = ActionContext.getContext().getSession();
-            String roleID = (String) session.get("roleid");
-            if (!"1".equals(roleID)) {
+            int roleID = (int) session.get("roleid");
+            if (roleID != 1) {
                 return USER;
             }
             Date date = Date.valueOf(LocalDate.now());

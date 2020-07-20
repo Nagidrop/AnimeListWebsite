@@ -167,7 +167,7 @@
                                         <input type="hidden" id="myinfo_anime_id" value="39547">
                                         <input type="hidden" id="myinfo_curstatus" value="">
 
-                                        <span class="notice_open_public pb4">* Your list is public by default.</span>
+                                        <span class="notice_open_public pb4">* Note: Anyone can view your list by default.</span>
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 5%!important;">
                                             <tbody><tr>
                                                     <td class="spaceit">Status:</td>
@@ -189,7 +189,7 @@
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td>
-                                                        <input type="button" name="myinfo_submit" value="Add" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
+                                                        <input type="submit" name="myinfo_submit" value="Add" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
                                                     </td>
                                                 </tr>
                                             </tbody></table>
@@ -241,7 +241,12 @@
                                         <label>Episodes</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><s:property value="anime.episodes" /></p>
+                                        <s:if test="%{anime.episodes != 0}">
+                                            <p><s:property value="anime.episodes" /></p>
+                                        </s:if>
+                                        <s:else>
+                                            <p>?</p>
+                                        </s:else>
                                     </div>
                                 </div>
                                 <div class="row">
