@@ -36,10 +36,7 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
         animeList = dao.getAnimeList(accountID, listStatus);
         animeDetailsList = dao.getAnimeDetailsList(animeList);
 
-        String url = SUCCESS; // by default, login is not successful
-
         if (animeList != null) {
-//            url = SUCCESS;
             request.setAttribute("AnimeList", animeList);
             request.setAttribute("AnimeDetailsList", animeDetailsList);
             statusList = new ArrayList<>();
@@ -54,7 +51,7 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
             request.setAttribute("AnimeDetailsList", new ArrayList<>());
         }
 
-        return url;
+        return SUCCESS;
     }
 
     /* Getters and Setters */
