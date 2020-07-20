@@ -4,6 +4,7 @@
     Author     : Quan Duc Loc CE140037 (SE1401)
 --%>
 
+<%@page import="animelist.model.ListDTO"%>
 <%@page import="animelist.model.GenreDTO"%>
 <%@page import="animelist.model.StudioDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -155,14 +156,17 @@
                             <img src="images/poster/<s:property value="anime.poster"/>" alt=""/>
                         </div>
                         <div class="details-work">
-                            <%if (session.getAttribute("user") != null) {%>
-                            <p>
-                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                    Add To List
-                                </button>
-                            </p>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body" style="padding: 0.9rem!important;">
+                            <% if (session.getAttribute("user") != null) {%>
+                            <%
+                                ArrayList<ListDTO> animeList = (ArrayList<ListDTO>) session.getAttribute("AnimeList");
+                                ArrayList<AnimeDTO> animeDetailsList = (ArrayList<AnimeDTO>) session.getAttribute("AnimeDetailsList");
+                                ArrayList<String> statusList = (ArrayList<String>) session.getAttribute("StatusList");
+                                ListDTO animeInList = (ListDTO) request.getAttribute("AnimeInList");
+                                if (animeInList != null) {
+
+                            %>
+                            <div class="collapse show" id="collapseExample">
+                                <div class="card card-body" style="padding: 0.5rem!important; margin-top: 10%!important;">
                                     <div id="addtolist" class="addtolist-block js-anime-addtolist-block" style="padding: 0!important;">
                                         <input type="hidden" id="myinfo_anime_id" value="39547">
                                         <input type="hidden" id="myinfo_curstatus" value="">
@@ -172,13 +176,24 @@
                                             <tbody><tr>
                                                     <td class="spaceit">Status:</td>
                                                     <td class="spaceit">
-                                                        <select name="myinfo_status" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control-sm" style="border: 1px solid #ced4da!important; font-size: 0.95rem!important;"><option value="1">Watching</option><option value="2">Completed</option><option value="3">On-Hold</option><option value="4">Dropped</option><option value="6">Plan to Watch</option></select>
+                                                        <select name="myinfo_status" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control-sm" style="border: 1px solid #ced4da!important; font-size: 0.95rem!important; padding: 0;">
+                                                            <%                                                                int statusIndex = 1;
+                                                                for (String status : statusList) {
+                                                                    if (status != animeInList.getStatus()) {
+                                                            %>
+                                                            <option value="<%= statusIndex%>"> <%= status%> </option> <br />
+                                                            <% } else {%>
+                                                            <option value="<%= statusIndex%>" selected="selected"> <%= status%> </option> <br />
+                                                            <% }
+                                                                    statusIndex++;
+                                                                }%>
+                                                        </select>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="spaceit">Eps Seen:</td>
                                                     <td class="spaceit">
-                                                        <input type="text" id="myinfo_watchedeps" name="myinfo_watchedeps" size="3" class="inputtext form-control-sm" value="" style="border: 1px solid #ced4da!important;"> / <span id="curEps">                                
+                                                        <input type="text" id="myinfo_watchedeps" name="myinfo_watchedeps" size="3" class="inputtext form-control-sm" value="<%= animeInList.getProgress()%>" style="border: 1px solid #ced4da!important; font-size: 1rem!important;"> / <span id="curEps">                                
                                                             <s:if test="%{anime.episodes != 0}">
                                                                 <s:property value="anime.episodes" />
                                                             </s:if>
@@ -189,7 +204,7 @@
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td>
-                                                        <input type="submit" name="myinfo_submit" value="Add" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
+                                                        <input type="submit" name="myinfo_submit" value="Edit" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
                                                     </td>
                                                 </tr>
                                             </tbody></table>
@@ -197,8 +212,58 @@
                                     </div>
                                 </div>
                             </div>
+                            <% } else { %>
+                            <p>
+                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Add To List
+                                </button>
+                            </p>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body" style="padding: 0.5rem!important;">
+                                    <div id="addtolist" class="addtolist-block js-anime-addtolist-block" style="padding: 0!important;">
+                                        <input type="hidden" id="myinfo_anime_id" value="39547">
+                                        <input type="hidden" id="myinfo_curstatus" value="">
 
-                            <% } %>
+                                        <span class="notice_open_public pb4">* Note: Anyone can view your list by default.</span>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 5%!important;">
+                                            <tbody><tr>
+                                                    <td class="spaceit">Status:</td>
+                                                    <td class="spaceit">
+                                                        <select name="myinfo_status" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control-sm" style="border: 1px solid #ced4da!important; font-size: 0.95rem!important; padding: 0;">
+                                                            <%
+                                                                int statusIndex = 1;
+                                                                for (String status : statusList) {
+                                                            %>
+                                                            <option value="<%= statusIndex%>"> <%= status%> </option> <br />
+                                                            <%    statusIndex++;
+                                                                }%>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="spaceit">Eps Seen:</td>
+                                                    <td class="spaceit">
+                                                        <input type="text" id="myinfo_watchedeps" name="myinfo_watchedeps" size="3" class="inputtext form-control-sm" value="" style="border: 1px solid #ced4da!important; font-size: 1rem!important;" /> / <span id="curEps">                                
+                                                            <s:if test="%{anime.episodes != 0}">
+                                                                <s:property value="anime.episodes" />
+                                                            </s:if>
+                                                            <s:else>
+                                                                ?
+                                                            </s:else></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <input type="submit" name="myinfo_submit" value="Edit" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                        <div id="myinfoDisplay" style="padding-left: 89px; margin-top: 3px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }
+                                }  %>
                         </div>
                     </div>
                     <div class="col-md-8">
