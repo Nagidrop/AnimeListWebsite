@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package animelist.controller;
 
 import animelist.model.AnimeDTO;
 import animelist.model.AnimeListDAO;
 import animelist.model.ListDTO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -18,7 +19,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
  *
  * @author Tran Minh Thang CE140085
  */
-public class SearchInListAction extends ActionSupport implements ServletRequestAware{
+public class SearchInListAction extends ActionSupport implements ServletRequestAware {
 
     private HttpServletRequest request;
     private ArrayList<ListDTO> searchedAnimeList;
@@ -31,7 +32,8 @@ public class SearchInListAction extends ActionSupport implements ServletRequestA
     @Override
     public String execute() throws Exception {
         AnimeListDAO dao = new AnimeListDAO();
-        
+        Map session = ActionContext.getContext().getSession();
+        accountID = (int) session.get("id");
         searchedAnimeList = dao.getSearchAnimeInList(request.getParameter("search-text"), accountID);
         searchedAnimeDetailList = dao.getAnimeDetailsList(searchedAnimeList);
 
@@ -51,11 +53,9 @@ public class SearchInListAction extends ActionSupport implements ServletRequestA
         }
 
         return SUCCESS;
-        
-        
+
     }
 
-    
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;
