@@ -17,6 +17,7 @@
             <file>file:/D:/Project/AnimeListWebsite/web/viewAnime.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/SearchAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/changepassword.jsp</file>
+            <file>file:/D:/Project/AnimeListWebsite/web/viewList.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeGenreDTO.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/js/global.js</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/InitSearchPageAction.java</file>
@@ -29,6 +30,7 @@
             <file>file:/D:/Project/AnimeListWebsite/web/register.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeDTO.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/ChangeInfoAction.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/SearchInListAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/LoginAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/userinfo.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/web/AnimeSearch.jsp</file>
