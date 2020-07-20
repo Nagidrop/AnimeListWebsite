@@ -1183,10 +1183,12 @@
                     <a id="plantowatch" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=5"
                        class="status-button plantowatch ">Plan to Watch</a>
                     <div class="search-container">
-                        <div id="search-box" class="open"><input type="text" value=""></div>
-                        <a id="search-button" href="javascript: void(0);">
-                            <i class="fa fa-search"></i>
-                        </a>
+                        <form action="searchInList" id="search-form-action">
+                            <div id="search-box" class="open"><input name="search-text" type="text" value=""></div>
+                            <a id="search-button" href="#">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1201,8 +1203,8 @@
                         <thead><tr class="list-table-header">
                                 <th class="header-title number">No.</th>
                                 <th class="header-title image"><a class="link hover_info">Poster</a></th>
-                                    <th class="header-title title" onclick="tableSort(2)">Anime Title</th>
-                                <th class="header-title score"  onclick="tableSort(3)">Type</th>
+                                <th class="header-title title"><a href="" class="link sort">Anime Title</th>
+                                <th class="header-title score"> <a href="" class="link sort">Type</th>
                                 <th class="header-title type"><a href="" class="link sort">Progress</a></th>
                                 <th class="header-title progress"><a href="" class="link sort">Status</a></th>
                                 <th class="header-title edit"><a href="" class="link sort">Edit</a></th>
@@ -1265,7 +1267,7 @@
                         </form>
                         </tbody>
                         <% }
-                        }%>
+                            }%>
                     </table>
                     <% if (animeDetailsList.isEmpty()) {%>
                     <div style="text-align: center!important; font-size: 20px; margin-top: 3%;">There are no animes to display!</div>
@@ -1274,50 +1276,55 @@
             </div>
         </div>
         <script>
-        var status =<s:property value="listStatus" />;
-        if (status == 0) {
-            $("#all_anime").addClass("on");
-            $("#watching").removeClass("on");
-            $("#completed").removeClass("on");
-            $("#onhold").removeClass("on");
-            $("#dropped").removeClass("on");
-            $("#plantowatch").removeClass("on");
-        } else if (status == 1) {
-            $("#all_anime").removeClass("on");
-            $("#watching").addClass("on");
-            $("#completed").removeClass("on");
-            $("#onhold").removeClass("on");
-            $("#dropped").removeClass("on");
-            $("#plantowatch").removeClass("on");
-        } else if (status == 2) {
-            $("#all_anime").removeClass("on");
-            $("#watching").removeClass("on");
-            $("#completed").addClass("on");
-            $("#onhold").removeClass("on");
-            $("#dropped").removeClass("on");
-            $("#plantowatch").removeClass("on");
-        } else if (status == 3) {
-            $("#all_anime").removeClass("on");
-            $("#watching").removeClass("on");
-            $("#completed").removeClass("on");
-            $("#onhold").addClass("on");
-            $("#dropped").removeClass("on");
-            $("#plantowatch").removeClass("on");
-        } else if (status == 4) {
-            $("#all_anime").removeClass("on");
-            $("#watching").removeClass("on");
-            $("#completed").removeClass("on");
-            $("#onhold").removeClass("on");
-            $("#dropped").addClass("on");
-            $("#plantowatch").removeClass("on");
-        } else if (status == 5) {
-            $("#all_anime").removeClass("on");
-            $("#watching").removeClass("on");
-            $("#completed").removeClass("on");
-            $("#onhold").removeClass("on");
-            $("#dropped").removeClass("on");
-            $("#plantowatch").addClass("on");
-        }
+            var status =<s:property value="listStatus" />;
+            $("#search-button").click(function () {
+                $("#search-form-action").submit();
+            });
+            if (status == 0) {
+                $("#all_anime").addClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 1) {
+                $("#all_anime").removeClass("on");
+                $("#watching").addClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 2) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").addClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 3) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").addClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 4) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").addClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 5) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").addClass("on");
+            }
+
+            
         </script>
     </body>
 </html>
