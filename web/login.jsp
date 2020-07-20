@@ -74,11 +74,12 @@
                             <span class="focus-input100" data-placeholder="&#xf191;"></span>
                         </div>
 
-                        <div class="contact100-form-checkbox">
-                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                            <label class="label-checkbox100" for="ckb1">
-                                Remember me
-                            </label>
+                        <div class="contact100-form-checkbox login100-form-title">
+                            <p class="text-lg" style="color:#cb7476;font-weight: bold"><%String status = (request.getParameter("status") != null) ? request.getParameter("status") : "null";
+                                if (status.equals("false")) {
+                                out.print("Username or passowrd incorrect !");
+                                }
+                                %></p>
                         </div>
 
                         <div class="container-login100-form-btn">

@@ -25,6 +25,8 @@
             <result name="admimpage"  type="redirectAction">admin</result>
             <result name="fail" type="redirectAction">
                 <param name="actionName">prelogin</param>
+                <param name="status">false</param>
+
             </result>
         </action>
 
@@ -112,8 +114,8 @@
         </action>
 
         <action name="sortAnimeByEpisode" class="animelist.controller.SortAnimeAction" method="sortByEpisode">
-             <result name="success" type="dispatcher">searchResult.jsp</result>
-             <result name="input">404.jsp</result>
+            <result name="success" type="dispatcher">searchResult.jsp</result>
+            <result name="input">404.jsp</result>
         </action>
     </package>
 </struts>
