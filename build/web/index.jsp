@@ -28,12 +28,12 @@
         <div class="row mb-3 ">
             <s:iterator value="listAnimeDTOs" status="dto">
                 <div class="col-md-3">
-                    <div class="card ">
+                    <div class="card " style="margin: 2%;">
                         <a href="viewAnime?animeID=<s:property  value="id"/>">
                             <div class="card-body">
-                                <img  src="images/poster/<s:property  value="poster"/>">
+                                <img  src="images/poster/<s:property  value="poster"/>" style="max-height: 100%; max-width: 100%">
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer" style="text-align: center;">
                                 <s:property value="name"/>
                             </div>
                         </a>

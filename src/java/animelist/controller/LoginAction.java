@@ -35,6 +35,19 @@ public class LoginAction {
             session.put("user", account);
             session.put("fullname", account.getFullName());
             session.put("id", account.getId());
+            session.put("username", account.getUsername());
+            session.put("email", account.getEmail());
+            switch (account.getGender()) {
+                case 0:
+                    session.put("gender", "Male");
+                    break;
+                case 1:
+                    session.put("gender", "Female");
+                    break;
+                case 2:
+                    session.put("gender", "Other");
+                    break;
+            }
             url = SUCCESS;
         }
 

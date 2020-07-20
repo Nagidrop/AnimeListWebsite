@@ -27,6 +27,7 @@
             <div class="col-md-7" ><h1>Search Result :</h1></div>
             <div class="col-md-5" >Sort</div>
 
+
         </div>
 
         <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("searchlist");%>
@@ -35,6 +36,7 @@
             <%for (AnimeDTO item : list) {%>
             <div class="col-md-3">
                 <div class="card ">
+
                     <a href="viewAnime?animeID=<%= item.getId() %>">
                         <div class="card-body">
                             <img  src="images/poster/<%=item.getPoster()%>">
