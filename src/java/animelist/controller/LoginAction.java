@@ -5,9 +5,12 @@
 package animelist.controller;
 
 import animelist.model.AccountDTO;
+import animelist.model.AnimeDTO;
 import animelist.model.AnimeListDAO;
+import animelist.model.ListDTO;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -21,6 +24,8 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     private final String SUCCESS = "success"; // indicates successful action
     private final String ADMIN = "admimpage"; // indicates successful action
     private HttpServletRequest request;
+    private ArrayList<ListDTO> animeList;
+    private ArrayList<AnimeDTO> animeDetailsList;
 
     /* Constructor */
     public LoginAction() {
@@ -60,6 +65,10 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                 url = SUCCESS;
 
             }
+
+            animeList = dao.getAnimeList(account.getId(), 0);
+            animeDetailsList = dao.getAnimeDetailsList(animeList);
+            
         }
 
         return url;
