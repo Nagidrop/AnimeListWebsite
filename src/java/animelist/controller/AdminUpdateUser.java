@@ -6,8 +6,10 @@
 package animelist.controller;
 
 import animelist.model.AnimeListDAO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,7 @@ public class AdminUpdateUser extends ActionSupport implements ServletRequestAwar
     private String avatar;
     private String email;
     private String password;
+    private final String USER = "user"; // indicates successful action
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
     HttpServletRequest request;
@@ -37,13 +40,18 @@ public class AdminUpdateUser extends ActionSupport implements ServletRequestAwar
     @Override
     public String execute() {
         try {
-            
+
             String usernameString = (String) request.getParameter("username");
             String fullnameString = (String) request.getParameter("fullname");
             String genderString = (String) request.getParameter("gender");
             String emailString = (String) request.getParameter("email");
             System.out.println(fullnameString);
             String passwordString = (String) request.getParameter("password");
+            Map session = ActionContext.getContext().getSession();
+            String roleID = (String) session.get("roleid");
+            if (!"1".equals(roleID)) {
+                return USER;
+            }
             AnimeListDAO dao = new AnimeListDAO();
             dao.changeInfo(usernameString, fullnameString, "", emailString, Integer.parseInt(genderString));
             if (!passwordString.isEmpty()) {

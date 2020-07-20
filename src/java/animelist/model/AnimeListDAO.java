@@ -62,7 +62,7 @@ public class AnimeListDAO {
 
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("SELECT * FROM Account WHERE username = ? AND password = ?");
+            st = conn.prepareStatement("SELECT * FROM Account WHERE username = ? AND password = ? AND deleted_at is null");
             st.setString(1, username);
             st.setString(2, hashPassword);
             rs = st.executeQuery();
@@ -645,17 +645,15 @@ public class AnimeListDAO {
     public boolean deleteUser(int id, Date deleted_at) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
-        try {
-            conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("Update account set deleted_at = ? where AccountID=?");
-            st.setDate(1, deleted_at);
-            st.setInt(2, id);
-            int count = st.executeUpdate();
-            if (count > 0) {
-                return true;
-            }
-        } catch (SQLException e) {
+        conn = DBUtils.makeConnection();
+        st = conn.prepareStatement("Update account set deleted_at = ? where AccountID=?");
+        st.setDate(1, deleted_at);
+        st.setInt(2, id);
+        int count = st.executeUpdate();
+        if (count > 0) {
+            return true;
         }
+
         return false;
     }
 
@@ -765,7 +763,7 @@ public class AnimeListDAO {
                 seasonName = rs.getString("name");
             }
 
-            return new SeasonDTO(seasonID, seasonName,null,null);
+            return new SeasonDTO(seasonID, seasonName, null, null);
         } finally {
             if (rs != null) {
                 rs.close();

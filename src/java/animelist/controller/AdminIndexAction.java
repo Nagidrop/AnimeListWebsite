@@ -9,12 +9,15 @@ import animelist.model.AnimeListDAO;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.logging.Logger;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.Session;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 /**
@@ -26,6 +29,8 @@ public class AdminIndexAction extends ActionSupport implements ServletRequestAwa
     String totalAnimes, totalUsers, totalAdmins;
     private HttpServletRequest request;
     HashMap<String, String> totalTypeHashMap;
+    private final String USER = "user"; // indicates successful action
+    private final String FAIL = "fail"; // indicates successful action
     private final String SUCCESS = "success"; // indicates successful action
     private String label[], number[];
 
@@ -57,24 +62,37 @@ public class AdminIndexAction extends ActionSupport implements ServletRequestAwa
     }
 
     @Override
-    public String execute() throws Exception {
-        AnimeListDAO dao = new AnimeListDAO();
-        ArrayList<String> type = new ArrayList<>();
-        ArrayList<String> count = new ArrayList<>();
+    public String execute() {
+        try {
+            AnimeListDAO dao = new AnimeListDAO();
+            ArrayList<String> type = new ArrayList<>();
+            ArrayList<String> count = new ArrayList<>();
+            Map session = ActionContext.getContext().getSession();
+            if (session==null) {
+                return USER;
+            }
+            int roleID = (int) session.get("roleid");
+            if (roleID != 1) {
+                return USER;
+            }
+            totalTypeHashMap = dao.countAnimeofType();
+            totalTypeHashMap.keySet().forEach((typesString) -> {
+                type.add(typesString);
+            });
+            totalTypeHashMap.values().forEach((typesString) -> {
+                count.add(typesString);
+            });
+            setLabel(type.toArray(new String[0]));
+            setNumber(count.toArray(new String[0]));
+            totalAdmins = dao.countAdmin();
+            totalAnimes = dao.countAnimes();
+            totalUsers = dao.countUsers();
+            return SUCCESS;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(AdminIndexAction.class.getName()).log(Level.SEVERE, null, ex);
 
-        totalTypeHashMap = dao.countAnimeofType();
-        totalTypeHashMap.keySet().forEach((typesString) -> {
-            type.add(typesString);
-        });
-        totalTypeHashMap.values().forEach((typesString) -> {
-            count.add(typesString);
-        });
-        setLabel(type.toArray(new String[0]));
-        setNumber(count.toArray(new String[0]));
-        totalAdmins = dao.countAdmin();
-        totalAnimes = dao.countAnimes();
-        totalUsers = dao.countUsers();
-        return SUCCESS;
+        }
+        return FAIL;
     }
 
     public String getTotalAnimes() {
