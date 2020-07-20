@@ -68,7 +68,7 @@ public class AdminIndexAction extends ActionSupport implements ServletRequestAwa
             ArrayList<String> type = new ArrayList<>();
             ArrayList<String> count = new ArrayList<>();
             Map session = ActionContext.getContext().getSession();
-            if (session==null) {
+            if (session.isEmpty()) {
                 return USER;
             }
             int roleID = (int) session.get("roleid");
