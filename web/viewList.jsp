@@ -19,6 +19,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
+        <script src="js/tableSort.js"></script>
         <style  type="text/css">
             body.ownlist {
                 background-image: url("https://cdn.myanimelist.net/s/common/uploaded_files/1455540188-934a8b8942494df1086f9402bbb5330b.png");
@@ -976,12 +977,12 @@
                     <div class="list-status-title" style="background-image: url('images/bg-03.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
                         <span class="text">ALL ANIME</span>
                     </div>
-                    <table class="list-table" style="font-size: 12px;">
+                    <table class="list-table" style="font-size: 12px;" id="myListTable">
                         <thead><tr class="list-table-header">
                                 <th class="header-title number">No.</th>
                                 <th class="header-title image"><a class="link hover_info">Poster</a></th>
-                                <th class="header-title title"><a href="" class="link sort">Anime Title</a></th>
-                                <th class="header-title score"><a href="" class="link sort">Type</a></th>
+                                    <th class="header-title title" onclick="tableSort(2)">Anime Title</th>
+                                <th class="header-title score"  onclick="tableSort(3)">Type</th>
                                 <th class="header-title type"><a href="" class="link sort">Progress</a></th>
                                 <th class="header-title progress"><a href="" class="link sort">Status</a></th>
                                 <th class="header-title edit"><a href="" class="link sort">Edit</a></th>
