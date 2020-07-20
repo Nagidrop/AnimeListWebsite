@@ -37,9 +37,9 @@
         <action name="search" class = "animelist.controller.SearchAction">
             <result name="success" type="dispatcher">searchResult.jsp</result>
         </action>
-          <action name="admin" class = "animelist.controller.AdminIndexAction">
+        <action name="admin" class = "animelist.controller.AdminIndexAction">
             <result name="success" type="dispatcher">admin/index.jsp</result>
-          </action>
+        </action>
 
         <action name="register" class = "animelist.controller.RegisterAction">
             <result name="success">
@@ -49,13 +49,12 @@
         </action>
 
         <action name="changepassword" class = "animelist.controller.ChangePasswordAction">
-            <result name="success" type="redirectAction">
-                <param name="actionName">.index</param>
+            <result name="success">userinfo.jsp
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
 
-          <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
+        <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
             <result name="success">userinfo.jsp
             </result>
             <result name="fail">invalid.jsp</result>
