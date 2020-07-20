@@ -25,7 +25,7 @@
         <div class=""><p></div>
         <div class="row">
             <div class="col-md-7" ><h1>Search Result :</h1></div>
-            <div class="col-md-5" >Sort</div>
+            <div class="col-md-5" >Sort<select name="myinfo_status" id="myinfo_status" class="inputtext js-anime-status-dropdown"><option value="1">Watching</option><option value="2">Completed</option><option value="3">On-Hold</option><option value="4">Dropped</option><option value="6">Plan to Watch</option></select></div>
 
 
         </div>
@@ -35,14 +35,18 @@
         <div class="row mb-3 ">
             <%for (AnimeDTO item : list) {%>
             <div class="col-md-3">
-                <div class="card ">
+                <div class="card " title=" <%=item.getName()%>">
 
-                    <a href="viewAnime?animeID=<%= item.getId() %>">
+                    <a href="viewAnime?animeID=<%= item.getId()%>">
                         <div class="card-body">
-                            <img  src="images/poster/<%=item.getPoster()%>">
+                            <img class="img-thumbnail" style="width: 200px;height: 280px"   src="images/poster/<%=item.getPoster()%>">
                         </div>
-                        <div class="card-footer">
-                            <%=item.getName()%>
+                        <div class="card-footer" style="text-align: center" title=" <%=item.getName()%>">
+                            <%if (item.getName().length() > 20) {
+                                    out.print(item.getName().substring(0, 20)+"...");
+                                } else {
+                                    out.print(item.getName());
+                                }%>
                         </div>
                     </a>
                 </div>

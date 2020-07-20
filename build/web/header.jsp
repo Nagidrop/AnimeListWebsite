@@ -29,8 +29,8 @@
     </div>
 
     <s:form cssClass="form-inline my-2 my-md-0" id="search-form" action="search">
-        <input class="form-control" type="text" name="searchvalue" placeholder="Search Anime...">
-        <input class="btn btn-search form-control" type="submit" value="Search" >
+        <input class="form-control" type="text" name="searchvalue" placeholder="Search Anime..." style="margin-right: 10px!important;">
+        <input class="btn btn-search form-control" type="submit" value="Search" style="margin-right: 20px!important;">
     </s:form>
     <%if(session.getAttribute("user")==null){%>
     <div class="col-sm-1">

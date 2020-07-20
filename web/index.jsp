@@ -7,7 +7,6 @@
 <%@page import="animelist.model.AccountDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="animelist.model.AnimeDTO"%>
-<%@page import="animelist.model.AnimeDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri = "/struts-tags" prefix = "s" %>
 <!DOCTYPE html>
@@ -19,6 +18,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
+        <style>
+            .img-thumbnail {
+                padding: 0!important;
+                background-color: #fff;
+                border: 1px solid #dee2e6;
+                border-radius: .25rem;
+                max-width: 100%;
+                height: auto;
+            }
+        </style>
         <title>Wibu Anime List</title>
     </head>
     <body class="container">
@@ -28,13 +37,20 @@
         <div class="row mb-3 ">
             <s:iterator value="listAnimeDTOs" status="dto">
                 <div class="col-md-3">
-                    <div class="card " style="margin: 2%;">
+                    <div class="card " style="margin: 2%;" title="<s:property value="name"/>">
                         <a href="viewAnime?animeID=<s:property  value="id"/>">
                             <div class="card-body">
-                                <img  src="images/poster/<s:property  value="poster"/>" style="max-height: 100%; max-width: 100%">
+                                <img class="img-thumbnail"  style="width: 200px;height: 280px"  src="images/poster/<s:property  value="poster"/>" style="max-height: 100%; max-width: 100%">
                             </div>
-                            <div class="card-footer" style="text-align: center;">
-                                <s:property value="name"/>
+
+                            <div class="card-footer" style="text-align: center;" title="<s:property value="name"/>" >
+                                <s:if test="%{name.length() > 20}">
+                                    <s:property value="name.substring(0,20)"/>...
+
+                                </s:if>
+                                <s:else>
+                                    <s:property value="name"/>
+                                </s:else>
                             </div>
                         </a>
                     </div>

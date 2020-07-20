@@ -120,6 +120,28 @@
                 color: #000000!important;
                 font-weight:normal!important;
             }
+
+            .btn-group{
+                margin-top: 15%!important;
+                width: 200px;
+            }
+
+            .addtolist-block {
+                padding-bottom: 40px;
+                padding-top: 5px;
+            }
+
+            .btn-primary {
+                color: #007bff;
+                background-color: #fff;
+                border-color: #007bff;
+                width: 100%;
+            }
+
+            .spaceit {
+                margin: 3px 0;
+                padding: 3px 0;
+            }
         </style>
         <title><s:property value="anime.name"/> - WibuAnimeList</title>
     </head>
@@ -134,7 +156,48 @@
                         </div>
                         <div class="details-work">
                             <%if (session.getAttribute("user") != null) {%>
-                            <h1>HELLO</h1>
+                            <p>
+                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Add To List
+                                </button>
+                            </p>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body" style="padding: 0.9rem!important;">
+                                    <div id="addtolist" class="addtolist-block js-anime-addtolist-block" style="padding: 0!important;">
+                                        <input type="hidden" id="myinfo_anime_id" value="39547">
+                                        <input type="hidden" id="myinfo_curstatus" value="">
+
+                                        <span class="notice_open_public pb4">* Your list is public by default.</span>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 5%!important;">
+                                            <tbody><tr>
+                                                    <td class="spaceit">Status:</td>
+                                                    <td class="spaceit">
+                                                        <select name="myinfo_status" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control-sm" style="border: 1px solid #ced4da!important; font-size: 0.95rem!important;"><option value="1">Watching</option><option value="2">Completed</option><option value="3">On-Hold</option><option value="4">Dropped</option><option value="6">Plan to Watch</option></select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="spaceit">Eps Seen:</td>
+                                                    <td class="spaceit">
+                                                        <input type="text" id="myinfo_watchedeps" name="myinfo_watchedeps" size="3" class="inputtext form-control-sm" value="" style="border: 1px solid #ced4da!important;"> / <span id="curEps">                                
+                                                            <s:if test="%{anime.episodes != 0}">
+                                                                <s:property value="anime.episodes" />
+                                                            </s:if>
+                                                            <s:else>
+                                                                ?
+                                                            </s:else></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        <input type="button" name="myinfo_submit" value="Add" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                        <div id="myinfoDisplay" style="padding-left: 89px; margin-top: 3px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <% } %>
                         </div>
                     </div>

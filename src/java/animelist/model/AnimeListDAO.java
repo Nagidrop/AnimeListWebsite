@@ -835,4 +835,46 @@ public class AnimeListDAO {
             }
         }
     }
+
+    public ArrayList<AccountDTO> getAccountList(int RoleID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<AccountDTO> accountList = null;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT * FROM account where RoleID = ? AND deleted_at is null");
+            st.setInt(1, RoleID);
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int AccountID = rs.getInt("AccountID");
+                String username = rs.getString("username");
+                String fullname = rs.getString("fullname");
+                String email = rs.getString("email");
+                int gender = rs.getInt("gender");
+                String avatar = rs.getString("avatar");
+
+                if (accountList == null) {
+                    accountList = new ArrayList<>();
+                }
+
+                accountList.add(new AccountDTO(AccountID, RoleID, username, fullname, avatar, email, gender, null, null));
+            }
+
+            return accountList;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 }
