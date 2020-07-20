@@ -151,13 +151,13 @@ public class AnimeListDAO {
 
             if (st != null) {
                 st.close();
-
-                if (conn != null) {
-                    conn.close();
-                }
             }
-            return false;
+            if (conn != null) {
+                conn.close();
+            }
         }
+
+        return false;
     }
 
     /**
@@ -258,8 +258,10 @@ public class AnimeListDAO {
             }
 
             return animeList;
+
         } catch (SQLException ex) {
-            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AnimeListDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (rs != null) {
@@ -272,9 +274,11 @@ public class AnimeListDAO {
 
                 if (conn != null) {
                     conn.close();
+
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AnimeListDAO.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -654,9 +658,11 @@ public class AnimeListDAO {
             hashPassword = no.toString(16);
             while (hashPassword.length() < 32) {
                 hashPassword = "0" + hashPassword;
+
             }
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AnimeListDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         Connection conn = null;
         PreparedStatement st = null;

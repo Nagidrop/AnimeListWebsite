@@ -18,6 +18,7 @@
         <style type="text/css">
             body {
                 margin-top: 20px;
+                color: #fda8a8!important;
             }
             /* User Cards */
             .user-box {
@@ -87,13 +88,13 @@
                 font-size: 30px;
                 padding-right: 20px;
                 vertical-align: middle;
-                color: #223035;
+                color: #ffffff;
             }
             .profile-card-4 .list-details {
                 display: table-cell;
                 vertical-align: middle;
                 font-weight: 600;
-                color: #223035;
+                color: #fda8a8;
                 font-size: 15px;
                 line-height: 15px;
             }
@@ -102,7 +103,7 @@
                 vertical-align: middle;
                 font-size: 12px;
                 font-weight: 400;
-                color: #808080;
+                color: #d4c3c3;
             }
             /*Nav Tabs & Pills */
             .nav-tabs .nav-link {
@@ -309,7 +310,7 @@
             }
             .nav-pills .nav-link {
                 border-radius: .25rem;
-                color: #223035;
+                color: #fda8a8;
                 font-size: 12px;
                 text-align: center;
                 letter-spacing: 1px;
@@ -323,7 +324,7 @@
                 transition: all 0.3s ease;
             }
             .nav-pills .nav-link:hover {
-                background-color: #f4f5fa;
+                background-color: #000000;
             }
             .nav-pills .nav-link i {
                 margin-right: 2px;
@@ -339,7 +340,7 @@
             .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
                 color: #fff;
                 background-color: #008cff;
-                box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(0, 140, 255, 0.5);
+                box-shadow:0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgb(255 33 176 / 55%);
             }
             .nav-pills-success .nav-link.active, .nav-pills-success .show>.nav-link {
                 color: #fff;
@@ -378,6 +379,28 @@
                 -webkit-box-shadow: 0 11px 7px 0 rgba(0,0,0,0.19), 0 13px 25px 0 rgba(0,0,0,0.3);
                 box-shadow: 0 11px 7px 0 rgba(0,0,0,0.19), 0 13px 25px 0 rgba(0,0,0,0.3);
             }
+
+            .card{
+                background-color: #0000008a!important;
+
+            }
+
+            .list-group-item{
+                background-color: #601f3e3d!important;
+                border: 1px solid rgb(255 98 98 / 51%)!important;
+            }
+
+            .nav-pills .nav-link.active, .show>.nav-pills .nav-link {
+                color: #fda8a8!important;
+                background-color: #000000!important;
+            }
+            
+            .btn-primary{
+                color: #ffffff!important;
+                background-color: #c70606!important;
+                border-color: #f12525!important;
+            }
+
         </style>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -424,17 +447,17 @@
         <script src="js/main.js"></script>
         <!--===============================================================================================-->
     </head>
-    <body style=" background-image: url('images/bg-06.png'); background-size: cover; background-repeat: no-repeat;">
+    <body style=" background-image: url('images/bg-13.png'); background-size: cover; background-repeat: no-repeat; ">
         <jsp:include page='header.jsp'/>
         <div class="container-userinfo">
             <div class="container" style="margin-top: 2%">
                 <div class="row">
                     <div class="col-lg-4">
-                        <div class="profile-card-4 z-depth-3">
+                         <div class="profile-card-4 z-depth-3">
                             <div class="card">
-                                <div class="card-body text-center bg-primary rounded-top">
+                                <div class="card-body text-center bg-primary rounded-top" style="background-color: #bd000066!important">
                                     <div class="user-box"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
-                                    <h5 class="mb-1 text-white"><%= session.getAttribute("username")%></h5>
+                                    <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
                                     <h6 class="text-light">True Wibu</h6>
                                 </div>
                                 <div class="card-body">
@@ -483,6 +506,9 @@
                                                 <div class="col-lg-9">
                                                     <input class="form-control" type="password" value="" name="password" id="typepass">
                                                 </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-9"> </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
