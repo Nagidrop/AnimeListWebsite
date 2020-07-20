@@ -1205,7 +1205,6 @@
                         <% ArrayList<ListDTO> animeList = (ArrayList<ListDTO>) request.getAttribute("AnimeList");
                             ArrayList<AnimeDTO> animeDetailsList = (ArrayList<AnimeDTO>) request.getAttribute("AnimeDetailsList");
                             int animeIndex = 0;
-                            int statusIndex = 1;
                             if (!animeDetailsList.isEmpty()) {
                                 ArrayList<String> statusList = (ArrayList<String>) request.getAttribute("StatusList");
                                 for (AnimeDTO anime : animeDetailsList) {
@@ -1240,12 +1239,14 @@
 
                                 <td class="data status" style="width: 15%;">
                                     <select name="statusEdit"> 
-                                        <% for (String status : statusList) {
+                                        <%                            
+                                            int statusIndex = 1;
+                                            for (String status : statusList) {
                                                 if (status != listAnime.getStatus()) {
                                         %>
-                                        <option value="<%= statusIndex%>"> <%= status%> </option> <br />
+                                        <option value="<%= statusIndex %>"> <%= status %> </option> <br />
                                         <% } else {%>
-                                        <option value="<%= statusIndex%>" selected="selected"> <%= status%> </option> <br />
+                                        <option value="<%= statusIndex%>" selected="selected"> <%= status %> </option> <br />
                                         <% }
                                                 statusIndex++;
                                             } %>
