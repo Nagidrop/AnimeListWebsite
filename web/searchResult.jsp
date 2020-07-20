@@ -39,7 +39,7 @@
 
                     <a href="viewAnime?animeID=<%= item.getId() %>">
                         <div class="card-body">
-                            <img  src="images/poster/<%=item.getPoster()%>">
+                            <img class="img-thumbnail" style="width: 200px;height: 280px"   src="images/poster/<%=item.getPoster()%>">
                         </div>
                         <div class="card-footer">
                             <%=item.getName()%>
