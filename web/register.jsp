@@ -33,7 +33,7 @@
         <link rel="stylesheet" type="text/css" href="css/util.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <!--===============================================================================================-->
-        <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
         <!--===============================================================================================-->
         <script src="vendor/animsition/js/animsition.min.js"></script>
         <!--===============================================================================================-->
@@ -66,38 +66,33 @@
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Enter username">
-                            <input class="input100" type="text" name="registerUsername" placeholder="Username">
+                            <input class="input100" type="text" name="registerUsername" placeholder="Username" required>
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
-                        <div class="wrap-input100 validate-input" data-validate = "Enter Full name">
-                            <input class="input100" type="text" name="registerFullname" placeholder="Full name">
+                        <div class="wrap-input100 validate-input"  data-validate = "Enter Full name">
+                            <input class="input100" type="text" name="registerFullname" placeholder="Full name" required>
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
-                        <div class="wrap-input100 validate-input" data-validate = "Enter Email">
-                            <input class="input100" type="text" name="registerEmail" placeholder="Email">
+                        <div class="wrap-input100 validate-input" onchange="ValidateEmail()" data-validate = "Enter Email">
+                            <input class="input100" id="email" type="text" name="registerEmail" placeholder="Email">
                             <span class="focus-input100" data-placeholder="&#xf207;"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="Enter password">
-                            <input class="input100" type="password" name="registerPassword" placeholder="Password">
+                            <input class="input100" id="registerPassword"  type="password" name="registerPassword" placeholder="Password" required>
                             <span class="focus-input100" data-placeholder="&#xf191;"></span>
                         </div>
                         <div class="wrap-input100 validate-input" data-validate="Enter confirm password">
-                            <input class="input100" type="password" name="repass" placeholder="Confirm Password">
+                            <input class="input100" type="password" id="repass" onchange="checkPass()" name="repass" placeholder="Confirm Password" required>
                             <span class="focus-input100" data-placeholder="&#xf191;"></span>
                         </div>
 
                         <div class="container-login100-form-btn">
-                            <button class="login100-form-btn">
+                            <button id="button-sign" class="login100-form-btn " disabled>
                                 Sign Up
                             </button>
                         </div>
 
-                        <div class="text-center p-t-90">
-                            <a class="txt1" href="#">
-                                Forgot Password?
-                            </a>
-                        </div>
                     </s:form>
                 </div>
             </div>
@@ -107,6 +102,27 @@
         <div id="dropDownSelect1"></div>
 
 
+        <script>
+            $('#email').blur(function () {
+                var email = $(this).val();
+                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm;
+                if (re.test(email)) {
 
+                } else {
+                    alert("Not a valid email address")
+                }
+
+            });
+            function checkPass() {
+                alert($("#registerPassword").val(), $("#repass").val())
+                if ($("#repass").val() == $("#registerPassword").val()) {
+                    $("#button-sign").removeAttr("disabled");
+                } else {
+                    alert("Please check confirm password")
+                    $("#button-sign").prop("disabled", true);
+                }
+            }
+            ;
+        </script>
     </body>
 </html>
