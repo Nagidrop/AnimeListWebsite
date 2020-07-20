@@ -123,7 +123,7 @@
         </style>
         <title><s:property value="anime.name"/> - AnimeListWebsite</title>
     </head>
-    <body>
+    <body style="background-image: url('images/bg-08.png')">
         <jsp:include page='header.jsp'/>
         <div class="container emp-profile">
             <form method="post">
