@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>InforWibu.com</title>
+        <title>Personal Profile - WibuAnimeList</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <link href="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -505,8 +505,8 @@
                                     <div class="tab-pane active show" id="profile">
                                         <h5 class="mb-3">User Profile</h5>
                                         <div class="form-group row">
-                                                <div class="col-lg-9"> </div>
-                                            </div>
+                                            <div class="col-lg-9"> </div>
+                                        </div>
                                         <h6 class="mb-3">Full Name: <%= session.getAttribute("fullname")%></h6> 
                                         <div class="form-group row">
                                                 <div class="col-lg-9"> </div>

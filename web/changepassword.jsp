@@ -499,8 +499,10 @@
                                 </ul>
                                     <div class="tab-pane" id="editpassword">
                                         <s:form action="changepassword">
+                                            <div style="margin-bottom: 4%;">
                                             <input type="checkbox" onclick="Toggle()"> 
                                             <b>Show Password</b> 
+                                            </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">New Password</label>
                                                 <div class="col-lg-9">
@@ -516,7 +518,7 @@
                                                     <input class="form-control" type="password" value="" name="1password" id="typepass1">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class="form-group row" style="margin-top: 5%">
                                                 <label class="col-lg-3 col-form-label form-control-label"></label>
                                                 <div class="col-lg-9">
                                                     <input type="reset" class="btn btn-secondary1" name="reset" value="Cancel">
