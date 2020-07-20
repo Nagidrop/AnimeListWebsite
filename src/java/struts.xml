@@ -8,6 +8,7 @@
         <action name="index" class="animelist.controller.ShowIndexAction" >
             <result name = "success"> index.jsp</result>
         </action>
+
         <action name="prelogin" class="animelist.controller.PreLoginAction" >
             <result name="success">login.jsp</result>
             <result name="fail" type="redirectAction">
@@ -18,6 +19,7 @@
         <action name="logout" class="animelist.controller.LogoutAction" >
             <result name="success" type="redirectAction">index</result>
         </action>
+
         <action name="login"  class="animelist.controller.LoginAction">
             <result name="success"  type="redirectAction">index</result>
             <result name="fail" type="redirectAction">
@@ -25,6 +27,7 @@
                 <param name="status" >123</param>
             </result>
         </action>
+
         <action name="viewAnime" class="animelist.controller.ViewAnimeAction" >
             <result name="success" type="dispatcher">viewAnime.jsp</result>
             <result name="fail">404.jsp</result>
@@ -59,16 +62,31 @@
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
+
+        <action name="viewAnimeList" class="animelist.controller.ViewListAction" >
+            <result name="success" type="dispatcher">viewList.jsp</result>
+        </action>
+
+        <action name="editAnimeList" class="animelist.controller.EditListAction" >
+            <result name="success" type="redirectAction">
+                <param name="actionName">viewAnimeList</param>
+                <param name="accountID" >${accountIDEdit}</param>
+                <param name="listStatus" >0</param>
+            </result>
+            <result name="fail" type="dispatcher">actionFailed.jsp</result>
+        </action>
+
         <action name="userList" class = "animelist.controller.ShowListUserAction">
             <result name="success">admin/tables.jsp
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
+
         <action name="updateUser" class = "animelist.controller.AdminUpdateUser">
             <result name="success" type="redirectAction">
                 <param name="actionName">userList</param>
-            </result>            
+            </result>
             <result name="fail">invalid.jsp</result>
-        </action>
+       </action>
     </package>
 </struts>

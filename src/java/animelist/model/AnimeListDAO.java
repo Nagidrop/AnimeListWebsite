@@ -32,8 +32,7 @@ public class AnimeListDAO {
      *
      * @param username
      * @param password
-     * @return Account object (except password) if login successful, null if
-     * login credentials don't match
+     * @return Account object (except password) if login successful, null if login credentials don't match
      * @throws java.sql.SQLException
      */
     public AccountDTO login(String username, String password) throws SQLException {
@@ -642,7 +641,7 @@ public class AnimeListDAO {
         }
         return false;
     }
-    
+
     public boolean deleteUser(int id, Date deleted_at) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -860,6 +859,79 @@ public class AnimeListDAO {
         }
     }
 
+    public ArrayList<ListDTO> getAnimeList(int accountID, int listStatus) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<ListDTO> animeList = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            if (listStatus == 0) {
+                st = conn.prepareStatement("SELECT * FROM list WHERE AccountID = ?");
+            } else {
+                st = conn.prepareStatement("SELECT * FROM list WHERE AccountID = ? AND status = ?");
+                st.setInt(2, listStatus);
+            }
+            st.setInt(1, accountID);
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int animeID = rs.getInt("AnimeID");
+                int status = rs.getInt("status");
+                String statusString = "";
+
+                switch (status) {
+                    case 1:
+                        statusString = "Currently Watching";
+
+                        break;
+
+                    case 2:
+                        statusString = "Completed";
+
+                        break;
+
+                    case 3:
+                        statusString = "On Hold";
+
+                        break;
+
+                    case 4:
+                        statusString = "Dropped";
+
+                        break;
+
+                    case 5:
+                        statusString = "Plan to Watch";
+
+                        break;
+                }
+
+                int progress = rs.getInt("progress");
+
+                if (animeList == null) {
+                    animeList = new ArrayList<>();
+                }
+
+                animeList.add(new ListDTO(animeID, accountID, statusString, progress));
+            }
+
+            return animeList;
+          } finally {
+              if (rs != null) {
+                  rs.close();
+              }
+
+              if (st != null) {
+                  st.close();
+              }
+
+              if (conn != null) {
+                  conn.close();
+              }
+          }
+      }
     public ArrayList<AccountDTO> getAccountList(int RoleID) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -900,5 +972,61 @@ public class AnimeListDAO {
                 conn.close();
             }
         }
+    }
+
+    public ArrayList<AnimeDTO> getAnimeDetailsList(ArrayList<ListDTO> animeList) throws SQLException {
+        ArrayList<AnimeDTO> animeDetailsList = null;
+
+        if (animeList != null) {
+            animeDetailsList = new ArrayList<>();
+
+            for (ListDTO listData : animeList) {
+                animeDetailsList.add(getAnimeDetails(listData.getAnimeID()));
+            }
+        }
+
+        return animeDetailsList;
+    }
+
+    public boolean editAnimeInList(int accountID, int animeID, int progress, int episodes, int status) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        if (status == 2) {
+            progress = episodes;
+        } else if (status == 5) {
+            progress = 0;
+        }
+
+        if (progress > episodes) {
+            progress = episodes;
+        } else if (progress < 0) {
+            progress = 0;
+        }
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("UPDATE List SET progress = ?, status = ? WHERE AccountID = ? AND AnimeID = ? ");
+            st.setInt(1, progress);
+            st.setInt(2, status);
+            st.setInt(3, accountID);
+            st.setInt(4, animeID);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+
+                return true;
+            }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return false;
     }
 }
