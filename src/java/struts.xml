@@ -8,6 +8,7 @@
         <action name="index" class="animelist.controller.ShowIndexAction" >
             <result name = "success"> index.jsp</result>
         </action>
+        
         <action name="prelogin" class="animelist.controller.PreLoginAction" >
             <result name="success">login.jsp</result>
             <result name="fail" type="redirectAction">
@@ -18,6 +19,7 @@
         <action name="logout" class="animelist.controller.LogoutAction" >
             <result name="success" type="redirectAction">index</result>
         </action>
+        
         <action name="login"  class="animelist.controller.LoginAction">
             <result name="success"  type="redirectAction">index</result>
             <result name="fail" type="redirectAction">
@@ -25,6 +27,7 @@
                 <param name="status" >123</param>
             </result>
         </action>
+        
         <action name="viewAnime" class="animelist.controller.ViewAnimeAction" >
             <result name="success" type="dispatcher">viewAnime.jsp</result>
             <result name="fail">404.jsp</result>
@@ -37,9 +40,9 @@
         <action name="search" class = "animelist.controller.SearchAction">
             <result name="success" type="dispatcher">searchResult.jsp</result>
         </action>
-          <action name="admin" class = "animelist.controller.AdminIndexAction">
+        <action name="admin" class = "animelist.controller.AdminIndexAction">
             <result name="success" type="dispatcher">admin/index.jsp</result>
-          </action>
+        </action>
 
         <action name="register" class = "animelist.controller.RegisterAction">
             <result name="success" type="redirectAction">
@@ -55,10 +58,14 @@
             <result name="fail">invalid.jsp</result>
         </action>
 
-          <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
+        <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
             <result name="success">userinfo.jsp
             </result>
             <result name="fail">invalid.jsp</result>
+        </action>
+        
+        <action name="viewAnimeList" class="animelist.controller.ViewListAction" >
+            <result name="success" type="dispatcher">viewList.jsp</result>
         </action>
 
     </package>

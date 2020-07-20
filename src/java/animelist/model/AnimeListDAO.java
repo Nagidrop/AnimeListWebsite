@@ -32,8 +32,7 @@ public class AnimeListDAO {
      *
      * @param username
      * @param password
-     * @return Account object (except password) if login successful, null if
-     * login credentials don't match
+     * @return Account object (except password) if login successful, null if login credentials don't match
      * @throws java.sql.SQLException
      */
     public AccountDTO login(String username, String password) throws SQLException {
@@ -835,5 +834,59 @@ public class AnimeListDAO {
                 conn.close();
             }
         }
+    }
+
+    public ArrayList<ListDTO> getAnimeList(int accountID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<ListDTO> animeList = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT * FROM list WHERE AccountID = ?");
+            st.setInt(1, accountID);
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int animeID = rs.getInt("AnimeID");
+                int status = rs.getInt("status");
+                int progress = rs.getInt("progress");
+
+                if (animeList == null) {
+                    animeList = new ArrayList<>();
+                }
+
+                animeList.add(new ListDTO(animeID, accountID, status, progress));
+            }
+
+            return animeList;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public ArrayList<AnimeDTO> getAnimeDetailsList(ArrayList<ListDTO> animeList) throws SQLException {
+        ArrayList<AnimeDTO> animeDetailsList = null;
+
+        if (animeList != null) {
+            animeDetailsList = new ArrayList<>();
+
+            for (ListDTO listData : animeList) {
+                animeDetailsList.add(getAnimeDetails(listData.getAnimeID()));
+            }
+        }
+
+        return animeDetailsList;
     }
 }
