@@ -25,7 +25,7 @@
         <div class=""><p></div>
         <div class="row">
             <div class="col-md-7" ><h1>Search Result :</h1></div>
-            <div class="col-md-5" >Sort</div>
+            <div class="col-md-5" >Sort<select name="myinfo_status" id="myinfo_status" class="inputtext js-anime-status-dropdown"><option value="1">Watching</option><option value="2">Completed</option><option value="3">On-Hold</option><option value="4">Dropped</option><option value="6">Plan to Watch</option></select></div>
 
 
         </div>
@@ -37,7 +37,7 @@
             <div class="col-md-3">
                 <div class="card ">
 
-                    <a href="viewAnime?animeID=<%= item.getId() %>">
+                    <a href="viewAnime?animeID=<%= item.getId()%>">
                         <div class="card-body">
                             <img  src="images/poster/<%=item.getPoster()%>">
                         </div>
