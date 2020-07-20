@@ -18,11 +18,21 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
+        <style>
+            .img-thumbnail {
+                padding: 0!important;
+                background-color: #fff;
+                border: 1px solid #dee2e6;
+                border-radius: .25rem;
+                max-width: 100%;
+                height: auto;
+            }
+        </style>
         <title>Search Results - WibuAnimeList</title>
     </head>
     <body class="container">
         <jsp:include page='header.jsp'/>
-        <%ArrayList<AnimeDTO> list =(ArrayList<AnimeDTO>) request.getAttribute("showlist");
+        <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("showlist");
             session.setAttribute("sortlist", list);
         %>
         <div class=""><p></div>
@@ -68,7 +78,7 @@
 
             </div>
             <%}
-                } else {%>
+            } else {%>
             <div class="row">
                 <h5>There is no anime meet the criteria</h5>
             </div>
