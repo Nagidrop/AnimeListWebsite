@@ -60,6 +60,11 @@
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
-
+        <action name="genreView" class = "animelist.controller.GenreView">
+            <result name="success">editgenre.jsp</result>
+        </action>
+        <action name="seasonView" class = "animelist.controller.SeasonView">
+            <result name="success">editseason.jsp</result>
+        </action>
     </package>
 </struts>

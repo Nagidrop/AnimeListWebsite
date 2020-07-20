@@ -481,7 +481,6 @@ public class AnimeListDAO {
                 }
                 seasons.add(season);
             }
-
             return seasons;
 
         } finally {
