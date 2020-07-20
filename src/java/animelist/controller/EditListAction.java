@@ -25,12 +25,6 @@ public class EditListAction {
         /* Instantiate DAO object and calls login method to check from DB */
         AnimeListDAO dao = new AnimeListDAO();
         boolean result = dao.editAnimeInList(accountIDEdit, animeIDEdit, progressEdit, episodesEdit, statusEdit);
-
-        System.out.println("Account ID " + accountIDEdit);
-        System.out.println("Anime ID " + animeIDEdit);
-        System.out.println("progress " + progressEdit);
-        System.out.println("episodes " + episodesEdit);
-        System.out.println("status " + statusEdit);
         String url = FAIL; // by default, login is not successful
 
         if (result) {

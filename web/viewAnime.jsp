@@ -241,7 +241,12 @@
                                         <label>Episodes</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><s:property value="anime.episodes" /></p>
+                                        <s:if test="%{anime.episodes != 0}">
+                                            <p><s:property value="anime.episodes" /></p>
+                                        </s:if>
+                                        <s:else>
+                                            <p>?</p>
+                                        </s:else>
                                     </div>
                                 </div>
                                 <div class="row">
