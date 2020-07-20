@@ -40,6 +40,7 @@
         <action name="search" class = "animelist.controller.SearchAction">
             <result name="success" type="dispatcher">searchResult.jsp</result>
         </action>
+
         <action name="admin" class = "animelist.controller.AdminIndexAction">
             <result name="success" type="dispatcher">admin/index.jsp</result>
             <result name="user" type="redirectAction">index</result>
@@ -98,6 +99,21 @@
             </result>
             <result name="user" type="redirectAction">index</result>
             <result name="fail" type="redirectAction">404.jsp</result>
+        </action>
+
+        <action name="sortAnimeByName" class="animelist.controller.SortAnimeAction" method="sortByName">
+            <result name="success" type="dispatcher">searchResult.jsp</result>
+            <result name="input">404.jsp</result>
+        </action>
+
+        <action name="sortAnimeBySeason" class="animelist.controller.SortAnimeAction" method="sortBySeason">
+            <result name="success" type="dispatcher">searchResult.jsp</result>
+            <result name="input">404.jsp</result>
+        </action>
+
+        <action name="sortAnimeByEpisode" class="animelist.controller.SortAnimeAction" method="sortByEpisode">
+             <result name="success" type="dispatcher">searchResult.jsp</result>
+             <result name="input">404.jsp</result>
         </action>
     </package>
 </struts>
