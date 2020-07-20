@@ -12,14 +12,14 @@ public class ListDTO implements Serializable {
     /* Anime List (for users) properties */
     private int animeID;
     private int accountID;
-    private int status;
+    private String status;
     private int progress;
 
     /* Constructors with and without arguments */
     public ListDTO() {
     }
 
-    public ListDTO(int animeID, int accountID, int status, int progress) {
+    public ListDTO(int animeID, int accountID, String status, int progress) {
         this.animeID = animeID;
         this.accountID = accountID;
         this.status = status;
@@ -43,11 +43,11 @@ public class ListDTO implements Serializable {
         this.accountID = accountID;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -58,5 +58,6 @@ public class ListDTO implements Serializable {
     public void setProgress(int progress) {
         this.progress = progress;
     }
+    
 
 }

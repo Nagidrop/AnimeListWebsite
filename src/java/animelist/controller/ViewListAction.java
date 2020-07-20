@@ -19,6 +19,7 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
     private HttpServletRequest request;
     private ArrayList<ListDTO> animeList;
     private ArrayList<AnimeDTO> animeDetailsList;
+    private ArrayList<String> statusList;
     private int accountID;
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
@@ -39,13 +40,22 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
             url = SUCCESS;
             request.setAttribute("AnimeList", animeList);
             request.setAttribute("AnimeDetailsList", animeDetailsList);
+            statusList = new ArrayList<>();
+            statusList.add("Currently Watching");
+            statusList.add("Completed");
+            statusList.add("On Hold");
+            statusList.add("Dropped");
+            statusList.add("Plan to Watch");
+            request.setAttribute("StatusList", statusList);
+        } else {
+            request.setAttribute("AnimeList", new ArrayList<>());
+            request.setAttribute("AnimeDetailsList", new ArrayList<>());
         }
 
         return url;
     }
 
     /* Getters and Setters */
-
     public ArrayList<ListDTO> getAnimeList() {
         return animeList;
     }
@@ -77,7 +87,6 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
     public static void setLOG(Logger LOG) {
         ActionSupport.LOG = LOG;
     }
-    
 
     public HttpServletRequest getRequest() {
         return request;

@@ -851,13 +851,42 @@ public class AnimeListDAO {
             while (rs.next()) {
                 int animeID = rs.getInt("AnimeID");
                 int status = rs.getInt("status");
+                String statusString = "";
+                
+                switch (status) {
+                    case 1:
+                        statusString = "Currently Watching";
+
+                        break;
+
+                    case 2:
+                        statusString = "Completed";
+
+                        break;
+
+                    case 3:
+                        statusString = "On Hold";
+
+                        break;
+
+                    case 4:
+                        statusString = "Dropped";
+
+                        break;
+
+                    case 5:
+                        statusString = "Plan to Watch";
+
+                        break;
+                }
+                
                 int progress = rs.getInt("progress");
 
                 if (animeList == null) {
                     animeList = new ArrayList<>();
                 }
 
-                animeList.add(new ListDTO(animeID, accountID, status, progress));
+                animeList.add(new ListDTO(animeID, accountID, statusString, progress));
             }
 
             return animeList;
