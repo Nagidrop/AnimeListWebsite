@@ -20,9 +20,9 @@
         </action>
         <action name="login"  class="animelist.controller.LoginAction">
             <result name="success"  type="redirectAction">index</result>
+            <result name="admimpage"  type="redirectAction">admin</result>
             <result name="fail" type="redirectAction">
                 <param name="actionName">prelogin</param>
-                <param name="status" >123</param>
             </result>
         </action>
         <action name="viewAnime" class="animelist.controller.ViewAnimeAction" >
@@ -39,18 +39,19 @@
         </action>
         <action name="admin" class = "animelist.controller.AdminIndexAction">
             <result name="success" type="dispatcher">admin/index.jsp</result>
+            <result name="user" type="redirectAction">index</result>
+            <result name="fail" type="redirectAction">404.jsp</result>
         </action>
 
         <action name="register" class = "animelist.controller.RegisterAction">
-            <result name="success" type="redirectAction">
-                <param name="actionName">index</param>
+            <result name="success">
+                login.jsp
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
 
         <action name="changepassword" class = "animelist.controller.ChangePasswordAction">
-            <result name="success" type="redirectAction">
-                <param name="actionName">.index</param>
+            <result name="success">userinfo.jsp
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
@@ -94,14 +95,22 @@
         <action name="userList" class = "animelist.controller.ShowListUserAction">
             <result name="success">admin/tables.jsp
             </result>
-            <result name="fail">invalid.jsp</result>
+            <result name="user" type="redirectAction">index</result>
+            <result name="fail" type="redirectAction">404.jsp</result>
         </action>
         <action name="updateUser" class = "animelist.controller.AdminUpdateUser">
             <result name="success" type="redirectAction">
                 <param name="actionName">userList</param>
             </result>            
-            <result name="fail">invalid.jsp</result>
-
+            <result name="user" type="redirectAction">index</result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+        </action>
+        <action name="deleteUser" class = "animelist.controller.DeleteUserAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">userList</param>
+            </result>            
+            <result name="user" type="redirectAction">index</result>
+            <result name="fail" type="redirectAction">404.jsp</result>         
         </action>
     </package>
 </struts>

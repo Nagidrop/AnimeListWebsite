@@ -16,7 +16,7 @@ public class AnimeDTO implements Serializable {
     /* An Anime properties */
     private int id;
     private int accountID;
-    private String season;
+    private SeasonDTO season;
     private ArrayList<StudioDTO> studios;
     private ArrayList<GenreDTO> genres;
     private String type;
@@ -36,7 +36,7 @@ public class AnimeDTO implements Serializable {
     public AnimeDTO() {
     }
 
-    public AnimeDTO(int id, int accountID, String season, ArrayList<StudioDTO> studios, ArrayList<GenreDTO> genres, String type, String name, Date releaseDate, String rating, int episodes, String status, String duration, String description, String poster, String trailer, Date created_at, Date deleted_at) {
+    public AnimeDTO(int id, int accountID, SeasonDTO season, ArrayList<StudioDTO> studios, ArrayList<GenreDTO> genres, String type, String name, Date releaseDate, String rating, int episodes, String status, String duration, String description, String poster, String trailer, Date created_at, Date deleted_at) {
         this.id = id;
         this.accountID = accountID;
         this.season = season;
@@ -74,11 +74,11 @@ public class AnimeDTO implements Serializable {
         this.accountID = accountID;
     }
 
-    public String getSeason() {
+    public SeasonDTO getSeason() {
         return season;
     }
 
-    public void setSeason(String season) {
+    public void setSeason(SeasonDTO season) {
         this.season = season;
     }
 
@@ -201,6 +201,17 @@ public class AnimeDTO implements Serializable {
             String name2 = t1.getName().toLowerCase();
             
             return name1.compareTo(name2);
+        }
+        
+    };
+    
+    public static Comparator<AnimeDTO> animeSeasonComp = new Comparator<AnimeDTO>(){
+        @Override
+        public int compare(AnimeDTO t, AnimeDTO t1) {
+            int season1 = t.getSeason().getId();
+            int season2 = t1.getSeason().getId();
+            
+            return season1-season2;
         }
         
     };

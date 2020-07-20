@@ -145,7 +145,7 @@
         </style>
         <title><s:property value="anime.name"/> - WibuAnimeList</title>
     </head>
-    <body>
+    <body style="background-image: url('images/bg-08.png')">
         <jsp:include page='header.jsp'/>
         <div class="container emp-details">
             <form method="post">
@@ -207,7 +207,7 @@
                                 <s:property value="anime.name" />
                             </h1>
                             <h6>
-                                <s:property value="anime.season" />
+                                <s:property value="anime.season.name" />
                             </h6>
                             <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
