@@ -19,6 +19,7 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
     private HttpServletRequest request;
     private ArrayList<ListDTO> animeList;
     private ArrayList<AnimeDTO> animeDetailsList;
+    private ArrayList<String> statusList;
     private int accountID;
     private int listStatus;
     private final String FAIL = "fail"; // indicates failed action

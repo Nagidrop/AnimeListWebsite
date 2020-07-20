@@ -19,13 +19,234 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
-        <style  type="text/css">
+        <style type="text/css">
             body.ownlist {
                 background-image: url("https://cdn.myanimelist.net/s/common/uploaded_files/1455540188-934a8b8942494df1086f9402bbb5330b.png");
                 background-attachment: fixed;
                 background-position: center top;
                 background-repeat: repeat\2D x;
             }
+
+            #advanced-options {
+                position: absolute;
+                top: 24px;
+                left: 0;
+                right: 0;
+                background-color: #F6F6F6;
+                display: none;
+                width: 860px;
+                margin: 0 auto;
+                padding: 25px 0px 30px;
+                border: #EBEBEB 1px solid;
+                -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
+                -webkit-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
+                -o-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
+                -ms-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
+                box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
+                color: #323232;
+                text-align: left;
+                font-family: 'Helvetica neue', Helvetica, "lucida grande", tahoma, verdana, arial, sans-serif;
+                z-index: 1101;
+            }
+            #advanced-options .advanced-options-header {
+                width: 750px;
+                margin: 0px auto;
+                padding-bottom: 4px;
+                border-bottom: 1px solid #BEBEBE;
+                font-size: 16px;
+            }
+
+            #advanced-options .advanced-options-header .description {
+                font-size: 12px;
+                font-weight: normal;
+                margin-left: 8px;
+            }
+
+            #advanced-options select {
+                -ms-appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background-image: url(/img/pc/ownlist/icon_pulldown_triangle.png);
+                background-repeat: no-repeat;
+                background-position: center right;
+                background-size: 18px 8px;
+                background-color: #FFFFFF;
+                display: inline-block;
+                height: 25px;
+                padding: 4px 20px 4px 4px;
+                padding-right: 4px\0;
+                border: #BEBEBE 1px solid;
+                border-radius: 0px;
+                font-size: 12px;
+            }
+            #advanced-options select::-ms-expand {
+                display: none;
+            }
+
+            #advanced-options select:disabled {
+                background-image: url(/img/pc/ownlist/icon_pulldown_triangle_disable.png);
+                color: #9B9B9B;
+            }
+
+            #advanced-options input[type=text] {
+                padding: 4px;
+                border: #BEBEBE 1px solid;
+            }
+
+            #advanced-options input:focus {
+                outline: none;
+            }
+
+            /* sort */
+            #advanced-options .sort-widget {
+                margin: 0px auto;
+                padding: 12px 0px 0px;
+                width: 750px;
+            }
+            #advanced-options .sort-widget:last-of-type {
+                padding-bottom: 45px;
+            }
+
+            #advanced-options .sort-widget select {
+                width: 172px;
+                margin-right: 8px;
+            }
+
+            #advanced-options .sort-widget input[type=radio] {
+                display: none;
+            }
+            #advanced-options .sort-widget input[type=radio] + label {
+                background-color: #FFFFFF;
+                display: inline-block;
+                width: 56px;
+                padding: 5px 0px;
+                border: #BEBEBE 1px solid;
+                border-radius: 4px;
+                color: #323232;
+                font-size: 12px;
+                text-align: center;
+                cursor: pointer;
+            }
+            #advanced-options .sort-widget input[type=radio]:checked + label {
+                background-color: #4065BA;
+                border: #4065BA 1px solid;
+                color: #FFFFFF;
+            }
+            #advanced-options .sort-widget input[type=radio]:disabled + label {
+                border: #BEBEBE 1px solid;
+                color: #9B9B9B;
+            }
+            #advanced-options .sort-widget input[type=radio]:checked:disabled + label {
+                background-color: #FFFFFF;
+                border: #BEBEBE 1px solid;
+                color: #9B9B9B;
+            }
+
+            /* filter */
+            #advanced-options .filter-widget {
+                margin: 0px auto;
+                padding: 12px 0px 0;
+                width: 750px;
+            }
+
+            #advanced-options .filter-widget select {
+                margin-right: 8px;
+                font-size: 12px;
+            }
+
+            #advanced-options .filter-widget.title input[type=text] {
+                width: 360px;
+            }
+
+            #advanced-options .filter-widget.airing-status select,
+            #advanced-options .filter-widget.publishing-status select {
+                width: 152px;
+            }
+
+            #advanced-options .filter-widget.producer select,
+            #advanced-options .filter-widget.magazine select {
+                width: 360px;
+            }
+
+            #advanced-options .filter-widget.aired-date select.year,
+            #advanced-options .filter-widget.published-date select.year {
+                width: 80px;
+            }
+
+            #advanced-options .filter-widget.aired-date select.month,
+            #advanced-options .filter-widget.published-date select.month,
+            #advanced-options .filter-widget.aired-date select.day,
+            #advanced-options .filter-widget.published-date select.day {
+                width: 60px;
+            }
+
+            #advanced-options .filter-widget.aired-date .text,
+            #advanced-options .filter-widget.published-date .text {
+                display: inline-block;
+                margin-right: 4px;
+                font-size: 12px;
+            }
+
+            #advanced-options .filter-widget.aired-season select.year {
+                width: 80px;
+            }
+
+            #advanced-options .filter-widget.aired-season select.season {
+                width: 110px;
+            }
+
+            #advanced-options .sort-widget .widget-header,
+            #advanced-options .filter-widget .widget-header {
+                display: inline-block;
+                width: 110px;
+                font-size: 12px;
+                font-family: 'Helvetica neue', Helvetica, "lucida grande", tahoma, verdana, arial, sans-serif;
+            }
+
+            #advanced-options .sort-widget:last-of-type,
+            #advanced-options .filter-widget:last-of-type {
+                padding-bottom: 40px;
+            }
+
+            #advanced-options .advanced-options-button {
+                width: 750px;
+                margin: 0px auto;
+                padding: 12px 0px 0px;
+                border-top: 1px solid #BEBEBE;
+                text-align: center;
+            }
+
+            #advanced-options .btn-apply,
+            #advanced-options .btn-clear {
+                background-color: rgba(64, 101, 186, 1);
+                display: inline-block;
+                width: 135px;
+                margin: 0 4px;
+                padding: 6px 0px;
+                border-radius: 4px;
+                font-size: 12px;
+                color: #FFFFFF;
+                text-align: center;
+                -moz-transition-property: all;
+                -o-transition-property: all;
+                -webkit-transition-property: all;
+                transition-property: all;
+                -moz-transition-duration: 0.3s;
+                -o-transition-duration: 0.3s;
+                -webkit-transition-duration: 0.3s;
+                transition-duration: 0.3s;
+                -moz-transition-timing-function: ease-in-out;
+                -o-transition-timing-function: ease-in-out;
+                -webkit-transition-timing-function: ease-in-out;
+                transition-timing-function: ease-in-out
+            }
+
+            #advanced-options .btn-apply:hover,
+            #advanced-options .btn-clear:hover {
+                background-color: rgba(64, 101, 186, 0.8);
+            }
+
 
             /**
              * General Styles
@@ -517,7 +738,7 @@
                 position: absolute;
                 bottom: 0px;
                 left: 0px;
-                background-color: #343a40;
+                background-color: #4065BA;
                 display: block;
                 width: 100%;
                 height: 4px;
@@ -959,10 +1180,9 @@
                     <a id="dropped" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=4"
                        class="status-button dropped ">Dropped</a>
                     <a id="plantowatch" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=5"
-                       class="status-button plantowatch ">Plan to Watch</a><div class="search-container">
-                    </div>
+                       class="status-button plantowatch ">Plan to Watch</a>
                     <div class="search-container">
-                        <div id="search-box"><input type="text" value=""></div>
+                        <div id="search-box" class="open"><input type="text" value=""></div>
                         <a id="search-button" href="javascript: void(0);">
                             <i class="fa fa-search"></i>
                         </a>
@@ -1044,7 +1264,7 @@
                         </form>
                         </tbody>
                         <% }
-                            }%>
+                        }%>
                     </table>
                     <% if (animeDetailsList.isEmpty()) {%>
                     <div style="text-align: center!important; font-size: 20px; margin-top: 3%;">There are no animes to display!</div>
@@ -1053,50 +1273,50 @@
             </div>
         </div>
         <script>
-            var status =<s:property value="listStatus" />;
-            if (status == 0) {
-                $("#all_anime").addClass("on");
-                $("#watching").removeClass("on");
-                $("#completed").removeClass("on");
-                $("#onhold").removeClass("on");
-                $("#dropped").removeClass("on");
-                $("#plantowatch").removeClass("on");
-            } else if (status == 1) {
-                $("#all_anime").removeClass("on");
-                $("#watching").addClass("on");
-                $("#completed").removeClass("on");
-                $("#onhold").removeClass("on");
-                $("#dropped").removeClass("on");
-                $("#plantowatch").removeClass("on");
-            } else if (status == 2) {
-                $("#all_anime").removeClass("on");
-                $("#watching").removeClass("on");
-                $("#completed").addClass("on");
-                $("#onhold").removeClass("on");
-                $("#dropped").removeClass("on");
-                $("#plantowatch").removeClass("on");
-            } else if (status == 3) {
-                $("#all_anime").removeClass("on");
-                $("#watching").removeClass("on");
-                $("#completed").removeClass("on");
-                $("#onhold").addClass("on");
-                $("#dropped").removeClass("on");
-                $("#plantowatch").removeClass("on");
-            } else if (status == 4) {
-                $("#all_anime").removeClass("on");
-                $("#watching").removeClass("on");
-                $("#completed").removeClass("on");
-                $("#onhold").removeClass("on");
-                $("#dropped").addClass("on");
-                $("#plantowatch").removeClass("on");
-            } else if (status == 5) {
-                $("#all_anime").removeClass("on");
-                $("#watching").removeClass("on");
-                $("#completed").removeClass("on");
-                $("#onhold").removeClass("on");
-                $("#dropped").removeClass("on");
-                $("#plantowatch").addClass("on");
-            }
+        var status =<s:property value="listStatus" />;
+        if (status == 0) {
+            $("#all_anime").addClass("on");
+            $("#watching").removeClass("on");
+            $("#completed").removeClass("on");
+            $("#onhold").removeClass("on");
+            $("#dropped").removeClass("on");
+            $("#plantowatch").removeClass("on");
+        } else if (status == 1) {
+            $("#all_anime").removeClass("on");
+            $("#watching").addClass("on");
+            $("#completed").removeClass("on");
+            $("#onhold").removeClass("on");
+            $("#dropped").removeClass("on");
+            $("#plantowatch").removeClass("on");
+        } else if (status == 2) {
+            $("#all_anime").removeClass("on");
+            $("#watching").removeClass("on");
+            $("#completed").addClass("on");
+            $("#onhold").removeClass("on");
+            $("#dropped").removeClass("on");
+            $("#plantowatch").removeClass("on");
+        } else if (status == 3) {
+            $("#all_anime").removeClass("on");
+            $("#watching").removeClass("on");
+            $("#completed").removeClass("on");
+            $("#onhold").addClass("on");
+            $("#dropped").removeClass("on");
+            $("#plantowatch").removeClass("on");
+        } else if (status == 4) {
+            $("#all_anime").removeClass("on");
+            $("#watching").removeClass("on");
+            $("#completed").removeClass("on");
+            $("#onhold").removeClass("on");
+            $("#dropped").addClass("on");
+            $("#plantowatch").removeClass("on");
+        } else if (status == 5) {
+            $("#all_anime").removeClass("on");
+            $("#watching").removeClass("on");
+            $("#completed").removeClass("on");
+            $("#onhold").removeClass("on");
+            $("#dropped").removeClass("on");
+            $("#plantowatch").addClass("on");
+        }
         </script>
     </body>
 </html>
