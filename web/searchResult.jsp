@@ -22,48 +22,57 @@
     </head>
     <body class="container">
         <jsp:include page='header.jsp'/>
+        <%ArrayList<AnimeDTO> list =(ArrayList<AnimeDTO>) request.getAttribute("showlist");
+            session.setAttribute("sortlist", list);
+        %>
         <div class=""><p></div>
         <div class="row">
             <div class="col-md-7" ><h3>Search Result :</h3></div>
             <div class="col-md-5" >
                 <div class="d-flex flex-row-reverse">
-                    <div class="p-2">
-                        <select name="" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control">
-                            <option value="1">Name</option>
-                            <option value="2">Season</option>
-                            <option value="3">On-Hold</option>
-                        </select>
+
+                    <div class="dropdown p-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="<s:url action="sortAnimeByName"/>">Name</a>
+                            <a class="dropdown-item" href="<s:url action="sortAnimeBySeason"/>">Season</a>
+                            <a class="dropdown-item" href="<s:url action="sortAnimeByEpisode"/>">Episode</a>
+                        </div>
                     </div>
-                    <div class="p-2"><p style="font-size: 18px">Sort:</p></div> 
+
                 </div>
             </div>
+        </div>
 
-            <%ArrayList<AnimeDTO> list = (ArrayList<AnimeDTO>) request.getAttribute("searchlist");%>
-            <%if (list != null) {%>
-            <div class="row mb-3 ">
-                <%for (AnimeDTO item : list) {%>
-                <div class="col-md-3">
-                    <div class="card " style="margin: 2%;" title=" <%=item.getName()%>">
+        <%if (list != null) {%>
+        <div class="row mb-3 ">
+            <%for (AnimeDTO item : list) {%>
+            <div class="col-md-3">
+                <div class="card " style="margin: 2%;" title=" <%=item.getName()%>">
 
-                        <a href="viewAnime?animeID=<%= item.getId()%>">
-                            <div class="card-body">
-                                <img class="img-thumbnail" style="width: 200px;height: 280px"   src="images/poster/<%=item.getPoster()%>">
-                            </div>
-                            <div class="card-footer" style="text-align: center" title=" <%=item.getName()%>">
-                                <%if (item.getName().length() > 20) {
-                                        out.print(item.getName().substring(0, 20) + "...");
-                                    } else {
-                                        out.print(item.getName());
-                                    }%>
-                            </div>
-                        </a>
-                    </div>
-
+                    <a href="viewAnime?animeID=<%= item.getId()%>">
+                        <div class="card-body">
+                            <img class="img-thumbnail" style="width: 200px;height: 280px"   src="images/poster/<%=item.getPoster()%>">
+                        </div>
+                        <div class="card-footer" style="text-align: center" title=" <%=item.getName()%>">
+                            <%if (item.getName().length() > 20) {
+                                    out.print(item.getName().substring(0, 20) + "...");
+                                } else {
+                                    out.print(item.getName());
+                                }%>
+                        </div>
+                    </a>
                 </div>
-                <%}
-            } else {%>
-                <h5>There is no anime meet the criteria</h5><%}%>
 
-                </body>
-                </html>
+            </div>
+            <%}
+                } else {%>
+            <div class="row">
+                <h5>There is no anime meet the criteria</h5>
+            </div>
+            <%}%>
+    </body>
+</html>
 

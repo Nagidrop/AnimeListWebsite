@@ -7,9 +7,11 @@ package animelist.controller;
 
 import animelist.model.AnimeDTO;
 import animelist.model.AnimeListDAO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +34,7 @@ public class SearchAction extends ActionSupport implements ServletRequestAware {
     public String execute() {
         try {
             AnimeListDAO dao = new AnimeListDAO();
-
+            Map session = ActionContext.getContext().getSession();
             searchValue = request.getParameter("searchvalue");
             if (searchValue == null || searchValue.equalsIgnoreCase("")) {
                 searchValue = "%";
@@ -59,7 +61,7 @@ public class SearchAction extends ActionSupport implements ServletRequestAware {
             listAnimeDTOs = dao.getSearchAnime(searchValue, type, studioID, genreID, seasonID);
           
             
-            request.setAttribute("searchlist", listAnimeDTOs);
+            request.setAttribute("showlist", listAnimeDTOs);
         } catch (SQLException ex) {
             Logger.getLogger(SearchAction.class.getName()).log(Level.SEVERE, null, ex);
         }
