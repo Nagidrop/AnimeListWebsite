@@ -215,6 +215,17 @@ public class AnimeDTO implements Serializable {
         }
         
     };
+    
+    public static Comparator<AnimeDTO> animeEpisodeComp = new Comparator<AnimeDTO>(){
+        @Override
+        public int compare(AnimeDTO t, AnimeDTO t1) {
+            int episodes1 = t.episodes;
+            int episodes2 = t1.episodes;
+            
+            return episodes1-episodes2  ;
+        }
+        
+    };
 
 
 }

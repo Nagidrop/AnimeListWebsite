@@ -19,7 +19,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
-        <style  type="text/css">
+        <style type="text/css">
             body.ownlist {
                 background-image: url("https://cdn.myanimelist.net/s/common/uploaded_files/1455540188-934a8b8942494df1086f9402bbb5330b.png");
                 background-attachment: fixed;
@@ -738,7 +738,7 @@
                 position: absolute;
                 bottom: 0px;
                 left: 0px;
-                background-color: #343a40;
+                background-color: #4065BA;
                 display: block;
                 width: 100%;
                 height: 4px;
@@ -1180,7 +1180,12 @@
                     <a id="dropped" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=4"
                        class="status-button dropped ">Dropped</a>
                     <a id="plantowatch" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=5"
-                       class="status-button plantowatch ">Plan to Watch</a><div class="search-container">
+                       class="status-button plantowatch ">Plan to Watch</a>
+                    <div class="search-container">
+                        <div id="search-box" class="open"><input type="text" value=""></div>
+                        <a id="search-button" href="javascript: void(0);">
+                            <i class="fa fa-search"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1239,14 +1244,14 @@
 
                                 <td class="data status" style="width: 15%;">
                                     <select name="statusEdit"> 
-                                        <%                            
+                                        <%
                                             int statusIndex = 1;
                                             for (String status : statusList) {
                                                 if (status != listAnime.getStatus()) {
                                         %>
-                                        <option value="<%= statusIndex %>"> <%= status %> </option> <br />
+                                        <option value="<%= statusIndex%>"> <%= status%> </option> <br />
                                         <% } else {%>
-                                        <option value="<%= statusIndex%>" selected="selected"> <%= status %> </option> <br />
+                                        <option value="<%= statusIndex%>" selected="selected"> <%= status%> </option> <br />
                                         <% }
                                                 statusIndex++;
                                             } %>
@@ -1259,7 +1264,7 @@
                         </form>
                         </tbody>
                         <% }
-                            }%>
+                        }%>
                     </table>
                     <% if (animeDetailsList.isEmpty()) {%>
                     <div style="text-align: center!important; font-size: 20px; margin-top: 3%;">There are no animes to display!</div>
@@ -1268,50 +1273,50 @@
             </div>
         </div>
         <script>
-            var status =<s:property value="listStatus" />;
-            if (status == 0) {
-                $("#all_anime").addClass("on");
-                $("#watching").removeClass("on");
-                $("#completed").removeClass("on");
-                $("#onhold").removeClass("on");
-                $("#dropped").removeClass("on");
-                $("#plantowatch").removeClass("on");
-            } else if (status == 1) {
-                $("#all_anime").removeClass("on");
-                $("#watching").addClass("on");
-                $("#completed").removeClass("on");
-                $("#onhold").removeClass("on");
-                $("#dropped").removeClass("on");
-                $("#plantowatch").removeClass("on");
-            } else if (status == 2) {
-                $("#all_anime").removeClass("on");
-                $("#watching").removeClass("on");
-                $("#completed").addClass("on");
-                $("#onhold").removeClass("on");
-                $("#dropped").removeClass("on");
-                $("#plantowatch").removeClass("on");
-            } else if (status == 3) {
-                $("#all_anime").removeClass("on");
-                $("#watching").removeClass("on");
-                $("#completed").removeClass("on");
-                $("#onhold").addClass("on");
-                $("#dropped").removeClass("on");
-                $("#plantowatch").removeClass("on");
-            } else if (status == 4) {
-                $("#all_anime").removeClass("on");
-                $("#watching").removeClass("on");
-                $("#completed").removeClass("on");
-                $("#onhold").removeClass("on");
-                $("#dropped").addClass("on");
-                $("#plantowatch").removeClass("on");
-            } else if (status == 5) {
-                $("#all_anime").removeClass("on");
-                $("#watching").removeClass("on");
-                $("#completed").removeClass("on");
-                $("#onhold").removeClass("on");
-                $("#dropped").removeClass("on");
-                $("#plantowatch").addClass("on");
-            }
+        var status =<s:property value="listStatus" />;
+        if (status == 0) {
+            $("#all_anime").addClass("on");
+            $("#watching").removeClass("on");
+            $("#completed").removeClass("on");
+            $("#onhold").removeClass("on");
+            $("#dropped").removeClass("on");
+            $("#plantowatch").removeClass("on");
+        } else if (status == 1) {
+            $("#all_anime").removeClass("on");
+            $("#watching").addClass("on");
+            $("#completed").removeClass("on");
+            $("#onhold").removeClass("on");
+            $("#dropped").removeClass("on");
+            $("#plantowatch").removeClass("on");
+        } else if (status == 2) {
+            $("#all_anime").removeClass("on");
+            $("#watching").removeClass("on");
+            $("#completed").addClass("on");
+            $("#onhold").removeClass("on");
+            $("#dropped").removeClass("on");
+            $("#plantowatch").removeClass("on");
+        } else if (status == 3) {
+            $("#all_anime").removeClass("on");
+            $("#watching").removeClass("on");
+            $("#completed").removeClass("on");
+            $("#onhold").addClass("on");
+            $("#dropped").removeClass("on");
+            $("#plantowatch").removeClass("on");
+        } else if (status == 4) {
+            $("#all_anime").removeClass("on");
+            $("#watching").removeClass("on");
+            $("#completed").removeClass("on");
+            $("#onhold").removeClass("on");
+            $("#dropped").addClass("on");
+            $("#plantowatch").removeClass("on");
+        } else if (status == 5) {
+            $("#all_anime").removeClass("on");
+            $("#watching").removeClass("on");
+            $("#completed").removeClass("on");
+            $("#onhold").removeClass("on");
+            $("#dropped").removeClass("on");
+            $("#plantowatch").addClass("on");
+        }
         </script>
     </body>
 </html>
