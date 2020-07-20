@@ -16,6 +16,8 @@ public class LoginAction {
     private String pass; // password passed from form input
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
+    private final String ADMIN = "admimpage"; // indicates successful action
+
 
     /* Constructor */
     public LoginAction() {
@@ -37,6 +39,7 @@ public class LoginAction {
             session.put("id", account.getId());
             session.put("username", account.getUsername());
             session.put("email", account.getEmail());
+            session.put("roleid", account.getRoleID());
             switch (account.getGender()) {
                 case 0:
                     session.put("gender", "Male");
@@ -48,7 +51,12 @@ public class LoginAction {
                     session.put("gender", "Other");
                     break;
             }
-            url = SUCCESS;
+            if (account.getRoleID() == 1) {
+                url = ADMIN;
+            } else {
+                url = SUCCESS;
+
+            }
         }
 
         return url;
