@@ -35,14 +35,18 @@
         <div class="row mb-3 ">
             <%for (AnimeDTO item : list) {%>
             <div class="col-md-3">
-                <div class="card ">
+                <div class="card " title=" <%=item.getName()%>">
 
-                    <a href="viewAnime?animeID=<%= item.getId() %>">
+                    <a href="viewAnime?animeID=<%= item.getId()%>">
                         <div class="card-body">
-                            <img  src="images/poster/<%=item.getPoster()%>">
+                            <img class="img-thumbnail" style="width: 200px;height: 280px"   src="images/poster/<%=item.getPoster()%>">
                         </div>
-                        <div class="card-footer">
-                            <%=item.getName()%>
+                        <div class="card-footer" style="text-align: center" title=" <%=item.getName()%>">
+                            <%if (item.getName().length() > 20) {
+                                    out.print(item.getName().substring(0, 20)+"...");
+                                } else {
+                                    out.print(item.getName());
+                                }%>
                         </div>
                     </a>
                 </div>

@@ -28,13 +28,21 @@
         <div class="row mb-3 ">
             <s:iterator value="listAnimeDTOs" status="dto">
                 <div class="col-md-3">
-                    <div class="card " style="margin: 2%;">
+                    <div class="card " style="margin: 2%;" title="<s:property value="name"/>">
                         <a href="viewAnime?animeID=<s:property  value="id"/>">
                             <div class="card-body">
-                                <img  src="images/poster/<s:property  value="poster"/>" style="max-height: 100%; max-width: 100%">
+
+                                <img class="img-thumbnail"  style="width: 200px;height: 280px"  src="images/poster/<s:property  value="poster"/>" style="max-height: 100%; max-width: 100%">
                             </div>
-                            <div class="card-footer" style="text-align: center;">
-                                <s:property value="name"/>
+
+                            <div class="card-footer" style="text-align: center;" title="<s:property value="name"/>" >
+                                <s:if test="%{name.length() > 20}">
+                                    <s:property value="name.substring(0,20)"/>...
+
+                                </s:if>
+                                <s:else>
+                                    <s:property value="name"/>
+                                </s:else>
                             </div>
                         </a>
                     </div>
