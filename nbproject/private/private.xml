@@ -3,32 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/LoginAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/utils/DBUtils.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/LogoutAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/struts.xml</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/SearchAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/ShowIndexAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/InitSearchPageAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/header.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/ViewAnimeAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/searchResult.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/userinfo.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/UserInfoAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/PreLoginAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/changepassword.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/viewAnime.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/ChangePasswordAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/model/AnimeDTO.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/model/AccountDTO.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/RegisterAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/editinfo.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/index.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/register.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/login.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/AnimeSearch.jsp</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/src/java/animelist/controller/SeasonView.java</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/src/java/struts.xml</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/src/java/animelist/controller/GenreView.java</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/web/editgenre.jsp</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/web/editstudio.jsp</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/web/AnimeSearch.jsp</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/web/editseason.jsp</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/src/java/animelist/controller/SearchAction.java</file>
         </group>
     </open-files>
 </project-private>

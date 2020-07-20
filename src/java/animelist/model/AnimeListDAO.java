@@ -877,4 +877,52 @@ public class AnimeListDAO {
             }
         }
     }
+    public boolean changeGenre(int GenreID , String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("Update genre set name = ? where GenreID=?");
+            st.setString(1, name);
+            st.setInt(2, GenreID);
+            int count = st.executeUpdate();
+            if (count > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+        public boolean changeSeason(int SeasonID , String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("Update season set name = ? where SeasonID=?");
+            st.setString(1, name);
+            st.setInt(2, SeasonID);
+            int count = st.executeUpdate();
+            if (count > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+        public boolean changeStudio(int StudioID , String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("Update season set name = ? where StudioID=?");
+            st.setString(1, name);
+            st.setInt(2, StudioID);
+            int count = st.executeUpdate();
+            if (count > 0) {
+                return true;
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
 }
