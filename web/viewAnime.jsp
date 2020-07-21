@@ -157,8 +157,6 @@
                     <div class="details-work">
                         <% if (session.getAttribute("user") != null) {%>
                         <%
-                            ArrayList<ListDTO> animeList = (ArrayList<ListDTO>) session.getAttribute("AnimeList");
-                            ArrayList<AnimeDTO> animeDetailsList = (ArrayList<AnimeDTO>) session.getAttribute("AnimeDetailsList");
                             ArrayList<String> statusList = (ArrayList<String>) session.getAttribute("StatusList");
                             ListDTO animeInList = (ListDTO) request.getAttribute("AnimeInList");
                             /* If anime already exists in list */
@@ -280,7 +278,12 @@
                             <s:property value="anime.name" />
                         </h1>
                         <h6>
-                            <s:property value="anime.season.name" />
+                            <s:if test="%{anime.season.id != 0}">
+                                <s:property value="anime.season.name" />
+                            </s:if>
+                            <s:else>
+                                Unknown Season
+                            </s:else>
                         </h6>
                         <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -298,7 +301,7 @@
                     </div>
                     <div class="tab-content details-tab" id="myTabContent">
                         <div class="tab-pane fade show active" id="synopsis" role="tabpanel" aria-labelledby="synopsis-tab">
-                            <p class="synopsis"> <s:property value="anime.description" /></p>
+                            <p class="synopsis"><s:property value="anime.description" /></p>
                         </div>
                         <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
                             <div class="row">
@@ -335,7 +338,14 @@
                                     <label>Release Date</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><s:property value="anime.releaseDate" /></p>
+                                    <p>
+                                        <s:if test="%{anime.releaseDate != null}">
+                                            <s:property value="anime.releaseDate" />
+                                        </s:if>
+                                        <s:else>
+                                            ?
+                                        </s:else>
+                                    </p>
                                 </div>
                             </div>
                             <div class="row">
@@ -381,7 +391,14 @@
                                     <label>Duration</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><s:property value="anime.duration" /></p>
+                                    <p><s:property value="anime.duration" />
+                                        <s:if test="%{anime.duration != null}">
+                                            <s:property value="anime.duration" />
+                                        </s:if>
+                                        <s:else>
+                                            &lt;Unknown Length&gt;
+                                        </s:else>
+                                    </p>
                                 </div>
                             </div>
                             <div class="row">
