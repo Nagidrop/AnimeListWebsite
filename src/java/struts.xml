@@ -255,9 +255,15 @@
             <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
         <action name="createAnimeAction" class="animelist.controller.CreateNewAnimeAction" >
-                        <result name="success" type="redirectAction">viewListAllAnimes</result>
+            <result name="success" type="redirectAction">viewListAllAnimes</result>
 
             <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
+        <action name="editAnime" class="animelist.controller.EditAnimeAction" >
+            <result name="success" type="dispatcher">admin/editAnime.jsp</result>
+
+            <result name="fail" type="redirect">actionFailed.jsp</result>
+        </action>
+        
     </package>
 </struts>

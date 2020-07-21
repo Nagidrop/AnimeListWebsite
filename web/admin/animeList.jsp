@@ -62,12 +62,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="d-flex flex-row-reverse">
-                                            <a class="btn btn-primary btn-icon-split" id="button-create-new" href="#">
+                                            <a class="btn btn-primary btn-icon-split" id="button-create-new" href="createAnime">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-plus"></i>
 
                                                 </span>
-                                                <span class="text">New Genre</span>
+                                                <span class="text">New Anime</span>
                                             </a>
                                         </div>
                                     </div>
