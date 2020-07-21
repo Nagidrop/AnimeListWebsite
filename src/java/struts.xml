@@ -187,7 +187,9 @@
                 <param name="actionName">viewAnime</param>
                 <param name="animeID" >${animeID}</param>
             </result>
-            <result name="fail" type="dispatcher">actionFailed.jsp</result>
+            <result name="fail" type="dispatcher">actionFailedAnime.jsp
+                <param name="animeID" >${animeID}</param>
+            </result>
         </action>
 
         <action name="deleteStudio" class = "animelist.controller.DeleteStudioAction">
