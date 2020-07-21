@@ -39,7 +39,7 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
 
     @Override
     public String execute() throws Exception {
-        /* Instantiate DAO object and calls login method to check from DB */
+        /* Instantiate DAO object and interacts with DB */
         String fileExt = null;
         AnimeListDAO dao = new AnimeListDAO();
         Map session = ActionContext.getContext().getSession();

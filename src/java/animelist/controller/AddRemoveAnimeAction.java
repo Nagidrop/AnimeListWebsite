@@ -6,15 +6,16 @@ package animelist.controller;
 
 import animelist.model.AnimeListDAO;
 
-/* Logic code when user press button in login view */
+/* This action got called when user add, edit, remove anime from list from anime page view */
 public class AddRemoveAnimeAction {
 
-    private int animeID; // password passed from form input
-    private int progress; // username passed from form input
-    private int episodes; // username passed from form input
-    private int status; // password passed from form input
-    private int accountID; // password passed from form input
-    private String btnAction;
+    /* Anime properties to update list */
+    private int animeID; 
+    private int progress;
+    private int episodes;
+    private int status;
+    private int accountID;
+    private String btnAction; // store button value
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
 
@@ -23,36 +24,39 @@ public class AddRemoveAnimeAction {
     }
 
     public String execute() throws Exception {
+        // If user adds an anime
         if (btnAction.equals("Add")) {
-            /* Instantiate DAO object and calls login method to check from DB */
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
 
             boolean result = dao.addAnimeToList(accountID, animeID, progress, episodes, status);
-            String url = FAIL; // by default, login is not successful
+            String url = FAIL; // by default, action is not successful
 
             if (result) {
                 url = SUCCESS;
             }
 
             return url;
+            // If user edits an anime
         } else if (btnAction.equals("Edit")) {
-            /* Instantiate DAO object and calls login method to check from DB */
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
 
             boolean result = dao.editAnimeInList(accountID, animeID, progress, episodes, status);
-            String url = FAIL; // by default, login is not successful
+            String url = FAIL; // by default, action is not successful
 
             if (result) {
                 url = SUCCESS;
             }
 
             return url;
+            // If user remove an anime
         } else if (btnAction.equals("Remove")) {
-            /* Instantiate DAO object and calls login method to check from DB */
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
 
             boolean result = dao.removeAnimeFromList(accountID, animeID);
-            String url = FAIL; // by default, login is not successful
+            String url = FAIL; // by default, action is not successful
 
             if (result) {
                 url = SUCCESS;

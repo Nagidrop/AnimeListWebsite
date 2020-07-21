@@ -24,11 +24,11 @@ public class EditRemoveAnimeAction {
 
     public String execute() throws Exception {
         if (btnAction.equals("Edit")) {
-            /* Instantiate DAO object and calls login method to check from DB */
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
 
             boolean result = dao.editAnimeInList(accountIDEdit, animeIDEdit, progressEdit, episodesEdit, statusEdit);
-            String url = FAIL; // by default, login is not successful
+            String url = FAIL; // by default, action is not successful
 
             if (result) {
                 url = SUCCESS;
@@ -36,11 +36,11 @@ public class EditRemoveAnimeAction {
 
             return url;
         } else if (btnAction.equals("Delete")) {
-            /* Instantiate DAO object and calls login method to check from DB */
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
 
             boolean result = dao.removeAnimeFromList(accountIDEdit, animeIDEdit);
-            String url = FAIL; // by default, login is not successful
+            String url = FAIL; // by default, action is not successful
 
             if (result) {
                 url = SUCCESS;
