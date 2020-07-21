@@ -113,7 +113,7 @@
                                <%--         <input  hidden id="id" name="id" value=> --%>
 
                                         <div class="form-group">
-                                            <label for="aaa">ID:</label>
+                                            <label for="id">ID:</label>
                                             <input class="form-control" id="id" name="id" readonly>
                                                  <label for="fullname">name:</label>
 
