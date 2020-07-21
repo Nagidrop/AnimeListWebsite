@@ -11,10 +11,10 @@ import animelist.model.SeasonDTO;
 import animelist.model.StudioDTO;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import java.
+import java.sql.SQLException;
 import java.sql.SQLException;
 import java.util.Map;
-sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
