@@ -24,8 +24,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     private final String SUCCESS = "success"; // indicates successful action
     private final String ADMIN = "admimpage"; // indicates successful action
     private HttpServletRequest request;
-    private ArrayList<ListDTO> animeList;
-    private ArrayList<AnimeDTO> animeDetailsList;
+    private ArrayList<String> statusList;
 
     /* Constructor */
     public LoginAction() {
@@ -66,9 +65,13 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
 
             }
 
-            animeList = dao.getAnimeList(account.getId(), 0);
-            animeDetailsList = dao.getAnimeDetailsList(animeList);
-            
+            statusList = new ArrayList<>();
+            statusList.add("Currently Watching");
+            statusList.add("Completed");
+            statusList.add("On Hold");
+            statusList.add("Dropped");
+            statusList.add("Plan to Watch");
+            session.put("StatusList", statusList);
         }
 
         return url;
@@ -89,6 +92,14 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public ArrayList<String> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(ArrayList<String> statusList) {
+        this.statusList = statusList;
     }
 
     public HttpServletRequest getRequest() {

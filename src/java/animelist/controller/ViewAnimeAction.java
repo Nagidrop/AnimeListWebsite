@@ -6,7 +6,11 @@ package animelist.controller;
 
 import animelist.model.AnimeDTO;
 import animelist.model.AnimeListDAO;
+import animelist.model.ListDTO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -16,6 +20,7 @@ public class ViewAnimeAction extends ActionSupport implements ServletRequestAwar
     private HttpServletRequest request;
     private int animeID; // anime ID passed from form input
     private AnimeDTO anime;
+    private ArrayList<ListDTO> animeList;
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
 
@@ -28,6 +33,11 @@ public class ViewAnimeAction extends ActionSupport implements ServletRequestAwar
         AnimeListDAO dao = new AnimeListDAO();
         anime = dao.getAnimeDetails(animeID);
 
+        Map session = ActionContext.getContext().getSession();
+        animeList = dao.getAnimeList((int) session.get("id"), 0);
+
+        ListDTO animeInList = null;
+
         String url = FAIL; // by default, login is not successful
 
         if (anime != null) {
@@ -37,6 +47,15 @@ public class ViewAnimeAction extends ActionSupport implements ServletRequestAwar
             if (anime.getTrailer() != null) {
                 anime.setTrailer(anime.getTrailer().replace("&autoplay=1", ""));
             }
+            request.setAttribute("Anime", anime);
+
+            for (ListDTO listAnime : animeList) {
+                if (listAnime.getAnimeID() == animeID) {
+                    animeInList = listAnime;
+                }
+            }
+
+            request.setAttribute("AnimeInList", animeInList);
         }
 
         return url;
@@ -57,6 +76,14 @@ public class ViewAnimeAction extends ActionSupport implements ServletRequestAwar
 
     public void setAnime(AnimeDTO anime) {
         this.anime = anime;
+    }
+
+    public ArrayList<ListDTO> getAnimeList() {
+        return animeList;
+    }
+
+    public void setAnimeList(ArrayList<ListDTO> animeList) {
+        this.animeList = animeList;
     }
 
     public HttpServletRequest getRequest() {
