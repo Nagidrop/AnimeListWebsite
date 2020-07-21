@@ -17,8 +17,6 @@
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Anime</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
                     <a class="dropdown-item" href="<s:url action="initSearchPage"/>">Anime Search</a>
-                    <a class="dropdown-item" href="#">Top Anime</a>
-                    <a class="dropdown-item" href="#">Seasonal Anime</a>
                 </div>
             </li>
 

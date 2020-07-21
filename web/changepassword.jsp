@@ -491,7 +491,7 @@
                                 <li class="nav-item"> <a href="javascript:void()" data-target="#editpassword" data-toggle="pill" class="nav-link"><i class="icon-pass"></i> <span class="hidden-xs">Password Changed</span></a> </li>
                             </ul>
                             <div class="tab-pane" id="editpassword">
-                                <s:form action="changepassword">
+                                <s:form action="changepassword" onsubmit="return isValid()">
                                     <div style="margin-bottom: 4%;">
                                         <input type="checkbox" onclick="Toggle()"> 
                                         <b>Show Password</b> 
@@ -508,14 +508,14 @@
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
                                         <div class="col-lg-9">
-                                            <input class="form-control" type="password" value="" name="1password" id="typepass1">
+                                            <input class="form-control" type="password" value="" name="1password" id="typepass1" onchange="checkPass()">
                                         </div>
                                     </div>
                                     <div class="form-group row" style="margin-top: 5%">
                                         <label class="col-lg-3 col-form-label form-control-label"></label>
                                         <div class="col-lg-9">
                                             <input type="reset" class="btn btn-secondary1" name="reset" value="Cancel">
-                                            <input type="submit" class="btn btn-primary1" name="button" value="Save Changes">
+                                            <input type="submit" class="btn btn-primary1" name="button" value="Save Changes" id="button-submit">
                                         </div>
                                     </div>
                                 </s:form>
@@ -528,18 +528,26 @@
     </div>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
     <script type="text/javascript">
-                                            // Change the type of input to password or text 
-                                            function Toggle() {
-                                                var temp = document.getElementById("typepass");
-                                                var temp1 = document.getElementById("typepass1");
-                                                if (temp.type === "password" && temp1.type === "password") {
-                                                    temp.type = "text";
-                                                    temp1.type = "text";
-                                                } else {
-                                                    temp.type = "password";
-                                                    temp1.type = "password";
+                                                // Change the type of input to password or text 
+                                                function Toggle() {
+                                                    var temp = document.getElementById("typepass");
+                                                    var temp1 = document.getElementById("typepass1");
+                                                    if (temp.type === "password" && temp1.type === "password") {
+                                                        temp.type = "text";
+                                                        temp1.type = "text";
+                                                    } else {
+                                                        temp.type = "password";
+                                                        temp1.type = "password";
+                                                    }
                                                 }
-                                            }
+
+                                                function isValid() {
+                                                    if ($("#typepass").val() == "" || $("#typepass1").val() == "" || $("#typepass").val() != $("#typepass1").val()) {
+                                                        alert("Please check your password");
+                                                        return false;
+                                                    }
+                                                }
+
     </script>
 </body>
 </html>
