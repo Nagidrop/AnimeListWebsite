@@ -66,7 +66,7 @@
                                                     <i class="fas fa-plus"></i>
 
                                                 </span>
-                                                <span class="text">New Genre</span>
+                                                <span class="text">New User</span>
                                             </a>
                                         </div>
                                     </div>
@@ -83,6 +83,8 @@
                                                 <th>Full name</th>
                                                 <th>Email</th>
                                                 <th>Gender</th>
+                                                <th>Role</th>
+
                                                 <th></th><th></th>
                                             </tr>
                                         </thead>
@@ -93,6 +95,8 @@
                                                 <th>Full name</th>
                                                 <th>Email</th>
                                                 <th>Gender</th>
+                                                <th>Role</th>
+
                                                 <th></th>
                                                 <th></th>
                                             </tr>
@@ -117,6 +121,19 @@
 
 
                                                     </td>      
+                                                     <td>
+                                                        <s:if test="%{RoleID==1}">
+                                                            Admin
+                                                        </s:if>
+                                                        <s:elseif test="%{RoleID==2}">
+                                                            User       
+                                                        </s:elseif>  
+                                                        <s:else>  
+                                                            Other
+                                                        </s:else>
+
+
+                                                    </td>
                                                     <td style="text-align: center">
                                                         <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="username"/>', '<s:property value="fullName"/>', '<s:property value="email"/>',<s:property value="gender"/>)"> <i class="fa fa-edit" style="color: white"></i></a>
                                                     </td>
@@ -228,6 +245,17 @@
                                             <div class="form-group">
                                                 <label for="gender">Gender</label>
                                                 <select id="gender-reg" name="gender-reg" class="form-control" required></select>
+                                            </div>
+                                             <div class="form-group">
+                                                <label for="gender">Role</label>
+                                                <select id="gender-reg" name="role-reg" class="form-control" required>
+                                                    <option value="1">
+                                                        Admin
+                                                    </option>
+                                                    <option value="2">
+                                                        User
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -24,7 +24,6 @@ public class createNewUserAction extends ActionSupport implements ServletRequest
     private String fullname;
     private String email;
     private String gender;
-
     private int roleID;
     private HttpServletRequest request;
     final String SUCCESS = "success";
@@ -44,8 +43,9 @@ public class createNewUserAction extends ActionSupport implements ServletRequest
             email = request.getParameter("email-reg");
             gender = request.getParameter("gender-reg");
             username = request.getParameter("username-reg");
+            roleID = Integer.parseInt(request.getParameter("role-reg")) ;
 
-            if (dao.createNewUser(2, username, password, fullname, email, gender)) {
+            if (dao.createNewUser(roleID, username, password, fullname, email, gender)) {
 
                 return SUCCESS;
             }

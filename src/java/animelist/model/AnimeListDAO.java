@@ -32,7 +32,8 @@ public class AnimeListDAO {
      *
      * @param username
      * @param password
-     * @return Account object (except password) if login successful, null if login credentials don't match
+     * @return Account object (except password) if login successful, null if
+     * login credentials don't match
      * @throws java.sql.SQLException
      */
     public AccountDTO login(String username, String password) throws SQLException {
@@ -1060,8 +1061,7 @@ public class AnimeListDAO {
         ArrayList<AccountDTO> accountList = null;
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("SELECT * FROM account where RoleID = ? AND deleted_at is null");
-            st.setInt(1, RoleID);
+            st = conn.prepareStatement("SELECT * FROM account where deleted_at is null");
             rs = st.executeQuery();
 
             while (rs.next()) {
@@ -1070,13 +1070,14 @@ public class AnimeListDAO {
                 String fullname = rs.getString("fullname");
                 String email = rs.getString("email");
                 int gender = rs.getInt("gender");
+                int role = rs.getInt("RoleID");
                 String avatar = rs.getString("avatar");
 
                 if (accountList == null) {
                     accountList = new ArrayList<>();
                 }
 
-                accountList.add(new AccountDTO(AccountID, RoleID, username, fullname, avatar, email, gender, null, null));
+                accountList.add(new AccountDTO(AccountID, role, username, fullname, avatar, email, gender, null, null));
             }
 
             return accountList;
@@ -1453,8 +1454,8 @@ public class AnimeListDAO {
         st.setDate(1, date);
         st.setString(2, id);
 
-       int rs = st.executeUpdate();
-        if (rs==1) {
+        int rs = st.executeUpdate();
+        if (rs == 1) {
             return true;
         }
         return false;

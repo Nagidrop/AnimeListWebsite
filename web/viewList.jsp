@@ -931,7 +931,7 @@
     </head>
     <body style="background-image: url('images/bg-12.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
         <jsp:include page='header.jsp'/>
-        <div class="header lala col-md-3 font-bold font-weight-bold" style="color:#343a40">
+        <div class="header lala col-md-4 font-bold font-weight-bold" style="color:#ffffff;text-shadow:2px 2px #6c757d">
             <div class="header-menu">
                 <div class="btn-menu" style="font-size:20px">
                     Viewing <s:property value="%{#session.username}"/> Anime List
@@ -1135,7 +1135,7 @@
                 $("#onhold").removeClass("on");
                 $("#dropped").removeClass("on");
                 $("#plantowatch").addClass("on");
-            }
+            } 
 
 
         </script>
