@@ -1202,7 +1202,7 @@ public class AnimeListDAO {
                 progress = 0;
             }
         } else {
-            if (progress < 0 || status == 5) {
+            if (progress < 0 || status == 2 || status == 5) {
                 progress = 0;
             }
         }
@@ -1306,7 +1306,7 @@ public class AnimeListDAO {
                 progress = 0;
             }
         } else {
-            if (progress < 0 || status == 5) {
+            if (progress < 0 || status == 2 || status == 5) {
                 progress = 0;
             }
         }
