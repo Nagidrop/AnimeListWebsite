@@ -397,7 +397,7 @@
 
             .btn-primary{
                 color: #ffffff!important;
-                background-color: #c70606!important;
+                background-color: #960505!important;
                 border-color: #f12525!important;
             }
 
