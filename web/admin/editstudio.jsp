@@ -1,6 +1,8 @@
 <%@taglib uri = "/struts-tags" prefix = "s" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@page import="animelist.model.StudioDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +13,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>User Manager</title>
+        <title>Studio Manager</title>
 
         <!-- Custom fonts for this template -->
         <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,8 +29,6 @@
     </head>
 
     <body id="page-top">
-
-            <form action="typeView">
             <!-- Page Wrapper -->
             <div id="wrapper">
 
@@ -47,49 +47,61 @@
                         <!-- End of Topbar -->
 
                         <!-- Begin Page Content -->
-                        <div class=" q-fluid">
+                        <div class="container-fluid">
                             <!-- Page Heading -->
-                            <h1 class="h3 mb-2 text-gray-800">Display Type List</h1>
+                            <h1 class="h3 mb-2 text-gray-800">Display Studio List</h1>
                             <!--          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
 
                             <!-- DataTales Example -->
                             <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">List Type</h6>
-                                    </select>
+                                <div class="card-header py-3 row">
+                                    <div class="col-md-6" style="padding: 0.8%;">
+                                        <h6 class="m-0 font-weight-bold text-primary">List Studio</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex flex-row-reverse">
+                                            <a class="btn btn-primary btn-icon-split" href="#">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-plus"></i>
+
+                                                </span>
+                                                <span class="text">New Studio</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th><b>StudioID</b></th>
-                                                    <th><b>name</b></th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th><b>StudioID</b></th>
-                                                    <th><b>name</b></th>
-                                                </tr>
-                                            </tfoot>
-                                            <tbody>
-                                                <s:iterator value="studios" status="dto">
-                                                    <tr>
-                                                        <td><s:property value="id"/></td>
-                                                        <td><s:property value="name"/></td>
-                                                        <td style="text-align: center">
-                                                            <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="name"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
-                                                        </td>
-                                                        <td style="text-align: center">
-                                                            <a class="btn-sm btn-danger btn-circle "><i class="fa fa-trash" style="color: white"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                </s:iterator>
-                                            </tbody>
-                                        </table>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th><b>StudioID</b></th>
+                                            <th><b>name</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th><b>StudioID</b></th>
+                                            <th><b>name</b></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <s:iterator value="studios" status="dto">
+                                            <tr>
+                                                <td><s:property value="id"/></td>
+                                                <td><s:property value="name"/></td>
+                                                <td style="text-align: center">
+                                                    <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="name"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <a class="btn-sm btn-danger btn-circle " href="deleteStudio?id=<s:property value="id"/>"><i class="fa fa-trash" style="color: white"></i></a>
+                                                </td>
+                                            </tr>
+                                        </s:iterator>
+                                    </tbody>
+                                </table>
 
                             </div>
                         </div>
@@ -102,25 +114,25 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Type Info</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Studio Info</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="updateType" method="post" id="info-form" accept-charset="utf-8">
+                                <form action="updateStudio" method="post" id="info-form" accept-charset="utf-8">
                                     <div >
-                               <%--         <input  hidden id="id" name="id" value=> --%>
+                                       <%-- <input  hidden id="id" name="id" value="">--%>
 
                                         <div class="form-group">
                                             <label for="aaa">ID:</label>
                                             <input class="form-control" id="id" name="id" readonly>
-                                                 <label for="fullname">name:</label>
+                                            <label for="name">name:</label>
 
-                                                    <div class="form-group">
-                                                        <input class="form-control" id="name" name="name" required>
+                                            <div class="form-group">
+                                                <input class="form-control" id="name" name="name"  required>
 
-                                                    </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -150,37 +162,38 @@
         <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
-    </form>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
 
-     <script>
-                function fillInfo(id, name) {
-                    $("#id").val(id);
-                    $("#name").val(name);
-                    $("#exampleModal").modal();
+    <script>
+        function fillInfo(id, name) {
+            $("#id").val(id);
+            $("#name").val(name);
+            $("#exampleModal").modal();
 
-                }
-                $("#btn-submit").click(function () {
-                    $("#info-form").submit();
-                });
-            </script>
-            <!-- Bootstrap core JavaScript-->
-            <script src="admin/vendor/jquery/jquery.min.js"></script>
-            <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        }
+        $("#btn-submit").click(function () {
+            $("#info-form").submit();
+        });
+    </script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="admin/vendor/jquery/jquery.min.js"></script>
+    <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Core plugin JavaScript-->
-            <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src="admin/js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="admin/js/sb-admin-2.min.js"></script>
 
-            <!-- Page level plugins -->
-            <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
-            <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-            <!-- Page level custom scripts -->
-            <script src="admin/js/demo/datatables-demo.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="admin/js/demo/datatables-demo.js"></script>
 
-    </body>
-
+</body>
 </html>

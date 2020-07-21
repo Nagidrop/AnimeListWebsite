@@ -4,7 +4,6 @@
 
 <struts>
     <!-- Configuration for the default package. -->
-    <constant name="struts.multipart.saveDir" value="tmp"/>
     <package name="default" extends="struts-default">
         <action name="index" class="animelist.controller.ShowIndexAction" >
             <result name = "success"> index.jsp</result>
@@ -68,7 +67,7 @@
         </action>
 
         <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
-             <interceptor-ref name="fileUpload">
+<interceptor-ref name="fileUpload">
                 <param name="maximumSize">2097152</param>				
                 <param name="allowedTypes">
                     image/png,image/jpg,image/jpeg
@@ -80,42 +79,35 @@
             <result name="fail">invalid.jsp</result>
         </action>
 
-        <action name="genreView" class = "animelist.controller.GenreView">
+        <action name="genreView" class = "animelist.controller.GenreViewAction">
             <result name="success">admin/editgenre.jsp</result>
         </action>
-        <action name="seasonView" class = "animelist.controller.SeasonView">
+        <action name="seasonView" class = "animelist.controller.SeasonViewAction">
             <result name="success">admin/editseason.jsp</result>
         </action>
-        <action name="studioView" class = "animelist.controller.StudioView">
+        <action name="studioView" class = "animelist.controller.StudioViewAction">
             <result name="success">admin/editstudio.jsp</result>
         </action>
-        <action name="typeView" class = "animelist.controller.TypeView">
+        <action name="typeView" class = "animelist.controller.TypeViewAction">
             <result name="success">admin/edittype.jsp</result>
         </action>
-        <action name="updateSeason" class = "animelist.controller.AdminUpdateSeason">
+        <action name="updateSeason" class = "animelist.controller.AdminUpdateSeasonAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">seasonView</param>
             </result>
             <result name="fail">invalid.jsp</result>
 
         </action>
-        <action name="updateGenre" class = "animelist.controller.AdminUpdateGenre">
+        <action name="updateGenre" class = "animelist.controller.AdminUpdateGenreAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">genreView</param>
             </result>
             <result name="fail">invalid.jsp</result>
 
         </action>
-        <action name="updateStudio" class = "animelist.controller.AdminUpdateStudio">
+        <action name="updateStudio" class = "animelist.controller.AdminUpdateStudioAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">studioView</param>
-            </result>
-            <result name="fail">invalid.jsp</result>
-
-        </action>
-        <action name="updateType" class = "animelist.controller.AdminUpdateType">
-            <result name="success" type="redirectAction">
-                <param name="actionName">typeView</param>
             </result>
             <result name="fail">invalid.jsp</result>
 
@@ -196,6 +188,25 @@
                 <param name="animeID" >${animeID}</param>
             </result>
             <result name="fail" type="dispatcher">actionFailed.jsp</result>
+        </action>
+
+        <action name="deleteStudio" class = "animelist.controller.DeleteStudioAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">studioView</param>
+            </result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+        </action>
+        <action name="deleteSeason" class = "animelist.controller.DeleteSeasonAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">seasonView</param>
+            </result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+        </action>
+        <action name="deleteGenre" class = "animelist.controller.DeleteGenreAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">genreView</param>
+            </result>
+            <result name="fail" type="redirectAction">404.jsp</result>
         </action>
     </package>
 </struts>

@@ -512,7 +512,7 @@ public class AnimeListDAO {
         try {
             conn = DBUtils.makeConnection();
 
-            st = conn.prepareStatement("SELECT * FROM genre");
+            st = conn.prepareStatement("SELECT * FROM genre WHERE 1 AND deleted_at is null");
 
             rs = st.executeQuery();
 
@@ -551,7 +551,7 @@ public class AnimeListDAO {
         try {
             conn = DBUtils.makeConnection();
 
-            st = conn.prepareStatement("SELECT * FROM studio");
+            st = conn.prepareStatement("SELECT * FROM studio WHERE 1 AND deleted_at is null");
 
             rs = st.executeQuery();
 
@@ -590,7 +590,7 @@ public class AnimeListDAO {
         try {
             conn = DBUtils.makeConnection();
 
-            st = conn.prepareStatement("SELECT * FROM season ORDER BY SeasonID desc");
+            st = conn.prepareStatement("SELECT * FROM season WHERE 1 AND deleted_at is null ORDER BY SeasonID DESC");
 
             rs = st.executeQuery();
 
@@ -878,7 +878,7 @@ public class AnimeListDAO {
 
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("SELECT name FROM Season WHERE SeasonID = ?");
+            st = conn.prepareStatement("SELECT name FROM Season WHERE SeasonID = ? AND deleted_at is null");
             st.setInt(1, seasonID);
             rs = st.executeQuery();
 
@@ -1132,14 +1132,7 @@ public class AnimeListDAO {
             if (count > 0) {
                 return true;
             }
-        } finally {
-            if (st != null) {
-                st.close();
-            }
-
-            if (conn != null) {
-                conn.close();
-            }
+        } catch (SQLException e) {
         }
         return false;
     }
@@ -1149,21 +1142,14 @@ public class AnimeListDAO {
         PreparedStatement st = null;
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("Update season set name = ? where StudioID=?");
+            st = conn.prepareStatement("Update studio set name = ? where StudioID=?");
             st.setString(1, name);
             st.setInt(2, StudioID);
             int count = st.executeUpdate();
             if (count > 0) {
                 return true;
             }
-        } finally {
-            if (st != null) {
-                st.close();
-            }
-
-            if (conn != null) {
-                conn.close();
-            }
+        } catch (SQLException e) {
         }
         return false;
     }
@@ -1230,30 +1216,6 @@ public class AnimeListDAO {
             }
         }
 
-        return false;
-    }
-
-    public boolean changeType(int AnimeID, String type) throws SQLException {
-        Connection conn = null;
-        PreparedStatement st = null;
-        try {
-            conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("Update anime set type = ? where AnimeID =?");
-            st.setString(1, type);
-            st.setInt(2, AnimeID);
-            int count = st.executeUpdate();
-            if (count > 0) {
-                return true;
-            }
-        } finally {
-            if (st != null) {
-                st.close();
-            }
-
-            if (conn != null) {
-                conn.close();
-            }
-        }
         return false;
     }
 
@@ -1390,7 +1352,66 @@ public class AnimeListDAO {
                 rs.close();
             }
         }
+    }
 
+    public boolean deleteStudio(int StudioID, Date deleted_at) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        conn = DBUtils.makeConnection();
+        st = conn.prepareStatement("Update studio set deleted_at = ? where StudioID=?");
+        st.setDate(1, deleted_at);
+        st.setInt(2, StudioID);
+        int count = st.executeUpdate();
+        if (count > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean deleteSeason(int SeasonID, Date deleted_at) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        conn = DBUtils.makeConnection();
+        st = conn.prepareStatement("Update season set deleted_at = ? where SeasonID=?");
+        st.setDate(1, deleted_at);
+        st.setInt(2, SeasonID);
+        int count = st.executeUpdate();
+        if (count > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean deleteGenre(int GenreID, Date deleted_at) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        conn = DBUtils.makeConnection();
+        st = conn.prepareStatement("Update genre set deleted_at = ? where GenreID =?");
+        st.setDate(1, deleted_at);
+        st.setInt(2, GenreID);
+        int count = st.executeUpdate();
+        if (count > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean deleteType(int AnimeID, Date deleted_at) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        conn = DBUtils.makeConnection();
+        st = conn.prepareStatement("Update type from anime set deleted_at = ? where AnimeID =?");
+        st.setDate(1, deleted_at);
+        st.setInt(2, AnimeID);
+        int count = st.executeUpdate();
+        if (count > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     public boolean createNewUser(int roleID, String username, String password, String fullname, String email, String gender) throws SQLException {

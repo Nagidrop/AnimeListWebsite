@@ -27,8 +27,6 @@
     </head>
 
     <body id="page-top">
-
-            <form action="typeView">
             <!-- Page Wrapper -->
             <div id="wrapper">
 
@@ -54,42 +52,55 @@
 
                             <!-- DataTales Example -->
                             <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">List Type</h6>
+                                <div class="card-header py-3 row">
+                                    <div class="col-md-6" style="padding: 0.8%;">
+                                    <h6 class="m-0 font-weight-bold text-primary">List Season</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex flex-row-reverse">
+                                            <a class="btn btn-primary btn-icon-split" href="#" onclick="fillIn()">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-plus"></i>
+
+                                                </span>
+                                                <span class="text">New Season</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                                               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th><b>SeasonID</b></th>
-                                                    <th><b>name</b></th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th><b>SeasonID</b></th>
-                                                    <th><b>name</b></th>
-                                                </tr>
-                                            </tfoot>
-                                            <tbody>
-                                                <s:iterator value="seasons" status="dto">
-                                                    <tr>
-                                                        <td><s:property value="id"/></td>
-                                                        <td><s:property value="name"/></td>
-                                                        <td style="text-align: center">
-                                                            <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="name"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
-                                                        </td>
-                                                        <td style="text-align: center">
-                                                            <a class="btn-sm btn-danger btn-circle "><i class="fa fa-trash" style="color: white"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                </s:iterator>
-                                            </tbody>
-                                        </table>
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th><b>SeasonID</b></th>
+                                            <th><b>name</b></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th><b>SeasonID</b></th>
+                                            <th><b>name</b></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <s:iterator value="seasons" status="dto">
+                                            <tr>
+                                                <td><s:property value="id"/></td>
+                                                <td><s:property value="name"/></td>
+                                                <td style="text-align: center">
+                                                    <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="name"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <a class="btn-sm btn-danger btn-circle " href="deleteSeason?id=<s:property value="id"/>"><i class="fa fa-trash" style="color: white"></i></a>
+                                                </td>
+                                            </tr>
+                                        </s:iterator>
+                                    </tbody>
+                                </table>
 
                             </div>
                         </div>
@@ -102,25 +113,25 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Type Info</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Season Info</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="updateType" method="post" id="info-form" accept-charset="utf-8">
-<div >
-                               <%--         <input  hidden id="id" name="id" value=> --%>
+                                <form action="updateSeason" method="post" id="info-form" accept-charset="utf-8">
+                                    <div >
+                                        <%--         <input  hidden id="id" name="id" value=> --%>
 
                                         <div class="form-group">
-                                            <label for="aaa">ID:</label>
+                                            <label for="id">ID:</label>
                                             <input class="form-control" id="id" name="id" readonly>
-                                                 <label for="fullname">name:</label>
+                                            <label for="fullname">name:</label>
 
-                                                    <div class="form-group">
-                                                        <input class="form-control" id="name" name="name" required>
+                                            <div class="form-group">
+                                                <input class="form-control" id="name" name="name" required>
 
-                                                    </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -150,37 +161,43 @@
         <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
-    </form>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
+    <script>
+        function fillInfo(id, name) {
+            $("#id").val(id);
+            $("#name").val(name);
+            $("#exampleModal").modal();
 
- <script>
-                function fillInfo(id, name) {
-                    $("#id").val(id);
-                    $("#name").val(name);
-                    $("#exampleModal").modal();
+        }
+        function  fillIn(){
+            $("#id").val("");
+           $("#name").val("");
+           $("#exampleModal").modal();
+        }
+        $("#btn-submit").click(function () {
+            $("#info-form").submit();
+        });
+    </script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="admin/vendor/jquery/jquery.min.js"></script>
+    <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                }
-                $("#btn-submit").click(function () {
-                    $("#info-form").submit();
-                });
-            </script>
-            <!-- Bootstrap core JavaScript-->
-            <script src="admin/vendor/jquery/jquery.min.js"></script>
-            <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-            <!-- Core plugin JavaScript-->
-            <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="admin/js/sb-admin-2.min.js"></script>
 
-            <!-- Custom scripts for all pages-->
-            <script src="admin/js/sb-admin-2.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-            <!-- Page level plugins -->
-            <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
-            <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="admin/js/demo/datatables-demo.js"></script>
 
-            <!-- Page level custom scripts -->
-            <script src="admin/js/demo/datatables-demo.js"></script>
-
-    </body>
+</body>
 
 </html>
