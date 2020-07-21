@@ -7,6 +7,7 @@ package animelist.controller;
 
 import animelist.model.AnimeListDAO;
 import animelist.model.GenreDTO;
+import animelist.model.SeasonDTO;
 import animelist.model.StudioDTO;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
@@ -25,10 +26,13 @@ public class showCreateNewAnimeView extends ActionSupport implements ServletRequ
     HttpServletRequest request;
     ArrayList<StudioDTO> studiosArrayList = new ArrayList<>();
     ArrayList<GenreDTO> genreArrayList = new ArrayList<>();
+    ArrayList<SeasonDTO> seasonArrayList = new ArrayList<>();
+
+
+
     private final String FAIL = "fail";
     private final String SUCCESS = "success";
 
- 
     public showCreateNewAnimeView() {
     }
 
@@ -38,6 +42,7 @@ public class showCreateNewAnimeView extends ActionSupport implements ServletRequ
             AnimeListDAO dao = new AnimeListDAO();
             studiosArrayList = dao.getStudios();
             genreArrayList = dao.getGenres();
+            seasonArrayList=(ArrayList<SeasonDTO>) dao.getSeasons();
             return SUCCESS;
         } catch (SQLException ex) {
             Logger.getLogger(showCreateNewAnimeView.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,11 +73,16 @@ public class showCreateNewAnimeView extends ActionSupport implements ServletRequ
     public ArrayList<GenreDTO> getGenreArrayList() {
         return genreArrayList;
     }
+    public ArrayList<SeasonDTO> getSeasonArrayList() {
+        return seasonArrayList;
+    }
 
-
+    public void setSeasonArrayList(ArrayList<SeasonDTO> seasonArrayList) {
+        this.seasonArrayList = seasonArrayList;
+    }
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
-        this.request=hsr;//To change body of generated methods, choose Tools | Templates.
+        this.request = hsr;//To change body of generated methods, choose Tools | Templates.
     }
 
 }

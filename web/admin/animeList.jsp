@@ -1,10 +1,6 @@
 <%@taglib uri = "/struts-tags" prefix = "s" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="animelist.model.ListDTO"%>
-<%@page import="animelist.model.GenreDTO"%>
-<%@page import="animelist.model.StudioDTO"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="animelist.model.AnimeDTO"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,13 +74,12 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>ID 
+                                                <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Episodes</th>
                                                 <th>Type</th>
@@ -103,15 +98,15 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-
                                             <s:iterator value="listAnimeDTOs" status="dto">
                                                 <tr>
                                                     <td><s:property value="id"/></td>
                                                     <td><s:property value="name"/></td>
                                                     <td><s:property value="episodes"/></td>
-                                                    <td><s:property value="studios"/></td>
+                                                    <td><s:property value="type"/></td>
+
                                                     <td style="text-align: center">
-                                                        <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="season.id"/>', '<s:property value="studios"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
+                                                        <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="season.id"/>', '<s:property value="studios"/>', '<s:property value="email"/>',<s:property value="gender"/>)"> <i class="fa fa-edit" style="color: white"></i></a>
                                                     </td>
                                                     <td style="text-align: center">
                                                         <a class="btn-sm btn-danger btn-circle " href="deleteAnime?id=<s:property value="id"/>"><i class="fa fa-trash" style="color: white"></i></a>                                  
@@ -168,8 +163,8 @@
 
                                             </div>
                                             <div class="form-group">
-                                                <label for="gender">Studio</label>
-                                                <select id="studio" name="studio" class="form-control" required></select>
+                                                <label for="gender">Gender</label>
+                                                <select id="gender" name="gender" class="form-control" required></select>
                                             </div>
                                         </div>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -254,9 +249,19 @@
 
 
             <script>
-           
+                $("#button-create-new").click(function () {
+                    var label = ["Female", "Male", "Other"];
+                    $("#gender-reg").html('');
+                    for (i = 0; i < label.length; i++) {
+
+                        $("#gender-reg").append('<option value="' + i + '" >' + label[i] + '</option>');
+
+
+                    }
+
+                    $("#modelReg").modal();
+                });
                 function fillInfo(id, username, fullname, email, gender) {
-                    console.log(fullname)
                     $("#id").val(id);
                     $("#username").val(username);
                     $("#fullname").val(fullname);

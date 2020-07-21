@@ -76,7 +76,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Release Date</label>
-                                            <input id="releaseDate" name="releaseDate"  class="form-control">
+                                            <input type="date" id="releaseDate" name="releaseDate"  class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>Rating</label>
@@ -110,10 +110,19 @@
 
                                             <input id="trailer" name="trailer"  type="text" class="form-control">
                                         </div>
-
+                                        <div class="form-group">
+                                            <label>Season</label>
+                                            <select id="season" name="season" class="form-control">
+                                                <s:iterator value="seasonArrayList">
+                                                    <option value=" <s:property value="id"></s:property>">
+                                                        <s:property value="name"></s:property>
+                                                        </option>
+                                                </s:iterator>
+                                            </select>    
+                                        </div>
                                         <div class="form-group">
                                             <label>Studios</label>
-                                            <select id="studio" name="studio" class="form-controler" multiple>
+                                            <select id="studio" name="studio" class="form-control" multiple>
                                                 <s:iterator value="studiosArrayList">
                                                     <option value=" <s:property value="id"></s:property>">
                                                         <s:property value="name"></s:property>
@@ -124,7 +133,7 @@
                                         <div class="form-group">
                                             <label>    Genres</label>
 
-                                            <select id="genre" name="genre[]" class="form-controler" multiple>
+                                            <select id="genre" name="genre" class="form-control" multiple>
                                                 <s:iterator value="genreArrayList">
                                                     <option value="<s:property value="id"></s:property>">
                                                         <s:property value="name"></s:property>
@@ -171,7 +180,8 @@
             G
             <script>
                 $("#studio").select2();
-                $("#genre   ").select2();
+                $("#genre").select2();
+                $("#season").select2();
 
 
                 function fillInfo(id, username, fullname, email, gender) {

@@ -193,7 +193,7 @@
         </action>
         <action name="viewListAllAnimes" class="animelist.controller.ShowListAnimeAction">
             <result name="success" type="dispatcher">admin/animeList.jsp</result>
-            <result name="fail" type="redirectAction">404.jsp</result>
+            <result name="fail" type="redirect">404.jsp</result>
 
         </action>
         <action name="deleteAnime" class="animelist.controller.DeleteAnimeAction">
