@@ -20,234 +20,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
         <style  type="text/css">
-            body.ownlist {
-                background-image: url("https://cdn.myanimelist.net/s/common/uploaded_files/1455540188-934a8b8942494df1086f9402bbb5330b.png");
-                background-attachment: fixed;
-                background-position: center top;
-                background-repeat: repeat\2D x;
-            }
-
-            #advanced-options {
-                position: absolute;
-                top: 24px;
-                left: 0;
-                right: 0;
-                background-color: #F6F6F6;
-                display: none;
-                width: 860px;
-                margin: 0 auto;
-                padding: 25px 0px 30px;
-                border: #EBEBEB 1px solid;
-                -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
-                -webkit-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
-                -o-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
-                -ms-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
-                box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.3);
-                color: #323232;
-                text-align: left;
-                font-family: 'Helvetica neue', Helvetica, "lucida grande", tahoma, verdana, arial, sans-serif;
-                z-index: 1101;
-            }
-            #advanced-options .advanced-options-header {
-                width: 750px;
-                margin: 0px auto;
-                padding-bottom: 4px;
-                border-bottom: 1px solid #BEBEBE;
-                font-size: 16px;
-            }
-
-            #advanced-options .advanced-options-header .description {
-                font-size: 12px;
-                font-weight: normal;
-                margin-left: 8px;
-            }
-
-            #advanced-options select {
-                -ms-appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                appearance: none;
-                background-image: url(/img/pc/ownlist/icon_pulldown_triangle.png);
-                background-repeat: no-repeat;
-                background-position: center right;
-                background-size: 18px 8px;
-                background-color: #FFFFFF;
-                display: inline-block;
-                height: 25px;
-                padding: 4px 20px 4px 4px;
-                padding-right: 4px\0;
-                border: #BEBEBE 1px solid;
-                border-radius: 0px;
-                font-size: 12px;
-            }
-            #advanced-options select::-ms-expand {
-                display: none;
-            }
-
-            #advanced-options select:disabled {
-                background-image: url(/img/pc/ownlist/icon_pulldown_triangle_disable.png);
-                color: #9B9B9B;
-            }
-
-            #advanced-options input[type=text] {
-                padding: 4px;
-                border: #BEBEBE 1px solid;
-            }
-
-            #advanced-options input:focus {
-                outline: none;
-            }
-
-            /* sort */
-            #advanced-options .sort-widget {
-                margin: 0px auto;
-                padding: 12px 0px 0px;
-                width: 750px;
-            }
-            #advanced-options .sort-widget:last-of-type {
-                padding-bottom: 45px;
-            }
-
-            #advanced-options .sort-widget select {
-                width: 172px;
-                margin-right: 8px;
-            }
-
-            #advanced-options .sort-widget input[type=radio] {
-                display: none;
-            }
-            #advanced-options .sort-widget input[type=radio] + label {
-                background-color: #FFFFFF;
-                display: inline-block;
-                width: 56px;
-                padding: 5px 0px;
-                border: #BEBEBE 1px solid;
-                border-radius: 4px;
-                color: #323232;
-                font-size: 12px;
-                text-align: center;
-                cursor: pointer;
-            }
-            #advanced-options .sort-widget input[type=radio]:checked + label {
-                background-color: #4065BA;
-                border: #4065BA 1px solid;
-                color: #FFFFFF;
-            }
-            #advanced-options .sort-widget input[type=radio]:disabled + label {
-                border: #BEBEBE 1px solid;
-                color: #9B9B9B;
-            }
-            #advanced-options .sort-widget input[type=radio]:checked:disabled + label {
-                background-color: #FFFFFF;
-                border: #BEBEBE 1px solid;
-                color: #9B9B9B;
-            }
-
-            /* filter */
-            #advanced-options .filter-widget {
-                margin: 0px auto;
-                padding: 12px 0px 0;
-                width: 750px;
-            }
-
-            #advanced-options .filter-widget select {
-                margin-right: 8px;
-                font-size: 12px;
-            }
-
-            #advanced-options .filter-widget.title input[type=text] {
-                width: 360px;
-            }
-
-            #advanced-options .filter-widget.airing-status select,
-            #advanced-options .filter-widget.publishing-status select {
-                width: 152px;
-            }
-
-            #advanced-options .filter-widget.producer select,
-            #advanced-options .filter-widget.magazine select {
-                width: 360px;
-            }
-
-            #advanced-options .filter-widget.aired-date select.year,
-            #advanced-options .filter-widget.published-date select.year {
-                width: 80px;
-            }
-
-            #advanced-options .filter-widget.aired-date select.month,
-            #advanced-options .filter-widget.published-date select.month,
-            #advanced-options .filter-widget.aired-date select.day,
-            #advanced-options .filter-widget.published-date select.day {
-                width: 60px;
-            }
-
-            #advanced-options .filter-widget.aired-date .text,
-            #advanced-options .filter-widget.published-date .text {
-                display: inline-block;
-                margin-right: 4px;
-                font-size: 12px;
-            }
-
-            #advanced-options .filter-widget.aired-season select.year {
-                width: 80px;
-            }
-
-            #advanced-options .filter-widget.aired-season select.season {
-                width: 110px;
-            }
-
-            #advanced-options .sort-widget .widget-header,
-            #advanced-options .filter-widget .widget-header {
-                display: inline-block;
-                width: 110px;
-                font-size: 12px;
-                font-family: 'Helvetica neue', Helvetica, "lucida grande", tahoma, verdana, arial, sans-serif;
-            }
-
-            #advanced-options .sort-widget:last-of-type,
-            #advanced-options .filter-widget:last-of-type {
-                padding-bottom: 40px;
-            }
-
-            #advanced-options .advanced-options-button {
-                width: 750px;
-                margin: 0px auto;
-                padding: 12px 0px 0px;
-                border-top: 1px solid #BEBEBE;
-                text-align: center;
-            }
-
-            #advanced-options .btn-apply,
-            #advanced-options .btn-clear {
-                background-color: rgba(64, 101, 186, 1);
-                display: inline-block;
-                width: 135px;
-                margin: 0 4px;
-                padding: 6px 0px;
-                border-radius: 4px;
-                font-size: 12px;
-                color: #FFFFFF;
-                text-align: center;
-                -moz-transition-property: all;
-                -o-transition-property: all;
-                -webkit-transition-property: all;
-                transition-property: all;
-                -moz-transition-duration: 0.3s;
-                -o-transition-duration: 0.3s;
-                -webkit-transition-duration: 0.3s;
-                transition-duration: 0.3s;
-                -moz-transition-timing-function: ease-in-out;
-                -o-transition-timing-function: ease-in-out;
-                -webkit-transition-timing-function: ease-in-out;
-                transition-timing-function: ease-in-out
-            }
-
-            #advanced-options .btn-apply:hover,
-            #advanced-options .btn-clear:hover {
-                background-color: rgba(64, 101, 186, 0.8);
-            }
-
-
             /**
              * General Styles
              */
@@ -738,7 +510,7 @@
                 position: absolute;
                 bottom: 0px;
                 left: 0px;
-                background-color: #4065BA;
+                background-color: #343a40;
                 display: block;
                 width: 100%;
                 height: 4px;
@@ -1159,7 +931,7 @@
     </head>
     <body style="background-image: url('images/bg-12.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
         <jsp:include page='header.jsp'/>
-        <div class="header lala col-md-3 font-bold font-weight-bold" style="color:#343a40">
+        <div class="header lala col-md-4 font-bold font-weight-bold" style="color:#ffffff;text-shadow:2px 2px #6c757d">
             <div class="header-menu">
                 <div class="btn-menu" style="font-size:20px">
                     Viewing <s:property value="%{#session.username}"/> Anime List
@@ -1196,17 +968,36 @@
 
                 <div class="list-unit all_anime">
                     <div class="list-status-title" style="background-image: url('images/bg-03.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
-                        <span class="text">ALL ANIME</span>
+                        <s:if test="%{listStatus == 0}">
+                            <span class="text">ALL ANIME</span>
+                        </s:if>
+                        <s:elseif test="%{listStatus == 1}">
+                            <span class="text">CURRENTLY WATCHING</span>
+                        </s:elseif>
+                        <s:elseif test="%{listStatus == 2}">
+                            <span class="text">COMPLETED</span>
+                        </s:elseif>
+                        <s:elseif test="%{listStatus == 3}">
+                            <span class="text">ON HOLD</span>
+                        </s:elseif>
+                        <s:elseif test="%{listStatus == 4}">
+                            <span class="text">DROPPED</span>
+                        </s:elseif>
+                        <s:elseif test="%{listStatus == 5}">
+                            <span class="text">PLAN TO WATCH</span>
+                        </s:elseif>
+
                     </div>
                     <table class="list-table" style="font-size: 12px;" id="myListTable">
                         <thead><tr class="list-table-header">
                                 <th class="header-title number">No.</th>
-                                <th class="header-title image"><a class="link hover_info">Poster</a></th>
-                                <th class="header-title title"><a href="" class="link sort">Anime Title</th>
-                                <th class="header-title score"> <a href="" class="link sort">Type</th>
-                                <th class="header-title type"><a href="" class="link sort">Progress</a></th>
-                                <th class="header-title progress"><a href="" class="link sort">Status</a></th>
-                                <th class="header-title edit"><a href="" class="link sort">Edit</a></th>
+                                <th class="header-title image"><a class="link hover_info" style="font-size: 12px;">Poster</a></th>
+                                <th class="header-title title"><a href="" class="link sort" style="font-size: 12px;">Anime Title</th>
+                                <th class="header-title score"> <a href="" class="link sort" style="font-size: 12px;">Type</th>
+                                <th class="header-title type"><a href="" class="link sort" style="font-size: 12px;">Progress</a></th>
+                                <th class="header-title progress"><a href="" class="link sort" style="font-size: 12px;">Status</a></th>
+                                <th class="header-title edit"><a href="" class="link sort" style="font-size: 12px;">Edit</a></th>
+                                <th class="header-title delete"><a href="" class="link sort" style="font-size: 12px;">Delete</a></th>
                             </tr>
                         </thead>
                         <% ArrayList<ListDTO> animeList = (ArrayList<ListDTO>) request.getAttribute("AnimeList");
@@ -1219,7 +1010,7 @@
                                     animeIndex++;
                         %>
                         <tbody class="list-item" >
-                        <form action="editAnimeList" method="POST">
+                        <form action="editRemoveAnimeFromList" method="POST">
                             <tr class="list-table-data">
                                 <td class="data number" style="width: 5%;"><%= animeIndex%></td>
 
@@ -1229,7 +1020,7 @@
                                     </a>
                                 </td>
 
-                                <td class="data title clearfix" style="width: 50%;">
+                                <td class="data title clearfix" style="width: 48%;">
                                     <a href="viewAnime?animeID=<%= anime.getId()%>" class="link sort"><%= anime.getName()%></a>
                                 </td>
 
@@ -1238,9 +1029,19 @@
                                 </td>
 
                                 <td class="data progress" style="background-color: transparent!important; width: 9%; text-align: left">
-                                    <input type="text" style="font-size: 12px;" name="progressEdit" size="1" class="inputtext form-control-sm progresseps" value="<%= listAnime.getProgress()%>" style="border: 1px solid #ced4da!important;">
-                                    / <%= anime.getEpisodes()%><input type="hidden" name="episodesEdit" value="<%= anime.getEpisodes()%>" />
-                                    <input type="hidden" name="animeIDEdit" value="<%= anime.getId()%>" />
+                                    <% if (listAnime.getProgress() == 0 && listAnime.getStatus().equals("Completed") && anime.getEpisodes() == 0) { %>
+                                    <input type="text" style="font-size: 12px;" name="progressEdit" size="1" class="inputtext form-control-sm progresseps" value="?" style="border: 1px solid #ced4da!important;"> / 
+                                    <%} else {%>
+                                    <input type="text" style="font-size: 12px;" name="progressEdit" size="1" class="inputtext form-control-sm progresseps" value="<%= listAnime.getProgress()%>" style="border: 1px solid #ced4da!important;"> / 
+                                    <% }%>
+
+                                    <% if (anime.getEpisodes() != 0) {%>
+                                    <%= anime.getEpisodes()%>
+                                    <%} else {%>
+                                    ?
+                                    <% }%>
+                                    <input type="hidden" name="episodesEdit" value="<%= anime.getEpisodes()%>" />
+                                    <input type="hidden" name="animeIDEdit" value="<%= anime.getId()%>" />          
                                     <input type="hidden" name="accountIDEdit" value="<s:property value="%{#session.id}"/>" />
                                 </td>
 
@@ -1249,7 +1050,7 @@
                                         <%
                                             int statusIndex = 1;
                                             for (String status : statusList) {
-                                                if (status != listAnime.getStatus()) {
+                                                if (!status.equals(listAnime.getStatus())) {
                                         %>
                                         <option value="<%= statusIndex%>"> <%= status%> </option> <br />
                                         <% } else {%>
@@ -1260,7 +1061,10 @@
                                     </select>
                                 </td>
                                 <td style="width: 5%; text-align: center;">
-                                    <input type="submit" style="font-size: 12px;" value="Edit" />
+                                    <input type="submit" name="btnAction" style="font-size: 12px;" value="Edit" />
+                                </td>
+                                <td style="width: 6%; text-align: center;">
+                                    <input type="submit" name="btnAction" style="font-size: 12px;" value="Delete" />
                                 </td>
                             </tr>
                         </form>
@@ -1288,7 +1092,7 @@
             $("#search-box").focusout(function () {
                 $("#search-box").attr("class", "");
             });
-            
+
             if (status == 0) {
                 $("#all_anime").addClass("on");
                 $("#watching").removeClass("on");
@@ -1331,7 +1135,7 @@
                 $("#onhold").removeClass("on");
                 $("#dropped").removeClass("on");
                 $("#plantowatch").addClass("on");
-            }
+            } 
 
 
         </script>

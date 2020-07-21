@@ -458,7 +458,7 @@
                                 <div class="card-body text-center bg-primary rounded-top" style="background-color: #bd000066!important">
                                     <div class="user-box"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
                                     <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
-                                    <h6 class="text-light">True Wibu</h6>
+                                    <h6 class="text-light">- Wibu -</h6>
                                 </div>
                                 <div class="card-body">
                                     <ul class="list-group shadow-none">
@@ -475,17 +475,7 @@
                                             <div class="list-details"> <span><%= session.getAttribute("gender")%></span> <small>Gender</small> </div>
                                         </li>
                                     </ul>
-                                    <div class="row text-center mt-4">
-                                        <div class="col p-2">
-                                            <h4 class="mb-1 line-height-5">154</h4>
-                                            <small class="mb-0 font-weight-bold">Anime</small> </div>
-                                        <div class="col p-2">
-                                            <h4 class="mb-1 line-height-5">2222</h4>
-                                            <small class="mb-0 font-weight-bold">Hours for Watching</small> </div>
-                                        <div class="col p-2">
-                                            <h4 class="mb-1 line-height-5">0</h4>
-                                            <small class="mb-0 font-weight-bold">Friend</small> </div>
-                                    </div>
+
                                 </div>
                                 <div class="card-footer text-center"> <a href="javascript:void()" class="btn-social btn-facebook waves-effect waves-light m-1"><i class="fa fa-facebook"></i></a> <a href="javascript:void()" class="btn-social btn-google-plus waves-effect waves-light m-1"><i class="fa fa-google-plus"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-behance waves-effect waves-light"><i class="fa fa-behance"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-dribbble waves-effect waves-light"><i class="fa fa-dribbble"></i></a> </div>
                             </div>
@@ -519,9 +509,9 @@
                                                 <div class="col-lg-9"> </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
+                                                <label class="col-lg-3 col-form-label form-control-label">Profile Picture</label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="file" name="upload" value="Upload Image">
+                                                    <s:file name="imageFile" cssClass="form-control" theme="simple"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -535,31 +525,31 @@
                                                 <label class="col-lg-3 col-form-label form-control-label">Gender</label>
                                                 <div class="col-lg-9">
                                                     <s:if test="%{#session.gender== 'Male'}">
-                                                    &ensp;
-                                                    <input type="checkbox" id="gender0" name="gender" value="0" checked>
-                                                    <label for="gender0">Male</label>                    &ensp;
-                                                    <input type="checkbox" id="gender1" name="gender" value="1">
-                                                    <label for="gender1">Female</label>                  &ensp;
-                                                    <input type="checkbox" id="gender2" name="gender" value="2">
-                                                    <label for="gender2">Other</label>
+                                                        &ensp;
+                                                        <input type="checkbox" id="gender0" name="gender" value="0" checked>
+                                                        <label for="gender0">Male</label>                    &ensp;
+                                                        <input type="checkbox" id="gender1" name="gender" value="1">
+                                                        <label for="gender1">Female</label>                  &ensp;
+                                                        <input type="checkbox" id="gender2" name="gender" value="2">
+                                                        <label for="gender2">Other</label>
                                                     </s:if>
                                                     <s:elseif test="%{#session.gender== 'Female'}">
-                                                    &ensp;
-                                                    <input type="checkbox" id="gender0" name="gender" value="0" >
-                                                    <label for="gender0">Male</label>                    &ensp;
-                                                    <input type="checkbox" id="gender1" name="gender" value="1" checked>
-                                                    <label for="gender1">Female</label>                  &ensp;
-                                                    <input type="checkbox" id="gender2" name="gender" value="2">
-                                                    <label for="gender2">Other</label>
+                                                        &ensp;
+                                                        <input type="checkbox" id="gender0" name="gender" value="0" >
+                                                        <label for="gender0">Male</label>                    &ensp;
+                                                        <input type="checkbox" id="gender1" name="gender" value="1" checked>
+                                                        <label for="gender1">Female</label>                  &ensp;
+                                                        <input type="checkbox" id="gender2" name="gender" value="2">
+                                                        <label for="gender2">Other</label>
                                                     </s:elseif>
                                                     <s:elseif test="%{#session.gender== 'Other'}">
-                                                    &ensp;
-                                                    <input type="checkbox" id="gender0" name="gender" value="0" >
-                                                    <label for="gender0">Male</label>                    &ensp;
-                                                    <input type="checkbox" id="gender1" name="gender" value="1">
-                                                    <label for="gender1">Female</label>                  &ensp;
-                                                    <input type="checkbox" id="gender2" name="gender" value="2"checked>
-                                                    <label for="gender2">Other</label>
+                                                        &ensp;
+                                                        <input type="checkbox" id="gender0" name="gender" value="0" >
+                                                        <label for="gender0">Male</label>                    &ensp;
+                                                        <input type="checkbox" id="gender1" name="gender" value="1">
+                                                        <label for="gender1">Female</label>                  &ensp;
+                                                        <input type="checkbox" id="gender2" name="gender" value="2"checked>
+                                                        <label for="gender2">Other</label>
                                                     </s:elseif>
                                                 </div>
                                             </div>
