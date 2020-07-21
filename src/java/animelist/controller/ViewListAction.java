@@ -24,6 +24,7 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
     private ArrayList<String> statusList;
     private int accountID;
     private int listStatus;
+    private String accountUsername;
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
 
@@ -35,11 +36,15 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
         /* Instantiate DAO object and calls login method to check from DB */
         AnimeListDAO dao = new AnimeListDAO();
 
+        accountUsername = dao.getAccountUsername(accountID);
         animeList = dao.getAnimeList(accountID, listStatus);
         animeDetailsList = dao.getAnimeDetailsList(animeList);
 
         Map session = ActionContext.getContext().getSession();
-        statusList = (ArrayList<String>) session.get("StatusList");
+        
+        if (session.get("user") != null) {
+            statusList = (ArrayList<String>) session.get("StatusList");
+        }
 
         if (animeList != null) {
             request.setAttribute("AnimeList", animeList);
@@ -92,15 +97,7 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
     public void setListStatus(int listStatus) {
         this.listStatus = listStatus;
     }
-
-    public static Logger getLOG() {
-        return LOG;
-    }
-
-    public static void setLOG(Logger LOG) {
-        ActionSupport.LOG = LOG;
-    }
-
+    
     public HttpServletRequest getRequest() {
         return request;
     }
@@ -108,6 +105,14 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;
+    }
+
+    public String getAccountUsername() {
+        return accountUsername;
+    }
+
+    public void setAccountUsername(String accountUsername) {
+        this.accountUsername = accountUsername;
     }
 
 }

@@ -32,8 +32,7 @@ public class AnimeListDAO {
      *
      * @param username
      * @param password
-     * @return Account object (except password) if login successful, null if
-     * login credentials don't match
+     * @return Account object (except password) if login successful, null if login credentials don't match
      * @throws java.sql.SQLException
      */
     public AccountDTO login(String username, String password) throws SQLException {
@@ -1482,4 +1481,33 @@ public class AnimeListDAO {
         return false;
     }
 
+    public String getAccountUsername(int accountID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT username FROM Account WHERE AccountID = ?");
+            st.setInt(1, accountID);
+
+            rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getString("username");
+            }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        
+        return null;
+    }
 }
