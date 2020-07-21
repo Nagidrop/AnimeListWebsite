@@ -139,6 +139,13 @@
             <result name="user" type="redirectAction">index</result>
             <result name="fail" type="redirectAction">404.jsp</result>
         </action>
+        <action name="createNewUser" class = "animelist.controller.createNewUserAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">userList</param>
+            </result>
+            <result name="user" type="redirectAction">index</result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+        </action>
         <action name="deleteUser" class = "animelist.controller.DeleteUserAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">userList</param>
@@ -164,6 +171,15 @@
         
         <action name="ViewUserTotalAnimes" class="animelist.controller.ViewTotalNumberAnimesAction">
             <result name="success" type="dispatcher">userinfo.jsp</result>
+        </action>
+        <action name="viewListAllAnimes" class="animelist.controller.ShowListAnimeAction">
+            <result name="success" type="dispatcher">admin/animeList.jsp</result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+
+        </action>
+        <action name="deleteAnime" class="animelist.controller.DeleteAnimeAction">
+            <result name="success" type="redirectAction">viewListAllAnimes</result>
+            <result name="fail" type="redirectAction">404.jsp</result>
         </action>
     </package>
 </struts>
