@@ -936,6 +936,7 @@
             </s:else>
         </title>
     </head>
+
     <body style="background-image: url('images/bg-12.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
         <jsp:include page='header.jsp'/>
         <div class="header lala col-md-4 font-bold font-weight-bold" style="color:#ffffff;text-shadow:2px 2px #6c757d">
@@ -952,7 +953,6 @@
                 </div>
             </div>
         </div>
-
         <div id="list-container" class="list-container">
             <div id="status-menu" class="status-menu-container">
                 <div class="status-menu">

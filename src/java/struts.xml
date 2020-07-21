@@ -193,7 +193,7 @@
         </action>
         <action name="viewListAllAnimes" class="animelist.controller.ShowListAnimeAction">
             <result name="success" type="dispatcher">admin/animeList.jsp</result>
-            <result name="fail" type="redirectAction">404.jsp</result>
+            <result name="fail" type="redirect">404.jsp</result>
 
         </action>
         <action name="deleteAnime" class="animelist.controller.DeleteAnimeAction">
@@ -247,6 +247,17 @@
             <result name="success" type="redirectAction">
                 <param name="actionName">studioView</param>
             </result>
+        </action>
+        <action name="createAnime" class="animelist.controller.showCreateNewAnimeView" >
+            <result name="success" type="dispatcher">
+                admin/createAnime.jsp
+            </result>
+            <result name="fail" type="dispatcher">actionFailed.jsp</result>
+        </action>
+        <action name="createAnimeAction" class="animelist.controller.CreateNewAnimeAction" >
+                        <result name="success" type="redirectAction">viewListAllAnimes</result>
+
+            <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
     </package>
 </struts>
