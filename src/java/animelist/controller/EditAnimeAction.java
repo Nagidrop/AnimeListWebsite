@@ -10,9 +10,11 @@ import animelist.model.AnimeListDAO;
 import animelist.model.GenreDTO;
 import animelist.model.SeasonDTO;
 import animelist.model.StudioDTO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -39,12 +41,20 @@ public class EditAnimeAction extends ActionSupport implements ServletRequestAwar
     public String execute() {
         try {
             AnimeListDAO dao = new AnimeListDAO();
+            Map session = ActionContext.getContext().getSession();
+            if (session.isEmpty()) {
+                return FAIL;
+            }
+
+            int roleID = (int) session.get("roleid");
+            if (roleID != 1) {
+                return FAIL;
+            }
             studiosArrayList = dao.getStudios();
             genreArrayList = dao.getGenres();
             seasonArrayList = (ArrayList<SeasonDTO>) dao.getSeasons();
             int id = Integer.parseInt(request.getParameter("id"));
             anime = dao.getAnimeDetails(id);
-            System.out.println(anime.getReleaseDate());
             return SUCCESS;
         } catch (SQLException ex) {
             Logger.getLogger(EditAnimeAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,7 +104,7 @@ public class EditAnimeAction extends ActionSupport implements ServletRequestAwar
 
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
-        this.request=hsr;
+        this.request = hsr;
     }
 
 }

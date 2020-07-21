@@ -6,10 +6,12 @@ package animelist.controller;
 
 import animelist.model.AnimeDTO;
 import animelist.model.AnimeListDAO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.logging.Logger;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -28,6 +30,15 @@ public class ShowListAnimeAction extends ActionSupport implements ServletRequest
     @Override
     public String execute() {
         try {
+             Map session = ActionContext.getContext().getSession();
+            if (session.isEmpty()) {
+                return FAIL;
+            }
+
+            int roleID = (int) session.get("roleid");
+            if (roleID != 1) {
+                return FAIL;
+            }
             AnimeListDAO dao = new AnimeListDAO();
             listAnimeDTOs = dao.getAllAnimes();
             return SUCCESS;

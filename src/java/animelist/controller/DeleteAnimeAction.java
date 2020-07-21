@@ -5,10 +5,12 @@
 package animelist.controller;
 
 import animelist.model.AnimeListDAO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +32,15 @@ public class DeleteAnimeAction extends ActionSupport implements ServletRequestAw
         try {
             /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
-            
+             Map session = ActionContext.getContext().getSession();
+            if (session.isEmpty()) {
+                return FAIL;
+            }
+
+            int roleID = (int) session.get("roleid");
+            if (roleID != 1) {
+                return FAIL;
+            }
             String id = request.getParameter("id");
             Date date = Date.valueOf(LocalDate.now()); // get curent time
             
