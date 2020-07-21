@@ -371,7 +371,7 @@ public class AnimeListDAO {
                 int animeID = rs.getInt("animeID");
                 int status = rs.getInt("status");
                 int progress = rs.getInt("progress");
-                String statusString="";
+                String statusString = "";
                 switch (status) {
                     case 1:
                         statusString = "Currently Watching";
@@ -1053,7 +1053,14 @@ public class AnimeListDAO {
             if (count > 0) {
                 return true;
             }
-        } catch (SQLException e) {
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
         }
         return false;
     }
@@ -1070,7 +1077,14 @@ public class AnimeListDAO {
             if (count > 0) {
                 return true;
             }
-        } catch (SQLException e) {
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
         }
         return false;
     }
@@ -1087,7 +1101,14 @@ public class AnimeListDAO {
             if (count > 0) {
                 return true;
             }
-        } catch (SQLException e) {
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
         }
         return false;
     }
@@ -1147,7 +1168,8 @@ public class AnimeListDAO {
 
         return false;
     }
-        public boolean changeType(int AnimeID, String type) throws SQLException {
+
+    public boolean changeType(int AnimeID, String type) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -1159,8 +1181,70 @@ public class AnimeListDAO {
             if (count > 0) {
                 return true;
             }
-        } catch (SQLException e) {
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
         }
         return false;
     }
+
+    public int getTotalAnimesInList(int accountID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT COUNT(*) as count from list where list.AccountID = ? GROUP BY list.AccountID");
+            st.setInt(1, accountID);
+            
+            rs = st.executeQuery();
+            if(rs.next()){
+                count = rs.getInt("count");
+            }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+       
+        return count; 
+    }
+    
+    public int getTotalCompletedAnimesInList(int accountID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT COUNT(*) as count from list WHERE list.AccountID = ? and list.status = 2 GROUP by list.AccountID");
+            st.setInt(1, accountID);
+            
+            rs = st.executeQuery();
+            if(rs.next()){
+                count = rs.getInt("count");
+            }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+       
+        return count; 
+    }
+    
 }

@@ -19,7 +19,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
-        <script src="js/tableSort.js"></script>
         <style  type="text/css">
             body.ownlist {
                 background-image: url("https://cdn.myanimelist.net/s/common/uploaded_files/1455540188-934a8b8942494df1086f9402bbb5330b.png");
@@ -1184,7 +1183,7 @@
                        class="status-button plantowatch ">Plan to Watch</a>
                     <div class="search-container">
                         <form action="searchInList" id="search-form-action">
-                            <div id="search-box" class="open"><input name="search-text" type="text" value=""></div>
+                            <div id="search-box" class=""><input name="search-text" type="text" value=""></div>
                             <a id="search-button" href="#">
                                 <i class="fa fa-search"></i>
                             </a>
@@ -1278,8 +1277,18 @@
         <script>
             var status =<s:property value="listStatus" />;
             $("#search-button").click(function () {
-                $("#search-form-action").submit();
+                var buttonState = $("#search-box").attr("class");
+                if (buttonState != "open") {
+                    $("#search-box").attr("class", "open");
+                } else {
+                    $("#search-form-action").submit();
+                }
             });
+
+            $("#search-box").focusout(function () {
+                $("#search-box").attr("class", "");
+            });
+            
             if (status == 0) {
                 $("#all_anime").addClass("on");
                 $("#watching").removeClass("on");
@@ -1324,7 +1333,7 @@
                 $("#plantowatch").addClass("on");
             }
 
-            
+
         </script>
     </body>
 </html>

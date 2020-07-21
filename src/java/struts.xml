@@ -162,5 +162,8 @@
             <result name="input">404.jsp</result>
         </action>
         
+        <action name="ViewUserTotalAnimes" class="animelist.controller.ViewTotalNumberAnimesAction">
+            <result name="success" type="dispatcher">404.jsp</result>
+        </action>
     </package>
 </struts>

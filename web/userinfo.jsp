@@ -462,33 +462,30 @@
                                 <div class="card-body text-center bg-primary rounded-top" style="background-color: #bd000066!important">
                                     <div class="user-box"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
                                     <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
-                                    <h6 class="text-light">True Wibu</h6>
+                                    <h6 class="text-light">- Wibu -</h6>
                                 </div>
                                 <div class="card-body">
-                                    <ul class="list-group shadow-none">
+<!--                                    <ul class="list-group shadow-none">
                                         <li class="list-group-item">
                                             <div class="list-icon"> <i class="fa fa-user-circle"></i> </div>
-                                            <div class="list-details"> <span><%= session.getAttribute("username")%></span> <small>Username</small> </div>
+                                            <div class="list-details"> <span></span> <small>Username</small> </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="list-icon"> <i class="fa fa-envelope"></i> </div>
-                                            <div class="list-details"> <span><%= session.getAttribute("email")%></span> <small>Email Address</small> </div>
+                                            <div class="list-details"> <span></span> <small>Email Address</small> </div>
                                         </li>
                                         <li class="list-group-item">
-                                            <div class="list-icon"> <i class="fa fa-genderless"></i> </div>
-                                            <div class="list-details"> <span><%= session.getAttribute("gender")%></span> <small>Gender</small> </div>
+                                            <div class="list-icon">  </div>
+                                            <div class="list-details"> <span></span> <small>Gender</small> </div>
                                         </li>
-                                    </ul>
+                                    </ul>-->
                                     <div class="row text-center mt-4">
                                         <div class="col p-2">
                                             <h4 class="mb-1 line-height-5">154</h4>
-                                            <small class="mb-0 font-weight-bold">Anime</small> </div>
+                                            <small class="mb-0 font-weight-bold">Animes In List</small> </div>
                                         <div class="col p-2">
                                             <h4 class="mb-1 line-height-5">2222</h4>
-                                            <small class="mb-0 font-weight-bold">Hours for Watching</small> </div>
-                                        <div class="col p-2">
-                                            <h4 class="mb-1 line-height-5">0</h4>
-                                            <small class="mb-0 font-weight-bold">Friend</small> </div>
+                                            <small class="mb-0 font-weight-bold">Completed Animes</small></div>
                                     </div>
                                 </div>
                                 <div class="card-footer text-center"> <a href="javascript:void()" class="btn-social btn-facebook waves-effect waves-light m-1"><i class="fa fa-facebook"></i></a> <a href="javascript:void()" class="btn-social btn-google-plus waves-effect waves-light m-1"><i class="fa fa-google-plus"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-behance waves-effect waves-light"><i class="fa fa-behance"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-dribbble waves-effect waves-light"><i class="fa fa-dribbble"></i></a> </div>
@@ -507,21 +504,12 @@
                                         <div class="form-group row">
                                             <div class="col-lg-9"> </div>
                                         </div>
-                                        <h6 class="mb-3">Full Name: <%= session.getAttribute("fullname")%></h6> 
-                                        <div class="form-group row">
-                                                <div class="col-lg-9"> </div>
-                                            </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <h6 >About</h6>
-                                                <p> Wibu , True Wibu </p>
-                                                <div class="form-group row">
-                                                    <div class="col-lg-9"> </div>
-                                                </div>
-                                                <h6>Hobbies</h6>
-                                                <p> Indie music, watch anime, happy when having a notification on mobile phone. </p>
-                                            </div>
-                                        </div>
+                                         <h6 class="mb-3">Username: <p style="display: inline;">  <%= session.getAttribute("username")%></p></h6> 
+
+                                        <h6 class="mb-3">Email: <p style="display: inline;">  <%= session.getAttribute("email")%></p></h6> 
+                                        
+                                        <h6 class="mb-3">Gender: <p style="display: inline;">  <%= session.getAttribute("gender")%></p></h6> 
+
                                     </div>
                                 </div>
                             </div>
