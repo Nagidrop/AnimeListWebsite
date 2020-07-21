@@ -75,18 +75,29 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="seasonView">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Season Manager</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="genreView">
             <i class="fas fa-fw fa-table"></i>
             <span>Genres Manager</span></a>
     </li>
-
+<!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="studioView">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Studio Manager</span></a>
+    </li>
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+        <a class="nav-link" href="typeView">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Type Manager</span></a>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

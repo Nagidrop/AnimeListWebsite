@@ -153,8 +153,9 @@
         <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
-    </form>
-
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
     <script>
         function fillInfo(type) {

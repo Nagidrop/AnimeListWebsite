@@ -48,10 +48,10 @@
                         <!-- Begin Page Content -->
                         <div class=" q-fluid">
                             <!-- Page Heading -->
-                            <h1 class="h3 mb-2 text-gray-800">Display Type List</h1>
+                            <h1 class="h3 mb-2 text-gray-800">Display Genre List</h1>
                             <!--          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
 
-                            <!-- DataTales Example -->\
+                            <!-- DataTales Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 row">
                                     <div class="col-md-6" style="padding: 0.8%;">
@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="d-flex flex-row-reverse">
-                                            <a class="btn btn-primary btn-icon-split" href="#">
+                                            <a class="btn btn-primary btn-icon-split" id="button-create-new" href="#">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-plus"></i>
 
@@ -150,7 +150,34 @@
                     </div>
                 </div>
                 <!-- End of Main Content -->
+                <!-- Modal -->
+                    <div class="modal fade" id="modelReg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modelRegLabel">Create New Genre</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="createNewGenre" method="post" id="form-reg" accept-charset="utf-8">
+                                        <div >
+                                                <label for="fullname">New name genre:</label>
 
+                                            <div class="form-group">
+                                                <input class="form-control" id="fullname-reg" name="fullname-reg" required>
+
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <input type="submit" id="btn-submit-reg" class="btn btn-primary" value="Save">
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <!-- Footer -->
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
@@ -173,12 +200,14 @@
         </a>
 
     <script>
-        function fillInfo(id, name) {
+        $("#button-create-new").click(function () {
+                                $("#modelReg").modal();
+                });
+    function fillInfo(id, name) {
             $("#id").val(id);
             $("#name").val(name);
             $("#exampleModal").modal();
-
-        }
+                    };
         $("#btn-submit").click(function () {
             $("#info-form").submit();
         });
