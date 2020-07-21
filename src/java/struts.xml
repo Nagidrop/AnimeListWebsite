@@ -4,7 +4,6 @@
 
 <struts>
     <!-- Configuration for the default package. -->
-    <constant name="struts.multipart.saveDir" value="tmp"/>
     <package name="default" extends="struts-default">
         <action name="index" class="animelist.controller.ShowIndexAction" >
             <result name = "success"> index.jsp</result>
@@ -62,13 +61,13 @@
         </action>
 
         <action name="changepassword" class = "animelist.controller.ChangePasswordAction">
-            <result name="success">userinfo.jsp
+            <result name="success" type="redirectAction">ViewUserTotalAnimes
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
 
         <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
-             <interceptor-ref name="fileUpload">
+<interceptor-ref name="fileUpload">
                 <param name="maximumSize">2097152</param>				
                 <param name="allowedTypes">
                     image/png,image/jpg,image/jpeg
@@ -95,26 +94,29 @@
         <action name="updateSeason" class = "animelist.controller.AdminUpdateSeasonAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">seasonView</param>
-            </result>            
+            </result>
+            <result name="fail">invalid.jsp</result>
 
         </action>
         <action name="updateGenre" class = "animelist.controller.AdminUpdateGenreAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">genreView</param>
-            </result>            
+            </result>
+            <result name="fail">invalid.jsp</result>
 
         </action>
         <action name="updateStudio" class = "animelist.controller.AdminUpdateStudioAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">studioView</param>
-            </result>            
+            </result>
+            <result name="fail">invalid.jsp</result>
 
         </action>
         <action name="viewAnimeList" class="animelist.controller.ViewListAction" >
             <result name="success" type="dispatcher">viewList.jsp</result>
         </action>
 
-        <action name="editAnimeList" class="animelist.controller.EditListAction" >
+        <action name="editRemoveAnimeFromList" class="animelist.controller.EditRemoveAnimeAction" >
             <result name="success" type="redirectAction">
                 <param name="actionName">viewAnimeList</param>
                 <param name="accountID" >${accountIDEdit}</param>
@@ -131,6 +133,13 @@
         </action>
 
         <action name="updateUser" class = "animelist.controller.AdminUpdateUser">
+            <result name="success" type="redirectAction">
+                <param name="actionName">userList</param>
+            </result>
+            <result name="user" type="redirectAction">index</result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+        </action>
+        <action name="createNewUser" class = "animelist.controller.createNewUserAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">userList</param>
             </result>
@@ -159,11 +168,28 @@
             <result name="success" type="dispatcher">searchResult.jsp</result>
             <result name="input">404.jsp</result>
         </action>
-        
+
         <action name="ViewUserTotalAnimes" class="animelist.controller.ViewTotalNumberAnimesAction">
-            <result name="success" type="dispatcher">404.jsp</result>
+            <result name="success" type="dispatcher">userinfo.jsp</result>
         </action>
-        
+        <action name="viewListAllAnimes" class="animelist.controller.ShowListAnimeAction">
+            <result name="success" type="dispatcher">admin/animeList.jsp</result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+
+        </action>
+        <action name="deleteAnime" class="animelist.controller.DeleteAnimeAction">
+            <result name="success" type="redirectAction">viewListAllAnimes</result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+          </action>
+
+        <action name="addOrRemoveAnimeFromList" class="animelist.controller.AddRemoveAnimeAction" >
+            <result name="success" type="redirectAction">
+                <param name="actionName">viewAnime</param>
+                <param name="animeID" >${animeID}</param>
+            </result>
+            <result name="fail" type="dispatcher">actionFailed.jsp</result>
+        </action>
+
         <action name="deleteStudio" class = "animelist.controller.DeleteStudioAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">studioView</param>
