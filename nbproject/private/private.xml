@@ -4,20 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/PC/Music/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
-            <file>file:/C:/Users/PC/Music/AnimeListWebsite/src/java/animelist/controller/ViewAnimeAction.java</file>
             <file>file:/C:/Users/PC/Music/AnimeListWebsite/src/java/struts.xml</file>
-            <file>file:/C:/Users/PC/Music/AnimeListWebsite/src/java/animelist/controller/ShowListUserAction.java</file>
             <file>file:/C:/Users/PC/Music/AnimeListWebsite/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/ViewAnimeAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/struts.xml</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/viewList.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/viewAnime.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/index.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/searchResult.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/header.jsp</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/src/java/animelist/controller/ViewListAction.java</file>
-            <file>file:/C:/Workbench/Coding/GitHub/AnimeListWebsite/web/AnimeSearch.jsp</file>
+            <file>file:/C:/Users/PC/Music/AnimeListWebsite/web/AnimeSearch.jsp</file>
         </group>
     </open-files>
 </project-private>
