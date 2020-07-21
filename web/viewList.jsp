@@ -927,14 +927,28 @@
                 text-decoration: none!important;
             }
         </style>
-        <title><s:property value="accountUsername" />'s Anime List - Wibu Anime List</title>
+        <title>
+            <s:if test="%{accountUsername != null}">
+                <s:property value="accountUsername" />'s Anime List - Wibu Anime List
+            </s:if>
+            <s:else>
+                User Anime List - Wibu Anime List
+            </s:else>
+        </title>
     </head>
     <body style="background-image: url('images/bg-12.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
         <jsp:include page='header.jsp'/>
         <div class="header lala col-md-4 font-bold font-weight-bold" style="color:#ffffff;text-shadow:2px 2px #6c757d">
             <div class="header-menu">
                 <div class="btn-menu" style="font-size:20px">
-                    Viewing <s:property value="accountUsername" /> Anime List
+                    Viewing 
+                    <s:if test="%{accountUsername != null}">
+                        <s:property value="accountUsername" />'s
+                    </s:if>
+                    <s:else>
+                        User
+                    </s:else> 
+                        Anime List
                 </div>
             </div>
         </div>

@@ -67,7 +67,7 @@
         </action>
 
         <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
-<interceptor-ref name="fileUpload">
+            <interceptor-ref name="fileUpload">
                 <param name="maximumSize">2097152</param>				
                 <param name="allowedTypes">
                     image/png,image/jpg,image/jpeg
@@ -180,14 +180,16 @@
         <action name="deleteAnime" class="animelist.controller.DeleteAnimeAction">
             <result name="success" type="redirectAction">viewListAllAnimes</result>
             <result name="fail" type="redirectAction">404.jsp</result>
-          </action>
+        </action>
 
         <action name="addOrRemoveAnimeFromList" class="animelist.controller.AddRemoveAnimeAction" >
             <result name="success" type="redirectAction">
                 <param name="actionName">viewAnime</param>
                 <param name="animeID" >${animeID}</param>
             </result>
-            <result name="fail" type="dispatcher">actionFailed.jsp</result>
+            <result name="fail" type="dispatcher">actionFailedAnime.jsp
+                <param name="animeID" >${animeID}</param>
+            </result>
         </action>
 
         <action name="deleteStudio" class = "animelist.controller.DeleteStudioAction">
