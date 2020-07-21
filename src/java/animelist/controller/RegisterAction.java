@@ -37,14 +37,14 @@ public class RegisterAction extends ActionSupport implements ServletRequestAware
         fullname = request.getParameter("registerFullname");
         email = request.getParameter("registerEmail");
         
-        System.out.println(username +password+ fullname+ email);
+        if(dao.checkExistedUsername(username)){
+            return FAIL;
+        }
         
         if (dao.register(username, password, fullname, email)) {
-
             return SUCCESS;
-        } else {
-            return "fail";
         }
+        return FAIL;
     }
 
     public String getUsername() {

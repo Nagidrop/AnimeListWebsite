@@ -61,13 +61,13 @@
             <result name="success">
                 login.jsp
             </result>
-            <result name="fail">invalid.jsp</result>
+            <result name="fail">registerFailed.jsp</result>
         </action>
 
         <action name="changepassword" class = "animelist.controller.ChangePasswordAction">
             <result name="success" type="redirectAction">ViewUserTotalAnimes
             </result>
-            <result name="fail">invalid.jsp</result>
+            <result name="fail">actionFailed.jsp</result>
         </action>
 
         <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
@@ -80,7 +80,7 @@
             <interceptor-ref name="basicStack"/>
             <result name="success" type="redirectAction">ViewUserTotalAnimes
             </result>
-            <result name="fail">invalid.jsp</result>
+            <result name="fail">actionFailed.jsp</result>
         </action>
 
         <action name="genreView" class = "animelist.controller.GenreViewAction">
@@ -99,21 +99,21 @@
             <result name="success" type="redirectAction">
                 <param name="actionName">seasonView</param>
             </result>
-            <result name="fail">invalid.jsp</result>
+            <result name="fail">actionFailed.jsp</result>
 
         </action>
         <action name="updateGenre" class = "animelist.controller.AdminUpdateGenreAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">genreView</param>
             </result>
-            <result name="fail">invalid.jsp</result>
+            <result name="fail">actionFailed.jsp</result>
 
         </action>
         <action name="updateStudio" class = "animelist.controller.AdminUpdateStudioAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">studioView</param>
             </result>
-            <result name="fail">invalid.jsp</result>
+            <result name="fail">actionFailed.jsp</result>
 
         </action>
         <action name="viewAnimeList" class="animelist.controller.ViewListAction" >
@@ -133,7 +133,7 @@
             <result name="success">admin/tables.jsp
             </result>
             <result name="user" type="redirectAction">index</result>
-            <result name="fail" type="redirectAction">404.jsp</result>
+            <result name="fail" type="redirectAction">actionFailed.jsp</result>
         </action>
 
         <action name="updateUser" class = "animelist.controller.AdminUpdateUser">
@@ -141,51 +141,51 @@
                 <param name="actionName">userList</param>
             </result>
             <result name="user" type="redirectAction">index</result>
-            <result name="fail" type="redirectAction">404.jsp</result>
+            <result name="fail" type="redirectAction">actionFailed.jsp</result>
         </action>
         <action name="createNewUser" class = "animelist.controller.createNewUserAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">userList</param>
             </result>
             <result name="user" type="redirectAction">index</result>
-            <result name="fail" type="redirectAction">404.jsp</result>
+            <result name="fail" type="redirectAction">actionFailed.jsp</result>
         </action>
         <action name="deleteUser" class = "animelist.controller.DeleteUserAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">userList</param>
             </result>
             <result name="user" type="redirectAction">index</result>
-            <result name="fail" type="redirectAction">404.jsp</result>
+            <result name="fail" type="redirectAction">actionFailed.jsp</result>
         </action>
 
         <action name="sortAllAnimeByName" class="animelist.controller.SortAnimeAction" method="sortByName">
             <result name="success" type="dispatcher">allAnime.jsp</result>
-            <result name="input">404.jsp</result>
+            <result name="input">actionFailed.jsp</result>
         </action>
 
         <action name="sortAllAnimeBySeason" class="animelist.controller.SortAnimeAction" method="sortBySeason">
             <result name="success" type="dispatcher">allAnime.jsp</result>
-            <result name="input">404.jsp</result>
+            <result name="input">actionFailed.jsp</result>
         </action>
 
         <action name="sortAllAnimeByEpisode" class="animelist.controller.SortAnimeAction" method="sortByEpisode">
             <result name="success" type="dispatcher">allAnime.jsp</result>
-            <result name="input">404.jsp</result>
+            <result name="input">actionFailed.jsp</result>
         </action>
 
         <action name="sortAnimeByName" class="animelist.controller.SortAnimeAction" method="sortByName">
             <result name="success" type="dispatcher">searchResult.jsp</result>
-            <result name="input">404.jsp</result>
+            <result name="input">actionFailed.jsp</result>
         </action>
 
         <action name="sortAnimeBySeason" class="animelist.controller.SortAnimeAction" method="sortBySeason">
             <result name="success" type="dispatcher">searchResult.jsp</result>
-            <result name="input">404.jsp</result>
+            <result name="input">actionFailed.jsp</result>
         </action>
 
         <action name="sortAnimeByEpisode" class="animelist.controller.SortAnimeAction" method="sortByEpisode">
             <result name="success" type="dispatcher">searchResult.jsp</result>
-            <result name="input">404.jsp</result>
+            <result name="input">actionFailed.jsp</result>
         </action>
 
         <action name="ViewUserTotalAnimes" class="animelist.controller.ViewTotalNumberAnimesAction">
@@ -193,12 +193,12 @@
         </action>
         <action name="viewListAllAnimes" class="animelist.controller.ShowListAnimeAction">
             <result name="success" type="dispatcher">admin/animeList.jsp</result>
-            <result name="fail" type="redirect">404.jsp</result>
+            <result name="fail" type="redirect">actionFailed.jsp</result>
 
         </action>
         <action name="deleteAnime" class="animelist.controller.DeleteAnimeAction">
             <result name="success" type="redirectAction">viewListAllAnimes</result>
-            <result name="fail" type="redirectAction">404.jsp</result>
+            <result name="fail" type="redirectAction">actionFailed.jsp</result>
         </action>
 
         <action name="addOrRemoveAnimeFromList" class="animelist.controller.AddRemoveAnimeAction" >
@@ -215,20 +215,20 @@
             <result name="success" type="redirectAction">
                 <param name="actionName">studioView</param>
             </result>
-            <result name="fail" type="redirectAction">404.jsp</result>
+            <result name="fail" type="redirectAction">actionFailed.jsp</result>
         </action>
         <action name="deleteSeason" class = "animelist.controller.DeleteSeasonAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">seasonView</param>
             </result>
-            <result name="fail" type="redirectAction">404.jsp</result>
+            <result name="fail" type="redirectAction">actionFailed.jsp</result>
         </action>
 
         <action name="deleteGenre" class = "animelist.controller.DeleteGenreAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">genreView</param>
             </result>
-            <result name="fail" type="redirectAction">404.jsp</result>
+            <result name="fail" type="redirectAction">actionFailed.jsp</result>
         </action>
 
         <action name="createNewGenre" class = "animelist.controller.createNewGenreAction">

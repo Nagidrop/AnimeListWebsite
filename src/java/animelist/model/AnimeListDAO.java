@@ -99,6 +99,48 @@ public class AnimeListDAO {
         return null;
     }
 
+    
+    /**
+     * Check if username is already in database or not
+     *
+     * @param username username need to check
+     * @return true if username existed, false otherwise
+     * @throws java.sql.SQLException
+     */
+    public boolean checkExistedUsername(String username) throws SQLException {
+
+        /* Declare Connection, PreparedStatement variables */
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT * FROM Account WHERE username = ? AND deleted_at is null");
+            st.setString(1, username);
+            
+            rs = st.executeQuery();
+            
+            if (rs.next()) {
+                return true;
+            }
+        } finally {
+            /* Close the JDBC resources after use */
+            
+            if (st != null) {
+                st.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+            if(rs !=null){
+                conn.close();
+            }
+        }
+        
+        return false;
+    }
+    
     /**
      * Register a new user to database
      *
