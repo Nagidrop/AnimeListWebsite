@@ -25,6 +25,8 @@
             <result name="admimpage"  type="redirectAction">admin</result>
             <result name="fail" type="redirectAction">
                 <param name="actionName">prelogin</param>
+                <param name="status">false</param>
+
             </result>
         </action>
 
@@ -70,6 +72,46 @@
             <result name="fail">invalid.jsp</result>
         </action>
 
+        <action name="genreView" class = "animelist.controller.GenreView">
+            <result name="success">admin/editgenre.jsp</result>
+        </action>
+        <action name="seasonView" class = "animelist.controller.SeasonView">
+            <result name="success">admin/editseason.jsp</result>
+        </action>
+        <action name="studioView" class = "animelist.controller.StudioView">
+            <result name="success">admin/editstudio.jsp</result>
+        </action>
+        <action name="typeView" class = "animelist.controller.TypeView">
+            <result name="success">admin/edittype.jsp</result>
+        </action>
+        <action name="updateSeason" class = "animelist.controller.AdminUpdateSeason">
+            <result name="success" type="redirectAction">
+                <param name="actionName">seasonView</param>
+            </result>            
+            <result name="fail">invalid.jsp</result>
+
+        </action>
+        <action name="updateGenre" class = "animelist.controller.AdminUpdateGenre">
+            <result name="success" type="redirectAction">
+                <param name="actionName">genreView</param>
+            </result>            
+            <result name="fail">invalid.jsp</result>
+
+        </action>
+        <action name="updateStudio" class = "animelist.controller.AdminUpdateStudio">
+            <result name="success" type="redirectAction">
+                <param name="actionName">studioView</param>
+            </result>            
+            <result name="fail">invalid.jsp</result>
+
+        </action>
+        <action name="updateType" class = "animelist.controller.AdminUpdateType">
+            <result name="success" type="redirectAction">
+                <param name="actionName">typeView</param>
+            </result>            
+            <result name="fail">invalid.jsp</result>
+
+        </action>
         <action name="viewAnimeList" class="animelist.controller.ViewListAction" >
             <result name="success" type="dispatcher">viewList.jsp</result>
         </action>
@@ -116,8 +158,8 @@
         </action>
 
         <action name="sortAnimeByEpisode" class="animelist.controller.SortAnimeAction" method="sortByEpisode">
-             <result name="success" type="dispatcher">searchResult.jsp</result>
-             <result name="input">404.jsp</result>
+            <result name="success" type="dispatcher">searchResult.jsp</result>
+            <result name="input">404.jsp</result>
         </action>
         
     </package>
