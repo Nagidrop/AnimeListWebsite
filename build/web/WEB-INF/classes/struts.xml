@@ -29,7 +29,11 @@
 
             </result>
         </action>
-
+         
+        <action name="showAllAnime" class = "animelist.controller.SearchAction">
+            <result name="success" type="dispatcher">allAnime.jsp</result>
+        </action> 
+          
         <action name="viewAnime" class="animelist.controller.ViewAnimeAction" >
             <result name="success" type="dispatcher">viewAnime.jsp</result>
             <result name="fail">404.jsp</result>
@@ -67,7 +71,7 @@
         </action>
 
         <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
-<interceptor-ref name="fileUpload">
+            <interceptor-ref name="fileUpload">
                 <param name="maximumSize">2097152</param>				
                 <param name="allowedTypes">
                     image/png,image/jpg,image/jpeg
@@ -154,6 +158,21 @@
             <result name="fail" type="redirectAction">404.jsp</result>
         </action>
 
+        <action name="sortAllAnimeByName" class="animelist.controller.SortAnimeAction" method="sortByName">
+            <result name="success" type="dispatcher">allAnime.jsp</result>
+            <result name="input">404.jsp</result>
+        </action>
+
+        <action name="sortAllAnimeBySeason" class="animelist.controller.SortAnimeAction" method="sortBySeason">
+            <result name="success" type="dispatcher">allAnime.jsp</result>
+            <result name="input">404.jsp</result>
+        </action>
+
+        <action name="sortAllAnimeByEpisode" class="animelist.controller.SortAnimeAction" method="sortByEpisode">
+            <result name="success" type="dispatcher">allAnime.jsp</result>
+            <result name="input">404.jsp</result>
+        </action>
+                
         <action name="sortAnimeByName" class="animelist.controller.SortAnimeAction" method="sortByName">
             <result name="success" type="dispatcher">searchResult.jsp</result>
             <result name="input">404.jsp</result>
@@ -180,7 +199,7 @@
         <action name="deleteAnime" class="animelist.controller.DeleteAnimeAction">
             <result name="success" type="redirectAction">viewListAllAnimes</result>
             <result name="fail" type="redirectAction">404.jsp</result>
-          </action>
+        </action>
 
         <action name="addOrRemoveAnimeFromList" class="animelist.controller.AddRemoveAnimeAction" >
             <result name="success" type="redirectAction">
@@ -202,11 +221,14 @@
             </result>
             <result name="fail" type="redirectAction">404.jsp</result>
         </action>
+        
         <action name="deleteGenre" class = "animelist.controller.DeleteGenreAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">genreView</param>
             </result>
             <result name="fail" type="redirectAction">404.jsp</result>
         </action>
+        
+        
     </package>
 </struts>
