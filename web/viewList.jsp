@@ -927,14 +927,14 @@
                 text-decoration: none!important;
             }
         </style>
-        <title><s:property value="%{#session.username}"/>'s Anime List - Wibu Anime List</title>
+        <title><s:property value="accountUsername" />'s Anime List - Wibu Anime List</title>
     </head>
     <body style="background-image: url('images/bg-12.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
         <jsp:include page='header.jsp'/>
         <div class="header lala col-md-4 font-bold font-weight-bold" style="color:#ffffff;text-shadow:2px 2px #6c757d">
             <div class="header-menu">
                 <div class="btn-menu" style="font-size:20px">
-                    Viewing <s:property value="%{#session.username}"/> Anime List
+                    Viewing <s:property value="accountUsername" /> Anime List
                 </div>
             </div>
         </div>
@@ -942,16 +942,16 @@
         <div id="list-container" class="list-container">
             <div id="status-menu" class="status-menu-container">
                 <div class="status-menu">
-                    <a id="all_anime" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=0" class="status-button all_anime">All Anime</a>
-                    <a id="watching" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=1"
+                    <a id="all_anime" href="viewAnimeList?accountID=<s:property value="accountID" />&listStatus=0" class="status-button all_anime">All Anime</a>
+                    <a id="watching" href="viewAnimeList?accountID=<s:property value="accountID" />&listStatus=1"
                        class="status-button watching ">Currently Watching</a>
-                    <a id="completed" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=2"
+                    <a id="completed" href="viewAnimeList?accountID=<s:property value="accountID" />&listStatus=2"
                        class="status-button completed ">Completed</a>
-                    <a id="onhold" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=3"
+                    <a id="onhold" href="viewAnimeList?accountID=<s:property value="accountID" />&listStatus=3"
                        class="status-button onhold ">On Hold</a>
-                    <a id="dropped" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=4"
+                    <a id="dropped" href="viewAnimeList?accountID=<s:property value="accountID" />&listStatus=4"
                        class="status-button dropped ">Dropped</a>
-                    <a id="plantowatch" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=5"
+                    <a id="plantowatch" href="viewAnimeList?accountID=<s:property value="accountID" />&listStatus=5"
                        class="status-button plantowatch ">Plan to Watch</a>
                     <div class="search-container">
                         <form action="searchInList" id="search-form-action">
@@ -1042,7 +1042,9 @@
                                     <% }%>
                                     <input type="hidden" name="episodesEdit" value="<%= anime.getEpisodes()%>" />
                                     <input type="hidden" name="animeIDEdit" value="<%= anime.getId()%>" />          
+                                    <% if (session.getAttribute("user") != null) { %>
                                     <input type="hidden" name="accountIDEdit" value="<s:property value="%{#session.id}"/>" />
+                                    <% } %>
                                 </td>
 
                                 <td class="data status" style="width: 15%;">
@@ -1135,7 +1137,7 @@
                 $("#onhold").removeClass("on");
                 $("#dropped").removeClass("on");
                 $("#plantowatch").addClass("on");
-            } 
+            }
 
 
         </script>
