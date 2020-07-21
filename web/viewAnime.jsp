@@ -154,12 +154,13 @@
                     <div class="details-img">
                         <img src="images/poster/<s:property value="anime.poster"/>" alt=""/>
                     </div>
-                    
+
                     <div class="details-work">
                         <% if (session.getAttribute("user") != null) {%>
                         <%
                             ArrayList<String> statusList = (ArrayList<String>) session.getAttribute("StatusList");
                             ListDTO animeInList = (ListDTO) request.getAttribute("AnimeInList");
+                            AnimeDTO viewingAnime = (AnimeDTO) request.getAttribute("anime");
                             /* If anime already exists in list */
                             if (animeInList != null) {
                         %>
@@ -177,7 +178,7 @@
                                                         <select name="status" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control-sm" style="border: 1px solid #ced4da!important; font-size: 0.95rem!important; padding: 0;">
                                                             <%                                                                int statusIndex = 1;
                                                                 for (String status : statusList) {
-                                                                    if (status != animeInList.getStatus()) {
+                                                                    if (!status.equals(animeInList.getStatus())) {
                                                             %>
                                                             <option value="<%= statusIndex%>"> <%= status%> </option> <br />
                                                             <% } else {%>
@@ -192,7 +193,11 @@
                                                     <td class="spaceit">Eps Seen:</td>
                                                     <td class="spaceit">
                                                         <input type="hidden" name="episodes" value="<s:property value="anime.episodes" />" />
-                                                        <input type="text" id="myinfo_watchedeps" name="progress" size="3" class="inputtext form-control-sm" value="<%= animeInList.getProgress()%>" style="border: 1px solid #ced4da!important; font-size: 1rem!important;" /> / 
+                                                        <% if (animeInList.getProgress() == 0 && animeInList.getStatus().equals("Completed") && viewingAnime.getEpisodes() == 0) { %>
+                                                        <input type="text" id="myinfo_watchedeps" name="progress" size="3" class="inputtext form-control-sm" value="?" style="border: 1px solid #ced4da!important; font-size: 1rem!important;" /> / 
+                                                        <%} else {%>
+                                                        <input type="text" id="myinfo_watchedeps" name="progress" size="3" class="inputtext form-control-sm" value="<%=animeInList.getProgress()%>" style="border: 1px solid #ced4da!important; font-size: 1rem!important;" /> / 
+                                                        <% } %>
                                                         <s:if test="%{anime.episodes != 0}">
                                                             <s:property value="anime.episodes" />
                                                         </s:if>
@@ -273,7 +278,7 @@
                             }  %>
                     </div>
                 </div>
-                    
+
                 <div class="col-md-8">
                     <div class="details-head">
                         <h1>
@@ -301,12 +306,12 @@
 
                         </ul>
                     </div>
-                        
+
                     <div class="tab-content details-tab" id="myTabContent">
                         <div class="tab-pane fade show active" id="synopsis" role="tabpanel" aria-labelledby="synopsis-tab">
                             <p class="synopsis"><s:property value="anime.description" /></p>
                         </div>
-                        
+
                         <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
                             <div class="row">
                                 <div class="col-md-6">
@@ -316,7 +321,7 @@
                                     <p><s:property value="anime.type" /></p>
                                 </div>
                             </div>
-                                
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Episodes</label>
@@ -330,7 +335,7 @@
                                     </s:else>
                                 </div>
                             </div>
-                                
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Status</label>
@@ -339,7 +344,7 @@
                                     <p><s:property value="anime.status" /></p>
                                 </div>
                             </div>
-                                
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Release Date</label>
@@ -355,7 +360,7 @@
                                     </p>
                                 </div>
                             </div>
-                                
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Studio(s)</label>
@@ -375,7 +380,7 @@
                                     </p>
                                 </div>
                             </div>
-                                    
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Genre(s)</label>
@@ -395,7 +400,7 @@
                                     </p>
                                 </div>
                             </div>
-                                    
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Duration</label>
@@ -411,7 +416,7 @@
                                     </p>
                                 </div>
                             </div>
-                                        
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Rating</label>
@@ -421,7 +426,7 @@
                                 </div>
                             </div>
                         </div>
-                                
+
                         <div class="tab-pane fade" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
                             <s:if test="%{anime.trailer != null}">
                                 <div style="text-align: center;"><iframe width="500" height="300" src="<s:property value="anime.trailer"/>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe></div>

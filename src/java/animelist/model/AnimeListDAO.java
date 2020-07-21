@@ -1068,16 +1068,26 @@ public class AnimeListDAO {
         Connection conn = null;
         PreparedStatement st = null;
 
-        if (status == 2) {
-            progress = episodes;
-        } else if (status == 5) {
-            progress = 0;
+        if (progress > 8888) {
+            progress = 8888;
         }
 
-        if (progress > episodes) {
-            progress = episodes;
-        } else if (progress < 0) {
-            progress = 0;
+        if (episodes != 0) {
+            if (progress > episodes) {
+                progress = episodes;
+            } else if (progress < 0) {
+                progress = 0;
+            }
+
+            if (status == 2) {
+                progress = episodes;
+            } else if (status == 5) {
+                progress = 0;
+            }
+        } else {
+            if (progress < 0 || status == 5) {
+                progress = 0;
+            }
         }
 
         try {
@@ -1162,16 +1172,26 @@ public class AnimeListDAO {
         Connection conn = null;
         PreparedStatement st = null;
 
-        if (status == 2) {
-            progress = episodes;
-        } else if (status == 5) {
-            progress = 0;
+        if (progress > 8888) {
+            progress = 8888;
         }
 
-        if (progress > episodes) {
-            progress = episodes;
-        } else if (progress < 0) {
-            progress = 0;
+        if (episodes != 0) {
+            if (progress > episodes) {
+                progress = episodes;
+            } else if (progress < 0) {
+                progress = 0;
+            }
+
+            if (status == 2) {
+                progress = episodes;
+            } else if (status == 5) {
+                progress = 0;
+            }
+        } else {
+            if (progress < 0 || status == 5) {
+                progress = 0;
+            }
         }
 
         try {
