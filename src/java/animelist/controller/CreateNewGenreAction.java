@@ -12,29 +12,35 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-public class createNewGenreAction extends ActionSupport implements ServletRequestAware {
-    private String fullname;
-    private HttpServletRequest request;
-    final String SUCCESS = "success";
-    final String FAIL = "fail";
-    public createNewGenreAction() {
+/* This action got triggered when an admin create new genre */
+public class CreateNewGenreAction extends ActionSupport implements ServletRequestAware {
+
+    private String fullname; // genre name
+    private HttpServletRequest request; // HTTP request
+    final String SUCCESS = "success"; // indicates sucessful action
+    final String FAIL = "fail"; // indicates failed action
+
+    /* Constructor */
+    public CreateNewGenreAction() {
     }
-    
+
     @Override
     public String execute() throws Exception {
-         try {
+        try {
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
             fullname = request.getParameter("fullname-reg");
-            if(dao.createNewGenre(fullname)){
+            if (dao.createNewGenre(fullname)) {
                 return SUCCESS;
             }
-            } catch (SQLException ex) {
-            Logger.getLogger(createNewUserAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateNewUserAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return FAIL;
     }
 
+    /* Getters and Setters */
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;

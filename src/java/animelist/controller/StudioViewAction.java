@@ -11,21 +11,28 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+/* This action got called when an admin views studio list */
 public class StudioViewAction extends ActionSupport implements ServletRequestAware {
-    HttpServletRequest request;
-    private ArrayList<StudioDTO> studios;
-    private final String FAIL = "fail";
-    private final String SUCCESS = "success";
+    HttpServletRequest request; // HTTP request
+    private ArrayList<StudioDTO> studios; // list of studios
+    private final String FAIL = "fail"; // indicates failed action
+    private final String SUCCESS = "success"; // indicates sucessful action
+    
+    /* Constructor */
     public StudioViewAction() {
     }
     
+    @Override
     public String execute() throws Exception {
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
-        studios = dao.getStudios();
+        studios = dao.getStudios(); // get studios from DB
+        
         request.setAttribute("listStudio", studios);
         return SUCCESS;
     }
 
+    /* Getters and Setters */
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;

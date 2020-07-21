@@ -11,33 +11,41 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-public class ViewTotalNumberAnimesAction extends ActionSupport implements ServletRequestAware{
+/* This action got triggered when user profile page is shown */
+public class ViewTotalNumberAnimesAction extends ActionSupport implements ServletRequestAware {
+
+    /* Data */
     int totalAnimes;
     int totalCompletedAnimes;
-    int accountID;
-    HttpServletRequest request;
-    final String SUCCESS = "success";
+    int accountID; // user ID
+    HttpServletRequest request; // HTTP request
+    final String SUCCESS = "success"; // indicates sucessful action
 
+    /* Constructor */
     public ViewTotalNumberAnimesAction() {
     }
 
+    @Override
+    public String execute() throws Exception {
+        // Get user ID from session
+        Map session = ActionContext.getContext().getSession();
+        accountID = (int) session.get("id");
+       
+        /* Instantiate DAO object and interacts with DB */
+        AnimeListDAO dao = new AnimeListDAO();
+        totalAnimes = dao.getTotalAnimesInList(accountID);
+        totalCompletedAnimes = dao.getTotalCompletedAnimesInList(accountID);
+
+        return SUCCESS;
+    }
+
+    /* Getters and Setters */
     public int getAccountID() {
         return accountID;
     }
 
     public void setAccountID(int accountID) {
         this.accountID = accountID;
-    }
-
-    @Override
-    public String execute() throws Exception {
-        Map session = ActionContext.getContext().getSession();
-        accountID = (int) session.get("id");
-        AnimeListDAO dao = new AnimeListDAO();
-        totalAnimes = dao.getTotalAnimesInList(accountID);
-        totalCompletedAnimes = dao.getTotalCompletedAnimesInList(accountID);
-        
-        return SUCCESS;
     }
 
     public int getTotalAnimes() {
@@ -60,6 +68,5 @@ public class ViewTotalNumberAnimesAction extends ActionSupport implements Servle
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;
     }
-    
-    
+
 }

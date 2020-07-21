@@ -14,28 +14,35 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-public class createNewStudioAction extends ActionSupport implements ServletRequestAware {
-     private String fullname;
-     private Date date;
-    private HttpServletRequest request;
-    final String SUCCESS = "success";
-    final String FAIL = "fail";
-    public createNewStudioAction() {
+/* This action got triggered when an admin create new stidop */
+public class CreateNewStudioAction extends ActionSupport implements ServletRequestAware {
+
+    private String fullname; // studio name
+    private Date date; // creation date
+    private HttpServletRequest request; // HTTP request
+    final String SUCCESS = "success"; // indicates sucessful action 
+    final String FAIL = "fail"; // indicates failed action
+
+    /* Constructor */
+    public CreateNewStudioAction() {
     }
-    
-     @Override
+
+    @Override
     public String execute() throws Exception {
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
         fullname = request.getParameter("fullname-reg");
-        date = Date.valueOf(LocalDate.now());
-        System.out.println("Hello"+fullname);
-        if(dao.createNewStudio(fullname,date)){
-            return SUCCESS;
-        }else{
+        date = Date.valueOf(LocalDate.now()); // 
 
-        return FAIL;}
+        if (dao.createNewStudio(fullname, date)) {
+            return SUCCESS;
+        } else {
+
+            return FAIL;
+        }
     }
 
+    /* Getters and Setters */
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;
@@ -56,5 +63,5 @@ public class createNewStudioAction extends ActionSupport implements ServletReque
     public void setRequest(HttpServletRequest request) {
         this.request = request;
     }
-    
+
 }

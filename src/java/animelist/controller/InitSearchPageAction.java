@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/* This action got called when a user open advanced search */
+/* This action got called when an advanced search page opens up (before pressing search in advanced search page) */
 public class InitSearchPageAction {
 
-    /* Advanced Search Page criteria */
+    /* Advanced Search Page crtieria to display to choose */
     private ArrayList<String> types;
     private ArrayList<GenreDTO> genres;
     private ArrayList<StudioDTO> studios;

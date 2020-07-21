@@ -13,40 +13,49 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/* This action got called when an admin views list of users */
 public class ShowListUserAction {
 
-    ArrayList<AccountDTO> listUser = new ArrayList<>();
+    ArrayList<AccountDTO> listUser = new ArrayList<>(); // list of users
     private final String SUCCESS = "success"; // indicates successful action
-    private final String USER = "user"; // indicates successful action
+    private final String USER = "user"; // indicates user intervention
     private final String FAIL = "fail"; // indicates failed action
-
     String genString = "1";
 
+    /* Constructor */
+    public ShowListUserAction() {
+    }
+
+    public String execute() {
+        try {
+            /* Check if user intervents in */
+            Map session = ActionContext.getContext().getSession();
+            int roleID = (int) session.get("roleid");
+            if (roleID != 1) {
+                return USER;
+            }
+
+            /* Instantiate DAO object and interacts with DB */
+            AnimeListDAO dao = new AnimeListDAO();
+            listUser = dao.getAccountList(2);
+
+            // indicates sucessful action
+            return SUCCESS;
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowListUserAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // indicates failed action
+        return FAIL;
+    }
+
+    /* Getters and Setters */
     public String getGenString() {
         return genString;
     }
 
     public void setGenString(String genString) {
         this.genString = genString;
-    }
-
-    public ShowListUserAction() {
-    }
-
-    public String execute() {
-        try {
-            Map session = ActionContext.getContext().getSession();
-            int roleID = (int) session.get("roleid");
-            if (roleID != 1) {
-                return USER;
-            }
-            AnimeListDAO dao = new AnimeListDAO();
-            listUser = dao.getAccountList(2);
-            return SUCCESS;
-        } catch (SQLException ex) {
-            Logger.getLogger(ShowListUserAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return FAIL;
     }
 
     public ArrayList<AccountDTO> getListUser() {

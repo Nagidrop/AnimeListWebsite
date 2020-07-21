@@ -14,12 +14,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+/* This action got called when sort is called for animes in search page */
 public class SortAnimeAction extends ActionSupport implements ServletRequestAware {
 
-    HttpServletRequest request;
-    private ArrayList<AnimeDTO> listAnimeDTOs;
-    private final String SUCCESS = "success";
+    HttpServletRequest request; // HTTP request
+    private ArrayList<AnimeDTO> listAnimeDTOs; // result list for sorting
+    private final String SUCCESS = "success"; // indicates sucessful action
 
+    /* Sort based on different criteria */
     public String sortByName() {
         Map session = ActionContext.getContext().getSession();
         listAnimeDTOs = (ArrayList<AnimeDTO>) session.get("sortlist");
@@ -47,6 +49,7 @@ public class SortAnimeAction extends ActionSupport implements ServletRequestAwar
         return SUCCESS;
     }
 
+    /* Getters and Setters */
     public HttpServletRequest getRequest() {
         return request;
     }
