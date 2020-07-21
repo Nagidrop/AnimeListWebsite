@@ -12,7 +12,8 @@
         <meta name="author" content="">
 
         <title>Anime Manager</title>
-
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         <!-- Custom fonts for this template -->
         <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -103,9 +104,9 @@
                                                     <td><s:property value="name"/></td>
                                                     <td><s:property value="episodes"/></td>
                                                     <td><s:property value="type"/></td>
-                                                         
+
                                                     <td style="text-align: center">
-                                                        <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="username"/>', '<s:property value="fullName"/>', '<s:property value="email"/>',<s:property value="gender"/>)"> <i class="fa fa-edit" style="color: white"></i></a>
+                                                        <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="season.id"/>', '<s:property value="studios"/>', '<s:property value="email"/>',<s:property value="gender"/>)"> <i class="fa fa-edit" style="color: white"></i></a>
                                                     </td>
                                                     <td style="text-align: center">
                                                         <a class="btn-sm btn-danger btn-circle " href="deleteAnime?id=<s:property value="id"/>"><i class="fa fa-trash" style="color: white"></i></a>                                  
