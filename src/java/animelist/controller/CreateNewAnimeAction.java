@@ -29,7 +29,6 @@ public class CreateNewAnimeAction extends ActionSupport implements ServletReques
 
     @Override
     public String execute() {
-        System.out.println(Arrays.toString(request.getParameterValues("studio")));
 
         return SUCCESS;
     }

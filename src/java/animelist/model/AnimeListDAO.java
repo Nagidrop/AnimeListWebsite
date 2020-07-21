@@ -32,7 +32,8 @@ public class AnimeListDAO {
      *
      * @param username
      * @param password
-     * @return Account object (except password) if login successful, null if login credentials don't match
+     * @return Account object (except password) if login successful, null if
+     * login credentials don't match
      * @throws java.sql.SQLException
      */
     public AccountDTO login(String username, String password) throws SQLException {
@@ -1352,13 +1353,14 @@ public class AnimeListDAO {
             }
         }
     }
-/**
- *
- * @param StudioID
- * @param deleted_at
- * @return
- * @throws SQLException
- */
+
+    /**
+     *
+     * @param StudioID
+     * @param deleted_at
+     * @return
+     * @throws SQLException
+     */
     public boolean deleteStudio(int StudioID, Date deleted_at) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -1373,13 +1375,14 @@ public class AnimeListDAO {
 
         return false;
     }
-/**
- *
- * @param SeasonID
- * @param deleted_at
- * @return
- * @throws SQLException
- */
+
+    /**
+     *
+     * @param SeasonID
+     * @param deleted_at
+     * @return
+     * @throws SQLException
+     */
     public boolean deleteSeason(int SeasonID, Date deleted_at) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -1394,13 +1397,14 @@ public class AnimeListDAO {
 
         return false;
     }
-/**
- *
- * @param GenreID input
- * @param deleted_at input
- * @return true false
- * @throws SQLException
- */
+
+    /**
+     *
+     * @param GenreID input
+     * @param deleted_at input
+     * @return true false
+     * @throws SQLException
+     */
     public boolean deleteGenre(int GenreID, Date deleted_at) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -1415,13 +1419,14 @@ public class AnimeListDAO {
 
         return false;
     }
-/**
- *
- * @param AnimeID input
- * @param deleted_at input
- * @return true false
- * @throws SQLException
- */
+
+    /**
+     *
+     * @param AnimeID input
+     * @param deleted_at input
+     * @return true false
+     * @throws SQLException
+     */
     public boolean deleteType(int AnimeID, Date deleted_at) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -1504,6 +1509,7 @@ public class AnimeListDAO {
         }
         return false;
     }
+
     /**
      *
      * @param name input
@@ -1536,6 +1542,7 @@ public class AnimeListDAO {
 
         return false;
     }
+
     /**
      *
      * @param name input
@@ -1568,6 +1575,7 @@ public class AnimeListDAO {
 
         return false;
     }
+
     /**
      *
      * @param name input
@@ -1575,7 +1583,7 @@ public class AnimeListDAO {
      * @return true false
      * @throws SQLException
      */
-     public boolean createNewStudio(String name, Date date) throws SQLException {
+    public boolean createNewStudio(String name, Date date) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
 
@@ -1600,7 +1608,7 @@ public class AnimeListDAO {
         }
 
         return false;
-            }
+    }
 
     public String getAccountUsername(int accountID) throws SQLException {
         Connection conn = null;
@@ -1630,6 +1638,41 @@ public class AnimeListDAO {
         }
 
         return null;
-      }
+    }
+
+    public boolean createAnimeStudio(String AnimeID, String StudioID, Date created_at) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        conn = DBUtils.makeConnection();
+        st = conn.prepareStatement("INSERT INTO anime_studio(AnimeID,StudioID,created_at) VALUES (?,?,?)");
+        st.setString(1, AnimeID);
+        st.setString(2, StudioID);
+        st.setDate(3, created_at);
+        int result = st.executeUpdate();
+
+        if (result > 0) {
+            return true;
+        }
+
+        return false;
+    }
+     public boolean createAnimeGenre(String AnimeID, String GenreID, Date created_at) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        conn = DBUtils.makeConnection();
+        st = conn.prepareStatement("INSERT INTO genre_anime(GenreID,AnimeID,created_at) VALUES (?,?,?)");
+        st.setString(1, GenreID);
+        st.setString(2, AnimeID);
+        st.setDate(3, created_at);
+        int result = st.executeUpdate();
+
+        if (result > 0) {
+            return true;
+        }
+
+        return false;
+    }
 
 }
