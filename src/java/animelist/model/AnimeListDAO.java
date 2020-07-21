@@ -32,8 +32,7 @@ public class AnimeListDAO {
      *
      * @param username
      * @param password
-     * @return Account object (except password) if login successful, null if
-     * login credentials don't match
+     * @return Account object (except password) if login successful, null if login credentials don't match
      * @throws java.sql.SQLException
      */
     public AccountDTO login(String username, String password) throws SQLException {
@@ -371,7 +370,7 @@ public class AnimeListDAO {
                 int animeID = rs.getInt("animeID");
                 int status = rs.getInt("status");
                 int progress = rs.getInt("progress");
-                String statusString="";
+                String statusString = "";
                 switch (status) {
                     case 1:
                         statusString = "Currently Watching";
@@ -1132,7 +1131,6 @@ public class AnimeListDAO {
             int result = st.executeUpdate();
 
             if (result > 0) {
-
                 return true;
             }
         } finally {
@@ -1147,7 +1145,8 @@ public class AnimeListDAO {
 
         return false;
     }
-        public boolean changeType(int AnimeID, String type) throws SQLException {
+
+    public boolean changeType(int AnimeID, String type) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -1161,6 +1160,74 @@ public class AnimeListDAO {
             }
         } catch (SQLException e) {
         }
+        return false;
+    }
+
+    public boolean addAnimeToList(int accountID, int animeID, int progress, int episodes, int status) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        if (status == 2) {
+            progress = episodes;
+        } else if (status == 5) {
+            progress = 0;
+        }
+
+        if (progress > episodes) {
+            progress = episodes;
+        } else if (progress < 0) {
+            progress = 0;
+        }
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("INSERT INTO List VALUES(?, ?, ?, ?)");
+            st.setInt(1, animeID);
+            st.setInt(2, accountID);
+            st.setInt(3, status);
+            st.setInt(4, progress);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return false;
+    }
+
+    public boolean removeAnimeFromList(int accountID, int animeID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("DELETE FROM List WHERE AnimeID = ? AND AccountID = ?");
+            st.setInt(1, animeID);
+            st.setInt(2, accountID);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
         return false;
     }
 }

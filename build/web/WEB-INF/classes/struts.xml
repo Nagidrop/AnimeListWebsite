@@ -162,5 +162,12 @@
             <result name="input">404.jsp</result>
         </action>
         
+        <action name="addOrRemoveAnimeFromList" class="animelist.controller.AddRemoveAnimeAction" >
+            <result name="success" type="redirectAction">
+                <param name="actionName">viewAnime</param>
+                <param name="animeID" >${animeID}</param>
+            </result>
+            <result name="fail" type="dispatcher">actionFailed.jsp</result>
+        </action>
     </package>
 </struts>
