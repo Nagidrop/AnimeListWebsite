@@ -13,6 +13,7 @@
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/SearchAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/showCreateNewAnimeView.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeGenreDTO.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/DeleteGenreAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/ViewTotalNumberAnimesAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/images/bg-16.jpg</file>
             <file>file:/D:/Project/AnimeListWebsite/web/images/bg-19.png</file>
@@ -48,6 +49,7 @@
             <file>file:/D:/Project/AnimeListWebsite/web/viewList.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/web/js/global.js</file>
             <file>file:/D:/Project/AnimeListWebsite/web/images/bg-11.jpg</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/DeleteStudioAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/css/AdvanceSearch.css</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/ViewListAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/AdminIndexAction.java</file>
@@ -55,6 +57,7 @@
             <file>file:/D:/Project/AnimeListWebsite/web/register.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/web/actionFailed.jsp</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/model/AnimeDTO.java</file>
+            <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/GenreViewAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/ChangeInfoAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/src/java/animelist/controller/DeleteUserAction.java</file>
             <file>file:/D:/Project/AnimeListWebsite/web/AnimeSearch.jsp</file>
