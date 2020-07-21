@@ -34,7 +34,15 @@ public class AdminUpdateStudioAction extends ActionSupport implements ServletReq
             /* Get Studio ID and Name from passed params */
             String idString = (String) request.getParameter("id");
             String nameString = (String) request.getParameter("name");
+            Map session = ActionContext.getContext().getSession();
+            if (session.isEmpty()) {
+                return FAIL;
+            }
 
+            int roleID = (int) session.get("roleid");
+            if (roleID != 1) {
+                return FAIL;
+            }
             /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
 
