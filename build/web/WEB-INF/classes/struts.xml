@@ -254,7 +254,7 @@
             </result>
             <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
-        
+
         <action name="createAnimeAction" class="animelist.controller.CreateNewAnimeAction" >
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">2097152</param>
@@ -267,5 +267,11 @@
 
             <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
+        <action name="editAnime" class="animelist.controller.EditAnimeAction" >
+            <result name="success" type="dispatcher">admin/editAnime.jsp</result>
+
+            <result name="fail" type="redirect">actionFailed.jsp</result>
+        </action>
+
     </package>
 </struts>
