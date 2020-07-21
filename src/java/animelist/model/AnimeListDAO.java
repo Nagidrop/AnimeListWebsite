@@ -1865,7 +1865,16 @@ public class AnimeListDAO {
         return null;
     }
 
+    /**
+     * Create An Anime Studio
+     * @param AnimeID
+     * @param StudioID
+     * @param created_at
+     * @return true if successful, and false if failed
+     * @throws SQLException 
+     */
     public boolean createAnimeStudio(String AnimeID, String StudioID, Date created_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
 
@@ -1883,7 +1892,16 @@ public class AnimeListDAO {
         return false;
     }
 
+    /**
+     * Create An Anime Genre
+     * @param AnimeID
+     * @param GenreID
+     * @param created_at
+     * @return true if successful, and false if failed
+     * @throws SQLException 
+     */
     public boolean createAnimeGenre(String AnimeID, String GenreID, Date created_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
 
@@ -1901,7 +1919,27 @@ public class AnimeListDAO {
         return false;
     }
 
+    /**
+     * Create New Anime
+     * @param accountid
+     * @param seasonid
+     * @param type
+     * @param name
+     * @param release
+     * @param rating
+     * @param episodes
+     * @param status
+     * @param duration
+     * @param description
+     * @param poster
+     * @param trailer
+     * @param create_at
+     * @param delete_at
+     * @return newly created anime ID
+     * @throws SQLException 
+     */
     public int createNewAnime(int accountid, String seasonid, String type, String name, String release, String rating, String episodes, String status, String duration, String description, String poster, String trailer, Date create_at, Date delete_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
 
@@ -1936,7 +1974,6 @@ public class AnimeListDAO {
             }
         } finally {
             /* Close the JDBC resources after use */
-
             if (st != null) {
                 st.close();
             }
