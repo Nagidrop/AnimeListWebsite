@@ -1200,12 +1200,12 @@ public class AnimeListDAO {
         int count = 0;
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("SELECT COUNT(*) as count from list where list.AccountID = ? GROUP BY list.AccountID");
+            st = conn.prepareStatement("SELECT COUNT(*) from list where list.AccountID = ? GROUP BY list.AccountID");
             st.setInt(1, accountID);
-            
+
             rs = st.executeQuery();
-            if(rs.next()){
-                count = rs.getInt(0);
+            if (rs.next()) {
+                count = rs.getInt(1);
             }
             return count;
         } finally {
@@ -1216,9 +1216,12 @@ public class AnimeListDAO {
             if (conn != null) {
                 conn.close();
             }
+            if (rs != null) {
+                rs.close();
+            }
         }
     }
-    
+
     public int getTotalCompletedAnimesInList(int accountID) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -1226,12 +1229,12 @@ public class AnimeListDAO {
         int count = 0;
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("SELECT COUNT(*) as count from list WHERE list.AccountID = ? and list.status = 2 GROUP by list.AccountID");
+            st = conn.prepareStatement("SELECT COUNT(*)from list WHERE list.AccountID = ? and list.status = 2 GROUP by list.AccountID");
             st.setInt(1, accountID);
-            
+
             rs = st.executeQuery();
-            if(rs.next()){
-                count = rs.getInt(0);
+            if (rs.next()) {
+                count = rs.getInt(1);
             }
             return count;
         } finally {
@@ -1242,8 +1245,11 @@ public class AnimeListDAO {
             if (conn != null) {
                 conn.close();
             }
+            if (rs != null) {
+                rs.close();
+            }
         }
-         
+
     }
-    
+
 }
