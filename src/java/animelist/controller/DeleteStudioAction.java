@@ -31,14 +31,15 @@ public class DeleteStudioAction extends ActionSupport implements ServletRequestA
     }
 
     @Override
+    
     public String execute() throws Exception {
         try {
-            id = request.getParameter("id");
-            System.out.println("Hello" + id);
-            AnimeListDAO dao = new AnimeListDAO();
-            Date date = Date.valueOf(LocalDate.now());
-            dao.deleteStudio(Integer.parseInt(id), date);
-            return SUCCESS;
+            id = request.getParameter("id"); //get id
+            System.out.println("Hello" + id); //print what is here
+            AnimeListDAO dao = new AnimeListDAO(); //new animelistdao
+            Date date = Date.valueOf(LocalDate.now()); //tao bien date kieu Date voi tgian set now
+            dao.deleteStudio(Integer.parseInt(id), date); //lay id va date va xoa 
+            return SUCCESS; //return success
         } catch (SQLException ex) {
             Logger.getLogger(DeleteUserAction.class.getName()).log(Level.SEVERE, null, ex);
         }

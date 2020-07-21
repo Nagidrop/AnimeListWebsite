@@ -1352,7 +1352,13 @@ public class AnimeListDAO {
             }
         }
     }
-
+/**
+ *
+ * @param StudioID
+ * @param deleted_at
+ * @return
+ * @throws SQLException
+ */
     public boolean deleteStudio(int StudioID, Date deleted_at) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -1367,7 +1373,13 @@ public class AnimeListDAO {
 
         return false;
     }
-
+/**
+ *
+ * @param SeasonID
+ * @param deleted_at
+ * @return
+ * @throws SQLException
+ */
     public boolean deleteSeason(int SeasonID, Date deleted_at) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -1382,7 +1394,13 @@ public class AnimeListDAO {
 
         return false;
     }
-
+/**
+ *
+ * @param GenreID input
+ * @param deleted_at input
+ * @return true false
+ * @throws SQLException
+ */
     public boolean deleteGenre(int GenreID, Date deleted_at) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -1397,7 +1415,13 @@ public class AnimeListDAO {
 
         return false;
     }
-
+/**
+ *
+ * @param AnimeID input
+ * @param deleted_at input
+ * @return true false
+ * @throws SQLException
+ */
     public boolean deleteType(int AnimeID, Date deleted_at) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -1480,6 +1504,103 @@ public class AnimeListDAO {
         }
         return false;
     }
+    /**
+     *
+     * @param name input
+     * @return true false
+     * @throws SQLException
+     */
+    public boolean createNewGenre(String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("INSERT INTO GENRE(name) VALUES (?)");
+            st.setString(1, name);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+        } finally {
+            /* Close the JDBC resources after use */
+
+            if (st != null) {
+                st.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return false;
+    }
+    /**
+     *
+     * @param name input
+     * @return true false
+     * @throws SQLException
+     */
+    public boolean createNewSeason(String name) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("INSERT INTO SEASON(name) VALUES (?)");
+            st.setString(1, name);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+        } finally {
+            /* Close the JDBC resources after use */
+
+            if (st != null) {
+                st.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return false;
+    }
+    /**
+     *
+     * @param name input
+     * @param date input
+     * @return true false
+     * @throws SQLException
+     */
+     public boolean createNewStudio(String name, Date date) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("INSERT INTO STUDIO(name,created_at) VALUES (?,?)");
+            st.setString(1, name);
+            st.setDate(2, date);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+        } finally {
+            /* Close the JDBC resources after use */
+            if (st != null) {
+                st.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return false;
+            }
 
     public String getAccountUsername(int accountID) throws SQLException {
         Connection conn = null;
@@ -1507,7 +1628,8 @@ public class AnimeListDAO {
                 rs.close();
             }
         }
-        
+
         return null;
-    }
+      }
+
 }
