@@ -143,7 +143,7 @@
             <result name="user" type="redirectAction">index</result>
             <result name="fail" type="redirectAction">actionFailed.jsp</result>
         </action>
-        <action name="createNewUser" class = "animelist.controller.createNewUserAction">
+        <action name="createNewUser" class = "animelist.controller.CreateNewUserAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">userList</param>
             </result>
@@ -231,19 +231,19 @@
             <result name="fail" type="redirectAction">actionFailed.jsp</result>
         </action>
 
-        <action name="createNewGenre" class = "animelist.controller.createNewGenreAction">
+        <action name="createNewGenre" class = "animelist.controller.CreateNewGenreAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">genreView</param>
             </result>
         </action>
 
-        <action name="createNewSeason" class = "animelist.controller.createNewSeasonAction">
+        <action name="createNewSeason" class = "animelist.controller.CreateNewSeasonAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">seasonView</param>
             </result>
         </action>
 
-        <action name="createNewStudio" class = "animelist.controller.createNewStudioAction">
+        <action name="createNewStudio" class = "animelist.controller.CreateNewStudioAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">studioView</param>
             </result>
@@ -254,7 +254,7 @@
             </result>
             <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
-        
+
         <action name="createAnimeAction" class="animelist.controller.CreateNewAnimeAction" >
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">2097152</param>
@@ -267,5 +267,11 @@
 
             <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
+        <action name="editAnime" class="animelist.controller.EditAnimeAction" >
+            <result name="success" type="dispatcher">admin/editAnime.jsp</result>
+
+            <result name="fail" type="redirect">actionFailed.jsp</result>
+        </action>
+
     </package>
 </struts>

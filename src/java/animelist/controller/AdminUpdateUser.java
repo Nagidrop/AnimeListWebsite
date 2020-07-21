@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -15,24 +14,23 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author HAPPY
- */
+/* This action got called when an admin changes user info */
 public class AdminUpdateUser extends ActionSupport implements ServletRequestAware {
 
-    private String username; // username passed from form input
-    private String pass; // password passed from form input
+    /* User info properties */
+    private String username;
+    private String pass;
     private int gender;
     private String fullname;
     private String avatar;
     private String email;
     private String password;
-    private final String USER = "user"; // indicates successful action
+    private final String USER = "user"; // indicates user intervention
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
     HttpServletRequest request;
 
+    /* Constructor */
     public AdminUpdateUser() {
 
     }
@@ -40,30 +38,40 @@ public class AdminUpdateUser extends ActionSupport implements ServletRequestAwar
     @Override
     public String execute() {
         try {
-
+            /* Get params and store to variables */
             String usernameString = (String) request.getParameter("username");
             String fullnameString = (String) request.getParameter("fullname");
             String genderString = (String) request.getParameter("gender");
             String emailString = (String) request.getParameter("email");
-            System.out.println(fullnameString);
             String passwordString = (String) request.getParameter("password");
+
+            /* Check if user enters in this page */
             Map session = ActionContext.getContext().getSession();
             int roleID = (int) session.get("roleid");
             if (roleID != 1) {
                 return USER;
             }
+
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
+
             dao.changeInfo(usernameString, fullnameString, "", emailString, Integer.parseInt(genderString));
+
+            // if user wants to change password
             if (!passwordString.isEmpty()) {
                 dao.changePassword(usernameString, passwordString);
             }
+
+            // if action is successful
             return SUCCESS;
         } catch (SQLException ex) {
             Logger.getLogger(AdminUpdateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // if action failed
         return FAIL;
     }
 
+    /* Getters and Setters */
     public String getUsername() {
         return username;
     }

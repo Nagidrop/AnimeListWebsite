@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -15,35 +14,39 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author HAPPY
- */
+/* This action got called when an admin delete anime */
 public class DeleteAnimeAction extends ActionSupport implements ServletRequestAware {
 
     private final String FAIL = "fail";
     private final String SUCCESS = "success";
-    HttpServletRequest request;
+    HttpServletRequest request; // HTTP request
 
+    /* Constructor */
     public DeleteAnimeAction() {
     }
 
     @Override
     public String execute() {
         try {
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
+            
             String id = request.getParameter("id");
-            System.out.println(id);
-            Date date = Date.valueOf(LocalDate.now());
+            Date date = Date.valueOf(LocalDate.now()); // get curent time
+            
             dao.deleteAnime(id, date);
+            
+            // if action is successful
             return SUCCESS;
         } catch (SQLException ex) {
             Logger.getLogger(DeleteAnimeAction.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // if action failed
         return FAIL;
 
     }
 
+    /* Getters and Setters */
     public HttpServletRequest getRequest() {
         return request;
     }

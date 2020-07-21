@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -13,50 +12,52 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author HAPPY
- */
-public class createNewUserAction extends ActionSupport implements ServletRequestAware {
+/* This action got triggered when an admin create new user */
+public class CreateNewUserAction extends ActionSupport implements ServletRequestAware {
 
+    /* User credentials and info */
     private String username;
     private String password;
     private String fullname;
     private String email;
     private String gender;
     private int roleID;
-    private HttpServletRequest request;
-    final String SUCCESS = "success";
-    final String FAIL = "fail";
+    private HttpServletRequest request; // HTTP request
+    final String SUCCESS = "success"; // indicates sucessful action
+    final String FAIL = "fail"; // indicates failed action
 
-    public createNewUserAction() {
+    /* Constructor */
+    public CreateNewUserAction() {
     }
 
     @Override
     public String execute() {
-
         try {
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
 
+            /* Store params to variables */
             password = request.getParameter("password-reg");
             fullname = request.getParameter("fullname-reg");
             email = request.getParameter("email-reg");
             gender = request.getParameter("gender-reg");
             username = request.getParameter("username-reg");
-            roleID = Integer.parseInt(request.getParameter("role-reg")) ;
+            roleID = Integer.parseInt(request.getParameter("role-reg"));
 
             if (dao.createNewUser(roleID, username, password, fullname, email, gender)) {
-
+                // if action is successful
                 return SUCCESS;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(createNewUserAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateNewUserAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        // if action failed
         return FAIL;
 
     }
 
+    /* Getters and Setters */
     public int getRoleID() {
         return roleID;
     }

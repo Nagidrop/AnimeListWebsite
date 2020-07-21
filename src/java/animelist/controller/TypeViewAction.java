@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -11,26 +10,28 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author PC
- */
-public class TypeViewAction extends ActionSupport implements ServletRequestAware  {
-    HttpServletRequest request;
-    private ArrayList<String> types ;
-    private final String FAIL = "fail";
-    private final String SUCCESS = "success";
+/* This action got called when an admin views type list */
+public class TypeViewAction extends ActionSupport implements ServletRequestAware {
+
+    HttpServletRequest request; // HTTP request
+    private ArrayList<String> types; // list of types
+    private final String FAIL = "fail"; // indicates failed action
+    private final String SUCCESS = "success"; // indicates sucessful action
+
+    /* Constructor */
     public TypeViewAction() {
     }
-    
+
     @Override
     public String execute() throws Exception {
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
         types = dao.getTypes();
         request.setAttribute("listType", types);
         return SUCCESS;
     }
 
+    /* Getters and Setters */
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;
@@ -51,5 +52,5 @@ public class TypeViewAction extends ActionSupport implements ServletRequestAware
     public void setTypes(ArrayList<String> types) {
         this.types = types;
     }
-    
+
 }

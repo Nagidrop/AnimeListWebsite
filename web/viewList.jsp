@@ -956,7 +956,8 @@
         <div id="list-container" class="list-container">
             <div id="status-menu" class="status-menu-container">
                 <div class="status-menu">
-                    <a id="all_anime" href="viewAnimeList?accountID=<s:property value="accountID" />&listStatus=0" class="status-button all_anime">All Anime</a>
+                    <a id="all_anime" href="viewAnimeList?accountID=<s:property value="accountID" />&listStatus=0" 
+                       class="status-button all_anime">All Anime</a>
                     <a id="watching" href="viewAnimeList?accountID=<s:property value="accountID" />&listStatus=1"
                        class="status-button watching ">Currently Watching</a>
                     <a id="completed" href="viewAnimeList?accountID=<s:property value="accountID" />&listStatus=2"

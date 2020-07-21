@@ -11,8 +11,8 @@ import java.util.Map;
 /* Logic code when user press login button on header */
 public class PreLoginAction {
 
-    private final String SUCCESS = "success";
-    private final String FAIL = "fail";
+    private final String SUCCESS = "success"; // indicates sucessful action
+    private final String FAIL = "fail"; // indicates failed action
 
     /* Constructor */
     public PreLoginAction() {

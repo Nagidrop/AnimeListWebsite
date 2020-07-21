@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -12,35 +11,39 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author PC
- */
+/* This action got called when a user changes password */
 public class ChangePasswordAction extends ActionSupport implements ServletRequestAware {
 
     private String username; // username passed from form input
     private String pass; // password passed from form input
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
-    HttpServletRequest request;
+    HttpServletRequest request; // HTTP request
 
+    /* Constructor */
     public ChangePasswordAction() {
     }
 
     public String execute() throws Exception {
-        /* Instantiate DAO object and calls login method to check from DB */
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
+        
+        /* Get user name from session */
         Map session = ActionContext.getContext().getSession();
-         username = (String) session.get("username");
+        username = (String) session.get("username");
+        
         pass = request.getParameter("password");
-        System.out.println("Hello:"+username);
+        
         if (dao.changePassword(username, pass)) {
+            // if action is successful
             return SUCCESS;
         } else {
+            // if action failed
             return FAIL;
         }
     }
 
+    /* Getters and Setters */
     public String getUsername() {
         return username;
     }
