@@ -1205,8 +1205,9 @@ public class AnimeListDAO {
             
             rs = st.executeQuery();
             if(rs.next()){
-                count = rs.getInt("count");
+                count = rs.getInt(0);
             }
+            return count;
         } finally {
             if (st != null) {
                 st.close();
@@ -1216,8 +1217,6 @@ public class AnimeListDAO {
                 conn.close();
             }
         }
-       
-        return count; 
     }
     
     public int getTotalCompletedAnimesInList(int accountID) throws SQLException {
@@ -1232,8 +1231,9 @@ public class AnimeListDAO {
             
             rs = st.executeQuery();
             if(rs.next()){
-                count = rs.getInt("count");
+                count = rs.getInt(0);
             }
+            return count;
         } finally {
             if (st != null) {
                 st.close();
@@ -1243,8 +1243,7 @@ public class AnimeListDAO {
                 conn.close();
             }
         }
-       
-        return count; 
+         
     }
     
 }

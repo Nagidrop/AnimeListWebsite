@@ -458,7 +458,7 @@
                                 <div class="card-body text-center bg-primary rounded-top" style="background-color: #bd000066!important">
                                     <div class="user-box"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
                                     <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
-                                    <h6 class="text-light">True Wibu</h6>
+                                    <h6 class="text-light">- Wibu -</h6>
                                 </div>
                                 <div class="card-body">
                                     <ul class="list-group shadow-none">
@@ -475,17 +475,7 @@
                                             <div class="list-details"> <span><%= session.getAttribute("gender")%></span> <small>Gender</small> </div>
                                         </li>
                                     </ul>
-                                    <div class="row text-center mt-4">
-                                        <div class="col p-2">
-                                            <h4 class="mb-1 line-height-5">154</h4>
-                                            <small class="mb-0 font-weight-bold">Anime</small> </div>
-                                        <div class="col p-2">
-                                            <h4 class="mb-1 line-height-5">2222</h4>
-                                            <small class="mb-0 font-weight-bold">Hours for Watching</small> </div>
-                                        <div class="col p-2">
-                                            <h4 class="mb-1 line-height-5">0</h4>
-                                            <small class="mb-0 font-weight-bold">Friend</small> </div>
-                                    </div>
+                                   
                                 </div>
                                 <div class="card-footer text-center"> <a href="javascript:void()" class="btn-social btn-facebook waves-effect waves-light m-1"><i class="fa fa-facebook"></i></a> <a href="javascript:void()" class="btn-social btn-google-plus waves-effect waves-light m-1"><i class="fa fa-google-plus"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-behance waves-effect waves-light"><i class="fa fa-behance"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-dribbble waves-effect waves-light"><i class="fa fa-dribbble"></i></a> </div>
                             </div>

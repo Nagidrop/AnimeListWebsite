@@ -163,7 +163,7 @@
         </action>
         
         <action name="ViewUserTotalAnimes" class="animelist.controller.ViewTotalNumberAnimesAction">
-            <result name="success" type="dispatcher">404.jsp</result>
+            <result name="success" type="dispatcher">userinfo.jsp</result>
         </action>
     </package>
 </struts>

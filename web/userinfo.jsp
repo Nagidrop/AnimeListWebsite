@@ -6,6 +6,7 @@
 
 <%@page import="animelist.model.AccountDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -465,26 +466,13 @@
                                     <h6 class="text-light">- Wibu -</h6>
                                 </div>
                                 <div class="card-body">
-<!--                                    <ul class="list-group shadow-none">
-                                        <li class="list-group-item">
-                                            <div class="list-icon"> <i class="fa fa-user-circle"></i> </div>
-                                            <div class="list-details"> <span></span> <small>Username</small> </div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="list-icon"> <i class="fa fa-envelope"></i> </div>
-                                            <div class="list-details"> <span></span> <small>Email Address</small> </div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="list-icon">  </div>
-                                            <div class="list-details"> <span></span> <small>Gender</small> </div>
-                                        </li>
-                                    </ul>-->
+
                                     <div class="row text-center mt-4">
                                         <div class="col p-2">
-                                            <h4 class="mb-1 line-height-5">154</h4>
+                                            <h4 class="mb-1 line-height-5"><s:property value="totalAnimes"/></h4>
                                             <small class="mb-0 font-weight-bold">Animes In List</small> </div>
                                         <div class="col p-2">
-                                            <h4 class="mb-1 line-height-5">2222</h4>
+                                            <h4 class="mb-1 line-height-5"><s:property value="totalCompletedAnimes"/></h4>
                                             <small class="mb-0 font-weight-bold">Completed Animes</small></div>
                                     </div>
                                 </div>

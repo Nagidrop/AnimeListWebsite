@@ -50,8 +50,8 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=0">View Own List</a>
                 <a class="dropdown-item" href="<s:url action="ViewUserTotalAnimes"/>">Personal Info</a>
-                <a class="dropdown-item" href="<s:url action="ViewUserTotalAnimes"/>">Change Password</a>
-                <a class="dropdown-item" href="<s:url action="ViewUserTotalAnimes"/>">Change Info</a>
+                <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
+                <a class="dropdown-item" href="editinfo.jsp">Change Info</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="logout">Log Out</a>
             </div>
