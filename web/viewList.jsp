@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document    viewList
     Created on  Jul 20, 2020, 10:45:33 AM
     Author      Quan Duc Loc CE140037 (SE1401)
@@ -13,13 +13,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
-        <style type="text/css">
+        <script src="js/tableSort.js"></script>
+        <style  type="text/css">
             body.ownlist {
                 background-image: url("https://cdn.myanimelist.net/s/common/uploaded_files/1455540188-934a8b8942494df1086f9402bbb5330b.png");
                 background-attachment: fixed;
@@ -1138,7 +1139,7 @@
             }
 
             .lala{
-                text-align: center!important; 
+                text-align: center!important;
             }
 
             .navbar{
@@ -1157,7 +1158,7 @@
         </style>
         <title><s:property value="%{#session.username}"/>'s Anime List - Wibu Anime List</title>
     </head>
-    <body style="background-image: url('images/bg-12.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;"> 
+    <body style="background-image: url('images/bg-12.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
         <jsp:include page='header.jsp'/>
         <div class="header lala col-md-3 font-bold font-weight-bold" style="color:#343a40">
             <div class="header-menu">
@@ -1182,10 +1183,12 @@
                     <a id="plantowatch" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=5"
                        class="status-button plantowatch ">Plan to Watch</a>
                     <div class="search-container">
-                        <div id="search-box" class="open"><input type="text" value=""></div>
-                        <a id="search-button" href="javascript: void(0);">
-                            <i class="fa fa-search"></i>
-                        </a>
+                        <form action="searchInList" id="search-form-action">
+                            <div id="search-box" class="open"><input name="search-text" type="text" value=""></div>
+                            <a id="search-button" href="#">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1196,12 +1199,12 @@
                     <div class="list-status-title" style="background-image: url('images/bg-03.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
                         <span class="text">ALL ANIME</span>
                     </div>
-                    <table class="list-table" style="font-size: 12px;">
+                    <table class="list-table" style="font-size: 12px;" id="myListTable">
                         <thead><tr class="list-table-header">
                                 <th class="header-title number">No.</th>
                                 <th class="header-title image"><a class="link hover_info">Poster</a></th>
-                                <th class="header-title title"><a href="" class="link sort">Anime Title</a></th>
-                                <th class="header-title score"><a href="" class="link sort">Type</a></th>
+                                <th class="header-title title"><a href="" class="link sort">Anime Title</th>
+                                <th class="header-title score"> <a href="" class="link sort">Type</th>
                                 <th class="header-title type"><a href="" class="link sort">Progress</a></th>
                                 <th class="header-title progress"><a href="" class="link sort">Status</a></th>
                                 <th class="header-title edit"><a href="" class="link sort">Edit</a></th>
@@ -1215,7 +1218,7 @@
                                 for (AnimeDTO anime : animeDetailsList) {
                                     ListDTO listAnime = animeList.get(animeIndex);
                                     animeIndex++;
-                        %> 
+                        %>
                         <tbody class="list-item" >
                         <form action="editAnimeList" method="POST">
                             <tr class="list-table-data">
@@ -1243,7 +1246,7 @@
                                 </td>
 
                                 <td class="data status" style="width: 15%;">
-                                    <select name="statusEdit"> 
+                                    <select name="statusEdit">
                                         <%
                                             int statusIndex = 1;
                                             for (String status : statusList) {
@@ -1264,7 +1267,7 @@
                         </form>
                         </tbody>
                         <% }
-                        }%>
+                            }%>
                     </table>
                     <% if (animeDetailsList.isEmpty()) {%>
                     <div style="text-align: center!important; font-size: 20px; margin-top: 3%;">There are no animes to display!</div>
@@ -1273,50 +1276,55 @@
             </div>
         </div>
         <script>
-        var status =<s:property value="listStatus" />;
-        if (status == 0) {
-            $("#all_anime").addClass("on");
-            $("#watching").removeClass("on");
-            $("#completed").removeClass("on");
-            $("#onhold").removeClass("on");
-            $("#dropped").removeClass("on");
-            $("#plantowatch").removeClass("on");
-        } else if (status == 1) {
-            $("#all_anime").removeClass("on");
-            $("#watching").addClass("on");
-            $("#completed").removeClass("on");
-            $("#onhold").removeClass("on");
-            $("#dropped").removeClass("on");
-            $("#plantowatch").removeClass("on");
-        } else if (status == 2) {
-            $("#all_anime").removeClass("on");
-            $("#watching").removeClass("on");
-            $("#completed").addClass("on");
-            $("#onhold").removeClass("on");
-            $("#dropped").removeClass("on");
-            $("#plantowatch").removeClass("on");
-        } else if (status == 3) {
-            $("#all_anime").removeClass("on");
-            $("#watching").removeClass("on");
-            $("#completed").removeClass("on");
-            $("#onhold").addClass("on");
-            $("#dropped").removeClass("on");
-            $("#plantowatch").removeClass("on");
-        } else if (status == 4) {
-            $("#all_anime").removeClass("on");
-            $("#watching").removeClass("on");
-            $("#completed").removeClass("on");
-            $("#onhold").removeClass("on");
-            $("#dropped").addClass("on");
-            $("#plantowatch").removeClass("on");
-        } else if (status == 5) {
-            $("#all_anime").removeClass("on");
-            $("#watching").removeClass("on");
-            $("#completed").removeClass("on");
-            $("#onhold").removeClass("on");
-            $("#dropped").removeClass("on");
-            $("#plantowatch").addClass("on");
-        }
+            var status =<s:property value="listStatus" />;
+            $("#search-button").click(function () {
+                $("#search-form-action").submit();
+            });
+            if (status == 0) {
+                $("#all_anime").addClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 1) {
+                $("#all_anime").removeClass("on");
+                $("#watching").addClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 2) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").addClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 3) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").addClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 4) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").addClass("on");
+                $("#plantowatch").removeClass("on");
+            } else if (status == 5) {
+                $("#all_anime").removeClass("on");
+                $("#watching").removeClass("on");
+                $("#completed").removeClass("on");
+                $("#onhold").removeClass("on");
+                $("#dropped").removeClass("on");
+                $("#plantowatch").addClass("on");
+            }
+
+            
         </script>
     </body>
 </html>
