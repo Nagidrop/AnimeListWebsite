@@ -61,13 +61,13 @@
         </action>
 
         <action name="changepassword" class = "animelist.controller.ChangePasswordAction">
-            <result name="success">userinfo.jsp
+            <result name="success" type="redirectAction">ViewUserTotalAnimes
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
 
         <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
-            <result name="success">userinfo.jsp
+            <result name="success" type="redirectAction">ViewUserTotalAnimes
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
