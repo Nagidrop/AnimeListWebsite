@@ -154,6 +154,7 @@
                     <div class="details-img">
                         <img src="images/poster/<s:property value="anime.poster"/>" alt=""/>
                     </div>
+                    
                     <div class="details-work">
                         <% if (session.getAttribute("user") != null) {%>
                         <%
@@ -272,6 +273,7 @@
                             }  %>
                     </div>
                 </div>
+                    
                 <div class="col-md-8">
                     <div class="details-head">
                         <h1>
@@ -299,10 +301,12 @@
 
                         </ul>
                     </div>
+                        
                     <div class="tab-content details-tab" id="myTabContent">
                         <div class="tab-pane fade show active" id="synopsis" role="tabpanel" aria-labelledby="synopsis-tab">
                             <p class="synopsis"><s:property value="anime.description" /></p>
                         </div>
+                        
                         <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
                             <div class="row">
                                 <div class="col-md-6">
@@ -312,6 +316,7 @@
                                     <p><s:property value="anime.type" /></p>
                                 </div>
                             </div>
+                                
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Episodes</label>
@@ -325,6 +330,7 @@
                                     </s:else>
                                 </div>
                             </div>
+                                
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Status</label>
@@ -333,6 +339,7 @@
                                     <p><s:property value="anime.status" /></p>
                                 </div>
                             </div>
+                                
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Release Date</label>
@@ -348,6 +355,7 @@
                                     </p>
                                 </div>
                             </div>
+                                
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Studio(s)</label>
@@ -367,6 +375,7 @@
                                     </p>
                                 </div>
                             </div>
+                                    
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Genre(s)</label>
@@ -386,6 +395,7 @@
                                     </p>
                                 </div>
                             </div>
+                                    
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Duration</label>
@@ -401,6 +411,7 @@
                                     </p>
                                 </div>
                             </div>
+                                        
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Rating</label>
@@ -410,6 +421,7 @@
                                 </div>
                             </div>
                         </div>
+                                
                         <div class="tab-pane fade" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
                             <s:if test="%{anime.trailer != null}">
                                 <div style="text-align: center;"><iframe width="500" height="300" src="<s:property value="anime.trailer"/>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe></div>
@@ -418,17 +430,6 @@
                                 <p style="text-align: center; color: #000000;">There is no trailer available for this anime title</p>
                             </s:else>
                         </div>
-                    </div>
-                </div>
-                <!--                    <div class="col-md-2">
-                                        <input type="submit" class="details-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                                    </div>-->
-                <div class="row">
-                    <div class="col-md-4">
-
-                    </div>
-                    <div class="col-md-8">
-
                     </div>
                 </div>
             </div>

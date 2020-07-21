@@ -21,13 +21,6 @@
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
         <script src="js/tableSort.js"></script>
         <style  type="text/css">
-            body.ownlist {
-                background-image: url("https://cdn.myanimelist.net/s/common/uploaded_files/1455540188-934a8b8942494df1086f9402bbb5330b.png");
-                background-attachment: fixed;
-                background-position: center top;
-                background-repeat: repeat\2D x;
-            }
-
             #advanced-options {
                 position: absolute;
                 top: 24px;
