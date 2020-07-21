@@ -55,16 +55,17 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
             }
             Random r = new Random();
             avatarFileName = r.ints(10, 971).findFirst().getAsInt() + Calendar.getInstance().getTimeInMillis() + ext;
+            File newFile = new File(path, avatarFileName);
+            FileUtils.copyFile(avatar, newFile);
 
+        } else {
+            avatarFileName = (String) session.get("userAvatar");
         }
-
-        File newFile = new File(path, avatarFileName);
-
-        FileUtils.copyFile(avatar, newFile);
-
+        
+        session.replace("userAvatar", avatarFileName);
         session.replace("fullname", fullname);
         session.replace("email", email);
-        session.replace("userAvatar", avatarFileName);
+
         switch (gender) {
             case 0:
                 session.replace("gender", "Male");
@@ -76,7 +77,7 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
                 session.replace("gender", "Other");
                 break;
         }
-        
+
         dao.changeInfo(username, fullname, avatarFileName, email, gender);
         return SUCCESS;
     }
