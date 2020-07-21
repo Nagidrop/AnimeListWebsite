@@ -44,18 +44,17 @@ public class ViewAnimeAction extends ActionSupport implements ServletRequestAwar
             url = SUCCESS;
             request.setAttribute("StudioList", anime.getStudios());
             request.setAttribute("GenreList", anime.getGenres());
-            if (anime.getTrailer() != null) {
-                anime.setTrailer(anime.getTrailer().replace("&autoplay=1", ""));
-            }
             request.setAttribute("Anime", anime);
 
-            for (ListDTO listAnime : animeList) {
-                if (listAnime.getAnimeID() == animeID) {
-                    animeInList = listAnime;
+            if (animeList != null) {
+                for (ListDTO listAnime : animeList) {
+                    if (listAnime.getAnimeID() == animeID) {
+                        animeInList = listAnime;
+                    }
                 }
-            }
 
-            request.setAttribute("AnimeInList", animeInList);
+                request.setAttribute("AnimeInList", animeInList);
+            }
         }
 
         return url;

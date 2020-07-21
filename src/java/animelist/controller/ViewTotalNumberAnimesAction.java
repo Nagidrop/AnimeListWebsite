@@ -42,10 +42,9 @@ public class ViewTotalNumberAnimesAction extends ActionSupport implements Servle
         AnimeListDAO dao = new AnimeListDAO();
         totalAnimes = dao.getTotalAnimesInList(accountID);
         totalCompletedAnimes = dao.getTotalCompletedAnimesInList(accountID);
+        
         return SUCCESS;
     }
-    
-    
 
     public int getTotalAnimes() {
         return totalAnimes;

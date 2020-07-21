@@ -175,8 +175,60 @@ public class AnimeListDAO {
 
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("SELECT * FROM Anime ORDER BY RAND() LIMIT ?");
+            st = conn.prepareStatement("SELECT * FROM Anime where deleted_at is null ORDER BY RAND() LIMIT ?");
             st.setInt(1, amount);
+            rs = st.executeQuery();
+
+            while (rs.next()) {
+                int animeID = rs.getInt("animeID");
+                SeasonDTO season = getSeason(rs.getInt("seasonID"));
+                ArrayList<StudioDTO> studios = getStudioList(animeID);
+                ArrayList<GenreDTO> genres = getGenreList(animeID);
+                String type = rs.getString("type");
+                String name = rs.getString("name");
+                Date releaseDate = rs.getDate("releaseDate");
+                String rating = rs.getString("rating");
+                int episodes = rs.getInt("episodes");
+                String status = rs.getString("status");
+                String duration = rs.getString("duration");
+                String description = rs.getString("description");
+                String poster = rs.getString("poster");
+                String trailer = rs.getString("trailer");
+                Date created_at = rs.getDate("created_at");
+                Date deleted_at = rs.getDate("deleted_at");
+
+                if (animeList == null) {
+                    animeList = new ArrayList<>();
+                }
+
+                animeList.add(new AnimeDTO(animeID, 0, season, studios, genres, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
+            }
+
+            return animeList;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
+
+    public ArrayList<AnimeDTO> getAllAnimes() throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<AnimeDTO> animeList = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT * FROM Anime where deleted_at is null ORDER BY AnimeID DESC");
             rs = st.executeQuery();
 
             while (rs.next()) {
@@ -788,6 +840,9 @@ public class AnimeListDAO {
                 String description = rs.getString("description");
                 String poster = rs.getString("poster");
                 String trailer = rs.getString("trailer");
+                if (trailer != null) {
+                    trailer = trailer.replace("&autoplay=1", "");
+                }
                 Date created_at = rs.getDate("created_at");
 
                 anime = new AnimeDTO(animeID, 0, season, studios, genres, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, null);
@@ -1006,8 +1061,7 @@ public class AnimeListDAO {
         ArrayList<AccountDTO> accountList = null;
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("SELECT * FROM account where RoleID = ? AND deleted_at is null");
-            st.setInt(1, RoleID);
+            st = conn.prepareStatement("SELECT * FROM account where deleted_at is null");
             rs = st.executeQuery();
 
             while (rs.next()) {
@@ -1016,13 +1070,14 @@ public class AnimeListDAO {
                 String fullname = rs.getString("fullname");
                 String email = rs.getString("email");
                 int gender = rs.getInt("gender");
+                int role = rs.getInt("RoleID");
                 String avatar = rs.getString("avatar");
 
                 if (accountList == null) {
                     accountList = new ArrayList<>();
                 }
 
-                accountList.add(new AccountDTO(AccountID, RoleID, username, fullname, avatar, email, gender, null, null));
+                accountList.add(new AccountDTO(AccountID, role, username, fullname, avatar, email, gender, null, null));
             }
 
             return accountList;
@@ -1131,16 +1186,26 @@ public class AnimeListDAO {
         Connection conn = null;
         PreparedStatement st = null;
 
-        if (status == 2) {
-            progress = episodes;
-        } else if (status == 5) {
-            progress = 0;
+        if (progress > 8888) {
+            progress = 8888;
         }
 
-        if (progress > episodes) {
-            progress = episodes;
-        } else if (progress < 0) {
-            progress = 0;
+        if (episodes != 0) {
+            if (progress > episodes) {
+                progress = episodes;
+            } else if (progress < 0) {
+                progress = 0;
+            }
+
+            if (status == 2) {
+                progress = episodes;
+            } else if (status == 5) {
+                progress = 0;
+            }
+        } else {
+            if (progress < 0 || status == 2 || status == 5) {
+                progress = 0;
+            }
         }
 
         try {
@@ -1153,7 +1218,6 @@ public class AnimeListDAO {
             int result = st.executeUpdate();
 
             if (result > 0) {
-
                 return true;
             }
         } finally {
@@ -1222,6 +1286,83 @@ public class AnimeListDAO {
         }
     }
 
+    public boolean addAnimeToList(int accountID, int animeID, int progress, int episodes, int status) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        if (progress > 8888) {
+            progress = 8888;
+        }
+
+        if (episodes != 0) {
+            if (progress > episodes) {
+                progress = episodes;
+            } else if (progress < 0) {
+                progress = 0;
+            }
+
+            if (status == 2) {
+                progress = episodes;
+            } else if (status == 5) {
+                progress = 0;
+            }
+        } else {
+            if (progress < 0 || status == 2 || status == 5) {
+                progress = 0;
+            }
+        }
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("INSERT INTO List VALUES(?, ?, ?, ?)");
+            st.setInt(1, animeID);
+            st.setInt(2, accountID);
+            st.setInt(3, status);
+            st.setInt(4, progress);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean removeAnimeFromList(int accountID, int animeID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("DELETE FROM List WHERE AnimeID = ? AND AccountID = ?");
+            st.setInt(1, animeID);
+            st.setInt(2, accountID);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return false;
+    }
+
     public int getTotalCompletedAnimesInList(int accountID) throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
@@ -1250,6 +1391,74 @@ public class AnimeListDAO {
             }
         }
 
+    }
+
+    public boolean createNewUser(int roleID, String username, String password, String fullname, String email, String gender) throws SQLException {
+        String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
+
+        /* Code to hash password using MD5 algorithm */
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            byte[] messageDigest = md.digest(password.getBytes());
+
+            BigInteger no = new BigInteger(1, messageDigest);
+
+            // Convert message digest into hex value
+            hashPassword = no.toString(16);
+            while (hashPassword.length() < 32) {
+                hashPassword = "0" + hashPassword;
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AnimeListDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        /* Declare Connection, PreparedStatement variables */
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("INSERT INTO Account(RoleID, username, password, fullname, email,gender, created_at) VALUES (?, ?, ?, ?, ?, ?,?) ");
+            st.setInt(1, roleID);
+            st.setString(2, username);
+            st.setString(3, hashPassword);
+            st.setString(4, fullname);
+            st.setString(5, email);
+            st.setString(6, gender);
+            st.setDate(7, new Date(System.currentTimeMillis()));
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+        } finally {
+            /* Close the JDBC resources after use */
+
+            if (st != null) {
+                st.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return false;
+    }
+
+    public boolean deleteAnime(String id, Date date) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        conn = DBUtils.makeConnection();
+        st = conn.prepareStatement("UPDATE anime SET deleted_at =? WHERE AnimeID= ?");
+        st.setDate(1, date);
+        st.setString(2, id);
+
+        int rs = st.executeUpdate();
+        if (rs == 1) {
+            return true;
+        }
+        return false;
     }
 
 }

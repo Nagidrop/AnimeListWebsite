@@ -75,7 +75,7 @@
                 <div>
                     <a class="login-detail-panel-button btn" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=0">
                     <i class="fa fa-arrow-left"></i>
-                    Go back to View List page                        
+                    Go back to View List page                     
                     </a>
                 </div>
             </div>

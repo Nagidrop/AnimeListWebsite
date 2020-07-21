@@ -114,7 +114,6 @@
 
             });
             function checkPass() {
-                alert($("#registerPassword").val(), $("#repass").val())
                 if ($("#repass").val() == $("#registerPassword").val()) {
                     $("#button-sign").removeAttr("disabled");
                 } else {
