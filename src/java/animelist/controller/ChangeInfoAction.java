@@ -8,6 +8,7 @@ package animelist.controller;
 import animelist.model.AnimeListDAO;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -22,7 +23,8 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
     private String pass; // password passed from form input
     private int gender;
     private String fullname;
-    private String avatar;
+    private File avatar;
+    private String avatarName;
     private String email;
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
@@ -41,7 +43,10 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
         System.out.println("Hello:" + gender);
         email = request.getParameter("email");
         fullname = request.getParameter("name");
-        avatar = request.getParameter("upload");
+        String path = request.getSession().getServletContext().getRealPath("/");
+        path = path.substring(0,path.length()-10).concat("web\\images\\users");
+        System.out.println(path);
+        avatarName= "hello User";
         session.replace("fullname", fullname);
         session.replace("email", email);
         switch (gender) {
@@ -55,7 +60,7 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
                 session.replace("gender", "Other");
                 break;
         }
-        dao.changeInfo(username, fullname, avatar, email, gender);
+        dao.changeInfo(username, fullname, avatarName, email, gender);
         return SUCCESS;
     }
 
@@ -91,11 +96,11 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
         this.fullname = fullname;
     }
 
-    public String getAvatar() {
+    public File getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(File avatar) {
         this.avatar = avatar;
     }
 

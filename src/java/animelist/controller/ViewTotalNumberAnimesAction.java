@@ -7,7 +7,9 @@
 package animelist.controller;
 
 import animelist.model.AnimeListDAO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -35,13 +37,14 @@ public class ViewTotalNumberAnimesAction extends ActionSupport implements Servle
 
     @Override
     public String execute() throws Exception {
+        Map session = ActionContext.getContext().getSession();
+        accountID = (int) session.get("id");
         AnimeListDAO dao = new AnimeListDAO();
         totalAnimes = dao.getTotalAnimesInList(accountID);
         totalCompletedAnimes = dao.getTotalCompletedAnimesInList(accountID);
+        
         return SUCCESS;
     }
-    
-    
 
     public int getTotalAnimes() {
         return totalAnimes;

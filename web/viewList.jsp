@@ -20,13 +20,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/7a37b2739f.js"></script>
         <style  type="text/css">
-            body.ownlist {
-                background-image: url("https://cdn.myanimelist.net/s/common/uploaded_files/1455540188-934a8b8942494df1086f9402bbb5330b.png");
-                background-attachment: fixed;
-                background-position: center top;
-                background-repeat: repeat\2D x;
-            }
-
             #advanced-options {
                 position: absolute;
                 top: 24px;
@@ -738,7 +731,7 @@
                 position: absolute;
                 bottom: 0px;
                 left: 0px;
-                background-color: #4065BA;
+                background-color: #343a40;
                 display: block;
                 width: 100%;
                 height: 4px;
@@ -1238,8 +1231,18 @@
                                 </td>
 
                                 <td class="data progress" style="background-color: transparent!important; width: 9%; text-align: left">
-                                    <input type="text" style="font-size: 12px;" name="progressEdit" size="1" class="inputtext form-control-sm progresseps" value="<%= listAnime.getProgress()%>" style="border: 1px solid #ced4da!important;">
-                                    / <%= anime.getEpisodes()%><input type="hidden" name="episodesEdit" value="<%= anime.getEpisodes()%>" />
+                                    <% if (listAnime.getProgress() == 0 && listAnime.getStatus().equals("Completed") && anime.getEpisodes() == 0) { %>
+                                    <input type="text" style="font-size: 12px;" name="progressEdit" size="1" class="inputtext form-control-sm progresseps" value="?" style="border: 1px solid #ced4da!important;"> / 
+                                    <%} else {%>
+                                    <input type="text" style="font-size: 12px;" name="progressEdit" size="1" class="inputtext form-control-sm progresseps" value="<%= listAnime.getProgress() %>" style="border: 1px solid #ced4da!important;"> / 
+                                    <% }%>
+
+                                    <% if (anime.getEpisodes() != 0) { %>
+                                    <%= anime.getEpisodes() %>
+                                    <%} else {%>
+                                    ?
+                                    <% }%>
+                                    <input type="hidden" name="episodesEdit" value="<%= anime.getEpisodes()%>" />
                                     <input type="hidden" name="animeIDEdit" value="<%= anime.getId()%>" />
                                     <input type="hidden" name="accountIDEdit" value="<s:property value="%{#session.id}"/>" />
                                 </td>
@@ -1249,7 +1252,7 @@
                                         <%
                                             int statusIndex = 1;
                                             for (String status : statusList) {
-                                                if (status != listAnime.getStatus()) {
+                                                if (!status.equals(listAnime.getStatus())) {
                                         %>
                                         <option value="<%= statusIndex%>"> <%= status%> </option> <br />
                                         <% } else {%>
@@ -1288,7 +1291,7 @@
             $("#search-box").focusout(function () {
                 $("#search-box").attr("class", "");
             });
-            
+
             if (status == 0) {
                 $("#all_anime").addClass("on");
                 $("#watching").removeClass("on");

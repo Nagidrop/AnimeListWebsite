@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.Session;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 /**
