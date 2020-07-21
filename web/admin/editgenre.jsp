@@ -28,7 +28,6 @@
 
     <body id="page-top">
 
-        <form action="typeView">
             <!-- Page Wrapper -->
             <div id="wrapper">
 
@@ -52,11 +51,11 @@
                             <h1 class="h3 mb-2 text-gray-800">Display Type List</h1>
                             <!--          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
 
-                            <!-- DataTales Example -->
+                            <!-- DataTales Example -->\
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 row">
                                     <div class="col-md-6" style="padding: 0.8%;">
-                                    <h6 class="m-0 font-weight-bold text-primary">List Type</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">List Type</h6>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="d-flex flex-row-reverse">
@@ -99,7 +98,7 @@
                                                     <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="name"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
                                                 </td>
                                                 <td style="text-align: center">
-                                                    <a class="btn-sm btn-danger btn-circle "><i class="fa fa-trash" style="color: white"></i></a>                                  
+                                                    <a class="btn-sm btn-danger btn-circle " href="deleteGenre?id=<s:property value="id"/> "><i class="fa fa-trash" style="color: white"></i></a>                                  
                                                 </td>
                                             </tr>
                                         </s:iterator>
@@ -123,16 +122,14 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="updateType" method="post" id="info-form" accept-charset="utf-8">
+                                <form action="updateGenre" method="post" id="info-form" accept-charset="utf-8">
                                     <div >
-                                        <input  hidden id="id" name="id" value=>
+                                        <%--        <input  hidden id="id" name="id">   --%>
 
                                         <div class="form-group">
                                             <div >
-                                                <input  hidden id="id" name="id" value=> 
-
                                                 <div class="form-group">
-                                                    <label for="aaa">ID:</label>
+                                                    <label for="id">ID:</label>
                                                     <input class="form-control" id="id" name="id" readonly>
                                                     <label for="fullname">name:</label>
 
@@ -150,56 +147,59 @@
                                     </div>
                             </div>
                         </div>
-                        <!-- End of Main Content -->
-
-                        <!-- Footer -->
-                        <footer class="sticky-footer bg-white">
-                            <div class="container my-auto">
-                                <div class="copyright text-center my-auto">
-                                    <span>Copyright &copy; WibuTeam Website 2020</span>
-                                </div>
-                            </div>
-                        </footer>
-                        <!-- End of Footer -->
-
                     </div>
-                    <!-- End of Content Wrapper -->
-
                 </div>
-                <!-- End of Page Wrapper -->
+                <!-- End of Main Content -->
 
-                <!-- Scroll to Top Button-->
-        </form>
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; WibuTeam Website 2020</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
+            </div>
+            <!-- End of Content Wrapper -->
 
-        <script>
-            function fillInfo(id, name) {
-                $("#id").val(id);
-                $("#name").val(name);
-                $("#exampleModal").modal();
+        </div>
+        <!-- End of Page Wrapper -->
 
-            }
-            $("#btn-submit").click(function () {
-                $("#info-form").submit();
-            });
-        </script>
-        <!-- Bootstrap core JavaScript-->
-        <script src="admin/vendor/jquery/jquery.min.js"></script>
-        <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-        <!-- Core plugin JavaScript-->
-        <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script>
+        function fillInfo(id, name) {
+            $("#id").val(id);
+            $("#name").val(name);
+            $("#exampleModal").modal();
 
-        <!-- Custom scripts for all pages-->
-        <script src="admin/js/sb-admin-2.min.js"></script>
+        }
+        $("#btn-submit").click(function () {
+            $("#info-form").submit();
+        });
+    </script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="admin/vendor/jquery/jquery.min.js"></script>
+    <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="admin/js/demo/datatables-demo.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="admin/js/sb-admin-2.min.js"></script>
 
-    </body>
+    <!-- Page level plugins -->
+    <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="admin/js/demo/datatables-demo.js"></script>
+
+</body>
 
 </html>
