@@ -477,7 +477,6 @@
                                     </ul>
 
                                 </div>
-                                <div class="card-footer text-center"> <a href="javascript:void()" class="btn-social btn-facebook waves-effect waves-light m-1"><i class="fa fa-facebook"></i></a> <a href="javascript:void()" class="btn-social btn-google-plus waves-effect waves-light m-1"><i class="fa fa-google-plus"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-behance waves-effect waves-light"><i class="fa fa-behance"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-dribbble waves-effect waves-light"><i class="fa fa-dribbble"></i></a> </div>
                             </div>
                         </div>
                     </div>
@@ -489,11 +488,11 @@
                                 </ul>
                                 <div class="tab-content p-3">
                                     <div class="tab-pane" id="edit">
-                                        <s:form action="editinfo">
+                                        <s:form action="editinfo" method="POST" enctype="multipart/form-data" theme="simple">
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Full name</label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="text" name="name" value="<%=session.getAttribute("fullname")%>">
+                                                    <s:textfield cssClass="form-control" name="fullname" value="%{#session.fullname}" theme="simple"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -502,7 +501,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="email" name="email" value="<%= session.getAttribute("email")%>">
+                                                    <s:textfield type="email" cssClass="form-control" name="email" value="%{#session.email}" theme="simple"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -511,7 +510,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Profile Picture</label>
                                                 <div class="col-lg-9">
-                                                    <s:file name="imageFile" cssClass="form-control" theme="simple"/>
+                                                    <s:file name="avatar" cssClass="form-control" theme="simple"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
