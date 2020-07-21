@@ -493,11 +493,11 @@
                                 </ul>
                                 <div class="tab-content p-3">
                                     <div class="tab-pane" id="edit">
-                                        <s:form action="editinfo" method="POST" enctype="multipart/form-data" theme="simple">
+                                        <s:form action="editinfo" method="POST" enctype="multipart/form-data" theme="simple" onsubmit="return isValid()">
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Full name</label>
                                                 <div class="col-lg-9">
-                                                    <s:textfield cssClass="form-control" name="fullname" value="%{#session.fullname}" theme="simple"/>
+                                                    <s:textfield cssClass="form-control" name="fullname" value="%{#session.fullname}" theme="simple" id="fullname"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -506,7 +506,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                                 <div class="col-lg-9">
-                                                    <s:textfield type="email" cssClass="form-control" name="email" value="%{#session.email}" theme="simple"/>
+                                                    <s:textfield type="email" cssClass="form-control" name="email" value="%{#session.email}" theme="simple" id="email"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -530,29 +530,29 @@
                                                 <div class="col-lg-9">
                                                     <s:if test="%{#session.gender== 'Male'}">
                                                         &ensp;
-                                                        <input type="checkbox" id="gender0" name="gender" value="0" checked>
+                                                        <input type="radio" id="gender0" name="gender" value="0" checked>
                                                         <label for="gender0">Male</label>                    &ensp;
-                                                        <input type="checkbox" id="gender1" name="gender" value="1">
+                                                        <input type="radio" id="gender1" name="gender" value="1">
                                                         <label for="gender1">Female</label>                  &ensp;
-                                                        <input type="checkbox" id="gender2" name="gender" value="2">
+                                                        <input type="radio" id="gender2" name="gender" value="2">
                                                         <label for="gender2">Other</label>
                                                     </s:if>
                                                     <s:elseif test="%{#session.gender== 'Female'}">
                                                         &ensp;
-                                                        <input type="checkbox" id="gender0" name="gender" value="0" >
+                                                        <input type="radio" id="gender0" name="gender" value="0" >
                                                         <label for="gender0">Male</label>                    &ensp;
-                                                        <input type="checkbox" id="gender1" name="gender" value="1" checked>
+                                                        <input type="radio" id="gender1" name="gender" value="1" checked>
                                                         <label for="gender1">Female</label>                  &ensp;
-                                                        <input type="checkbox" id="gender2" name="gender" value="2">
+                                                        <input type="radio" id="gender2" name="gender" value="2">
                                                         <label for="gender2">Other</label>
                                                     </s:elseif>
                                                     <s:elseif test="%{#session.gender== 'Other'}">
                                                         &ensp;
-                                                        <input type="checkbox" id="gender0" name="gender" value="0" >
+                                                        <input type="radio" id="gender0" name="gender" value="0" >
                                                         <label for="gender0">Male</label>                    &ensp;
-                                                        <input type="checkbox" id="gender1" name="gender" value="1">
+                                                        <input type="radio" id="gender1" name="gender" value="1">
                                                         <label for="gender1">Female</label>                  &ensp;
-                                                        <input type="checkbox" id="gender2" name="gender" value="2"checked>
+                                                        <input type="radio" id="gender2" name="gender" value="2"checked>
                                                         <label for="gender2">Other</label>
                                                     </s:elseif>
                                                 </div>
@@ -577,6 +577,13 @@
                 $('input[type="checkbox"]').on('change', function () {
                     $('input[type="checkbox"]').not(this).prop('checked', false);
                 });
+                
+                function isValid(){
+                    if($("#fullname").val()==""|| $("#email").val()==""){
+                        alert("Check Your Input Again!!! Email and Fullname Can't Be NULL!!!");
+                        return false;
+                    }
+                }
             </script>
     </body>
 </html>
