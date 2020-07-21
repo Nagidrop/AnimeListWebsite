@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -13,33 +12,35 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author PC
- */
-public class createNewSeasonAction extends ActionSupport implements ServletRequestAware  {
-    private String fullname;
-    private HttpServletRequest request;
-    final String SUCCESS = "success";
-    final String FAIL = "fail";
-    public createNewSeasonAction() {
+/* This action got triggered when an admin create new season */
+public class CreateNewSeasonAction extends ActionSupport implements ServletRequestAware {
+
+    private String fullname; // season name
+    private HttpServletRequest request; // HTTP request
+    final String SUCCESS = "success"; // indicates sucessful action
+    final String FAIL = "fail"; // indicates failed action
+
+    /* Constructor */
+    public CreateNewSeasonAction() {
     }
-    
+
     @Override
     public String execute() throws Exception {
-try {
+        try {
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
             fullname = request.getParameter("fullname-reg");
-            if(dao.createNewSeason(fullname)){
+            if (dao.createNewSeason(fullname)) {
                 return SUCCESS;
             }
-            } catch (SQLException ex) {
-            Logger.getLogger(createNewUserAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateNewUserAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return FAIL;
     }
 
+    /* Getters and Setters */
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;
@@ -60,5 +61,5 @@ try {
     public void setRequest(HttpServletRequest request) {
         this.request = request;
     }
-    
+
 }

@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -15,40 +14,47 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author PC
- */
+/* This action got called when an admin update studio */
 public class AdminUpdateStudioAction extends ActionSupport implements ServletRequestAware {
 
-    private int id;
-    private String name;
+    private int id;  // Studio ID
+    private String name;  // Studio Name
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
-    private final String STUDIO = "studio"; // indicates successful action
-    HttpServletRequest request;
+    private final String STUDIO = "studio";
+    HttpServletRequest request; // HTTP request
+
+    /* Constructor */
     public AdminUpdateStudioAction() {
     }
-    
+
     @Override
     public String execute() throws Exception {
         try {
+            /* Get Studio ID and Name from passed params */
             String idString = (String) request.getParameter("id");
             String nameString = (String) request.getParameter("name");
-            System.out.println("Hello"+nameString);
+
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
+
             dao.changeStudio(Integer.parseInt(idString), nameString);
-            
+
+            // if action is successful
             return SUCCESS;
         } catch (SQLException ex) {
             Logger.getLogger(AdminUpdateUser.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // if action failed
         return FAIL;
     }
+
+    /* Getters and Setters */
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr; //To change body of generated methods, choose Tools | Templates.
     }
+
     public HttpServletRequest getRequest() {
         return request;
     }

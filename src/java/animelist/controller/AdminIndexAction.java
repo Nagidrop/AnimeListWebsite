@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -19,19 +18,67 @@ import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author HAPPY
- */
+/* This action got called when admin page is opened up */
 public class AdminIndexAction extends ActionSupport implements ServletRequestAware {
 
-    String totalAnimes, totalUsers, totalAdmins;
-    private HttpServletRequest request;
-    HashMap<String, String> totalTypeHashMap;
-    private final String USER = "user"; // indicates successful action
+    String totalAnimes, totalUsers, totalAdmins; // data to display
+    private HttpServletRequest request; // HTTP request
+    HashMap<String, String> totalTypeHashMap; // hash map of types to display
+    private final String USER = "user";
     private final String FAIL = "fail"; // indicates successful action
     private final String SUCCESS = "success"; // indicates successful action
     private String label[], number[];
+
+    /* Constructor */
+    public AdminIndexAction() {
+    }
+
+    @Override
+    public String execute() {
+        try {
+            /* Instantiate DAO object and interacts with DB */
+            AnimeListDAO dao = new AnimeListDAO();
+            
+            ArrayList<String> type = new ArrayList<>();
+            ArrayList<String> count = new ArrayList<>();
+            
+            /* Check if there is an Admin logged in session */
+            Map session = ActionContext.getContext().getSession();
+            if (session.isEmpty()) {
+                return USER;
+            }
+            
+            int roleID = (int) session.get("roleid");
+            if (roleID != 1) {
+                return USER;
+            }
+            
+            /* Get hash map of types to display */
+            totalTypeHashMap = dao.countAnimeofType();
+            totalTypeHashMap.keySet().forEach((typesString) -> {
+                type.add(typesString);
+            });
+            totalTypeHashMap.values().forEach((typesString) -> {
+                count.add(typesString);
+            });
+            
+            /* Set labels and values for the types map */
+            setLabel(type.toArray(new String[0]));
+            setNumber(count.toArray(new String[0]));
+            
+            /* Get data from database */
+            totalAdmins = dao.countAdmin();
+            totalAnimes = dao.countAnimes();
+            totalUsers = dao.countUsers();
+            
+            return SUCCESS;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(AdminIndexAction.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        
+        return FAIL;
+    }
 
     public HashMap<String, String> getTotalTypeHashMap() {
         return totalTypeHashMap;
@@ -55,43 +102,6 @@ public class AdminIndexAction extends ActionSupport implements ServletRequestAwa
 
     public void setNumber(String[] number) {
         this.number = number;
-    }
-
-    public AdminIndexAction() {
-    }
-
-    @Override
-    public String execute() {
-        try {
-            AnimeListDAO dao = new AnimeListDAO();
-            ArrayList<String> type = new ArrayList<>();
-            ArrayList<String> count = new ArrayList<>();
-            Map session = ActionContext.getContext().getSession();
-            if (session.isEmpty()) {
-                return USER;
-            }
-            int roleID = (int) session.get("roleid");
-            if (roleID != 1) {
-                return USER;
-            }
-            totalTypeHashMap = dao.countAnimeofType();
-            totalTypeHashMap.keySet().forEach((typesString) -> {
-                type.add(typesString);
-            });
-            totalTypeHashMap.values().forEach((typesString) -> {
-                count.add(typesString);
-            });
-            setLabel(type.toArray(new String[0]));
-            setNumber(count.toArray(new String[0]));
-            totalAdmins = dao.countAdmin();
-            totalAnimes = dao.countAnimes();
-            totalUsers = dao.countUsers();
-            return SUCCESS;
-        } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(AdminIndexAction.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-        return FAIL;
     }
 
     public String getTotalAnimes() {

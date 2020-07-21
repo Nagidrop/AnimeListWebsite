@@ -22,7 +22,7 @@ public class EditListAction {
     }
 
     public String execute() throws Exception {
-        /* Instantiate DAO object and calls login method to check from DB */
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
         System.out.println("accountID" + accountIDEdit);
         System.out.println("animeIDEdit" +animeIDEdit);
@@ -30,7 +30,7 @@ public class EditListAction {
         System.out.println("episodesEdit" +episodesEdit);
         System.out.println("statusEdit" +statusEdit);
         boolean result = dao.editAnimeInList(accountIDEdit, animeIDEdit, progressEdit, episodesEdit, statusEdit);
-        String url = FAIL; // by default, login is not successful
+        String url = FAIL; // by default, action is not successful
 
         if (result) {
             url = SUCCESS;

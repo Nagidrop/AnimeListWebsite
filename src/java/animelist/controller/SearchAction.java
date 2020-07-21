@@ -2,39 +2,42 @@
  *
  * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
-
 package animelist.controller;
 
 import animelist.model.AnimeDTO;
 import animelist.model.AnimeListDAO;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+/* This action got called when a user press search button (on nav bar or advanced search page) */
 public class SearchAction extends ActionSupport implements ServletRequestAware {
 
+    /* Search criteria */
     private String searchValue;
     private String type;
     private String genreID;
     private String studioID;
     private String seasonID;
-    private ArrayList<AnimeDTO> listAnimeDTOs = new ArrayList<>();
-    private final String SUCCESS = "success";
-    private HttpServletRequest request;
+    private ArrayList<AnimeDTO> listAnimeDTOs = new ArrayList<>(); // result search list
+    private final String SUCCESS = "success"; // if action is successful
+    private HttpServletRequest request; // HTTP request
 
+    /* Constructor */
     public SearchAction() {
     }
 
+    @Override
     public String execute() {
         try {
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
-            Map session = ActionContext.getContext().getSession();
+
+            /* Set search criteria to % if it is null */
             searchValue = request.getParameter("searchvalue");
             if (searchValue == null || searchValue.equalsIgnoreCase("")) {
                 searchValue = "%";
@@ -56,10 +59,10 @@ public class SearchAction extends ActionSupport implements ServletRequestAware {
             if (seasonID == null || seasonID.equalsIgnoreCase("")) {
                 seasonID = "%";
             }
-            
+
             listAnimeDTOs = dao.getSearchAnime(searchValue, type, studioID, genreID, seasonID);
-          
-            
+
+            // set result list as attribute to pass
             request.setAttribute("showlist", listAnimeDTOs);
         } catch (SQLException ex) {
             Logger.getLogger(SearchAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,6 +70,7 @@ public class SearchAction extends ActionSupport implements ServletRequestAware {
         return SUCCESS;
     }
 
+    /* Getters and Setters */
     public String getSearchValue() {
         return searchValue;
     }

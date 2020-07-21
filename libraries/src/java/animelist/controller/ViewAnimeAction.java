@@ -29,7 +29,7 @@ public class ViewAnimeAction extends ActionSupport implements ServletRequestAwar
     }
 
     public String execute() throws Exception {
-        /* Instantiate DAO object and calls login method to check from DB */
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
         anime = dao.getAnimeDetails(animeID);
 
@@ -38,7 +38,7 @@ public class ViewAnimeAction extends ActionSupport implements ServletRequestAwar
 
         ListDTO animeInList = null;
 
-        String url = FAIL; // by default, login is not successful
+        String url = FAIL; // by default, action is not successful
 
         if (anime != null) {
             url = SUCCESS;

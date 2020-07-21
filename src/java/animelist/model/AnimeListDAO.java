@@ -17,7 +17,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,9 +42,9 @@ public class AnimeListDAO {
         /* Code to hash password using MD5 algorithm */
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            
+
             byte[] messageDigest = md.digest(password.getBytes());
-            
+
             BigInteger no = new BigInteger(1, messageDigest);
 
             // Convert message digest into hex value
@@ -61,14 +60,14 @@ public class AnimeListDAO {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT * FROM Account WHERE username = ? AND password = ? AND deleted_at is null");
             st.setString(1, username);
             st.setString(2, hashPassword);
             rs = st.executeQuery();
-            
+
             if (rs.next()) {
                 int id = rs.getInt("AccountID");
                 int roleID = rs.getInt("RoleID");
@@ -78,7 +77,7 @@ public class AnimeListDAO {
                 int gender = rs.getInt("gender");
                 Date created_at = rs.getDate("created_at");
                 Date deleted_at = rs.getDate("deleted_at");
-                
+
                 return new AccountDTO(id, roleID, username, fullname, avatar, email, gender, created_at, deleted_at);
             }
         } finally {
@@ -86,16 +85,16 @@ public class AnimeListDAO {
             if (rs != null) {
                 rs.close();
             }
-            
+
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
-        
+
         return null;
     }
 
@@ -115,9 +114,9 @@ public class AnimeListDAO {
         /* Code to hash password using MD5 algorithm */
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            
+
             byte[] messageDigest = md.digest(password.getBytes());
-            
+
             BigInteger no = new BigInteger(1, messageDigest);
 
             // Convert message digest into hex value
@@ -132,7 +131,7 @@ public class AnimeListDAO {
         /* Declare Connection, PreparedStatement variables */
         Connection conn = null;
         PreparedStatement st = null;
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("INSERT INTO Account(RoleID, username, password, fullname, email, created_at) VALUES (?, ?, ?, ?, ?, ?) ");
@@ -143,13 +142,12 @@ public class AnimeListDAO {
             st.setString(5, email);
             st.setDate(6, new Date(System.currentTimeMillis()));
             int result = st.executeUpdate();
-            
+
             if (result > 0) {
                 return true;
             }
         } finally {
             /* Close the JDBC resources after use */
-            
             if (st != null) {
                 st.close();
             }
@@ -157,7 +155,7 @@ public class AnimeListDAO {
                 conn.close();
             }
         }
-        
+
         return false;
     }
 
@@ -169,17 +167,18 @@ public class AnimeListDAO {
      * @throws java.sql.SQLException
      */
     public ArrayList<AnimeDTO> getAnimes(int amount) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<AnimeDTO> animeList = null;
-        
+        ArrayList<AnimeDTO> animeList = null; // store result
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT * FROM Anime where deleted_at is null ORDER BY RAND() LIMIT ?");
             st.setInt(1, amount);
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 int animeID = rs.getInt("animeID");
                 SeasonDTO season = getSeason(rs.getInt("seasonID"));
@@ -197,41 +196,49 @@ public class AnimeListDAO {
                 String trailer = rs.getString("trailer");
                 Date created_at = rs.getDate("created_at");
                 Date deleted_at = rs.getDate("deleted_at");
-                
+
                 if (animeList == null) {
                     animeList = new ArrayList<>();
                 }
-                
+
                 animeList.add(new AnimeDTO(animeID, 0, season, studios, genres, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
-            
+
             return animeList;
         } finally {
+            /* Close the JDBC resources after use */
             if (rs != null) {
                 rs.close();
             }
-            
+
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
     }
-    
+
+    /**
+     * Get all animes from DB
+     *
+     * @return list of all animes and their details
+     * @throws SQLException
+     */
     public ArrayList<AnimeDTO> getAllAnimes() throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<AnimeDTO> animeList = null;
-        
+        ArrayList<AnimeDTO> animeList = null; // store result
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT * FROM Anime where deleted_at is null ORDER BY AnimeID DESC");
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 int animeID = rs.getInt("animeID");
                 SeasonDTO season = getSeason(rs.getInt("seasonID"));
@@ -249,104 +256,52 @@ public class AnimeListDAO {
                 String trailer = rs.getString("trailer");
                 Date created_at = rs.getDate("created_at");
                 Date deleted_at = rs.getDate("deleted_at");
-                
+
                 if (animeList == null) {
                     animeList = new ArrayList<>();
                 }
-                
+
                 animeList.add(new AnimeDTO(animeID, 0, season, studios, genres, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
-            
+
             return animeList;
         } finally {
+            /* Close the JDBC resources after use */
             if (rs != null) {
                 rs.close();
             }
-            
+
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
     }
-    
-    public ArrayList<AnimeDTO> getTopAnimesByType(int top) {
-        Connection conn = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        ArrayList<AnimeDTO> animeList = null;
-        
-        try {
-            conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("SELECT TOP(?) FROM Anime ORDER BY Type");
-            st.setInt(1, top);
-            rs = st.executeQuery();
-            
-            while (rs.next()) {
-                int animeID = rs.getInt("animeID");
-                SeasonDTO season = getSeason(rs.getInt("seasonID"));
-                ArrayList<StudioDTO> studios = getStudioList(animeID);
-                ArrayList<GenreDTO> genres = getGenreList(animeID);
-                String type = rs.getString("type");
-                String name = rs.getString("name");
-                Date releaseDate = rs.getDate("releaseDate");
-                String rating = rs.getString("rating");
-                int episodes = rs.getInt("episodes");
-                String status = rs.getString("status");
-                String duration = rs.getString("duration");
-                String description = rs.getString("description");
-                String poster = rs.getString("poster");
-                String trailer = rs.getString("trailer");
-                Date created_at = rs.getDate("created_at");
-                Date deleted_at = rs.getDate("deleted_at");
-                
-                if (animeList == null) {
-                    animeList = new ArrayList<>();
-                }
-                
-                animeList.add(new AnimeDTO(animeID, 0, season, studios, genres, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
-            }
-            
-            return animeList;
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(AnimeListDAO.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                
-                if (st != null) {
-                    st.close();
-                }
-                
-                if (conn != null) {
-                    conn.close();
-                    
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(AnimeListDAO.class
-                        .getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-        return null;
-    }
-    
+
+    /**
+     * Get an anime with search criteria
+     *
+     * @param searchValue
+     * @param type
+     * @param StudioID
+     * @param genreID
+     * @param seasonID
+     * @return list of searched animes
+     * @throws SQLException
+     */
     public ArrayList<AnimeDTO> getSearchAnime(String searchValue, String type, String StudioID, String genreID, String seasonID) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<AnimeDTO> animeList = null;
-        
+        ArrayList<AnimeDTO> animeList = null; // store result
+
         try {
             conn = DBUtils.makeConnection();
-            
+
             st = conn.prepareStatement("SELECT anime.AccountID, anime.AnimeID, anime.SeasonID, anime.name , anime.type , anime.releaseDate , anime.rating , anime.episodes , anime.status , anime.duration, anime.description, anime.poster, anime.trailer, anime.created_at, anime.deleted_at, StudioID, GenreID \n"
                     + "FROM \n"
                     + "anime JOIN anime_studio on anime.AnimeID = anime_studio.AnimeID  \n"
@@ -357,13 +312,13 @@ public class AnimeListDAO {
                     + "StudioID like ? and \n"
                     + "(SeasonID like ? or SeasonID is NULL)\n"
                     + "GROUP BY anime.name");
-            
+
             st.setString(1, "%" + searchValue + "%");
             st.setString(2, type);
             st.setString(3, genreID);
             st.setString(4, StudioID);
             st.setString(5, seasonID);
-            
+
             rs = st.executeQuery();
             while (rs.next()) {
                 int animeID = rs.getInt("animeID");
@@ -382,17 +337,17 @@ public class AnimeListDAO {
                 String trailer = rs.getString("trailer");
                 Date created_at = rs.getDate("created_at");
                 Date deleted_at = rs.getDate("deleted_at");
-                
+
                 if (animeList == null) {
                     animeList = new ArrayList<>();
                 }
-                
+
                 animeList.add(new AnimeDTO(animeID, 0, season, studios, genres, animetype, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at));
             }
-            
+
             return animeList;
-            
         } finally {
+            /* Close the JDBC resources after use */
             if (conn != null) {
                 conn.close();
             }
@@ -404,21 +359,30 @@ public class AnimeListDAO {
             }
         }
     }
-    
+
+    /**
+     * Get animes based on search value in anime list view
+     *
+     * @param searchValue
+     * @param accountID
+     * @return list of searched animes
+     * @throws SQLException
+     */
     public ArrayList<ListDTO> getSearchAnimeInList(String searchValue, int accountID) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<ListDTO> myList = null;
-        
+        ArrayList<ListDTO> myList = null; // store result
+
         try {
             conn = DBUtils.makeConnection();
-            
+
             st = conn.prepareStatement("select * from list join anime on list.AnimeID = anime.AnimeID where name like ? and list.AccountID = ?");
-            
+
             st.setString(1, "%" + searchValue + "%");
             st.setInt(2, accountID);
-            
+
             rs = st.executeQuery();
             while (rs.next()) {
                 int animeID = rs.getInt("animeID");
@@ -428,39 +392,40 @@ public class AnimeListDAO {
                 switch (status) {
                     case 1:
                         statusString = "Currently Watching";
-                        
+
                         break;
-                    
+
                     case 2:
                         statusString = "Completed";
-                        
+
                         break;
-                    
+
                     case 3:
                         statusString = "On Hold";
-                        
+
                         break;
-                    
+
                     case 4:
                         statusString = "Dropped";
-                        
+
                         break;
-                    
+
                     case 5:
                         statusString = "Plan to Watch";
-                        
+
                         break;
                 }
                 if (myList == null) {
                     myList = new ArrayList<>();
                 }
-                
+
                 myList.add(new ListDTO(animeID, accountID, statusString, progress));
             }
-            
+
             return myList;
-            
+
         } finally {
+            /* Close the JDBC resources after use */
             if (conn != null) {
                 conn.close();
             }
@@ -472,19 +437,27 @@ public class AnimeListDAO {
             }
         }
     }
-    
+
+    /**
+     * Get All Types
+     *
+     * @return list of all types
+     * @throws SQLException
+     */
     public ArrayList<String> getTypes() throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<String> types = null;
+        ArrayList<String> types = null;  // store result
+
         try {
             conn = DBUtils.makeConnection();
-            
+
             st = conn.prepareStatement("SELECT type FROM anime GROUP BY type");
-            
+
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 if (types == null) {
                     types = new ArrayList<>();
@@ -493,6 +466,7 @@ public class AnimeListDAO {
             }
             return types;
         } finally {
+            /* Close the JDBC resources after use */
             if (conn != null) {
                 conn.close();
             }
@@ -504,19 +478,27 @@ public class AnimeListDAO {
             }
         }
     }
-    
+
+    /**
+     * Get all genres
+     *
+     * @return list of all genres
+     * @throws SQLException
+     */
     public ArrayList<GenreDTO> getGenres() throws SQLException {
+
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<GenreDTO> genres = null;
+        ArrayList<GenreDTO> genres = null; // store result
         try {
             conn = DBUtils.makeConnection();
-            
+
             st = conn.prepareStatement("SELECT * FROM genre WHERE 1 AND deleted_at is null");
-            
+
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 int GenreID = rs.getInt("GenreID");
                 String name = rs.getString("name");
@@ -528,10 +510,11 @@ public class AnimeListDAO {
                 }
                 genres.add(genre);
             }
-            
+
             return genres;
-            
+
         } finally {
+            /* Close the JDBC resources after use */
             if (conn != null) {
                 conn.close();
             }
@@ -543,19 +526,26 @@ public class AnimeListDAO {
             }
         }
     }
-    
+
+    /**
+     * Get all studios
+     *
+     * @return list of all studios
+     * @throws SQLException
+     */
     public ArrayList<StudioDTO> getStudios() throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<StudioDTO> studios = null;
+        ArrayList<StudioDTO> studios = null; // store result
         try {
             conn = DBUtils.makeConnection();
-            
+
             st = conn.prepareStatement("SELECT * FROM studio WHERE 1 AND deleted_at is null");
-            
+
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 int StudioID = rs.getInt("StudioID");
                 String name = rs.getString("name");
@@ -567,10 +557,11 @@ public class AnimeListDAO {
                 }
                 studios.add(studio);
             }
-            
+
             return studios;
-            
+
         } finally {
+            /* Close the JDBC resources after use */
             if (conn != null) {
                 conn.close();
             }
@@ -582,19 +573,27 @@ public class AnimeListDAO {
             }
         }
     }
-    
+
+    /**
+     * Get all seasons
+     *
+     * @return list of all seasons
+     * @throws SQLException
+     */
     public List<SeasonDTO> getSeasons() throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        List<SeasonDTO> seasons = null;
+        List<SeasonDTO> seasons = null; // store result
+
         try {
             conn = DBUtils.makeConnection();
-            
+
             st = conn.prepareStatement("SELECT * FROM season WHERE 1 AND deleted_at is null ORDER BY SeasonID DESC");
-            
+
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 int SeasonID = rs.getInt("SeasonID");
                 String name = rs.getString("name");
@@ -607,8 +606,9 @@ public class AnimeListDAO {
                 seasons.add(season);
             }
             return seasons;
-            
+
         } finally {
+            /* Close the JDBC resources after use */
             if (conn != null) {
                 conn.close();
             }
@@ -620,23 +620,32 @@ public class AnimeListDAO {
             }
         }
     }
-    
+
+    /**
+     * Get total number of animes
+     *
+     * @return total number of animes
+     * @throws SQLException
+     */
     public String countAnimes() throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
+
         try {
             conn = DBUtils.makeConnection();
-            
+
             st = conn.prepareStatement("SELECT count(*) as count FROM anime");
-            
+
             rs = st.executeQuery();
             if (rs.first()) {
                 String countString = rs.getString(1);
                 return countString;
             }
-            
+
         } finally {
+            /* Close the JDBC resources after use */
             if (conn != null) {
                 conn.close();
             }
@@ -649,24 +658,32 @@ public class AnimeListDAO {
         }
         return "";
     }
-    
+
+    /**
+     * Get the number of users in DB
+     *
+     * @return number of users
+     * @throws SQLException
+     */
     public String countUsers() throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.makeConnection();
-            
+
             st = conn.prepareStatement("SELECT count(*) as count FROM account where RoleID=2");
-            
+
             rs = st.executeQuery();
-            
+
             if (rs.first()) {
                 String countString = rs.getString(1);
                 return countString;
             }
-            
+
         } finally {
+            /* Close the JDBC resources after use */
             if (conn != null) {
                 conn.close();
             }
@@ -679,23 +696,32 @@ public class AnimeListDAO {
         }
         return "";
     }
-    
+
+    /**
+     * Get the total number of admins in DB
+     *
+     * @return total number of admins
+     * @throws SQLException
+     */
     public String countAdmin() throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
+
         try {
             conn = DBUtils.makeConnection();
-            
+
             st = conn.prepareStatement("SELECT count(*) as count FROM account where RoleID = 1");
-            
+
             rs = st.executeQuery();
             if (rs.first()) {
                 String countString = rs.getString(1);
                 return countString;
             }
-            
+
         } finally {
+            /* Close the JDBC resources after use */
             if (conn != null) {
                 conn.close();
             }
@@ -708,15 +734,22 @@ public class AnimeListDAO {
         }
         return "";
     }
-    
+
+    /**
+     * Get the number of animes for each type
+     *
+     * @return a map with anime types as keys and their amounts as values
+     * @throws SQLException
+     */
     public HashMap<String, String> countAnimeofType() throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.makeConnection();
             HashMap<String, String> list = new HashMap<>();
-            
+
             st = conn.prepareStatement("SELECT count(*),type as count FROM anime GROUP BY type");
             rs = st.executeQuery();
             if (rs.first()) {
@@ -725,11 +758,12 @@ public class AnimeListDAO {
                     String name = rs.getString(2);
                     list.put(name, countString);
                 } while (rs.next());
-                
+
                 return list;
             }
-            
+
         } finally {
+            /* Close the JDBC resources after use */
             if (conn != null) {
                 conn.close();
             }
@@ -742,8 +776,19 @@ public class AnimeListDAO {
         }
         return null;
     }
-    
+
+    /**
+     * Change user info
+     * @param username
+     * @param fullname
+     * @param avatar
+     * @param email
+     * @param gender
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
     public boolean changeInfo(String username, String fullname, String avatar, String email, int gender) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -762,8 +807,16 @@ public class AnimeListDAO {
         }
         return false;
     }
-    
+
+    /**
+     * Delete a user in database
+     * @param id
+     * @param deleted_at
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
     public boolean deleteUser(int id, Date deleted_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         conn = DBUtils.makeConnection();
@@ -774,31 +827,40 @@ public class AnimeListDAO {
         if (count > 0) {
             return true;
         }
-        
+
         return false;
     }
-    
+
+    /**
+     * Change password of user
+     * @param username
+     * @param password
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
     public boolean changePassword(String username, String password) throws SQLException {
         String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
 
         /* code to hash password using MD5 algorithm */
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            
+
             byte[] messageDigest = md.digest(password.getBytes());
-            
+
             BigInteger no = new BigInteger(1, messageDigest);
 
             // Convert message digest into hex value
             hashPassword = no.toString(16);
             while (hashPassword.length() < 32) {
                 hashPassword = "0" + hashPassword;
-                
+
             }
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(AnimeListDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
+
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -814,19 +876,26 @@ public class AnimeListDAO {
         }
         return false;
     }
-    
+
+    /**
+     * Get a single anime's details
+     * @param animeID
+     * @return anime object with details
+     * @throws SQLException
+     */
     public AnimeDTO getAnimeDetails(int animeID) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        AnimeDTO anime = null;
-        
+        AnimeDTO anime = null; // store result
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT * FROM Anime WHERE AnimeID = ?");
             st.setInt(1, animeID);
             rs = st.executeQuery();
-            
+
             if (rs.next()) {
                 SeasonDTO season = getSeason(rs.getInt("seasonID"));
                 ArrayList<StudioDTO> studios = getStudioList(animeID);
@@ -845,148 +914,181 @@ public class AnimeListDAO {
                     trailer = trailer.replace("&autoplay=1", "");
                 }
                 Date created_at = rs.getDate("created_at");
-                
+
                 anime = new AnimeDTO(animeID, 0, season, studios, genres, type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, null);
             }
-            
+
             return anime;
         } finally {
+            /* Close the JDBC resources after use */
             if (rs != null) {
                 rs.close();
             }
-            
+
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
     }
-    
+
+    /**
+     * Get season from season ID
+     * @param seasonID
+     * @return season object
+     * @throws SQLException
+     */
     public SeasonDTO getSeason(int seasonID) throws SQLException {
         String seasonName = null;
-        
+
         if (seasonID == 0) {
             seasonName = " ";
             return new SeasonDTO(0, "", null, null);
         }
-        
+
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT name FROM Season WHERE SeasonID = ? AND deleted_at is null");
             st.setInt(1, seasonID);
             rs = st.executeQuery();
-            
+
             if (rs.next()) {
                 seasonName = rs.getString("name");
             }
-            
+
             return new SeasonDTO(seasonID, seasonName, null, null);
         } finally {
+            /* Close the JDBC resources after use */
             if (rs != null) {
                 rs.close();
             }
-            
+
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
     }
-    
+
+    /**
+     * Get studio list of an anime title's ID
+     * @param animeID
+     * @return list of studios
+     * @throws SQLException
+     */
     public ArrayList<StudioDTO> getStudioList(int animeID) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<StudioDTO> studioList = null;
-        
+        ArrayList<StudioDTO> studioList = null; // store result
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT * FROM anime_studio JOIN studio ON studio.StudioID = anime_studio.StudioID WHERE anime_studio.AnimeID = ?");
             st.setInt(1, animeID);
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 int studioID = rs.getInt("StudioID");
                 String studioName = rs.getString("name");
-                
+
                 if (studioList == null) {
                     studioList = new ArrayList<>();
                 }
-                
+
                 studioList.add(new StudioDTO(studioID, studioName, null, null));
             }
-            
+
             return studioList;
         } finally {
+            /* Close the JDBC resources after use */
             if (rs != null) {
                 rs.close();
             }
-            
+
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
     }
-    
+
+    /**
+     * Get genre list of a single anime title's ID
+     * @param animeID
+     * @return list of genres for such anime
+     * @throws SQLException
+     */
     public ArrayList<GenreDTO> getGenreList(int animeID) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<GenreDTO> genreList = null;
-        
+        ArrayList<GenreDTO> genreList = null; // store result
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT * FROM genre_anime JOIN genre on genre.GenreID = genre_anime.GenreID WHERE genre_anime.AnimeID = ?");
             st.setInt(1, animeID);
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 int genreID = rs.getInt("GenreID");
                 String genreName = rs.getString("name");
-                
+
                 if (genreList == null) {
                     genreList = new ArrayList<>();
                 }
-                
+
                 genreList.add(new GenreDTO(genreID, genreName, null, null));
             }
-            
+
             return genreList;
         } finally {
+            /* Close the JDBC resources after use */
             if (rs != null) {
                 rs.close();
             }
-            
+
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
     }
-    
+
+    /**
+     * Get anime list of user based on list status (0 for no filter)
+     * @param accountID
+     * @param listStatus
+     * @return list of animes
+     * @throws SQLException
+     */
     public ArrayList<ListDTO> getAnimeList(int accountID, int listStatus) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<ListDTO> animeList = null;
-        
+        ArrayList<ListDTO> animeList = null; // store result
+
         try {
             conn = DBUtils.makeConnection();
             if (listStatus == 0) {
@@ -997,74 +1099,83 @@ public class AnimeListDAO {
             }
             st.setInt(1, accountID);
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 int animeID = rs.getInt("AnimeID");
                 int status = rs.getInt("status");
                 String statusString = "";
-                
+
                 switch (status) {
                     case 1:
                         statusString = "Currently Watching";
-                        
+
                         break;
-                    
+
                     case 2:
                         statusString = "Completed";
-                        
+
                         break;
-                    
+
                     case 3:
                         statusString = "On Hold";
-                        
+
                         break;
-                    
+
                     case 4:
                         statusString = "Dropped";
-                        
+
                         break;
-                    
+
                     case 5:
                         statusString = "Plan to Watch";
-                        
+
                         break;
                 }
-                
+
                 int progress = rs.getInt("progress");
-                
+
                 if (animeList == null) {
                     animeList = new ArrayList<>();
                 }
-                
+
                 animeList.add(new ListDTO(animeID, accountID, statusString, progress));
             }
-            
+
             return animeList;
         } finally {
+            /* Close the JDBC resources after use */
             if (rs != null) {
                 rs.close();
             }
-            
+
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
     }
-    
+
+    /**
+     * Get account list
+     * @param RoleID
+     * @return list of accounts
+     * @throws SQLException
+     */
     public ArrayList<AccountDTO> getAccountList(int RoleID) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        ArrayList<AccountDTO> accountList = null;
+        ArrayList<AccountDTO> accountList = null; // store result
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT * FROM account where deleted_at is null");
             rs = st.executeQuery();
-            
+
             while (rs.next()) {
                 int AccountID = rs.getInt("AccountID");
                 String username = rs.getString("username");
@@ -1073,33 +1184,43 @@ public class AnimeListDAO {
                 int gender = rs.getInt("gender");
                 int role = rs.getInt("RoleID");
                 String avatar = rs.getString("avatar");
-                
+
                 if (accountList == null) {
                     accountList = new ArrayList<>();
                 }
-                
+
                 accountList.add(new AccountDTO(AccountID, role, username, fullname, avatar, email, gender, null, null));
             }
-            
+
             return accountList;
         } finally {
+            /* Close the JDBC resources after use */
             if (rs != null) {
                 rs.close();
             }
-            
+
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
     }
-    
+
+    /**
+     * Change a genre details
+     * @param GenreID
+     * @param name
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
     public boolean changeGenre(int GenreID, String name) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("Update genre set name = ? where GenreID=?");
@@ -1110,18 +1231,27 @@ public class AnimeListDAO {
                 return true;
             }
         } finally {
+            /* Close the JDBC resources after use */
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
         return false;
     }
-    
+
+    /**
+     * Change a season details
+     * @param SeasonID
+     * @param name
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
     public boolean changeSeason(int SeasonID, String name) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -1137,8 +1267,16 @@ public class AnimeListDAO {
         }
         return false;
     }
-    
+
+    /**
+     * Change a studio details
+     * @param StudioID
+     * @param name
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
     public boolean changeStudio(int StudioID, String name) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         try {
@@ -1154,36 +1292,53 @@ public class AnimeListDAO {
         }
         return false;
     }
-    
+
+    /**
+     * Get details for each anime in list
+     * @param animeList
+     * @return list of anime (with details for each)
+     * @throws SQLException
+     */
     public ArrayList<AnimeDTO> getAnimeDetailsList(ArrayList<ListDTO> animeList) throws SQLException {
         ArrayList<AnimeDTO> animeDetailsList = null;
-        
+
         if (animeList != null) {
             animeDetailsList = new ArrayList<>();
-            
+
             for (ListDTO listData : animeList) {
                 animeDetailsList.add(getAnimeDetails(listData.getAnimeID()));
             }
         }
-        
+
         return animeDetailsList;
     }
-    
+
+    /**
+     * Edit an anime in an anime list
+     * @param accountID
+     * @param animeID
+     * @param progress
+     * @param episodes
+     * @param status
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
     public boolean editAnimeInList(int accountID, int animeID, int progress, int episodes, int status) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
-        
+
         if (progress > 8888) {
             progress = 8888;
         }
-        
+
         if (episodes != 0) {
             if (progress > episodes) {
                 progress = episodes;
             } else if (progress < 0) {
                 progress = 0;
             }
-            
+
             if (status == 2) {
                 progress = episodes;
             } else if (status == 5) {
@@ -1194,7 +1349,7 @@ public class AnimeListDAO {
                 progress = 0;
             }
         }
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("UPDATE List SET progress = ?, status = ? WHERE AccountID = ? AND AnimeID = ? ");
@@ -1203,24 +1358,32 @@ public class AnimeListDAO {
             st.setInt(3, accountID);
             st.setInt(4, animeID);
             int result = st.executeUpdate();
-            
+
             if (result > 0) {
                 return true;
             }
         } finally {
+            /* Close the JDBC resources after use */
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
         }
-        
+
         return false;
     }
-    
+
+    /**
+     * Get total number of animes in one's list
+     * @param accountID
+     * @return total number of animes
+     * @throws SQLException
+     */
     public int getTotalAnimesInList(int accountID) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -1229,123 +1392,18 @@ public class AnimeListDAO {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT COUNT(*) from list where list.AccountID = ? GROUP BY list.AccountID");
             st.setInt(1, accountID);
-            
+
             rs = st.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);
             }
             return count;
         } finally {
+            /* Close the JDBC resources after use */
             if (st != null) {
                 st.close();
             }
-            
-            if (conn != null) {
-                conn.close();
-            }
-            if (rs != null) {
-                rs.close();
-            }
-        }
-    }
-    
-    public boolean addAnimeToList(int accountID, int animeID, int progress, int episodes, int status) throws SQLException {
-        Connection conn = null;
-        PreparedStatement st = null;
-        
-        if (progress > 8888) {
-            progress = 8888;
-        }
-        
-        if (episodes != 0) {
-            if (progress > episodes) {
-                progress = episodes;
-            } else if (progress < 0) {
-                progress = 0;
-            }
-            
-            if (status == 2) {
-                progress = episodes;
-            } else if (status == 5) {
-                progress = 0;
-            }
-        } else {
-            if (progress < 0 || status == 2 || status == 5) {
-                progress = 0;
-            }
-        }
-        
-        try {
-            conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("INSERT INTO List VALUES(?, ?, ?, ?)");
-            st.setInt(1, animeID);
-            st.setInt(2, accountID);
-            st.setInt(3, status);
-            st.setInt(4, progress);
-            int result = st.executeUpdate();
-            
-            if (result > 0) {
-                return true;
-            }
-        } finally {
-            if (st != null) {
-                st.close();
-            }
-            
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        return false;
-    }
-    
-    public boolean removeAnimeFromList(int accountID, int animeID) throws SQLException {
-        Connection conn = null;
-        PreparedStatement st = null;
-        
-        try {
-            conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("DELETE FROM List WHERE AnimeID = ? AND AccountID = ?");
-            st.setInt(1, animeID);
-            st.setInt(2, accountID);
-            int result = st.executeUpdate();
-            
-            if (result > 0) {
-                return true;
-            }
-        } finally {
-            if (st != null) {
-                st.close();
-            }
-            
-            if (conn != null) {
-                conn.close();
-            }
-        }
-        
-        return false;
-    }
-    
-    public int getTotalCompletedAnimesInList(int accountID) throws SQLException {
-        Connection conn = null;
-        PreparedStatement st = null;
-        ResultSet rs = null;
-        int count = 0;
-        try {
-            conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("SELECT COUNT(*)from list WHERE list.AccountID = ? and list.status = 2 GROUP by list.AccountID");
-            st.setInt(1, accountID);
-            
-            rs = st.executeQuery();
-            if (rs.next()) {
-                count = rs.getInt(1);
-            }
-            return count;
-        } finally {
-            if (st != null) {
-                st.close();
-            }
-            
+
             if (conn != null) {
                 conn.close();
             }
@@ -1356,13 +1414,149 @@ public class AnimeListDAO {
     }
 
     /**
-     *
+     * Add an anime to list
+     * @param accountID
+     * @param animeID
+     * @param progress
+     * @param episodes
+     * @param status
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
+    public boolean addAnimeToList(int accountID, int animeID, int progress, int episodes, int status) throws SQLException {
+        /* Declare JDBC resources to use */
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        if (progress > 8888) {
+            progress = 8888;
+        }
+
+        if (episodes != 0) {
+            if (progress > episodes) {
+                progress = episodes;
+            } else if (progress < 0) {
+                progress = 0;
+            }
+
+            if (status == 2) {
+                progress = episodes;
+            } else if (status == 5) {
+                progress = 0;
+            }
+        } else {
+            if (progress < 0 || status == 2 || status == 5) {
+                progress = 0;
+            }
+        }
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("INSERT INTO List VALUES(?, ?, ?, ?)");
+            st.setInt(1, animeID);
+            st.setInt(2, accountID);
+            st.setInt(3, status);
+            st.setInt(4, progress);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+        } finally {
+            /* Close the JDBC resources after use */
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Remove/Delete anime from list
+     * @param accountID
+     * @param animeID
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
+    public boolean removeAnimeFromList(int accountID, int animeID) throws SQLException {
+        /* Declare JDBC resources to use */
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("DELETE FROM List WHERE AnimeID = ? AND AccountID = ?");
+            st.setInt(1, animeID);
+            st.setInt(2, accountID);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+        } finally {
+            /* Close the JDBC resources after use */
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Get total number of completed animes in list
+     * @param accountID
+     * @return total number of completed animes
+     * @throws SQLException
+     */
+    public int getTotalCompletedAnimesInList(int accountID) throws SQLException {
+        /* Declare JDBC resources to use */
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT COUNT(*)from list WHERE list.AccountID = ? and list.status = 2 GROUP by list.AccountID");
+            st.setInt(1, accountID);
+
+            rs = st.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            return count;
+        } finally {
+            /* Close the JDBC resources after use */
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+
+    /**
+     * Delete a studio
      * @param StudioID
      * @param deleted_at
-     * @return
+     * @return true if successful, and false if failed
      * @throws SQLException
      */
     public boolean deleteStudio(int StudioID, Date deleted_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         conn = DBUtils.makeConnection();
@@ -1373,18 +1567,19 @@ public class AnimeListDAO {
         if (count > 0) {
             return true;
         }
-        
+
         return false;
     }
 
     /**
-     *
+     * Delete a season
      * @param SeasonID
      * @param deleted_at
-     * @return
+     * @return true if successful, and false if failed
      * @throws SQLException
      */
     public boolean deleteSeason(int SeasonID, Date deleted_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         conn = DBUtils.makeConnection();
@@ -1395,18 +1590,19 @@ public class AnimeListDAO {
         if (count > 0) {
             return true;
         }
-        
+
         return false;
     }
 
     /**
-     *
+     * Delete a genre
      * @param GenreID input
      * @param deleted_at input
-     * @return true false
+     * @return true if successful, and false if failed
      * @throws SQLException
      */
     public boolean deleteGenre(int GenreID, Date deleted_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         conn = DBUtils.makeConnection();
@@ -1417,18 +1613,19 @@ public class AnimeListDAO {
         if (count > 0) {
             return true;
         }
-        
+
         return false;
     }
 
     /**
-     *
+     * Delete a type of anime
      * @param AnimeID input
      * @param deleted_at input
-     * @return true false
+     * @return true if successful, and false if failed
      * @throws SQLException
      */
     public boolean deleteType(int AnimeID, Date deleted_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         conn = DBUtils.makeConnection();
@@ -1439,19 +1636,30 @@ public class AnimeListDAO {
         if (count > 0) {
             return true;
         }
-        
+
         return false;
     }
-    
+
+    /**
+     * Create an user
+     * @param roleID
+     * @param username
+     * @param password
+     * @param fullname
+     * @param email
+     * @param gender
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
     public boolean createNewUser(int roleID, String username, String password, String fullname, String email, String gender) throws SQLException {
         String hashPassword = ""; // store password that is MD5 hashed version of user's password (for validation)
 
         /* Code to hash password using MD5 algorithm */
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            
+
             byte[] messageDigest = md.digest(password.getBytes());
-            
+
             BigInteger no = new BigInteger(1, messageDigest);
 
             // Convert message digest into hex value
@@ -1466,7 +1674,7 @@ public class AnimeListDAO {
         /* Declare Connection, PreparedStatement variables */
         Connection conn = null;
         PreparedStatement st = null;
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("INSERT INTO Account(RoleID, username, password, fullname, email,gender, created_at) VALUES (?, ?, ?, ?, ?, ?,?) ");
@@ -1478,13 +1686,12 @@ public class AnimeListDAO {
             st.setString(6, gender);
             st.setDate(7, new Date(System.currentTimeMillis()));
             int result = st.executeUpdate();
-            
+
             if (result > 0) {
                 return true;
             }
         } finally {
             /* Close the JDBC resources after use */
-            
             if (st != null) {
                 st.close();
             }
@@ -1492,18 +1699,26 @@ public class AnimeListDAO {
                 conn.close();
             }
         }
-        
+
         return false;
     }
-    
+
+    /**
+     * Delete an anime
+     * @param id
+     * @param date
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
     public boolean deleteAnime(String id, Date date) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         conn = DBUtils.makeConnection();
         st = conn.prepareStatement("UPDATE anime SET deleted_at =? WHERE AnimeID= ?");
         st.setDate(1, date);
         st.setString(2, id);
-        
+
         int rs = st.executeUpdate();
         if (rs == 1) {
             return true;
@@ -1512,27 +1727,27 @@ public class AnimeListDAO {
     }
 
     /**
-     *
+     * Create new anime genre
      * @param name input
-     * @return true false
+     * @return true if successful, and false if failed
      * @throws SQLException
      */
     public boolean createNewGenre(String name) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("INSERT INTO GENRE(name) VALUES (?)");
             st.setString(1, name);
             int result = st.executeUpdate();
-            
+
             if (result > 0) {
                 return true;
             }
         } finally {
             /* Close the JDBC resources after use */
-            
             if (st != null) {
                 st.close();
             }
@@ -1540,32 +1755,32 @@ public class AnimeListDAO {
                 conn.close();
             }
         }
-        
+
         return false;
     }
 
     /**
-     *
+     * Create new anime season
      * @param name input
-     * @return true false
+     * @return true if successful, and false if failed
      * @throws SQLException
      */
     public boolean createNewSeason(String name) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("INSERT INTO SEASON(name) VALUES (?)");
             st.setString(1, name);
             int result = st.executeUpdate();
-            
+
             if (result > 0) {
                 return true;
             }
         } finally {
             /* Close the JDBC resources after use */
-            
             if (st != null) {
                 st.close();
             }
@@ -1573,28 +1788,29 @@ public class AnimeListDAO {
                 conn.close();
             }
         }
-        
+
         return false;
     }
 
     /**
-     *
+     * Create new anime studio
      * @param name input
      * @param date input
-     * @return true false
+     * @return true if successful, and false if failed
      * @throws SQLException
      */
     public boolean createNewStudio(String name, Date date) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("INSERT INTO STUDIO(name,created_at) VALUES (?,?)");
             st.setString(1, name);
             st.setDate(2, date);
             int result = st.executeUpdate();
-            
+
             if (result > 0) {
                 return true;
             }
@@ -1607,29 +1823,37 @@ public class AnimeListDAO {
                 conn.close();
             }
         }
-        
+
         return false;
     }
-    
+
+    /**
+     * Get an account's username
+     * @param accountID
+     * @return true if successful, and false if failed
+     * @throws SQLException
+     */
     public String getAccountUsername(int accountID) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT username FROM Account WHERE AccountID = ?");
             st.setInt(1, accountID);
-            
+
             rs = st.executeQuery();
             if (rs.next()) {
                 return rs.getString("username");
             }
         } finally {
+            /* Close the JDBC resources after use */
             if (st != null) {
                 st.close();
             }
-            
+
             if (conn != null) {
                 conn.close();
             }
@@ -1637,50 +1861,88 @@ public class AnimeListDAO {
                 rs.close();
             }
         }
-        
+
         return null;
     }
-    
+
+    /**
+     * Create An Anime Studio
+     * @param AnimeID
+     * @param StudioID
+     * @param created_at
+     * @return true if successful, and false if failed
+     * @throws SQLException 
+     */
     public boolean createAnimeStudio(String AnimeID, String StudioID, Date created_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
-        
+
         conn = DBUtils.makeConnection();
         st = conn.prepareStatement("INSERT INTO anime_studio(AnimeID,StudioID,created_at) VALUES (?,?,?)");
         st.setString(1, AnimeID);
         st.setString(2, StudioID);
         st.setDate(3, created_at);
         int result = st.executeUpdate();
-        
+
         if (result > 0) {
             return true;
         }
-        
+
         return false;
     }
-    
+
+    /**
+     * Create An Anime Genre
+     * @param AnimeID
+     * @param GenreID
+     * @param created_at
+     * @return true if successful, and false if failed
+     * @throws SQLException 
+     */
     public boolean createAnimeGenre(String AnimeID, String GenreID, Date created_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
-        
+
         conn = DBUtils.makeConnection();
         st = conn.prepareStatement("INSERT INTO genre_anime(GenreID,AnimeID,created_at) VALUES (?,?,?)");
         st.setString(1, GenreID);
         st.setString(2, AnimeID);
         st.setDate(3, created_at);
         int result = st.executeUpdate();
-        
+
         if (result > 0) {
             return true;
         }
-        
+
         return false;
     }
-    
+
+    /**
+     * Create New Anime
+     * @param accountid
+     * @param seasonid
+     * @param type
+     * @param name
+     * @param release
+     * @param rating
+     * @param episodes
+     * @param status
+     * @param duration
+     * @param description
+     * @param poster
+     * @param trailer
+     * @param create_at
+     * @param delete_at
+     * @return newly created anime ID
+     * @throws SQLException 
+     */
     public int createNewAnime(int accountid, String seasonid, String type, String name, String release, String rating, String episodes, String status, String duration, String description, String poster, String trailer, Date create_at, Date delete_at) throws SQLException {
+        /* Declare JDBC resources to use */
         Connection conn = null;
         PreparedStatement st = null;
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("INSERT INTO anime(AccountID, SeasonID , type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
@@ -1699,9 +1961,9 @@ public class AnimeListDAO {
             st.setDate(13, create_at);
             st.setDate(14, delete_at);
             int result = st.executeUpdate();
-            
+
             if (result > 0) {
-                
+
                 try (ResultSet generatedKeys = st.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         return generatedKeys.getInt(1);
@@ -1712,7 +1974,6 @@ public class AnimeListDAO {
             }
         } finally {
             /* Close the JDBC resources after use */
-            
             if (st != null) {
                 st.close();
             }

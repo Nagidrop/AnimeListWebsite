@@ -1,47 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
 import animelist.model.AnimeDTO;
 import animelist.model.AnimeListDAO;
 import animelist.model.ListDTO;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author Tran Minh Thang CE140085
- */
+/* This action got called when a user uses search function in list */
 public class SearchInListAction extends ActionSupport implements ServletRequestAware {
 
-    private HttpServletRequest request;
-    private ArrayList<ListDTO> searchedAnimeList;
-    private ArrayList<AnimeDTO> searchedAnimeDetailList;
-    private ArrayList<String> statusList;
-    private String accountUsername;
-    private int accountID;
-    private int listStatus;
+    private HttpServletRequest request; // HTTP request
+    private ArrayList<ListDTO> searchedAnimeList; // get user anime list
+    private ArrayList<AnimeDTO> searchedAnimeDetailList; // get user anime list (with details for each anime)
+    private ArrayList<String> statusList; // status list (5 status)
+        private String accountUsername;
+    private int accountID; // the account ID of list page
+    private int listStatus; // status of list
     private final String SUCCESS = "success"; // indicates successful action
 
     @Override
     public String execute() throws Exception {
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
-        Map session = ActionContext.getContext().getSession();
-        accountID = (int) session.get("id");
-        accountUsername = dao.getAccountUsername(accountID);
+
+        /* Get anime list and anime details for each list anime */
+                accountUsername = dao.getAccountUsername(accountID);
         searchedAnimeList = dao.getSearchAnimeInList(request.getParameter("search-text"), accountID);
         searchedAnimeDetailList = dao.getAnimeDetailsList(searchedAnimeList);
 
+        // if the list of the user with account ID is not null (not necessarily the logged in user)
         if (searchedAnimeList != null) {
             request.setAttribute("AnimeList", searchedAnimeList);
             request.setAttribute("AnimeDetailsList", searchedAnimeDetailList);
+
+            /* Instantiate and add data to status list */
             statusList = new ArrayList<>();
             statusList.add("Currently Watching");
             statusList.add("Completed");
@@ -58,6 +56,7 @@ public class SearchInListAction extends ActionSupport implements ServletRequestA
 
     }
 
+    /* Getters and Setters */
     public String getAccountUsername() {
         return accountUsername;
     }

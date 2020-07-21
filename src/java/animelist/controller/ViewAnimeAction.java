@@ -14,13 +14,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/* Logic code when user press button in login view */
+/* This action got triggered when web user views an anime */
 public class ViewAnimeAction extends ActionSupport implements ServletRequestAware {
 
-    private HttpServletRequest request;
+    private HttpServletRequest request; // HTTP request
     private int animeID; // anime ID passed from form input
-    private AnimeDTO anime;
-    private ArrayList<ListDTO> animeList;
+    private AnimeDTO anime; // anime details to view
+    private ArrayList<ListDTO> animeList; // list of anime of current user (if any)
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
 
@@ -29,29 +29,32 @@ public class ViewAnimeAction extends ActionSupport implements ServletRequestAwar
     }
 
     public String execute() throws Exception {
-        /* Instantiate DAO object and calls login method to check from DB */
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
         anime = dao.getAnimeDetails(animeID);
 
+        /* Check if user logged in to get list */
         Map session = ActionContext.getContext().getSession();
         if (session.get("user") != null) {
             animeList = dao.getAnimeList((int) session.get("id"), 0);
         }
 
-        ListDTO animeInList = null;
+        ListDTO animeInList = null; // not null if there is an anime in list
 
-        String url = FAIL; // by default, login is not successful
+        String url = FAIL; // by default, action is not successful
 
+        // if there is anime details from DB
         if (anime != null) {
-            url = SUCCESS;
+            url = SUCCESS; // indicates action is successful
             request.setAttribute("StudioList", anime.getStudios());
             request.setAttribute("GenreList", anime.getGenres());
             request.setAttribute("Anime", anime);
 
+            // if there is an anime list for user who views
             if (animeList != null) {
                 for (ListDTO listAnime : animeList) {
                     if (listAnime.getAnimeID() == animeID) {
-                        animeInList = listAnime;
+                        animeInList = listAnime; // mark anime in list
                     }
                 }
 
