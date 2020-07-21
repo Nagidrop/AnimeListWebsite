@@ -168,7 +168,7 @@
                             <div class="card card-body" style="padding: 0.5rem!important; margin-top: 10%!important;">
                                 <div id="addtolist" class="addtolist-block js-anime-addtolist-block" style="padding: 0!important;">
                                     <span class="notice_open_public pb4">* Note: Anyone can view your list by default.</span>
-                                    <form action="addOrRemoveAnimeFromList">
+                                    <form action="addOrRemoveAnimeFromList" method="POST">
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 5%!important;">
                                             <input type="hidden" name="animeID" value="<s:property value="anime.id" />" />
                                             <input type="hidden" name="accountID" value="<s:property value="%{#session.id}"/>" />
@@ -230,7 +230,7 @@
                             <div class="card card-body" style="padding: 0.5rem!important;">
                                 <div id="addtolist" class="addtolist-block js-anime-addtolist-block" style="padding: 0!important;">
                                     <span class="notice_open_public pb4">* Note: Anyone can view your list by default.</span>
-                                    <form action="addOrRemoveAnimeFromList">
+                                    <form action="addOrRemoveAnimeFromList" method="POST">
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 5%!important;">
                                             <input type="hidden" name="animeID" value="<s:property value="anime.id" />" />	
                                             <input type="hidden" name="accountID" value="<s:property value="%{#session.id}"/>" />
@@ -406,7 +406,7 @@
                                     <label>Duration</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><s:property value="anime.duration" />
+                                    <p>
                                         <s:if test="%{anime.duration != null}">
                                             <s:property value="anime.duration" />
                                         </s:if>

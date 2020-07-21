@@ -116,7 +116,7 @@
             <result name="success" type="dispatcher">viewList.jsp</result>
         </action>
 
-        <action name="editAnimeList" class="animelist.controller.EditListAction" >
+        <action name="editRemoveAnimeFromList" class="animelist.controller.EditRemoveAnimeAction" >
             <result name="success" type="redirectAction">
                 <param name="actionName">viewAnimeList</param>
                 <param name="accountID" >${accountIDEdit}</param>
