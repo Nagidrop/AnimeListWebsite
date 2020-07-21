@@ -7,10 +7,12 @@
             <file>file:/E:/AnimeListWebsite/nbproject/private/private.xml</file>
             <file>file:/E:/AnimeListWebsite/web/META-INF/context.xml</file>
             <file>file:/E:/AnimeListWebsite/src/java/animelist/model/AccountDTO.java</file>
+            <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/AdminUpdateType.java</file>
             <file>file:/E:/AnimeListWebsite/web/searchResult.jsp</file>
             <file>file:/E:/AnimeListWebsite/src/java/animelist/model/ListDTO.java</file>
             <file>file:/E:/AnimeListWebsite/src/java/animelist/model/AnimeListDAO.java</file>
             <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/ViewListAction.java</file>
+            <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/ViewTotalNumberAnimesAction.java</file>
             <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/SortAnimeAction.java</file>
             <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/AdminUpdateUser.java</file>
             <file>file:/E:/AnimeListWebsite/nbproject/private/private.properties</file>
@@ -35,6 +37,7 @@
             <file>file:/E:/AnimeListWebsite/web/viewList.jsp</file>
             <file>file:/E:/AnimeListWebsite/src/java/animelist/model/SeasonDTO.java</file>
             <file>file:/E:/AnimeListWebsite/src/java/animelist/controller/AdminIndexAction.java</file>
+            <file>file:/E:/AnimeListWebsite/web/WEB-INF/web.xml</file>
             <file>file:/E:/AnimeListWebsite/web/userinfo.jsp</file>
             <file>file:/E:/AnimeListWebsite/web/404.jsp</file>
             <file>file:/E:/AnimeListWebsite/web/viewAnime.jsp</file>
