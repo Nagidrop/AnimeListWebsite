@@ -11,7 +11,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>User Manager</title>
+        <title>Anime Manager</title>
 
         <!-- Custom fonts for this template -->
         <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -49,7 +49,7 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">User Manager</h1>
+                        <h1 class="h3 mb-2 text-gray-800">Anime Manager</h1>
                         <!--          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
 
                         <!-- DataTales Example -->
@@ -57,7 +57,7 @@
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 row">
                                     <div class="col-md-6" style="padding: 0.8%;">
-                                        <h6 class="m-0 font-weight-bold text-primary">List User</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">List Anime</h6>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="d-flex flex-row-reverse">
@@ -79,49 +79,36 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Username</th>
-                                                <th>Full name</th>
-                                                <th>Email</th>
-                                                <th>Gender</th>
-                                                <th></th><th></th>
+                                                <th>Name</th>
+                                                <th>Episodes</th>
+                                                <th>Type</th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Username</th>
-                                                <th>Full name</th>
-                                                <th>Email</th>
-                                                <th>Gender</th>
+                                                <th>Name</th>
+                                                <th>Episodes</th>
+                                                <th>Type</th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <s:iterator value="listUser" status="dto">
+                                            <s:iterator value="listAnimeDTOs" status="dto">
                                                 <tr>
                                                     <td><s:property value="id"/></td>
-                                                    <td><s:property value="username"/></td>
-                                                    <td><s:property value="fullName"/></td>
-                                                    <td><s:property value="email"/></td>
-                                                    <td>
-                                                        <s:if test="%{gender==1}">
-                                                            Male
-                                                        </s:if>
-                                                        <s:elseif test="%{gender==0}">
-                                                            Female       
-                                                        </s:elseif>  
-                                                        <s:else>  
-                                                            Other
-                                                        </s:else>
-
-
-                                                    </td>      
+                                                    <td><s:property value="name"/></td>
+                                                    <td><s:property value="episodes"/></td>
+                                                    <td><s:property value="type"/></td>
+                                                         
                                                     <td style="text-align: center">
                                                         <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="username"/>', '<s:property value="fullName"/>', '<s:property value="email"/>',<s:property value="gender"/>)"> <i class="fa fa-edit" style="color: white"></i></a>
                                                     </td>
                                                     <td style="text-align: center">
-                                                        <a class="btn-sm btn-danger btn-circle " href="deleteUser?id=<s:property value="id"/>"><i class="fa fa-trash" style="color: white"></i></a>                                  
+                                                        <a class="btn-sm btn-danger btn-circle " href="deleteAnime?id=<s:property value="id"/>"><i class="fa fa-trash" style="color: white"></i></a>                                  
                                                     </td>
                                                 </tr>
                                             </s:iterator>
