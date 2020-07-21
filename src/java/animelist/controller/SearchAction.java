@@ -57,7 +57,6 @@ public class SearchAction extends ActionSupport implements ServletRequestAware {
                 seasonID = "%";
             }
             
-            System.out.println(searchValue + type+ studioID+ genreID+ seasonID);
             listAnimeDTOs = dao.getSearchAnime(searchValue, type, studioID, genreID, seasonID);
           
             
