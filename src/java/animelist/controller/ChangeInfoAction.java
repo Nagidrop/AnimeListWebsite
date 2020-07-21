@@ -9,8 +9,11 @@ import animelist.model.AnimeListDAO;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
+import java.util.Calendar;
 import java.util.Map;
+import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 /**
@@ -24,7 +27,8 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
     private int gender;
     private String fullname;
     private File avatar;
-    private String avatarName;
+    private String avatarFileName;
+    private String avatarContentType;
     private String email;
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
@@ -36,19 +40,32 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
     @Override
     public String execute() throws Exception {
         /* Instantiate DAO object and calls login method to check from DB */
+        String fileExt = null;
         AnimeListDAO dao = new AnimeListDAO();
         Map session = ActionContext.getContext().getSession();
         username = (String) session.get("username");
-        gender = Integer.parseInt(request.getParameter("gender"));
-        System.out.println("Hello:" + gender);
-        email = request.getParameter("email");
-        fullname = request.getParameter("name");
         String path = request.getSession().getServletContext().getRealPath("/");
-        path = path.substring(0,path.length()-10).concat("web\\images\\users");
-        System.out.println(path);
-        avatarName= "hello User";
+        path = path.substring(0, path.length() - 10).concat("web\\images\\users");
+        // random file name
+        if (avatar != null) {
+            fileExt = avatarFileName.substring(avatarFileName.length() - 4, avatarFileName.length());
+            String ext = "";
+            if (avatarFileName != null || avatarFileName.equalsIgnoreCase("")) {
+                ext = avatarFileName.substring(avatarFileName.lastIndexOf("."), avatarFileName.length());
+            }
+            Random r = new Random();
+            avatarFileName = r.ints(10, 971).findFirst().getAsInt() + Calendar.getInstance().getTimeInMillis() + ext;
+            File newFile = new File(path, avatarFileName);
+            FileUtils.copyFile(avatar, newFile);
+
+        } else {
+            avatarFileName = (String) session.get("userAvatar");
+        }
+        
+        session.replace("userAvatar", avatarFileName);
         session.replace("fullname", fullname);
         session.replace("email", email);
+
         switch (gender) {
             case 0:
                 session.replace("gender", "Male");
@@ -60,8 +77,25 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
                 session.replace("gender", "Other");
                 break;
         }
-        dao.changeInfo(username, fullname, avatarName, email, gender);
+
+        dao.changeInfo(username, fullname, avatarFileName, email, gender);
         return SUCCESS;
+    }
+
+    public String getAvatarFileName() {
+        return avatarFileName;
+    }
+
+    public void setAvatarFileName(String avatarFileName) {
+        this.avatarFileName = avatarFileName;
+    }
+
+    public String getAvatarContentType() {
+        return avatarContentType;
+    }
+
+    public void setAvatarContentType(String avatarContentType) {
+        this.avatarContentType = avatarContentType;
     }
 
     public String getUsername() {

@@ -461,7 +461,11 @@
                         <div class="profile-card-4 z-depth-3">
                             <div class="card">
                                 <div class="card-body text-center bg-primary rounded-top" style="background-color: #bd000066!important">
-                                    <div class="user-box"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
+                                    <div class="user-box"> <%if (session.getAttribute("userAvatar") == null) {%>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
+                                        <%} else {%>
+                                        <img src="images/users/<s:property  value="%{#session.userAvatar}"/>" alt="user avatar"> </div>
+                                    <%}%>
                                     <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
                                     <h6 class="text-light">- Wibu -</h6>
                                 </div>
@@ -476,7 +480,6 @@
                                             <small class="mb-0 font-weight-bold">Completed Animes</small></div>
                                     </div>
                                 </div>
-                                <div class="card-footer text-center"> <a href="javascript:void()" class="btn-social btn-facebook waves-effect waves-light m-1"><i class="fa fa-facebook"></i></a> <a href="javascript:void()" class="btn-social btn-google-plus waves-effect waves-light m-1"><i class="fa fa-google-plus"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-behance waves-effect waves-light"><i class="fa fa-behance"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-dribbble waves-effect waves-light"><i class="fa fa-dribbble"></i></a> </div>
                             </div>
                         </div>
                     </div>

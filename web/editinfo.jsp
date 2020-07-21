@@ -397,7 +397,7 @@
 
             .btn-primary{
                 color: #ffffff!important;
-                background-color: #c70606!important;
+                background-color: #960505!important;
                 border-color: #f12525!important;
             }
 
@@ -456,7 +456,12 @@
                         <div class="profile-card-4 z-depth-3">
                             <div class="card">
                                 <div class="card-body text-center bg-primary rounded-top" style="background-color: #bd000066!important">
-                                    <div class="user-box"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
+                                    <div class="user-box"> 
+                                        <%if (session.getAttribute("userAvatar") == null) {%>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
+                                        <%} else {%>
+                                        <img src="images/users/<s:property  value="%{#session.userAvatar}"/>" alt="user avatar"> </div>
+                                    <%}%>
                                     <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
                                     <h6 class="text-light">- Wibu -</h6>
                                 </div>
@@ -477,7 +482,6 @@
                                     </ul>
 
                                 </div>
-                                <div class="card-footer text-center"> <a href="javascript:void()" class="btn-social btn-facebook waves-effect waves-light m-1"><i class="fa fa-facebook"></i></a> <a href="javascript:void()" class="btn-social btn-google-plus waves-effect waves-light m-1"><i class="fa fa-google-plus"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-behance waves-effect waves-light"><i class="fa fa-behance"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-dribbble waves-effect waves-light"><i class="fa fa-dribbble"></i></a> </div>
                             </div>
                         </div>
                     </div>
@@ -489,11 +493,11 @@
                                 </ul>
                                 <div class="tab-content p-3">
                                     <div class="tab-pane" id="edit">
-                                        <s:form action="editinfo">
+                                        <s:form action="editinfo" method="POST" enctype="multipart/form-data" theme="simple" onsubmit="return isValid()">
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Full name</label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="text" name="name" value="<%=session.getAttribute("fullname")%>">
+                                                    <s:textfield cssClass="form-control" name="fullname" value="%{#session.fullname}" theme="simple" id="fullname"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -502,7 +506,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                                 <div class="col-lg-9">
-                                                    <input class="form-control" type="email" name="email" value="<%= session.getAttribute("email")%>">
+                                                    <s:textfield type="email" cssClass="form-control" name="email" value="%{#session.email}" theme="simple" id="email"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -511,7 +515,7 @@
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label form-control-label">Profile Picture</label>
                                                 <div class="col-lg-9">
-                                                    <s:file name="imageFile" cssClass="form-control" theme="simple"/>
+                                                    <s:file name="avatar" cssClass="form-control" theme="simple"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -526,29 +530,29 @@
                                                 <div class="col-lg-9">
                                                     <s:if test="%{#session.gender== 'Male'}">
                                                         &ensp;
-                                                        <input type="checkbox" id="gender0" name="gender" value="0" checked>
+                                                        <input type="radio" id="gender0" name="gender" value="0" checked>
                                                         <label for="gender0">Male</label>                    &ensp;
-                                                        <input type="checkbox" id="gender1" name="gender" value="1">
+                                                        <input type="radio" id="gender1" name="gender" value="1">
                                                         <label for="gender1">Female</label>                  &ensp;
-                                                        <input type="checkbox" id="gender2" name="gender" value="2">
+                                                        <input type="radio" id="gender2" name="gender" value="2">
                                                         <label for="gender2">Other</label>
                                                     </s:if>
                                                     <s:elseif test="%{#session.gender== 'Female'}">
                                                         &ensp;
-                                                        <input type="checkbox" id="gender0" name="gender" value="0" >
+                                                        <input type="radio" id="gender0" name="gender" value="0" >
                                                         <label for="gender0">Male</label>                    &ensp;
-                                                        <input type="checkbox" id="gender1" name="gender" value="1" checked>
+                                                        <input type="radio" id="gender1" name="gender" value="1" checked>
                                                         <label for="gender1">Female</label>                  &ensp;
-                                                        <input type="checkbox" id="gender2" name="gender" value="2">
+                                                        <input type="radio" id="gender2" name="gender" value="2">
                                                         <label for="gender2">Other</label>
                                                     </s:elseif>
                                                     <s:elseif test="%{#session.gender== 'Other'}">
                                                         &ensp;
-                                                        <input type="checkbox" id="gender0" name="gender" value="0" >
+                                                        <input type="radio" id="gender0" name="gender" value="0" >
                                                         <label for="gender0">Male</label>                    &ensp;
-                                                        <input type="checkbox" id="gender1" name="gender" value="1">
+                                                        <input type="radio" id="gender1" name="gender" value="1">
                                                         <label for="gender1">Female</label>                  &ensp;
-                                                        <input type="checkbox" id="gender2" name="gender" value="2"checked>
+                                                        <input type="radio" id="gender2" name="gender" value="2"checked>
                                                         <label for="gender2">Other</label>
                                                     </s:elseif>
                                                 </div>
@@ -573,6 +577,13 @@
                 $('input[type="checkbox"]').on('change', function () {
                     $('input[type="checkbox"]').not(this).prop('checked', false);
                 });
+                
+                function isValid(){
+                    if($("#fullname").val()==""|| $("#email").val()==""){
+                        alert("Check Your Input Again!!! Email and Fullname Can't Be NULL!!!");
+                        return false;
+                    }
+                }
             </script>
     </body>
 </html>

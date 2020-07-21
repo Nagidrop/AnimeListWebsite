@@ -34,7 +34,9 @@ public class ViewAnimeAction extends ActionSupport implements ServletRequestAwar
         anime = dao.getAnimeDetails(animeID);
 
         Map session = ActionContext.getContext().getSession();
-        animeList = dao.getAnimeList((int) session.get("id"), 0);
+        if (session.get("user") != null) {
+            animeList = dao.getAnimeList((int) session.get("id"), 0);
+        }
 
         ListDTO animeInList = null;
 

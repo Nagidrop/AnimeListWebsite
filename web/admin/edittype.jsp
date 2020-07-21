@@ -54,8 +54,21 @@
 
                             <!-- DataTales Example -->
                             <div class="card shadow mb-4">
-                                <div class="card-header py-3">
+                                <div class="card-header py-3 row">
+                                    <div class="col-md-6" style="padding: 0.8%;">
                                     <h6 class="m-0 font-weight-bold text-primary">List Type</h6>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex flex-row-reverse">
+                                            <a class="btn btn-primary btn-icon-split" href="#">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-plus"></i>
+
+                                                </span>
+                                                <span class="text">New Type</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                     </select>
                                 </div>
                             </div>
@@ -77,12 +90,6 @@
                                         <s:iterator value="types" status="dto">
                                             <tr>
                                                 <td><s:property/></td>
-                                                <td style="text-align: center">
-                                                    <a class="btn-sm btn-success btn-circle"  onclick="fillInfo('<s:property/>')"> <i class="fa fa-edit" style="color: white"></i></a>
-                                                </td>
-                                                <td style="text-align: center">
-                                                    <a class="btn-sm btn-danger btn-circle "><i class="fa fa-trash" style="color: white"></i></a>
-                                                </td>
                                             </tr>
                                         </s:iterator>
                                     </tbody>
@@ -146,8 +153,9 @@
         <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
-    </form>
-
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
     <script>
         function fillInfo(type) {

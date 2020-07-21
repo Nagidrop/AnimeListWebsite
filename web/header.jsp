@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : header
     Created on : Jul 15, 2020, 7:25:43 PM
     Author     : HAPPY
@@ -17,8 +17,8 @@
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Anime</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown03">
                     <a class="dropdown-item" href="<s:url action="initSearchPage"/>">Anime Search</a>
-                    <a class="dropdown-item" href="#">Top Anime</a>
-                    <a class="dropdown-item" href="#">Seasonal Anime</a>
+                    <a class="dropdown-item" href="comingSoon.jsp">Top Anime</a>
+                    <a class="dropdown-item" href="comingSoon.jsp">Seasonal Anime</a>
                 </div>
             </li>
 
@@ -43,7 +43,7 @@
 
     <ul class="nav navbar-nav">
         <li class="dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false"> 
+            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
 
                 Welcome, <s:property value="%{#session.fullname}"/> <b class="caret"></b>
             </a>

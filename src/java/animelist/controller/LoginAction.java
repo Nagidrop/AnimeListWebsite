@@ -44,6 +44,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
             session.put("user", account);
             session.put("fullname", account.getFullName());
             session.put("id", account.getId());
+            session.put("userAvatar", account.getAvatar());
             session.put("username", account.getUsername());
             session.put("email", account.getEmail());
             session.put("roleid", account.getRoleID());

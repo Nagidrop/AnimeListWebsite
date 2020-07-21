@@ -88,11 +88,7 @@
                             </button>
                         </div>
 
-                        <div class="text-center p-t-90">
-                            <a class="txt1" href="#">
-                                Forgot Password?
-                            </a>
-                        </div>
+                       
                     </form>
                 </div>
             </div>

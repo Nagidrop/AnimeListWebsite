@@ -30,6 +30,10 @@
             </result>
         </action>
 
+        <action name="showAllAnime" class = "animelist.controller.SearchAction">
+            <result name="success" type="dispatcher">allAnime.jsp</result>
+        </action>
+
         <action name="viewAnime" class="animelist.controller.ViewAnimeAction" >
             <result name="success" type="dispatcher">viewAnime.jsp</result>
             <result name="fail">404.jsp</result>
@@ -67,47 +71,47 @@
         </action>
 
         <action name="editinfo" class = "animelist.controller.ChangeInfoAction">
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">2097152</param>
+                <param name="allowedTypes">
+                    image/png,image/jpg,image/jpeg
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="basicStack"/>
             <result name="success" type="redirectAction">ViewUserTotalAnimes
             </result>
             <result name="fail">invalid.jsp</result>
         </action>
 
-        <action name="genreView" class = "animelist.controller.GenreView">
+        <action name="genreView" class = "animelist.controller.GenreViewAction">
             <result name="success">admin/editgenre.jsp</result>
         </action>
-        <action name="seasonView" class = "animelist.controller.SeasonView">
+        <action name="seasonView" class = "animelist.controller.SeasonViewAction">
             <result name="success">admin/editseason.jsp</result>
         </action>
-        <action name="studioView" class = "animelist.controller.StudioView">
+        <action name="studioView" class = "animelist.controller.StudioViewAction">
             <result name="success">admin/editstudio.jsp</result>
         </action>
-        <action name="typeView" class = "animelist.controller.TypeView">
+        <action name="typeView" class = "animelist.controller.TypeViewAction">
             <result name="success">admin/edittype.jsp</result>
         </action>
-        <action name="updateSeason" class = "animelist.controller.AdminUpdateSeason">
+        <action name="updateSeason" class = "animelist.controller.AdminUpdateSeasonAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">seasonView</param>
             </result>
             <result name="fail">invalid.jsp</result>
 
         </action>
-        <action name="updateGenre" class = "animelist.controller.AdminUpdateGenre">
+        <action name="updateGenre" class = "animelist.controller.AdminUpdateGenreAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">genreView</param>
             </result>
             <result name="fail">invalid.jsp</result>
 
         </action>
-        <action name="updateStudio" class = "animelist.controller.AdminUpdateStudio">
+        <action name="updateStudio" class = "animelist.controller.AdminUpdateStudioAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">studioView</param>
-            </result>
-            <result name="fail">invalid.jsp</result>
-
-        </action>
-        <action name="updateType" class = "animelist.controller.AdminUpdateType">
-            <result name="success" type="redirectAction">
-                <param name="actionName">typeView</param>
             </result>
             <result name="fail">invalid.jsp</result>
 
@@ -154,6 +158,21 @@
             <result name="fail" type="redirectAction">404.jsp</result>
         </action>
 
+        <action name="sortAllAnimeByName" class="animelist.controller.SortAnimeAction" method="sortByName">
+            <result name="success" type="dispatcher">allAnime.jsp</result>
+            <result name="input">404.jsp</result>
+        </action>
+
+        <action name="sortAllAnimeBySeason" class="animelist.controller.SortAnimeAction" method="sortBySeason">
+            <result name="success" type="dispatcher">allAnime.jsp</result>
+            <result name="input">404.jsp</result>
+        </action>
+
+        <action name="sortAllAnimeByEpisode" class="animelist.controller.SortAnimeAction" method="sortByEpisode">
+            <result name="success" type="dispatcher">allAnime.jsp</result>
+            <result name="input">404.jsp</result>
+        </action>
+
         <action name="sortAnimeByName" class="animelist.controller.SortAnimeAction" method="sortByName">
             <result name="success" type="dispatcher">searchResult.jsp</result>
             <result name="input">404.jsp</result>
@@ -187,7 +206,47 @@
                 <param name="actionName">viewAnime</param>
                 <param name="animeID" >${animeID}</param>
             </result>
-            <result name="fail" type="dispatcher">actionFailed.jsp</result>
+            <result name="fail" type="dispatcher">actionFailedAnime.jsp
+                <param name="animeID" >${animeID}</param>
+            </result>
+        </action>
+
+        <action name="deleteStudio" class = "animelist.controller.DeleteStudioAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">studioView</param>
+            </result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+        </action>
+        <action name="deleteSeason" class = "animelist.controller.DeleteSeasonAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">seasonView</param>
+            </result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+        </action>
+
+        <action name="deleteGenre" class = "animelist.controller.DeleteGenreAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">genreView</param>
+            </result>
+            <result name="fail" type="redirectAction">404.jsp</result>
+        </action>
+
+        <action name="createNewGenre" class = "animelist.controller.createNewGenreAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">genreView</param>
+            </result>
+        </action>
+
+        <action name="createNewSeason" class = "animelist.controller.createNewSeasonAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">seasonView</param>
+            </result>
+        </action>
+
+        <action name="createNewStudio" class = "animelist.controller.createNewStudioAction">
+            <result name="success" type="redirectAction">
+                <param name="actionName">studioView</param>
+            </result>
         </action>
         <action name="createAnime" class="animelist.controller.showCreateNewAnimeView" >
             <result name="success" type="dispatcher">

@@ -59,5 +59,11 @@
 
         </div>
 
+        <div class="" style="text-align: center;">
+
+            <a href="<s:url action="showAllAnime"/>" class="btn btn-secondary btn-icon-split">
+                <span class="text">Show All</span>
+            </a>
+        </div>
     </body>
 </html>

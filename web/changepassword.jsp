@@ -394,7 +394,7 @@
                 color: #fda8a8!important;
                 background-color: #000000!important;
             }
-            
+
             .btn-primary{
                 color: #ffffff!important;
                 background-color: #c70606!important;
@@ -453,78 +453,81 @@
             <div class="container" style="margin-top: 2%">
                 <div class="row">
                     <div class="col-lg-4">
-                         <div class="profile-card-4 z-depth-3">
+                        <div class="profile-card-4 z-depth-3">
                             <div class="card">
                                 <div class="card-body text-center bg-primary rounded-top" style="background-color: #bd000066!important">
-                                    <div class="user-box"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
-                                    <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
-                                    <h6 class="text-light">- Wibu -</h6>
-                                </div>
-                                <div class="card-body">
-                                    <ul class="list-group shadow-none">
-                                        <li class="list-group-item">
-                                            <div class="list-icon"> <i class="fa fa-user-circle"></i> </div>
-                                            <div class="list-details"> <span><%= session.getAttribute("username")%></span> <small>Username</small> </div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="list-icon"> <i class="fa fa-envelope"></i> </div>
-                                            <div class="list-details"> <span><%= session.getAttribute("email")%></span> <small>Email Address</small> </div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="list-icon"> <i class="fa fa-genderless"></i> </div>
-                                            <div class="list-details"> <span><%= session.getAttribute("gender")%></span> <small>Gender</small> </div>
-                                        </li>
-                                    </ul>
-                                   
-                                </div>
-                                <div class="card-footer text-center"> <a href="javascript:void()" class="btn-social btn-facebook waves-effect waves-light m-1"><i class="fa fa-facebook"></i></a> <a href="javascript:void()" class="btn-social btn-google-plus waves-effect waves-light m-1"><i class="fa fa-google-plus"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-behance waves-effect waves-light"><i class="fa fa-behance"></i></a> <a href="javascript:void()" class="list-inline-item btn-social btn-dribbble waves-effect waves-light"><i class="fa fa-dribbble"></i></a> </div>
+                                    <div class="user-box"> <%if (session.getAttribute("userAvatar") == null) {%>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
+                                        <%} else {%>
+                                    <img src="images/users/<s:property  value="%{#session.userAvatar}"/>" alt="user avatar"> </div>
+                                    <%}%>
+                                <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
+                                <h6 class="text-light">- Wibu -</h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group shadow-none">
+                                    <li class="list-group-item">
+                                        <div class="list-icon"> <i class="fa fa-user-circle"></i> </div>
+                                        <div class="list-details"> <span><%= session.getAttribute("username")%></span> <small>Username</small> </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-icon"> <i class="fa fa-envelope"></i> </div>
+                                        <div class="list-details"> <span><%= session.getAttribute("email")%></span> <small>Email Address</small> </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-icon"> <i class="fa fa-genderless"></i> </div>
+                                        <div class="list-details"> <span><%= session.getAttribute("gender")%></span> <small>Gender</small> </div>
+                                    </li>
+                                </ul>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8">
-                        <div class="card z-depth-3">
-                            <div class="card-body">
-                                <ul class="nav nav-pills nav-pills-primary nav-justified">
-                                    <li class="nav-item"> <a href="javascript:void()" data-target="#editpassword" data-toggle="pill" class="nav-link"><i class="icon-pass"></i> <span class="hidden-xs">Password Changed</span></a> </li>
-                                </ul>
-                                    <div class="tab-pane" id="editpassword">
-                                        <s:form action="changepassword">
-                                            <div style="margin-bottom: 4%;">
-                                            <input type="checkbox" onclick="Toggle()"> 
-                                            <b>Show Password</b> 
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">New Password</label>
-                                                <div class="col-lg-9">
-                                                    <input class="form-control" type="password" value="" name="password" id="typepass">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-lg-9"> </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
-                                                <div class="col-lg-9">
-                                                    <input class="form-control" type="password" value="" name="1password" id="typepass1">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row" style="margin-top: 5%">
-                                                <label class="col-lg-3 col-form-label form-control-label"></label>
-                                                <div class="col-lg-9">
-                                                    <input type="reset" class="btn btn-secondary1" name="reset" value="Cancel">
-                                                    <input type="submit" class="btn btn-primary1" name="button" value="Save Changes">
-                                                </div>
-                                            </div>
-                                        </s:form>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card z-depth-3">
+                        <div class="card-body">
+                            <ul class="nav nav-pills nav-pills-primary nav-justified">
+                                <li class="nav-item"> <a href="javascript:void()" data-target="#editpassword" data-toggle="pill" class="nav-link"><i class="icon-pass"></i> <span class="hidden-xs">Password Changed</span></a> </li>
+                            </ul>
+                            <div class="tab-pane" id="editpassword">
+                                <s:form action="changepassword" onsubmit="return isValid()">
+                                    <div style="margin-bottom: 4%;">
+                                        <input type="checkbox" onclick="Toggle()"> 
+                                        <b>Show Password</b> 
                                     </div>
-                                </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">New Password</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" type="password" value="" name="password" id="typepass">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-9"> </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" type="password" value="" name="1password" id="typepass1" onchange="checkPass()">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" style="margin-top: 5%">
+                                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                                        <div class="col-lg-9">
+                                            <input type="reset" class="btn btn-secondary1" name="reset" value="Cancel">
+                                            <input type="submit" class="btn btn-primary1" name="button" value="Save Changes" id="button-submit">
+                                        </div>
+                                    </div>
+                                </s:form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
-            <script type="text/javascript">
+        </div>
+    </div>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> 
+    <script type="text/javascript">
                                                 // Change the type of input to password or text 
                                                 function Toggle() {
                                                     var temp = document.getElementById("typepass");
@@ -537,6 +540,14 @@
                                                         temp1.type = "password";
                                                     }
                                                 }
-            </script>
-    </body>
+
+                                                function isValid() {
+                                                    if ($("#typepass").val() == "" || $("#typepass1").val() == "" || $("#typepass").val() != $("#typepass1").val()) {
+                                                        alert("Please check your password");
+                                                        return false;
+                                                    }
+                                                }
+
+    </script>
+</body>
 </html>

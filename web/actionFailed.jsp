@@ -27,7 +27,7 @@
             .error-code {
                 bottom: 60%;
                 color: #000000;
-                font-size: 96px;
+                font-size: 60px;
                 font-family: 'Raleway', sans-serif;
                 line-height: 100px;
             }
@@ -51,7 +51,7 @@
             }
 
             .m-t-20 {
-                margin-top: 17%!important;
+                margin-top: 10%!important;
             }
 
             .login-detail-panel-button {
@@ -73,9 +73,9 @@
 
             <div class="error-desc">
                 <div>
-                    <a class="login-detail-panel-button btn" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=0">
-                    <i class="fa fa-arrow-left"></i>
-                    Go back to View List page                     
+                    <a class="login-detail-panel-button btn" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=0"
+                       <i class="fa fa-arrow-left"></i>
+                        Go back to View List page                     
                     </a>
                 </div>
             </div>
