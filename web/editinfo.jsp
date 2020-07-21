@@ -460,7 +460,7 @@
                                         <%if (session.getAttribute("userAvatar") == null) {%>
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
                                         <%} else {%>
-                                        <img src="images/users/<s:property  value="#session.userAvatar"/>" alt="user avatar"> </div>
+                                        <img src="images/users/<s:property  value="%{#session.userAvatar}"/>" alt="user avatar"> </div>
                                     <%}%>
                                     <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
                                     <h6 class="text-light">- Wibu -</h6>

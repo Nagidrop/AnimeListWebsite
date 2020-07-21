@@ -43,7 +43,7 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
         String fileExt = null;
         AnimeListDAO dao = new AnimeListDAO();
         Map session = ActionContext.getContext().getSession();
-
+        username = (String) session.get("username");
         String path = request.getSession().getServletContext().getRealPath("/");
         path = path.substring(0, path.length() - 10).concat("web\\images\\users");
         // random file name
@@ -64,6 +64,7 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
 
         session.replace("fullname", fullname);
         session.replace("email", email);
+        session.replace("userAvatar", avatarFileName);
         switch (gender) {
             case 0:
                 session.replace("gender", "Male");
@@ -75,6 +76,7 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
                 session.replace("gender", "Other");
                 break;
         }
+        
         dao.changeInfo(username, fullname, avatarFileName, email, gender);
         return SUCCESS;
     }
