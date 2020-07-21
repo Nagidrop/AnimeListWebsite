@@ -87,28 +87,28 @@
         <action name="updateSeason" class = "animelist.controller.AdminUpdateSeason">
             <result name="success" type="redirectAction">
                 <param name="actionName">seasonView</param>
-            </result>            
+            </result>
             <result name="fail">invalid.jsp</result>
 
         </action>
         <action name="updateGenre" class = "animelist.controller.AdminUpdateGenre">
             <result name="success" type="redirectAction">
                 <param name="actionName">genreView</param>
-            </result>            
+            </result>
             <result name="fail">invalid.jsp</result>
 
         </action>
         <action name="updateStudio" class = "animelist.controller.AdminUpdateStudio">
             <result name="success" type="redirectAction">
                 <param name="actionName">studioView</param>
-            </result>            
+            </result>
             <result name="fail">invalid.jsp</result>
 
         </action>
         <action name="updateType" class = "animelist.controller.AdminUpdateType">
             <result name="success" type="redirectAction">
                 <param name="actionName">typeView</param>
-            </result>            
+            </result>
             <result name="fail">invalid.jsp</result>
 
         </action>
@@ -161,9 +161,17 @@
             <result name="success" type="dispatcher">searchResult.jsp</result>
             <result name="input">404.jsp</result>
         </action>
-        
+
         <action name="ViewUserTotalAnimes" class="animelist.controller.ViewTotalNumberAnimesAction">
             <result name="success" type="dispatcher">userinfo.jsp</result>
+        </action>
+
+        <action name="addOrRemoveAnimeFromList" class="animelist.controller.AddRemoveAnimeAction" >
+            <result name="success" type="redirectAction">
+                <param name="actionName">viewAnime</param>
+                <param name="animeID" >${animeID}</param>
+            </result>
+            <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
     </package>
 </struts>

@@ -149,34 +149,32 @@
     <body style="background-image: url('images/bg-08.png')">
         <jsp:include page='header.jsp'/>
         <div class="container emp-details">
-            <form method="post">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="details-img">
-                            <img src="images/poster/<s:property value="anime.poster"/>" alt=""/>
-                        </div>
-                        <div class="details-work">
-                            <% if (session.getAttribute("user") != null) {%>
-                            <%
-                                ArrayList<ListDTO> animeList = (ArrayList<ListDTO>) session.getAttribute("AnimeList");
-                                ArrayList<AnimeDTO> animeDetailsList = (ArrayList<AnimeDTO>) session.getAttribute("AnimeDetailsList");
-                                ArrayList<String> statusList = (ArrayList<String>) session.getAttribute("StatusList");
-                                ListDTO animeInList = (ListDTO) request.getAttribute("AnimeInList");
-                                if (animeInList != null) {
-
-                            %>
-                            <div class="collapse show" id="collapseExample">
-                                <div class="card card-body" style="padding: 0.5rem!important; margin-top: 10%!important;">
-                                    <div id="addtolist" class="addtolist-block js-anime-addtolist-block" style="padding: 0!important;">
-                                        <input type="hidden" id="myinfo_anime_id" value="39547">
-                                        <input type="hidden" id="myinfo_curstatus" value="">
-
-                                        <span class="notice_open_public pb4">* Note: Anyone can view your list by default.</span>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="details-img">
+                        <img src="images/poster/<s:property value="anime.poster"/>" alt=""/>
+                    </div>
+                    
+                    <div class="details-work">
+                        <% if (session.getAttribute("user") != null) {%>
+                        <%
+                            ArrayList<String> statusList = (ArrayList<String>) session.getAttribute("StatusList");
+                            ListDTO animeInList = (ListDTO) request.getAttribute("AnimeInList");
+                            /* If anime already exists in list */
+                            if (animeInList != null) {
+                        %>
+                        <div class="collapse show" id="collapseExample">
+                            <div class="card card-body" style="padding: 0.5rem!important; margin-top: 10%!important;">
+                                <div id="addtolist" class="addtolist-block js-anime-addtolist-block" style="padding: 0!important;">
+                                    <span class="notice_open_public pb4">* Note: Anyone can view your list by default.</span>
+                                    <form action="addOrRemoveAnimeFromList">
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 5%!important;">
+                                            <input type="hidden" name="animeID" value="<s:property value="anime.id" />" />
+                                            <input type="hidden" name="accountID" value="<s:property value="%{#session.id}"/>" />
                                             <tbody><tr>
                                                     <td class="spaceit">Status:</td>
                                                     <td class="spaceit">
-                                                        <select name="myinfo_status" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control-sm" style="border: 1px solid #ced4da!important; font-size: 0.95rem!important; padding: 0;">
+                                                        <select name="status" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control-sm" style="border: 1px solid #ced4da!important; font-size: 0.95rem!important; padding: 0;">
                                                             <%                                                                int statusIndex = 1;
                                                                 for (String status : statusList) {
                                                                     if (status != animeInList.getStatus()) {
@@ -193,43 +191,48 @@
                                                 <tr>
                                                     <td class="spaceit">Eps Seen:</td>
                                                     <td class="spaceit">
-                                                        <input type="text" id="myinfo_watchedeps" name="myinfo_watchedeps" size="3" class="inputtext form-control-sm" value="<%= animeInList.getProgress()%>" style="border: 1px solid #ced4da!important; font-size: 1rem!important;"> / <span id="curEps">                                
-                                                            <s:if test="%{anime.episodes != 0}">
-                                                                <s:property value="anime.episodes" />
-                                                            </s:if>
-                                                            <s:else>
-                                                                ?
-                                                            </s:else></span></td>
+                                                        <input type="hidden" name="episodes" value="<s:property value="anime.episodes" />" />
+                                                        <input type="text" id="myinfo_watchedeps" name="progress" size="3" class="inputtext form-control-sm" value="<%= animeInList.getProgress()%>" style="border: 1px solid #ced4da!important; font-size: 1rem!important;" /> / 
+                                                        <s:if test="%{anime.episodes != 0}">
+                                                            <s:property value="anime.episodes" />
+                                                        </s:if>
+                                                        <s:else>
+                                                            ?
+                                                        </s:else>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td>
-                                                        <input type="submit" name="myinfo_submit" value="Edit" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
+                                                        <input type="submit" name="btnAction" value="Edit" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
+                                                        <input type="submit" name="btnAction" value="Remove" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
                                                     </td>
                                                 </tr>
-                                            </tbody></table>
-                                        <div id="myinfoDisplay" style="padding-left: 89px; margin-top: 3px;"></div>
-                                    </div>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                    <div id="myinfoDisplay" style="padding-left: 89px; margin-top: 3px;"></div>
                                 </div>
                             </div>
-                            <% } else { %>
-                            <p>
-                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                    Add To List
-                                </button>
-                            </p>
-                            <div class="collapse" id="collapseExample">
-                                <div class="card card-body" style="padding: 0.5rem!important;">
-                                    <div id="addtolist" class="addtolist-block js-anime-addtolist-block" style="padding: 0!important;">
-                                        <input type="hidden" id="myinfo_anime_id" value="39547">
-                                        <input type="hidden" id="myinfo_curstatus" value="">
-
-                                        <span class="notice_open_public pb4">* Note: Anyone can view your list by default.</span>
+                        </div>
+                        <% } else { %>
+                        <p>
+                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Add To List
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body" style="padding: 0.5rem!important;">
+                                <div id="addtolist" class="addtolist-block js-anime-addtolist-block" style="padding: 0!important;">
+                                    <span class="notice_open_public pb4">* Note: Anyone can view your list by default.</span>
+                                    <form action="addOrRemoveAnimeFromList">
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 5%!important;">
+                                            <input type="hidden" name="animeID" value="<s:property value="anime.id" />" />	
+                                            <input type="hidden" name="accountID" value="<s:property value="%{#session.id}"/>" />
                                             <tbody><tr>
                                                     <td class="spaceit">Status:</td>
                                                     <td class="spaceit">
-                                                        <select name="myinfo_status" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control-sm" style="border: 1px solid #ced4da!important; font-size: 0.95rem!important; padding: 0;">
+                                                        <select name="status" id="myinfo_status" class="inputtext js-anime-status-dropdown form-control-sm" style="border: 1px solid #ced4da!important; font-size: 0.95rem!important; padding: 0;">
                                                             <%
                                                                 int statusIndex = 1;
                                                                 for (String status : statusList) {
@@ -243,171 +246,193 @@
                                                 <tr>
                                                     <td class="spaceit">Eps Seen:</td>
                                                     <td class="spaceit">
-                                                        <input type="text" id="myinfo_watchedeps" name="myinfo_watchedeps" size="3" class="inputtext form-control-sm" value="" style="border: 1px solid #ced4da!important; font-size: 1rem!important;" /> / <span id="curEps">                                
-                                                            <s:if test="%{anime.episodes != 0}">
-                                                                <s:property value="anime.episodes" />
-                                                            </s:if>
-                                                            <s:else>
-                                                                ?
-                                                            </s:else></span></td>
+                                                        <input type="hidden" name="episodes" value="<s:property value="anime.episodes" />" />
+                                                        <input type="text" id="myinfo_watchedeps" name="progress" size="3" class="inputtext form-control-sm" value="" style="border: 1px solid #ced4da!important; font-size: 1rem!important;" /> /                                 
+                                                        <s:if test="%{anime.episodes != 0}">
+                                                            <s:property value="anime.episodes" />
+                                                        </s:if>
+                                                        <s:else>
+                                                            ?
+                                                        </s:else>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td>
-                                                        <input type="submit" name="myinfo_submit" value="Edit" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
+                                                        <input type="submit" name="btnAction" value="Add" class="inputButton btn-middle flat js-anime-add-button" style="margin-top: 5%!important;">
                                                     </td>
                                                 </tr>
-                                            </tbody></table>
-                                        <div id="myinfoDisplay" style="padding-left: 89px; margin-top: 3px;"></div>
-                                    </div>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                    <div id="myinfoDisplay" style="padding-left: 89px; margin-top: 3px;"></div>
                                 </div>
                             </div>
-                            <% }
-                                }  %>
                         </div>
+                        <% }
+                            }  %>
                     </div>
-                    <div class="col-md-8">
-                        <div class="details-head">
-                            <h1>
-                                <s:property value="anime.name" />
-                            </h1>
-                            <h6>
+                </div>
+                    
+                <div class="col-md-8">
+                    <div class="details-head">
+                        <h1>
+                            <s:property value="anime.name" />
+                        </h1>
+                        <h6>
+                            <s:if test="%{anime.season.id != 0}">
                                 <s:property value="anime.season.name" />
-                            </h6>
-                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="synopsis-tab" data-toggle="tab" href="#synopsis" role="tab" aria-controls="synopsis" aria-selected="true">Synopsis</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">Details</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="trailer-tab" data-toggle="tab" href="#trailer" role="tab" aria-controls="trailer" aria-selected="false">Trailer</a>
-                                </li>
+                            </s:if>
+                            <s:else>
+                                Unknown Season
+                            </s:else>
+                        </h6>
+                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="synopsis-tab" data-toggle="tab" href="#synopsis" role="tab" aria-controls="synopsis" aria-selected="true">Synopsis</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="false">Details</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="trailer-tab" data-toggle="tab" href="#trailer" role="tab" aria-controls="trailer" aria-selected="false">Trailer</a>
+                            </li>
 
-                            </ul>
-                        </div>
-                        <div class="tab-content details-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="synopsis" role="tabpanel" aria-labelledby="synopsis-tab">
-                                <p class="synopsis"> <s:property value="anime.description" /></p>
-                            </div>
-                            <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Type</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><s:property value="anime.type" /></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Episodes</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <s:if test="%{anime.episodes != 0}">
-                                            <p><s:property value="anime.episodes" /></p>
-                                        </s:if>
-                                        <s:else>
-                                            <p>?</p>
-                                        </s:else>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Status</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><s:property value="anime.status" /></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Release Date</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><s:property value="anime.releaseDate" /></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Studio(s)</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <% ArrayList<StudioDTO> studioList = (ArrayList<StudioDTO>) request.getAttribute("StudioList");
-                                            int studioIndex = 0;
-                                            for (StudioDTO studio : studioList) {
-                                                if (studioIndex == 0) {
-                                        %>
-                                        <p><%= studio.getName()%>
-                                            <% } else {%>
-                                            <%= ", " + studio.getName()%>
-                                            <% }
-                                                    studioIndex++;
-                                                }%>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Genre(s)</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <% ArrayList<GenreDTO> genreList = (ArrayList<GenreDTO>) request.getAttribute("GenreList");
-                                            int genreIndex = 0;
-                                            for (GenreDTO genre : genreList) {
-                                                if (genreIndex == 0) {
-                                        %>
-                                        <p> <%= genre.getName()%>
-                                            <% } else {%>
-                                            <%= ", " + genre.getName()%>
-                                            <% }
-                                                    genreIndex++;
-                                                }%>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Duration</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><s:property value="anime.duration" /></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Rating</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><s:property value="anime.rating" /></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
-                                <s:if test="%{anime.trailer != null}">
-                                    <div style="text-align: center;"><iframe width="500" height="300" src="<s:property value="anime.trailer"/>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe></div>
-                                        </s:if>
-                                        <s:else>
-                                    <p style="text-align: center; color: #000000;">There is no trailer available for this anime title</p>
-                                </s:else>
-                            </div>
-                        </div>
+                        </ul>
                     </div>
-                    <!--                    <div class="col-md-2">
-                                            <input type="submit" class="details-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                                        </div>-->
-                    <div class="row">
-                        <div class="col-md-4">
-
+                        
+                    <div class="tab-content details-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="synopsis" role="tabpanel" aria-labelledby="synopsis-tab">
+                            <p class="synopsis"><s:property value="anime.description" /></p>
                         </div>
-                        <div class="col-md-8">
-
+                        
+                        <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Type</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><s:property value="anime.type" /></p>
+                                </div>
+                            </div>
+                                
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Episodes</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <s:if test="%{anime.episodes != 0}">
+                                        <p><s:property value="anime.episodes" /></p>
+                                    </s:if>
+                                    <s:else>
+                                        <p>?</p>
+                                    </s:else>
+                                </div>
+                            </div>
+                                
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Status</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><s:property value="anime.status" /></p>
+                                </div>
+                            </div>
+                                
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Release Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>
+                                        <s:if test="%{anime.releaseDate != null}">
+                                            <s:property value="anime.releaseDate" />
+                                        </s:if>
+                                        <s:else>
+                                            ?
+                                        </s:else>
+                                    </p>
+                                </div>
+                            </div>
+                                
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Studio(s)</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <% ArrayList<StudioDTO> studioList = (ArrayList<StudioDTO>) request.getAttribute("StudioList");
+                                        int studioIndex = 0;
+                                        for (StudioDTO studio : studioList) {
+                                            if (studioIndex == 0) {
+                                    %>
+                                    <p><%= studio.getName()%>
+                                        <% } else {%>
+                                        <%= ", " + studio.getName()%>
+                                        <% }
+                                                studioIndex++;
+                                            }%>
+                                    </p>
+                                </div>
+                            </div>
+                                    
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Genre(s)</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <% ArrayList<GenreDTO> genreList = (ArrayList<GenreDTO>) request.getAttribute("GenreList");
+                                        int genreIndex = 0;
+                                        for (GenreDTO genre : genreList) {
+                                            if (genreIndex == 0) {
+                                    %>
+                                    <p> <%= genre.getName()%>
+                                        <% } else {%>
+                                        <%= ", " + genre.getName()%>
+                                        <% }
+                                                genreIndex++;
+                                            }%>
+                                    </p>
+                                </div>
+                            </div>
+                                    
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Duration</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><s:property value="anime.duration" />
+                                        <s:if test="%{anime.duration != null}">
+                                            <s:property value="anime.duration" />
+                                        </s:if>
+                                        <s:else>
+                                            &lt;Unknown Length&gt;
+                                        </s:else>
+                                    </p>
+                                </div>
+                            </div>
+                                        
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Rating</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><s:property value="anime.rating" /></p>
+                                </div>
+                            </div>
+                        </div>
+                                
+                        <div class="tab-pane fade" id="trailer" role="tabpanel" aria-labelledby="trailer-tab">
+                            <s:if test="%{anime.trailer != null}">
+                                <div style="text-align: center;"><iframe width="500" height="300" src="<s:property value="anime.trailer"/>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe></div>
+                                    </s:if>
+                                    <s:else>
+                                <p style="text-align: center; color: #000000;">There is no trailer available for this anime title</p>
+                            </s:else>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </body>
 </html>
