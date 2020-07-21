@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="d-flex flex-row-reverse">
-                                            <a class="btn btn-primary btn-icon-split" href="#">
+                                            <a class="btn btn-primary btn-icon-split" href="#" id="button-create-new">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-plus"></i>
 
@@ -144,7 +144,34 @@
                     </div>
                 </div>
                 <!-- End of Main Content -->
+                            <!-- Modal -->
+            <div class="modal fade" id="modelReg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modelRegLabel">Create New Studio</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="createNewStudio" method="post" id="form-reg" accept-charset="utf-8">
+                                <div >
+                                    <label for="fullname">New name Studio: </label>
 
+                                    <div class="form-group">
+                                        <input class="form-control" id="fullname-reg" name="fullname-reg" required>
+
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" id="btn-submit-reg" class="btn btn-primary" value="Save">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
                 <!-- Footer -->
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
@@ -154,7 +181,7 @@
                     </div>
                 </footer>
                 <!-- End of Footer -->
-
+                
             </div>
             <!-- End of Content Wrapper -->
 
@@ -168,6 +195,9 @@
 
 
     <script>
+        $("#button-create-new").click(function () {
+            $("#modelReg").modal();
+        });
         function fillInfo(id, name) {
             $("#id").val(id);
             $("#name").val(name);

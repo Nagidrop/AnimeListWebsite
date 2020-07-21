@@ -27,155 +27,180 @@
     </head>
 
     <body id="page-top">
-            <!-- Page Wrapper -->
-            <div id="wrapper">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
 
-                <!-- Sidebar -->
-                <jsp:include page='sidebar.jsp'/>
-                <!-- End of Sidebar -->
+            <!-- Sidebar -->
+            <jsp:include page='sidebar.jsp'/>
+            <!-- End of Sidebar -->
 
-                <!-- Content Wrapper -->
-                <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
 
-                    <!-- Main Content -->
-                    <div id="content">
+                <!-- Main Content -->
+                <div id="content">
 
-                        <!-- Topbar -->
-                        <jsp:include page='navbar.jsp'/>
-                        <!-- End of Topbar -->
+                    <!-- Topbar -->
+                    <jsp:include page='navbar.jsp'/>
+                    <!-- End of Topbar -->
 
-                        <!-- Begin Page Content -->
-                        <div class=" q-fluid">
-                            <!-- Page Heading -->
-                            <h1 class="h3 mb-2 text-gray-800">Display Type List</h1>
-                            <!--          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
+                    <!-- Begin Page Content -->
+                    <div class=" q-fluid">
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800">Display Season List</h1>
+                        <!--          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
 
-                            <!-- DataTales Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 row">
-                                    <div class="col-md-6" style="padding: 0.8%;">
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3 row">
+                                <div class="col-md-6" style="padding: 0.8%;">
                                     <h6 class="m-0 font-weight-bold text-primary">List Season</h6>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="d-flex flex-row-reverse">
-                                            <a class="btn btn-primary btn-icon-split" href="#" onclick="fillIn()">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-plus"></i>
-
-                                                </span>
-                                                <span class="text">New Season</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    </select>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th><b>SeasonID</b></th>
-                                            <th><b>name</b></th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th><b>SeasonID</b></th>
-                                            <th><b>name</b></th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <s:iterator value="seasons" status="dto">
-                                            <tr>
-                                                <td><s:property value="id"/></td>
-                                                <td><s:property value="name"/></td>
-                                                <td style="text-align: center">
-                                                    <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="name"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
-                                                </td>
-                                                <td style="text-align: center">
-                                                    <a class="btn-sm btn-danger btn-circle " href="deleteSeason?id=<s:property value="id"/>"><i class="fa fa-trash" style="color: white"></i></a>
-                                                </td>
-                                            </tr>
-                                        </s:iterator>
-                                    </tbody>
-                                </table>
+                                <div class="col-md-6">
+                                    <div class="d-flex flex-row-reverse">
+                                        <a class="btn btn-primary btn-icon-split" href="#" id="button-create-new" >
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-plus"></i>
 
+                                            </span>
+                                            <span class="text">New Season</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                </select>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- /.container-fluid -->
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th><b>SeasonID</b></th>
+                                        <th><b>name</b></th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th><b>SeasonID</b></th>
+                                        <th><b>name</b></th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <s:iterator value="seasons" status="dto">
+                                        <tr>
+                                            <td><s:property value="id"/></td>
+                                            <td><s:property value="name"/></td>
+                                            <td style="text-align: center">
+                                                <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="name"/>')"> <i class="fa fa-edit" style="color: white"></i></a>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <a class="btn-sm btn-danger btn-circle " href="deleteSeason?id=<s:property value="id"/>"><i class="fa fa-trash" style="color: white"></i></a>
+                                            </td>
+                                        </tr>
+                                    </s:iterator>
+                                </tbody>
+                            </table>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Season Info</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="updateSeason" method="post" id="info-form" accept-charset="utf-8">
-                                    <div >
-                                        <%--         <input  hidden id="id" name="id" value=> --%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Season Info</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="updateSeason" method="post" id="info-form" accept-charset="utf-8">
+                                <div >
+                                    <%--         <input  hidden id="id" name="id" value=> --%>
+
+                                    <div class="form-group">
+                                        <label for="id">ID:</label>
+                                        <input class="form-control" id="id" name="id" readonly>
+                                        <label for="fullname">name:</label>
 
                                         <div class="form-group">
-                                            <label for="id">ID:</label>
-                                            <input class="form-control" id="id" name="id" readonly>
-                                            <label for="fullname">name:</label>
+                                            <input class="form-control" id="name" name="name" required>
 
-                                            <div class="form-group">
-                                                <input class="form-control" id="name" name="name" required>
-
-                                            </div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <input type="submit" id="btn-submit" class="btn btn-primary" value="Save">
-                                </form>
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" id="btn-submit" class="btn btn-primary" value="Save">
+                            </form>
 
-                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- End of Main Content -->
+            </div>
+            <!-- End of Main Content -->
+            <!-- Modal -->
+            <div class="modal fade" id="modelReg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modelRegLabel">Create New Season</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="createNewSeason" method="post" id="form-reg" accept-charset="utf-8">
+                                <div >
+                                    <label for="fullname">New name season:</label>
 
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; WibuTeam Website 2020</span>
+                                    <div class="form-group">
+                                        <input class="form-control" id="fullname-reg" name="fullname-reg" required>
+
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" id="btn-submit-reg" class="btn btn-primary" value="Save">
+                            </form>
+
                         </div>
                     </div>
-                </footer>
-                <!-- End of Footer -->
-
+                </div>
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; WibuTeam Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
     <script>
+        $("#button-create-new").click(function () {
+            $("#modelReg").modal();
+        });
         function fillInfo(id, name) {
             $("#id").val(id);
             $("#name").val(name);
             $("#exampleModal").modal();
 
-        }
-        function  fillIn(){
-            $("#id").val("");
-           $("#name").val("");
-           $("#exampleModal").modal();
         }
         $("#btn-submit").click(function () {
             $("#info-form").submit();
