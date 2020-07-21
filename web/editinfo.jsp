@@ -456,7 +456,12 @@
                         <div class="profile-card-4 z-depth-3">
                             <div class="card">
                                 <div class="card-body text-center bg-primary rounded-top" style="background-color: #bd000066!important">
-                                    <div class="user-box"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
+                                    <div class="user-box"> 
+                                        <%if (session.getAttribute("userAvatar") == null) {%>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar"> </div>
+                                        <%} else {%>
+                                        <img src="images/users/<s:property  value="#session.userAvatar"/>" alt="user avatar"> </div>
+                                    <%}%>
                                     <h5 class="mb-1 text-white"><%= session.getAttribute("fullname")%></h5>
                                     <h6 class="text-light">- Wibu -</h6>
                                 </div>
