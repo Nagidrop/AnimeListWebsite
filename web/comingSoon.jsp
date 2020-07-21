@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ActionFailed
-    Created on : Jul 20, 2020, 7:01:44 PM
+    Document   : comingSoon
+    Created on : Jul 21, 2020, 9:57:03 PM
     Author     : Quan Duc Loc CE140037 (SE1401)
 --%>
 
@@ -26,20 +26,21 @@
 
             .error-code {
                 bottom: 60%;
-                color: #000000;
-                font-size: 60px;
+                color: #FFFFFF;
+                font-size: 50px;
                 font-family: 'Raleway', sans-serif;
                 line-height: 100px;
             }
 
             .font-bold{
-                color: #000000;
+                color: #FFFFFF;
+                font-size: 25px;
                 margin-bottom: 2%!important;
             }
 
             .error-desc {
                 font-size: 20px;
-                color: #000000;
+                color: #FFFFFF;
             }
 
             .m-b-10 {
@@ -56,30 +57,31 @@
 
             .login-detail-panel-button {
                 font-size: 20px;
-                color: #000000;
+                color: #FFFFFF;
                 border-radius: 30px !important;
                 text-decoration: none;
-                border-color: #000000;
+                border-color: #FFFFFF;
             }
 
         </style>
-        <title>Action Failed - WibuAnimeList</title>
+        <title>Coming Soon - WibuAnimeList</title>
     </head>
     <body>
         <jsp:include page='header.jsp'/>
-        <div class="error" style="background-image: url('images/bg-17.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
-            <div class="error-code m-b-10 m-t-20">Action Failed</div>
-            <h3 class="font-bold">Please Try Again...</h3>
+        <div class="error" style="background-image: url('images/bg-19.png'); background-repeat: no-repeat; background-size: cover; background-position: center; background-attachment: fixed;">
+            <div class="error-code m-b-10 m-t-20">THIS PAGE IS COMING SOON!</div>
+            <h3 class="font-bold">Please check again later...</h3>
 
             <div class="error-desc">
                 <div>
-                    <a class="login-detail-panel-button btn" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=0"
-                       <i class="fa fa-arrow-left"></i>
-                        Go back to View List page                     
+                    <a class="login-detail-panel-button btn" href="index"/>
+                    <i class="fa fa-arrow-left"></i>
+                    Go back to Home Page                     
                     </a>
                 </div>
             </div>
         </div>
     </body>
 </html>
+
 

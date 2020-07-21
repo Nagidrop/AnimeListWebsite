@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ActionFailed
-    Created on : Jul 20, 2020, 7:01:44 PM
+    Document   : actionFailedAnime
+    Created on : Jul 21, 2020, 10:24:15 PM
     Author     : Quan Duc Loc CE140037 (SE1401)
 --%>
 
@@ -73,9 +73,9 @@
 
             <div class="error-desc">
                 <div>
-                    <a class="login-detail-panel-button btn" href="viewAnimeList?accountID=<s:property value="%{#session.id}"/>&listStatus=0"
+                    <a class="login-detail-panel-button btn" href="viewAnime?animeID=<s:property value="animeID"/>"
                        <i class="fa fa-arrow-left"></i>
-                        Go back to View List page                     
+                        Go back to View Anime page                     
                     </a>
                 </div>
             </div>
