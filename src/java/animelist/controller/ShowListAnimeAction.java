@@ -35,7 +35,6 @@ public class ShowListAnimeAction extends ActionSupport implements ServletRequest
         try {
             AnimeListDAO dao = new AnimeListDAO();
             listAnimeDTOs = dao.getAllAnimes();
-
             return SUCCESS;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(ShowListAnimeAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,7 +68,7 @@ public class ShowListAnimeAction extends ActionSupport implements ServletRequest
 
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
-        this.request=hsr;
+        this.request = hsr;
     }
 
 }
