@@ -491,7 +491,7 @@
                                 </ul>
                                 <div class="tab-content p-3">
                                     <div class="tab-pane active show" id="profile">
-                                        <h5 class="mb-3">User Profile</h5>
+                                        <h5 class="mb-3">User Information</h5>
                                         <div class="form-group row">
                                             <div class="col-lg-9"> </div>
                                         </div>

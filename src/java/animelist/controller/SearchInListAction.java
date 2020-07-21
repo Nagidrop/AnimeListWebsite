@@ -25,6 +25,7 @@ public class SearchInListAction extends ActionSupport implements ServletRequestA
     private ArrayList<ListDTO> searchedAnimeList;
     private ArrayList<AnimeDTO> searchedAnimeDetailList;
     private ArrayList<String> statusList;
+    private String accountUsername;
     private int accountID;
     private int listStatus;
     private final String SUCCESS = "success"; // indicates successful action
@@ -34,6 +35,7 @@ public class SearchInListAction extends ActionSupport implements ServletRequestA
         AnimeListDAO dao = new AnimeListDAO();
         Map session = ActionContext.getContext().getSession();
         accountID = (int) session.get("id");
+        accountUsername = dao.getAccountUsername(accountID);
         searchedAnimeList = dao.getSearchAnimeInList(request.getParameter("search-text"), accountID);
         searchedAnimeDetailList = dao.getAnimeDetailsList(searchedAnimeList);
 
@@ -54,6 +56,14 @@ public class SearchInListAction extends ActionSupport implements ServletRequestA
 
         return SUCCESS;
 
+    }
+
+    public String getAccountUsername() {
+        return accountUsername;
+    }
+
+    public void setAccountUsername(String accountUsername) {
+        this.accountUsername = accountUsername;
     }
 
     @Override
