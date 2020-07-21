@@ -15,27 +15,30 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/* This action got called when a user open advanced search */
 public class InitSearchPageAction {
 
+    /* Advanced Search Page criteria */
     private ArrayList<String> types;
     private ArrayList<GenreDTO> genres;
     private ArrayList<StudioDTO> studios;
     private List<SeasonDTO> seasons;
-    private final String SUCCESS = "success";
+    private final String SUCCESS = "success"; // indicates sucessful action
 
+    /* Constructor */
     public InitSearchPageAction() {
     }
 
     public String execute() {
-
         try {
+            /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
 
+            /* Get data from Database */
             types = dao.getTypes();
             genres = dao.getGenres();
             studios = dao.getStudios();
             seasons = dao.getSeasons();
-
         } catch (SQLException ex) {
             Logger.getLogger(InitSearchPageAction.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -43,6 +46,7 @@ public class InitSearchPageAction {
         return SUCCESS;
     }
 
+    /* Getters and Setters */
     public ArrayList<String> getTypes() {
         return types;
     }

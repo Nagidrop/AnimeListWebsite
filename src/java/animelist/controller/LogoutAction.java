@@ -4,16 +4,12 @@
  */
 package animelist.controller;
 
-import animelist.model.AccountDTO;
-import animelist.model.AnimeListDAO;
 import com.opensymphony.xwork2.ActionContext;
-import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 
-/* Logic code when user press button in login view */
+/* Logic code when user press logout */
 public class LogoutAction {
 
-    private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
 
     /* Constructor */
@@ -21,12 +17,9 @@ public class LogoutAction {
     }
 
     public String execute() throws Exception {
-        /* Instantiate DAO object and interacts with DB */
+        String url = SUCCESS;
 
-        String url = SUCCESS; // by default, action is not successful
-
-        /* If login successful */
- /* Create new session for user with username */
+        /* Invalidate current session */
         SessionMap session = (SessionMap) ActionContext.getContext().getSession();
         session.invalidate();
 

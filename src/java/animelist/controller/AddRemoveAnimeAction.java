@@ -10,7 +10,7 @@ import animelist.model.AnimeListDAO;
 public class AddRemoveAnimeAction {
 
     /* Anime properties to update list */
-    private int animeID; 
+    private int animeID;
     private int progress;
     private int episodes;
     private int status;
@@ -32,6 +32,7 @@ public class AddRemoveAnimeAction {
             boolean result = dao.addAnimeToList(accountID, animeID, progress, episodes, status);
             String url = FAIL; // by default, action is not successful
 
+            // if action is successful
             if (result) {
                 url = SUCCESS;
             }
@@ -45,6 +46,7 @@ public class AddRemoveAnimeAction {
             boolean result = dao.editAnimeInList(accountID, animeID, progress, episodes, status);
             String url = FAIL; // by default, action is not successful
 
+            // if action is successful
             if (result) {
                 url = SUCCESS;
             }
@@ -58,6 +60,7 @@ public class AddRemoveAnimeAction {
             boolean result = dao.removeAnimeFromList(accountID, animeID);
             String url = FAIL; // by default, action is not successful
 
+            // if action is successful
             if (result) {
                 url = SUCCESS;
             }

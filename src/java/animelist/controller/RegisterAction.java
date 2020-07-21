@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -10,43 +9,43 @@ import com.opensymphony.xwork2.ActionSupport;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author Tran Minh Thang CE140085
- */
+/* This action got called when a user presses register/sign up button */
 public class RegisterAction extends ActionSupport implements ServletRequestAware {
 
+    /* User credentials and basic info */
     private String username;
     private String password;
     private String fullname;
     private String email;
-    private HttpServletRequest request;
-    final String SUCCESS = "success";
-    final String FAIL = "fail";
+    private HttpServletRequest request; // HTTP request
+    final String SUCCESS = "success"; // indicates sucessful action
+    final String FAIL = "fail"; // indicates failed action
 
+    /* Constructor */
     public RegisterAction() {
     }
 
     @Override
     public String execute() throws Exception {
-
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
 
+        /* Store data from params to variables */
         username = request.getParameter("registerUsername");
         password = request.getParameter("registerPassword");
         fullname = request.getParameter("registerFullname");
         email = request.getParameter("registerEmail");
-        
-        System.out.println(username +password+ fullname+ email);
-        
-        if (dao.register(username, password, fullname, email)) {
 
+        if (dao.register(username, password, fullname, email)) {
+            // indicates sucessful action
             return SUCCESS;
         } else {
-            return "fail";
+            // indicates failed action
+            return FAIL;
         }
     }
 
+    /* Getters and Setters */
     public String getUsername() {
         return username;
     }
@@ -83,7 +82,6 @@ public class RegisterAction extends ActionSupport implements ServletRequestAware
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;
     }
-
 
     public HttpServletRequest getRequest() {
         return request;

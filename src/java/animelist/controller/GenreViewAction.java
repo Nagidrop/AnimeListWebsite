@@ -1,41 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
 import animelist.model.AnimeListDAO;
 import animelist.model.GenreDTO;
-import animelist.model.SeasonDTO;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author PC
- */
+/* This action got called when an view genre */
 public class GenreViewAction extends ActionSupport implements ServletRequestAware {
 
-    HttpServletRequest request;
-    private ArrayList<GenreDTO> genres;
-    private final String FAIL = "fail";
-    private final String SUCCESS = "success";
+    HttpServletRequest request; // HTTP request
+    private ArrayList<GenreDTO> genres; // Genre List
+    private final String FAIL = "fail"; // indicates failed action
+    private final String SUCCESS = "success"; // indicates sucessful action
 
+    /* Constructor */
     public GenreViewAction() {
     }
 
     @Override
     public String execute() throws Exception {
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
         genres = dao.getGenres();
         request.setAttribute("listGenre", genres);
         return SUCCESS;
-
     }
 
+    /* Getters and Setters */
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;

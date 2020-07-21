@@ -22,14 +22,15 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
     private String pass; // password passed from form input
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
-    private final String ADMIN = "admimpage"; // indicates successful action
-    private HttpServletRequest request;
-    private ArrayList<String> statusList;
+    private final String ADMIN = "admimpage"; // indicates admin login
+    private HttpServletRequest request; // HTTP request
+    private ArrayList<String> statusList; // list of anime status in list
 
     /* Constructor */
     public LoginAction() {
     }
 
+    @Override
     public String execute() throws Exception {
         /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
@@ -39,7 +40,7 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
 
         /* If login successful */
         if (account != null) {
-            /* Create new session for user with username */
+            /* Put data to session for user with user attributes */
             Map session = ActionContext.getContext().getSession();
             session.put("user", account);
             session.put("fullname", account.getFullName());
@@ -59,13 +60,15 @@ public class LoginAction extends ActionSupport implements ServletRequestAware {
                     session.put("gender", "Other");
                     break;
             }
+            
+            /* Check if admin or user logged in */
             if (account.getRoleID() == 1) {
-                url = ADMIN;
+                url = ADMIN; // indicates admin
             } else {
-                url = SUCCESS;
-
+                url = SUCCESS; // indicates user
             }
 
+            /* Instantiate and add data to status list */
             statusList = new ArrayList<>();
             statusList.add("Currently Watching");
             statusList.add("Completed");

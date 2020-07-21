@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -15,37 +14,39 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author PC
- */
+/* This action got called when an admin delete studio */
 public class DeleteStudioAction extends ActionSupport implements ServletRequestAware {
 
-    String id;
-    HttpServletRequest request;
+    String id; // Studio ID
+    HttpServletRequest request; // HTTP request
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
-    private final String Studio = "Studio"; // indicates successful action
 
+    /* Constructor */
     public DeleteStudioAction() {
     }
 
     @Override
-    
     public String execute() throws Exception {
         try {
-            id = request.getParameter("id"); //get id
-            System.out.println("Hello" + id); //print what is here
-            AnimeListDAO dao = new AnimeListDAO(); //new animelistdao
-            Date date = Date.valueOf(LocalDate.now()); //tao bien date kieu Date voi tgian set now
-            dao.deleteStudio(Integer.parseInt(id), date); //lay id va date va xoa 
-            return SUCCESS; //return success
+            id = request.getParameter("id"); // get id from param
+
+            /* Instantiate DAO object and interacts with DB */
+            AnimeListDAO dao = new AnimeListDAO();
+            Date date = Date.valueOf(LocalDate.now()); // get current time
+
+            dao.deleteStudio(Integer.parseInt(id), date);
+
+            // if action is successful
+            return SUCCESS;
         } catch (SQLException ex) {
             Logger.getLogger(DeleteUserAction.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // if action failed
         return FAIL;
     }
 
+    /* Getters and Setters */
     @Override
     public void setServletRequest(HttpServletRequest hsr) {
         this.request = hsr;
