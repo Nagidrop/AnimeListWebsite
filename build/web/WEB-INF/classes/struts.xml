@@ -30,7 +30,7 @@
             </result>
         </action>
 
-        <action name="showAllAnime" class = "animelist.controller.SearchAction">
+        <action name="showAllAnime" class =  "animelist.controller.SearchAction">
             <result name="success" type="dispatcher">allAnime.jsp</result>
         </action>
 
@@ -254,8 +254,16 @@
             </result>
             <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
+        
         <action name="createAnimeAction" class="animelist.controller.CreateNewAnimeAction" >
-                        <result name="success" type="redirectAction">viewListAllAnimes</result>
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">2097152</param>
+                <param name="allowedTypes">
+                    image/png,image/jpg,image/jpeg
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="basicStack"/>
+            <result name="success" type="redirectAction">viewListAllAnimes</result>
 
             <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>

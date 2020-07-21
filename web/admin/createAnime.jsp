@@ -65,7 +65,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">List Anime</h6>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="createAnimeAction" method="post">
+                                    <s:form action="createAnimeAction" method="post" enctype="multipart/form-data" theme="simple">
                                         <div class="form-group">
                                             <label>Name:</label>
                                             <input id="name" name="name" required class="form-control">
@@ -104,6 +104,11 @@
                                             <textarea id="description" name="description"  type="text" class="form-control" rows="4" cols="4">
                                             
                                             </textarea>   
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Poster</label>
+
+                                            <s:file id="poster" name="poster" cssClass="form-control" theme="simple"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Trailer URL</label>
@@ -145,7 +150,7 @@
 
                                         <p>
                                             <input type="submit" value="Create" class="btn btn-success form-control">
-                                    </form>
+                                    </s:form>
 
                                 </div>
 
