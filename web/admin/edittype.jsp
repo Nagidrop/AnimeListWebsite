@@ -58,17 +58,6 @@
                                     <div class="col-md-6" style="padding: 0.8%;">
                                     <h6 class="m-0 font-weight-bold text-primary">List Type</h6>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="d-flex flex-row-reverse">
-                                            <a class="btn btn-primary btn-icon-split" href="#">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-plus"></i>
-
-                                                </span>
-                                                <span class="text">New Type</span>
-                                            </a>
-                                        </div>
-                                    </div>
                                     </select>
                                 </div>
                             </div>
