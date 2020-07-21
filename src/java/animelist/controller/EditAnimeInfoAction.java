@@ -10,7 +10,9 @@ import animelist.model.GenreDTO;
 import animelist.model.StudioDTO;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.File;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -78,6 +80,7 @@ public class EditAnimeInfoAction extends ActionSupport implements ServletRequest
             String description = request.getParameter("description");
             String trailer = request.getParameter("trailer");
             String season = request.getParameter("season");
+            Date date = Date.valueOf(LocalDate.now());
             String path = request.getSession().getServletContext().getRealPath("/");
             path = path.substring(0, path.length() - 10).concat("web\\images\\poster");
             // random file name
@@ -101,11 +104,11 @@ public class EditAnimeInfoAction extends ActionSupport implements ServletRequest
             dao.deleteGenreAnime(id);
             String[] studio = request.getParameterValues("studio");
             for (String i : studio) {
-                dao.createAnimeStudio(String.valueOf(id), i, null);
+                dao.createAnimeStudio(String.valueOf(id), i, date);
             }
             String[] genre = request.getParameterValues("genre");
             for (String i : genre) {
-                dao.createAnimeGenre(String.valueOf(id), i, null);
+                dao.createAnimeGenre(String.valueOf(id), i, date);
             }
             if (dao.editAnime(id, season, type, name, releaseDate, rating, episodes, status, duration, description, posterFileName, trailer, null, null)) {
                 return SUCCESS;
