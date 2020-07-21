@@ -65,9 +65,10 @@
                                     <h6 class="m-0 font-weight-bold text-primary">List Anime</h6>
                                 </div>
                                 <div class="col-md-6">
-                                    <form action="createAnimeAction" method="post">
+                                    <s:form action="editAnimeInfo" method="post" enctype="multipart/form-data" theme="simple">
                                         <div class="form-group">
                                             <label>Name:</label>
+                                            <input value="<s:property  value="anime.id"/>" type = "hidden" name="animeid"/>
                                             <input id="name" name="name" required class="form-control" value="<s:property value="anime.name"></s:property>">
                                             </div>
                                             <div class="form-group">
@@ -106,9 +107,15 @@
                                                 </textarea>   
                                             </div>
                                             <div class="form-group">
-                                                <label>Trailer URL</label>
+                                                <label>Poster</label>
+                                                <input value="<s:property  value="anime.poster"/>" type = "hidden" name="posterName"/>
+                                            <s:file id="poster" name="poster" cssClass="form-control" theme="simple"/>
+                                        </div>
 
-                                                <input id="trailer" name="trailer" value="<s:property value="anime.trailer"></s:property>" type="text" class="form-control">
+                                        <div class="form-group">
+                                            <label>Trailer URL</label>
+
+                                            <input id="trailer" name="trailer" value="<s:property value="anime.trailer"></s:property>" type="text" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Season</label>
@@ -155,7 +162,7 @@
 
                                         <p>
                                             <input type="submit" value="Create" class="btn btn-success form-control">
-                                    </form>
+                                    </s:form>
 
                                 </div>
 

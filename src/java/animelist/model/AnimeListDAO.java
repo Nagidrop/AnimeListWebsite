@@ -98,7 +98,6 @@ public class AnimeListDAO {
         return null;
     }
 
-    
     /**
      * Check if username is already in database or not
      *
@@ -112,34 +111,34 @@ public class AnimeListDAO {
         Connection conn = null;
         PreparedStatement st = null;
         ResultSet rs = null;
-        
+
         try {
             conn = DBUtils.makeConnection();
             st = conn.prepareStatement("SELECT * FROM Account WHERE username = ? AND deleted_at is null");
             st.setString(1, username);
-            
+
             rs = st.executeQuery();
-            
+
             if (rs.next()) {
                 return true;
             }
         } finally {
             /* Close the JDBC resources after use */
-            
+
             if (st != null) {
                 st.close();
             }
             if (conn != null) {
                 conn.close();
             }
-            if(rs !=null){
+            if (rs != null) {
                 conn.close();
             }
         }
-        
+
         return false;
     }
-    
+
     /**
      * Register a new user to database
      *
@@ -821,6 +820,7 @@ public class AnimeListDAO {
 
     /**
      * Change user info
+     *
      * @param username
      * @param fullname
      * @param avatar
@@ -852,6 +852,7 @@ public class AnimeListDAO {
 
     /**
      * Delete a user in database
+     *
      * @param id
      * @param deleted_at
      * @return true if successful, and false if failed
@@ -875,6 +876,7 @@ public class AnimeListDAO {
 
     /**
      * Change password of user
+     *
      * @param username
      * @param password
      * @return true if successful, and false if failed
@@ -921,6 +923,7 @@ public class AnimeListDAO {
 
     /**
      * Get a single anime's details
+     *
      * @param animeID
      * @return anime object with details
      * @throws SQLException
@@ -979,6 +982,7 @@ public class AnimeListDAO {
 
     /**
      * Get season from season ID
+     *
      * @param seasonID
      * @return season object
      * @throws SQLException
@@ -1025,6 +1029,7 @@ public class AnimeListDAO {
 
     /**
      * Get studio list of an anime title's ID
+     *
      * @param animeID
      * @return list of studios
      * @throws SQLException
@@ -1072,6 +1077,7 @@ public class AnimeListDAO {
 
     /**
      * Get genre list of a single anime title's ID
+     *
      * @param animeID
      * @return list of genres for such anime
      * @throws SQLException
@@ -1119,6 +1125,7 @@ public class AnimeListDAO {
 
     /**
      * Get anime list of user based on list status (0 for no filter)
+     *
      * @param accountID
      * @param listStatus
      * @return list of animes
@@ -1202,6 +1209,7 @@ public class AnimeListDAO {
 
     /**
      * Get account list
+     *
      * @param RoleID
      * @return list of accounts
      * @throws SQLException
@@ -1253,6 +1261,7 @@ public class AnimeListDAO {
 
     /**
      * Change a genre details
+     *
      * @param GenreID
      * @param name
      * @return true if successful, and false if failed
@@ -1287,6 +1296,7 @@ public class AnimeListDAO {
 
     /**
      * Change a season details
+     *
      * @param SeasonID
      * @param name
      * @return true if successful, and false if failed
@@ -1312,6 +1322,7 @@ public class AnimeListDAO {
 
     /**
      * Change a studio details
+     *
      * @param StudioID
      * @param name
      * @return true if successful, and false if failed
@@ -1337,6 +1348,7 @@ public class AnimeListDAO {
 
     /**
      * Get details for each anime in list
+     *
      * @param animeList
      * @return list of anime (with details for each)
      * @throws SQLException
@@ -1357,6 +1369,7 @@ public class AnimeListDAO {
 
     /**
      * Edit an anime in an anime list
+     *
      * @param accountID
      * @param animeID
      * @param progress
@@ -1420,6 +1433,7 @@ public class AnimeListDAO {
 
     /**
      * Get total number of animes in one's list
+     *
      * @param accountID
      * @return total number of animes
      * @throws SQLException
@@ -1457,6 +1471,7 @@ public class AnimeListDAO {
 
     /**
      * Add an anime to list
+     *
      * @param accountID
      * @param animeID
      * @param progress
@@ -1519,6 +1534,7 @@ public class AnimeListDAO {
 
     /**
      * Remove/Delete anime from list
+     *
      * @param accountID
      * @param animeID
      * @return true if successful, and false if failed
@@ -1555,6 +1571,7 @@ public class AnimeListDAO {
 
     /**
      * Get total number of completed animes in list
+     *
      * @param accountID
      * @return total number of completed animes
      * @throws SQLException
@@ -1592,6 +1609,7 @@ public class AnimeListDAO {
 
     /**
      * Delete a studio
+     *
      * @param StudioID
      * @param deleted_at
      * @return true if successful, and false if failed
@@ -1615,6 +1633,7 @@ public class AnimeListDAO {
 
     /**
      * Delete a season
+     *
      * @param SeasonID
      * @param deleted_at
      * @return true if successful, and false if failed
@@ -1638,6 +1657,7 @@ public class AnimeListDAO {
 
     /**
      * Delete a genre
+     *
      * @param GenreID input
      * @param deleted_at input
      * @return true if successful, and false if failed
@@ -1661,6 +1681,7 @@ public class AnimeListDAO {
 
     /**
      * Delete a type of anime
+     *
      * @param AnimeID input
      * @param deleted_at input
      * @return true if successful, and false if failed
@@ -1684,6 +1705,7 @@ public class AnimeListDAO {
 
     /**
      * Create an user
+     *
      * @param roleID
      * @param username
      * @param password
@@ -1747,6 +1769,7 @@ public class AnimeListDAO {
 
     /**
      * Delete an anime
+     *
      * @param id
      * @param date
      * @return true if successful, and false if failed
@@ -1770,6 +1793,7 @@ public class AnimeListDAO {
 
     /**
      * Create new anime genre
+     *
      * @param name input
      * @return true if successful, and false if failed
      * @throws SQLException
@@ -1803,6 +1827,7 @@ public class AnimeListDAO {
 
     /**
      * Create new anime season
+     *
      * @param name input
      * @return true if successful, and false if failed
      * @throws SQLException
@@ -1836,6 +1861,7 @@ public class AnimeListDAO {
 
     /**
      * Create new anime studio
+     *
      * @param name input
      * @param date input
      * @return true if successful, and false if failed
@@ -1871,6 +1897,7 @@ public class AnimeListDAO {
 
     /**
      * Get an account's username
+     *
      * @param accountID
      * @return true if successful, and false if failed
      * @throws SQLException
@@ -1909,11 +1936,12 @@ public class AnimeListDAO {
 
     /**
      * Create An Anime Studio
+     *
      * @param AnimeID
      * @param StudioID
      * @param created_at
      * @return true if successful, and false if failed
-     * @throws SQLException 
+     * @throws SQLException
      */
     public boolean createAnimeStudio(String AnimeID, String StudioID, Date created_at) throws SQLException {
         /* Declare JDBC resources to use */
@@ -1936,11 +1964,12 @@ public class AnimeListDAO {
 
     /**
      * Create An Anime Genre
+     *
      * @param AnimeID
      * @param GenreID
      * @param created_at
      * @return true if successful, and false if failed
-     * @throws SQLException 
+     * @throws SQLException
      */
     public boolean createAnimeGenre(String AnimeID, String GenreID, Date created_at) throws SQLException {
         /* Declare JDBC resources to use */
@@ -1963,6 +1992,7 @@ public class AnimeListDAO {
 
     /**
      * Create New Anime
+     *
      * @param accountid
      * @param seasonid
      * @param type
@@ -1978,7 +2008,7 @@ public class AnimeListDAO {
      * @param create_at
      * @param delete_at
      * @return newly created anime ID
-     * @throws SQLException 
+     * @throws SQLException
      */
     public int createNewAnime(int accountid, String seasonid, String type, String name, String release, String rating, String episodes, String status, String duration, String description, String poster, String trailer, Date create_at, Date delete_at) throws SQLException {
         /* Declare JDBC resources to use */
@@ -1987,7 +2017,7 @@ public class AnimeListDAO {
 
         try {
             conn = DBUtils.makeConnection();
-            st = conn.prepareStatement("INSERT INTO anime(AccountID, SeasonID , type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            st = conn.prepareStatement("INSERT INTO anime(AccountID, SeasonID , type, name, releaseDate, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             st.setInt(1, accountid);
             st.setString(2, seasonid);
             st.setString(3, type);
@@ -2024,5 +2054,118 @@ public class AnimeListDAO {
             }
         }
         return 0;
+    }
+
+    /**
+     * Edit Anime
+     *
+     * @param animeID
+     * @param seasonid
+     * @param type
+     * @param name
+     * @param release
+     * @param rating
+     * @param episodes
+     * @param status
+     * @param duration
+     * @param description
+     * @param poster
+     * @param trailer
+     * @param create_at
+     * @param delete_at
+     * @return true if edit successful
+     * @throws SQLException
+     */
+    public boolean editAnime(int animeID, String seasonid, String type, String name, String release, String rating, String episodes, String status, String duration, String description, String poster, String trailer, Date create_at, Date delete_at) throws SQLException {
+        /* Declare JDBC resources to use */
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("update anime set SeasonID = ? , type = ?, name = ?, releaseDate = ?, rating = ?, episodes = ? , status = ?, duration = ?, description = ?, poster = ?, trailer = ? where AnimeID = ?");
+            st.setString(1, seasonid);
+            st.setString(2, type);
+            st.setString(3, name);
+            st.setString(4, release);
+            st.setString(5, rating);
+            st.setString(6, episodes);
+            st.setString(7, status);
+            st.setString(8, duration);
+            st.setString(9, description);
+            st.setString(10, poster);
+            st.setString(11, trailer);
+            st.setInt(12, animeID);
+
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+
+            }
+        } finally {
+            /* Close the JDBC resources after use */
+            if (st != null) {
+                st.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+    
+    public boolean deleteGenreAnime(int animeID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("DELETE FROM genre_anime WHERE AnimeID= ?");
+            st.setInt(1, animeID);
+
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+
+            }
+        } finally {
+            /* Close the JDBC resources after use */
+            if (st != null) {
+                st.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
+    }
+    
+    public boolean deleteAnimeStudio(int animeID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("DELETE FROM anime_studio WHERE AnimeID= ?");
+            st.setInt(1, animeID);
+
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+
+            }
+        } finally {
+            /* Close the JDBC resources after use */
+            if (st != null) {
+                st.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return false;
     }
 }
