@@ -59,11 +59,11 @@
 
         </div>
 
-        <div class="d-flex flex-row-reverse">
-            <div class="col-md-7">
-                <a href="<s:url action="showAllAnime"/>" class="btn btn-secondary btn-icon-split">
-                    <span class="text">Show All</span>
-                </a></div>
+        <div class="" style="text-align: center;">
+
+            <a href="<s:url action="showAllAnime"/>" class="btn btn-secondary btn-icon-split">
+                <span class="text">Show All</span>
+            </a>
         </div>
     </body>
 </html>
