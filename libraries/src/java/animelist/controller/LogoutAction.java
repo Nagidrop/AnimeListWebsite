@@ -21,9 +21,9 @@ public class LogoutAction {
     }
 
     public String execute() throws Exception {
-        /* Instantiate DAO object and calls login method to check from DB */
+        /* Instantiate DAO object and interacts with DB */
 
-        String url = SUCCESS; // by default, login is not successful
+        String url = SUCCESS; // by default, action is not successful
 
         /* If login successful */
  /* Create new session for user with username */

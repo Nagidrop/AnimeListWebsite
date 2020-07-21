@@ -28,7 +28,7 @@ public class ChangePasswordAction extends ActionSupport implements ServletReques
     }
 
     public String execute() throws Exception {
-        /* Instantiate DAO object and calls login method to check from DB */
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
         Map session = ActionContext.getContext().getSession();
          username = (String) session.get("username");

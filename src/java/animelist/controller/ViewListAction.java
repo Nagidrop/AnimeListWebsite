@@ -15,16 +15,16 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/* Logic code when user press button in login view */
+/* This action got triggered when a web user views someone's list */
 public class ViewListAction extends ActionSupport implements ServletRequestAware {
 
-    private HttpServletRequest request;
-    private ArrayList<ListDTO> animeList;
-    private ArrayList<AnimeDTO> animeDetailsList;
-    private ArrayList<String> statusList;
-    private int accountID;
-    private int listStatus;
-    private String accountUsername;
+    private HttpServletRequest request; // HTTP request
+    private ArrayList<ListDTO> animeList; // anime list of users (with progress)
+    private ArrayList<AnimeDTO> animeDetailsList;  // anime details for each anime in list
+    private ArrayList<String> statusList; // status list
+    private int accountID; // accountID of user whose list is shown
+    private int listStatus; // status of list in view
+    private String accountUsername; // username of user whose list is shown
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
 
@@ -32,20 +32,23 @@ public class ViewListAction extends ActionSupport implements ServletRequestAware
     public ViewListAction() {
     }
 
+    @Override
     public String execute() throws Exception {
-        /* Instantiate DAO object and calls login method to check from DB */
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
 
+        /* Get user whose list is viewed info and their own anime list */
         accountUsername = dao.getAccountUsername(accountID);
         animeList = dao.getAnimeList(accountID, listStatus);
         animeDetailsList = dao.getAnimeDetailsList(animeList);
 
+        /* Get status list if there is user logged in */
         Map session = ActionContext.getContext().getSession();
-        
         if (session.get("user") != null) {
             statusList = (ArrayList<String>) session.get("StatusList");
         }
 
+        /* If user whose list is viewed has their own anime list */
         if (animeList != null) {
             request.setAttribute("AnimeList", animeList);
             request.setAttribute("AnimeDetailsList", animeDetailsList);

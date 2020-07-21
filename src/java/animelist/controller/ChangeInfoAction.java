@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Wibu Group (Duc Tong, Duc Loc, Minh Thang, Tien Minh)
  */
 package animelist.controller;
 
@@ -16,12 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-/**
- *
- * @author PC
- */
+/* This action got called when user changes their own info */
 public class ChangeInfoAction extends ActionSupport implements ServletRequestAware {
 
+    /* User info properties */
     private String username; // username passed from form input
     private String pass; // password passed from form input
     private int gender;
@@ -32,18 +29,23 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
     private String email;
     private final String FAIL = "fail"; // indicates failed action
     private final String SUCCESS = "success"; // indicates successful action
-    HttpServletRequest request;
+    HttpServletRequest request; // HTTP request
 
+    /* Constructor */
     public ChangeInfoAction() {
     }
 
     @Override
     public String execute() throws Exception {
-        /* Instantiate DAO object and calls login method to check from DB */
         String fileExt = null;
+
+        /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
+        
+        // Get user name from session
         Map session = ActionContext.getContext().getSession();
         username = (String) session.get("username");
+        
         String path = request.getSession().getServletContext().getRealPath("/");
         path = path.substring(0, path.length() - 10).concat("web\\images\\users");
         // random file name
@@ -61,7 +63,7 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
         } else {
             avatarFileName = (String) session.get("userAvatar");
         }
-        
+
         session.replace("userAvatar", avatarFileName);
         session.replace("fullname", fullname);
         session.replace("email", email);
@@ -79,9 +81,11 @@ public class ChangeInfoAction extends ActionSupport implements ServletRequestAwa
         }
 
         dao.changeInfo(username, fullname, avatarFileName, email, gender);
+        
         return SUCCESS;
     }
 
+    /* Getters and Setters */
     public String getAvatarFileName() {
         return avatarFileName;
     }
