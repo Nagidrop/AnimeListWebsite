@@ -7,12 +7,14 @@ package animelist.controller;
 
 import animelist.model.AnimeDTO;
 import animelist.model.AnimeListDAO;
+import animelist.model.StudioDTO;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.util.logging.Logger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 /**
@@ -26,6 +28,15 @@ public class ShowListAnimeAction extends ActionSupport implements ServletRequest
     private final String FAIL = "fail";
     private final String SUCCESS = "success";
     private ArrayList<AnimeDTO> listAnimeDTOs = new ArrayList<>();
+    private String StudioString="--Studio--";
+
+    public String getStudioString() {
+        return StudioString;
+    }
+
+    public void setStudioString(String StudioString) {
+        this.StudioString = StudioString;
+    }
 
     public ShowListAnimeAction() {
     }
@@ -35,9 +46,17 @@ public class ShowListAnimeAction extends ActionSupport implements ServletRequest
         try {
             AnimeListDAO dao = new AnimeListDAO();
             listAnimeDTOs = dao.getAllAnimes();
+            ArrayList<StudioDTO> studios = dao.getStudios();
+            ArrayList<String> StudioList = new ArrayList<>();
+            System.out.println(studios.toArray());
+            for (StudioDTO itemDTO : studios) {
+                 StudioString +=","+ itemDTO.getName();
+            }
+
             return SUCCESS;
         } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(ShowListAnimeAction.class.getName()).log(Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ShowListAnimeAction.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return FAIL;
     }

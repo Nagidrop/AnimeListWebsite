@@ -31,7 +31,7 @@ public class AnimeDTO implements Serializable {
     private String trailer;
     private Date created_at;
     private Date deleted_at;
-
+    
     /* Constructors with and without arguments */
     public AnimeDTO() {
     }

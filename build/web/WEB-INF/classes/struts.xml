@@ -180,13 +180,24 @@
         <action name="deleteAnime" class="animelist.controller.DeleteAnimeAction">
             <result name="success" type="redirectAction">viewListAllAnimes</result>
             <result name="fail" type="redirectAction">404.jsp</result>
-          </action>
+        </action>
 
         <action name="addOrRemoveAnimeFromList" class="animelist.controller.AddRemoveAnimeAction" >
             <result name="success" type="redirectAction">
                 <param name="actionName">viewAnime</param>
                 <param name="animeID" >${animeID}</param>
             </result>
+            <result name="fail" type="dispatcher">actionFailed.jsp</result>
+        </action>
+        <action name="createAnime" class="animelist.controller.showCreateNewAnimeView" >
+            <result name="success" type="dispatcher">
+                admin/createAnime.jsp
+            </result>
+            <result name="fail" type="dispatcher">actionFailed.jsp</result>
+        </action>
+        <action name="createAnimeAction" class="animelist.controller.CreateNewAnimeAction" >
+                        <result name="success" type="redirectAction">viewListAllAnimes</result>
+
             <result name="fail" type="dispatcher">actionFailed.jsp</result>
         </action>
     </package>
