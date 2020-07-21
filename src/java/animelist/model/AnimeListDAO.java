@@ -1140,20 +1140,20 @@ public class AnimeListDAO {
             st.setInt(1, accountID);
 
             rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 count = rs.getInt(0);
             }
             return count;
-          } finally {
-              if (st != null) {
-                  st.close();
-              }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
 
-              if (conn != null) {
-                  conn.close();
-              }
-          }
-}
+            if (conn != null) {
+                conn.close();
+            }
+        }
+    }
 
     public boolean addAnimeToList(int accountID, int animeID, int progress, int episodes, int status) throws SQLException {
         Connection conn = null;
@@ -1192,7 +1192,7 @@ public class AnimeListDAO {
                 conn.close();
             }
         }
-                return false;
+        return false;
     }
 
     public boolean removeAnimeFromList(int accountID, int animeID) throws SQLException {
@@ -1209,16 +1209,46 @@ public class AnimeListDAO {
             if (result > 0) {
                 return true;
             }
-          } finally {
-              if (st != null) {
-                  st.close();
-              }
+        } finally {
+            if (st != null) {
+                st.close();
+            }
 
-              if (conn != null) {
-                  conn.close();
-              }
-          }
+            if (conn != null) {
+                conn.close();
+            }
+        }
 
-                  return false;
-              }
+        return false;
+    }
+
+    public int getTotalCompletedAnimesInList(int accountID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        int count = 0;
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("SELECT COUNT(*)from list WHERE list.AccountID = ? and list.status = 2 GROUP by list.AccountID");
+            st.setInt(1, accountID);
+
+            rs = st.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            return count;
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+
+    }
 }
