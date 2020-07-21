@@ -43,6 +43,10 @@
             <result name="success" type="dispatcher">searchResult.jsp</result>
         </action>
 
+        <action name="searchInList" class = "animelist.controller.SearchInListAction">
+            <result name="success" type = "dispatcher">viewList.jsp</result>
+        </action>
+
         <action name="admin" class = "animelist.controller.AdminIndexAction">
             <result name="success" type="dispatcher">admin/index.jsp</result>
             <result name="user" type="redirectAction">index</result>
@@ -157,5 +161,6 @@
             <result name="success" type="dispatcher">searchResult.jsp</result>
             <result name="input">404.jsp</result>
         </action>
+        
     </package>
 </struts>

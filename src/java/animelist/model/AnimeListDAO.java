@@ -352,6 +352,74 @@ public class AnimeListDAO {
         }
     }
 
+    public ArrayList<ListDTO> getSearchAnimeInList(String searchValue, int accountID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        ArrayList<ListDTO> myList = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+
+            st = conn.prepareStatement("select * from list join anime on list.AnimeID = anime.AnimeID where name like ? and list.AccountID = ?");
+
+            st.setString(1, "%" + searchValue + "%");
+            st.setInt(2, accountID);
+
+            rs = st.executeQuery();
+            while (rs.next()) {
+                int animeID = rs.getInt("animeID");
+                int status = rs.getInt("status");
+                int progress = rs.getInt("progress");
+                String statusString="";
+                switch (status) {
+                    case 1:
+                        statusString = "Currently Watching";
+
+                        break;
+
+                    case 2:
+                        statusString = "Completed";
+
+                        break;
+
+                    case 3:
+                        statusString = "On Hold";
+
+                        break;
+
+                    case 4:
+                        statusString = "Dropped";
+
+                        break;
+
+                    case 5:
+                        statusString = "Plan to Watch";
+
+                        break;
+                }
+                if (myList == null) {
+                    myList = new ArrayList<>();
+                }
+
+                myList.add(new ListDTO(animeID, accountID, statusString, progress));
+            }
+
+            return myList;
+
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (st != null) {
+                st.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+        }
+    }
+
     public ArrayList<String> getTypes() throws SQLException {
         Connection conn = null;
         PreparedStatement st = null;
