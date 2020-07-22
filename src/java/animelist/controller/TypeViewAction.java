@@ -5,8 +5,10 @@
 package animelist.controller;
 
 import animelist.model.AnimeListDAO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.ArrayList;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
@@ -26,6 +28,15 @@ public class TypeViewAction extends ActionSupport implements ServletRequestAware
     public String execute() throws Exception {
         /* Instantiate DAO object and interacts with DB */
         AnimeListDAO dao = new AnimeListDAO();
+        Map session = ActionContext.getContext().getSession();
+        if (session.isEmpty()) {
+            return FAIL;
+        }
+
+        int roleID = (int) session.get("roleid");
+        if (roleID != 1) {
+            return FAIL;
+        }
         types = dao.getTypes();
         request.setAttribute("listType", types);
         return SUCCESS;

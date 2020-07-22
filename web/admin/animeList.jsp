@@ -62,12 +62,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="d-flex flex-row-reverse">
-                                            <a class="btn btn-primary btn-icon-split" id="button-create-new" href="#">
+                                            <a class="btn btn-primary btn-icon-split" id="button-create-new" href="createAnime">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-plus"></i>
 
                                                 </span>
-                                                <span class="text">New Genre</span>
+                                                <span class="text">New Anime</span>
                                             </a>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                                     <td><s:property value="type"/></td>
 
                                                     <td style="text-align: center">
-                                                        <a class="btn-sm btn-success btn-circle"  onclick="fillInfo(<s:property value="id"/>, '<s:property value="season.id"/>', '<s:property value="studios"/>', '<s:property value="email"/>',<s:property value="gender"/>)"> <i class="fa fa-edit" style="color: white"></i></a>
+                                                        <a class="btn-sm btn-success btn-circle"  href="editAnime?id=<s:property value="id"/>"> <i class="fa fa-edit" style="color: white"></i></a>
                                                     </td>
                                                     <td style="text-align: center">
                                                         <a class="btn-sm btn-danger btn-circle " href="deleteAnime?id=<s:property value="id"/>"><i class="fa fa-trash" style="color: white"></i></a>                                  
@@ -124,108 +124,7 @@
                     </div>
                     <!-- /.container-fluid -->
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit User Info</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="updateUser" method="post" id="info-form" accept-charset="utf-8">
-                                        <div >
-                                            <input  hidden id="id" name="id" value="">
 
-                                            <div class="form-group">
-                                                <label for="username">User name:</label>
-                                                <input class="form-control" id="username" name="username" readonly>
-
-                                            </div>
-                                            <label for="fullname">Full name:</label>
-
-                                            <div class="form-group">
-                                                <input class="form-control" id="fullname" name="fullname" required>
-
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="email">Email:</label>
-                                                <input class="form-control" id="email" name="email" >
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="password">Password(Fill if you want to change):</label>
-
-                                                <input class="form-control" type="password" id="password" name="password">
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="gender">Gender</label>
-                                                <select id="gender" name="gender" class="form-control" required></select>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <input type="submit" id="btn-submit" class="btn btn-primary" value="Save">
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End of Main Content -->
-                    <!-- Modal -->
-                    <div class="modal fade" id="modelReg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modelRegLabel">Edit User Info</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="createNewUser" method="post" id="form-reg" accept-charset="utf-8">
-                                        <div >
-
-                                            <div class="form-group">
-                                                <label for="username-reg">User name:</label>
-                                                <input class="form-control" id="username-reg" name="username-reg" required>
-
-                                            </div>
-                                            <label for="fullname">Full name:</label>
-
-                                            <div class="form-group">
-                                                <input class="form-control" id="fullname-reg" name="fullname-reg" required>
-
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="email">Email:</label>
-                                                <input class="form-control" id="email-reg" name="email-reg" >
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="password">Password</label>
-
-                                                <input class="form-control" type="password-reg" id="password" name="password-reg" required>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="gender">Gender</label>
-                                                <select id="gender-reg" name="gender-reg" class="form-control" required></select>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <input type="submit" id="btn-submit-reg" class="btn btn-primary" value="Save">
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <!-- Footer -->
                     <footer class="sticky-footer bg-white">
                         <div class="container my-auto">

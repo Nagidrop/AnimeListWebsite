@@ -5,8 +5,10 @@
 package animelist.controller;
 
 import animelist.model.AnimeListDAO;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +33,15 @@ public class AdminUpdateSeasonAction extends ActionSupport implements ServletReq
             /* Get Season ID and Name from passed params */
             String idString = (String) request.getParameter("id");
             String nameString = (String) request.getParameter("name");
+            Map session = ActionContext.getContext().getSession();
+            if (session.isEmpty()) {
+                return FAIL;
+            }
 
+            int roleID = (int) session.get("roleid");
+            if (roleID != 1) {
+                return FAIL;
+            }
             /* Instantiate DAO object and interacts with DB */
             AnimeListDAO dao = new AnimeListDAO();
 
