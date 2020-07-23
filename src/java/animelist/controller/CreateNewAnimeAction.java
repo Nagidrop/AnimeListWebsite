@@ -95,13 +95,18 @@ public class CreateNewAnimeAction extends ActionSupport implements ServletReques
             System.out.println(path);
             int id = dao.createNewAnime(1, season, type, name, releaseDate, rating, episodes, status, duration, description, posterFileName, trailer, null, null);
             String[] studio = request.getParameterValues("studio");
-            for (String i : studio) {
-                dao.createAnimeStudio(String.valueOf(id), i, null);
+            if (studio != null) {
+                for (String i : studio) {
+                    dao.createAnimeStudio(String.valueOf(id), i, null);
+                }
             }
             String[] genre = request.getParameterValues("genre");
-            for (String i : genre) {
-                dao.createAnimeGenre(String.valueOf(id), i, null);
+            if (genre != null) {
+                for (String i : genre) {
+                    dao.createAnimeGenre(String.valueOf(id), i, null);
+                }
             }
+
             return SUCCESS;
         } catch (SQLException ex) {
             Logger.getLogger(CreateNewAnimeAction.class.getName()).log(Level.SEVERE, null, ex);
