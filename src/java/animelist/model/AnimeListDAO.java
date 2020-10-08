@@ -1603,4 +1603,42 @@ public class AnimeListDAO {
 
         return false;
     }
+     public boolean animeanime(int accountid, int seasonid , String type, String name, String release, String rating, int episodes, String status, String duration, String description, String poster, String trailer, Date create_at, Date delete_at) throws SQLException{
+         Connection conn = null;
+        PreparedStatement st = null;
+
+        try {
+            conn = DBUtils.makeConnection();
+            st = conn.prepareStatement("INSERT INTO anime(AccountID, SeasonID , type, name, release, rating, episodes, status, duration, description, poster, trailer, created_at, deleted_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            st.setInt(1, accountid);
+            st.setInt(2, seasonid);
+            st.setString(3,type);
+            st.setString(4, name);
+            st.setString(5, release);
+            st.setString(6, rating);
+            st.setInt(7, episodes);
+            st.setString(8, status);
+            st.setString(9, duration);
+            st.setString(10, description);
+            st.setString(11, poster);
+            st.setString(12, trailer);
+            st.setDate(13, create_at);
+            st.setDate(14, delete_at);
+            int result = st.executeUpdate();
+
+            if (result > 0) {
+                return true;
+            }
+       } finally {
+            /* Close the JDBC resources after use */
+
+            if (st != null) {
+                st.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+     }
+        return false;
+}
 }
