@@ -2,7 +2,7 @@
 
 This project aims to develop a website using Java. It will have similar functionalities compared to MyAnimeList.com (a.k.a MAL - which is also used as a template/reference to design) but with only limited core functions, such as view, search and add animes to list. 
 
-> Basic functions where users can log in, register and view their profiles, and basic admin functions to manage the users are as well included. 
+> Basic functions that enable users to log in, register and view their profiles, and enable admin to manage the users are as well included. 
 
 > This is used as an assignment project in university.
 
