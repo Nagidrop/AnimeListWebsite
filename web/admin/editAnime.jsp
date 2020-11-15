@@ -77,32 +77,32 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Release Date</label>
-                                                <input type="date" id="releaseDate" value="<s:property value="anime.releaseDate"></s:property>" name="releaseDate"  class="form-control">
+                                                <input type="date" id="releaseDate" required value="<s:property value="anime.releaseDate"></s:property>" name="releaseDate"  class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Rating</label>
 
-                                                <input id="rating" name="rating" value="<s:property value="anime.rating"></s:property>" class="form-control">
+                                                <input id="rating" name="rating" required value="<s:property value="anime.rating"></s:property>" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Episodes</label>
 
-                                                <input id="episodes" name="episodes" value="<s:property value="anime.episodes"></s:property>" type="number" class="form-control">
+                                                <input id="episodes" name="episodes" required value="<s:property value="anime.episodes"></s:property>" type="number" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Status</label>
 
-                                                <input id="status" name="status" value="<s:property value="anime.status"></s:property>" type="text" class="form-control">
+                                                <input id="status" name="status" required value="<s:property value="anime.status"></s:property>" type="text" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Duration</label>
 
-                                                <input id="duration" name="duration"  value="<s:property value="anime.duration"></s:property>" type="text" class="form-control">
+                                                <input id="duration" name="duration"  required value="<s:property value="anime.duration"></s:property>" type="text" class="form-control">
                                             </div>
                                             <div class="form-group">
                                                 <label>Description</label>
 
-                                                <textarea id="description" name="description" value="<s:property value="anime.description"></s:property>" type="text" class="form-control" rows="4" cols="4">
+                                                <textarea id="description" required name="description" value="<s:property value="anime.description"></s:property>" type="text" class="form-control" rows="4" cols="4">
                                             
                                                 </textarea>   
                                             </div>
@@ -119,7 +119,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Season</label>
-                                                <select id="season" name="season" class="form-control">
+                                                <select id="season" name="season"  required class="form-control">
                                                 <s:iterator value="seasonArrayList">
                                                     <s:if test="%{anime.season.id==id}">
                                                         <option value=" <s:property value="id"></s:property>" selected>
@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Studios</label>
-                                            <select id="studio" name="studio" class="form-control" multiple>
+                                            <select id="studio" name="studio" required class="form-control" multiple>
 
                                                 <s:iterator value="studiosArrayList" status="select">
 
@@ -150,7 +150,7 @@
                                         <div class="form-group">
                                             <label>    Genres</label>
 
-                                            <select id="genre" name="genre" class="form-control" multiple>
+                                            <select id="genre" name="genre" required class="form-control" multiple>
                                                 <s:iterator value="genreArrayList">
                                                     <option value="<s:property value="id"></s:property>">
                                                         <s:property value="name"></s:property>

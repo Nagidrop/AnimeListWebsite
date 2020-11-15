@@ -76,39 +76,39 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Release Date</label>
-                                            <input type="date" id="releaseDate" name="releaseDate"  class="form-control">
+                                            <input type="date" id="releaseDate" name="releaseDate" required class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>Rating</label>
 
-                                            <input id="rating" name="rating"  class="form-control">
+                                            <input id="rating" name="rating" required  class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>Episodes</label>
 
-                                            <input id="episodes" name="episodes"  type="number" class="form-control">
+                                            <input id="episodes" name="episodes" required type="number" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>Status</label>
 
-                                            <input id="status" name="status"  type="text" class="form-control">
+                                            <input id="status" name="status" required  type="text" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>Duration</label>
 
-                                            <input id="duration" name="duration"  type="text" class="form-control">
+                                            <input id="duration" name="duration" required  type="text" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label>Description</label>
 
-                                            <textarea id="description" name="description"  type="text" class="form-control" rows="4" cols="4">
+                                            <textarea id="description" name="description" required  type="text" class="form-control" rows="4" cols="4">
                                             
                                             </textarea>   
                                         </div>
                                         <div class="form-group">
                                             <label>Poster</label>
 
-                                            <s:file id="poster" name="poster" cssClass="form-control" theme="simple"/>
+                                            <s:file id="poster" name="poster"  cssClass="form-control" theme="simple"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Trailer URL</label>
@@ -117,7 +117,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Season</label>
-                                            <select id="season" name="season" class="form-control">
+                                            <select id="season" name="season" class="form-control" required>
                                                 <s:iterator value="seasonArrayList">
                                                     <option value=" <s:property value="id"></s:property>">
                                                         <s:property value="name"></s:property>
@@ -127,7 +127,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Studios</label>
-                                            <select id="studio" name="studio" class="form-control" multiple>
+                                            <select id="studio" name="studio" class="form-control" multiple required>
                                                 <s:iterator value="studiosArrayList">
                                                     <option value=" <s:property value="id"></s:property>">
                                                         <s:property value="name"></s:property>
@@ -138,7 +138,7 @@
                                         <div class="form-group">
                                             <label>    Genres</label>
 
-                                            <select id="genre" name="genre" class="form-control" multiple>
+                                            <select id="genre" name="genre" class="form-control" multiple required>
                                                 <s:iterator value="genreArrayList">
                                                     <option value="<s:property value="id"></s:property>">
                                                         <s:property value="name"></s:property>

@@ -543,9 +543,9 @@ public class AnimeListDAO {
             while (rs.next()) {
                 int GenreID = rs.getInt("GenreID");
                 String name = rs.getString("name");
-                Date created_at = rs.getDate("created_at");
+//                String created_at = rs.getString("created_at");
                 Date deleted_at = rs.getDate("deleted_at");
-                GenreDTO genre = new GenreDTO(GenreID, name, created_at, deleted_at);
+                GenreDTO genre = new GenreDTO(GenreID, name, null, deleted_at);
                 if (genres == null) {
                     genres = new ArrayList<>();
                 }
